@@ -1,0 +1,491 @@
+{
+    "comparison_date": "2025-07-05 18:57:29",
+    "db1_name": "e-defter.globalpozitif.com.tr",
+    "db2_name": "johwears.globalpozitif.com.tr",
+    "tables_only_in_db1": {
+        "20": "chatbot_packages",
+        "21": "chatbot_requests_log",
+        "82": "user_chatbot_usage",
+        "83": "user_consent",
+        "84": "user_sessions",
+        "85": "user_sessions_log"
+    },
+    "tables_only_in_db2": {
+        "42": "language_copy_jobs",
+        "64": "site_config_versions"
+    },
+    "common_tables": {
+        "0": "ad_conversion_code",
+        "1": "ayaranaliz",
+        "2": "ayarbanka",
+        "3": "ayarfirma",
+        "4": "ayarfiyat",
+        "5": "ayargaleri",
+        "6": "ayargalerislayt",
+        "7": "ayargenel",
+        "8": "ayarlogo",
+        "9": "ayarsatisdonusumkodu",
+        "10": "ayarsosyalmedya",
+        "11": "bankaeft",
+        "12": "banner_display_rules",
+        "13": "banner_groups",
+        "14": "banner_layouts",
+        "15": "banner_styles",
+        "16": "banner_types",
+        "17": "banners",
+        "18": "cart_conversion_code",
+        "19": "chat_completion",
+        "22": "dil",
+        "23": "dilbirlestir",
+        "24": "dillistesi",
+        "25": "dilsabitleri",
+        "26": "dinamik_fiyatlandirma",
+        "27": "dosya",
+        "28": "formiletisim",
+        "29": "google_merchant_categories",
+        "30": "iptaliadedegisim",
+        "31": "kampanya_kombinasyonlari",
+        "32": "kampanya_kurallari",
+        "33": "kampanya_miktar_indirim",
+        "34": "kampanya_urunleri",
+        "35": "kampanyalar",
+        "36": "kargo",
+        "37": "kargobolgeleri",
+        "38": "kargodesiayar",
+        "39": "kargosehirler",
+        "40": "kargoucret",
+        "41": "kategori",
+        "42": "kuponlar",
+        "43": "language_category_mapping",
+        "44": "language_page_mapping",
+        "45": "menu",
+        "46": "newsletter",
+        "47": "odemeyontemi",
+        "48": "payment_provider_settings",
+        "49": "payment_providers",
+        "50": "product_transfer",
+        "51": "puan_islemleri",
+        "52": "resim",
+        "53": "resimgaleri",
+        "54": "resimgaleriliste",
+        "55": "resimklasor",
+        "56": "sayfa",
+        "57": "sayfalistedosya",
+        "58": "sayfalistegaleri",
+        "59": "sayfalistekategori",
+        "60": "sayfalisteresim",
+        "61": "sayfalistevideo",
+        "62": "sayfapaylasim",
+        "63": "sayfatip",
+        "64": "seo",
+        "65": "site_settings",
+        "66": "sorusor",
+        "67": "tag_manager",
+        "68": "teklif",
+        "69": "urun_arama",
+        "70": "urunekozellikler",
+        "71": "urungrup",
+        "72": "uruniliski",
+        "73": "urunmarka",
+        "74": "urunmiktarbirim",
+        "75": "urunmiktarbirimceviri",
+        "76": "urunozellikleri",
+        "77": "urunparabirim",
+        "78": "urunvaryant",
+        "79": "urunvaryant_translate",
+        "80": "urunvaryantgrup",
+        "81": "urunvaryantgrup_translate",
+        "86": "uye",
+        "87": "uye_puanlari",
+        "88": "uyeadres",
+        "89": "uyebayigrup",
+        "90": "uyebayiozellikleri",
+        "91": "uyesepet",
+        "92": "uyesepetdurum",
+        "93": "uyesiparis",
+        "94": "uyesiparisdurum",
+        "95": "uyesiparisdurumceviri",
+        "96": "variant_properties",
+        "97": "videos",
+        "98": "yerilce",
+        "99": "yermahalle",
+        "100": "yersehir",
+        "101": "yersemt",
+        "102": "yerulke",
+        "103": "yoneticiler",
+        "104": "yoneticilerlog",
+        "105": "yoneticilerlogeylemlistesi",
+        "106": "yoneticilerlogislemler",
+        "107": "yoneticilerlogislemlistesi",
+        "108": "yorum",
+        "109": "ziyaretcisayfa"
+    },
+    "column_differences": {
+        "banner_groups": [
+            {
+                "type": "missing_in_db2",
+                "column": "bannerDuration",
+                "db1_info": {
+                    "type": "int",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                },
+                "db2_info": null
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "group_title",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(100)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "group_desc",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(255)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "group_kind",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(100)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "group_view",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(20)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "style_class",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(50)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "background_color",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(50)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "group_title_color",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(50)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "group_desc_color",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(50)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "group_full_size",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "tinyint",
+                    "null": "YES",
+                    "key": "",
+                    "default": "1",
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "banner_duration",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "int",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "banner_full_size",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "tinyint",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            }
+        ],
+        "banner_layouts": [
+            {
+                "type": "missing_in_db1",
+                "column": "layout_group",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(50)",
+                    "null": "NO",
+                    "key": "",
+                    "default": "text_and_image",
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "layout_view",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(20)",
+                    "null": "NO",
+                    "key": "",
+                    "default": "single",
+                    "extra": ""
+                }
+            }
+        ],
+        "banner_styles": [
+            {
+                "type": "missing_in_db1",
+                "column": "banner_height_size",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "int",
+                    "null": "NO",
+                    "key": "",
+                    "default": "0",
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "content_box_bg_color",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(25)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "show_button",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "tinyint(1)",
+                    "null": "NO",
+                    "key": "",
+                    "default": "1",
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "button_hover_background",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(25)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "button_hover_color",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "varchar(25)",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "column_difference",
+                "column": "background_color",
+                "differences": {
+                    "type": {
+                        "db1": "varchar(20)",
+                        "db2": "varchar(25)"
+                    }
+                }
+            },
+            {
+                "type": "column_difference",
+                "column": "title_color",
+                "differences": {
+                    "type": {
+                        "db1": "varchar(20)",
+                        "db2": "varchar(25)"
+                    }
+                }
+            },
+            {
+                "type": "column_difference",
+                "column": "content_color",
+                "differences": {
+                    "type": {
+                        "db1": "varchar(20)",
+                        "db2": "varchar(25)"
+                    }
+                }
+            },
+            {
+                "type": "column_difference",
+                "column": "button_background",
+                "differences": {
+                    "type": {
+                        "db1": "varchar(20)",
+                        "db2": "varchar(25)"
+                    }
+                }
+            },
+            {
+                "type": "column_difference",
+                "column": "button_color",
+                "differences": {
+                    "type": {
+                        "db1": "varchar(20)",
+                        "db2": "varchar(25)"
+                    }
+                }
+            }
+        ],
+        "language_category_mapping": [
+            {
+                "type": "missing_in_db1",
+                "column": "translation_status",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "enum('pending','completed','failed')",
+                    "null": "NO",
+                    "key": "",
+                    "default": "pending",
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "last_attempt_date",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "datetime",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "error_message",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "text",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            }
+        ],
+        "language_page_mapping": [
+            {
+                "type": "missing_in_db1",
+                "column": "translation_status",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "enum('pending','completed','failed')",
+                    "null": "NO",
+                    "key": "",
+                    "default": "pending",
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "last_attempt_date",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "datetime",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "error_message",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "text",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            }
+        ]
+    },
+    "statistics": {
+        "db1_table_count": 110,
+        "db2_table_count": 106,
+        "common_table_count": 104,
+        "total_differences": 30
+    }
+}
