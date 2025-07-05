@@ -1,0 +1,232 @@
+/* Ana Banner Konteyneri (.banner-item.HoverCardBanner eklendiğinde) */
+.banner-type-orta-banner.HoverCardBanner{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 60px;
+}
+
+/* Grup Başlığı Stilleri */
+.HoverCardBanner .banner-group-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.HoverCardBanner .banner-group-title {
+    font-weight: 700;
+    margin: 0 0 15px;
+    letter-spacing: 1px;
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
+}
+
+.HoverCardBanner .banner-group-desc {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.banner-type-orta-banner.HoverCardBanner .banner-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap; /* Mobilde düzgün görüntü için */
+}
+/* .HoverCardBanner sınıfı .banner-type-orta-banner ile birlikte ana .banner div'inde olacak */
+.banner-type-orta-banner.HoverCardBanner .banner-item {
+    position: relative; /* Mutlak konumlandırılmış içerik kutusu için */
+    overflow: hidden; /* Taşmaları gizle */
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-out;
+}
+
+/* İçerik Konteyneri (Mevcut yapıdaki .banner-item içindeki doğrudan sarmalayıcı) */
+/* Bu sınıf HTML yapısında olmayabilir, .banner-item içindeki .banner-image-wrapper ve .content-box doğrudan kullanılır */
+/* .banner-type-orta-banner.HoverCardBanner .banner-item .banner-content-container { ... } */
+
+/* Görsel Sarmalayıcı */
+.banner-type-orta-banner.HoverCardBanner .banner-item .banner-image {
+    height: 100%; /* Konteyner yüksekliğini kapla */
+    width: 100%; /* Genişliği de kaplasın */
+    position: relative; /* Z-index için gerekebilir */
+    z-index: 1; /* İçerik kutusunun altında kalması için */
+    box-sizing: border-box;
+}
+
+/* Görsel */
+.banner-type-orta-banner.HoverCardBanner .banner-item .banner-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Alanı doldur, oranı koru */
+    transition: transform 0.4s ease;
+    border-radius: var(--border-radius-base);
+    border: var(--border-style) var(--border-width) var(--border-color);
+}
+
+/* İçerik Kutusu (Bu artık overlay olacak) */
+/* layout_group="text_and_image" veya "text" olduğunda bu div render edilir */
+.banner-type-orta-banner.HoverCardBanner .banner-item .content-box {
+    position: absolute; /* Görselin ve wrapper'ın üzerine yerleş */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px; /* İç boşlukları buradan verelim */
+    box-sizing: border-box; /* Padding'i içeri dahil et */
+    z-index: 2; /* Görselin üzerinde olmalı */
+
+    display: flex; /* İçeriği (h2, div, button) ortalamak için */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    opacity: 0; /* Başlangıçta gizli */
+    visibility: hidden;
+    transform: translateY(10px); /* Hafif aşağıdan gelme efekti */
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+}
+
+/* Hover Durumu */
+.banner-type-orta-banner.HoverCardBanner .banner-item:hover .content-box {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.banner-type-orta-banner.HoverCardBanner .banner-item:hover .banner-image-wrapper img {
+    transform: scale(1.08); /* İsteğe bağlı zoom */
+}
+
+/* İçerik Kutusu İçindeki Elemanlar */
+/* Not: HTML'de .title, .content, .button-container sınıfları BannerController tarafından üretiliyor.
+   Aşağıdaki .bannerTitle, .bannerContent, .bannerButton sınıfları admin panelindeki önizleme veya
+   özel stil beklentisine göredir. Eğer BannerController çıktısı değişmeyecekse, bu seçiciler
+   .title, .content, .bannerButton button olarak güncellenmelidir.
+   Şimdilik verilen CSS'teki gibi bırakıyorum. */
+.banner-type-orta-banner.HoverCardBanner .banner-item:hover{
+    transform: translateY(-4px);
+    box-shadow: var(--orta-shadow-hover);
+}
+
+
+.banner-type-orta-banner.HoverCardBanner .banner-item .content-box .bannerTitle { /* veya .title */
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.banner-type-orta-banner.HoverCardBanner .banner-item .content-box .bannerContent { /* veya .content */
+    margin-bottom: 20px;
+}
+
+/* Buton Konteyneri ve Buton */
+.banner-type-orta-banner.HoverCardBanner .banner-item .content-box .bannerButton button { /* veya .button-container .banner-button */
+    padding: 10px 22px;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.banner-type-orta-banner.HoverCardBanner .banner-item .content-box .bannerButton button:hover,
+.banner-type-orta-banner.HoverCardBanner .banner-item .content-box .bannerButton button:focus {
+    outline: none;
+}
+
+/* layout_group="text" (Sadece Metin) durumu için HoverCardBanner uyarlaması */
+.banner-type-orta-banner.HoverCardBanner .banner-item.text-only-layout .content-box {
+    opacity: 1; /* Başlangıçta görünür olsun, çünkü arkada resim yok */
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* layout_group="image" (Sadece Resim) durumu için HoverCardBanner */
+/* Bu durumda .content-box olmayacağı için özel bir stil gerekmez, sadece resim zoom efekti çalışır. */
+.banner-type-orta-banner.HoverCardBanner .banner-item.image-only-layout:hover .banner-image-wrapper img {
+    transform: scale(1.08);
+}
+/* Banner Item Boyutlandırma */
+.banner-type-orta-banner.HoverCardBanner.single .banner-item {
+    width: 100%;
+}
+
+.banner-type-orta-banner.HoverCardBanner.double .banner-item {
+    /* 2 öğe, 1 boşluk (10px) -> (100% - 10px) / 2 */
+    width: calc(50% - 5px);
+}
+
+.banner-type-orta-banner.HoverCardBanner.triple .banner-item {
+    /* 3 öğe, 2 boşluk (20px) -> (100% - 20px) / 3 */
+    width: calc(33.333% - 6.67px);
+}
+
+.banner-type-orta-banner.HoverCardBanner.quad .banner-item {
+    /* 4 öğe, 3 boşluk (30px) -> (100% - 30px) / 4 */
+    width: calc(25% - 7.5px);
+}
+
+.banner-type-orta-banner.HoverCardBanner.quinary .banner-item {
+    /* 5 öğe, 4 boşluk (40px) -> (100% - 40px) / 5 */
+    width: calc(20% - 8px);
+}
+
+@media  (max-width: 1399px) {
+    .banner-type-orta-banner.HoverCardBanner .banner-container{max-width: 100%;width:100%;}
+}
+
+@media  (max-width: 1024px) {
+    .banner-type-orta-banner.HoverCardBanner.double .banner-item {
+        /* 2 öğe, 1 boşluk (10px) -> (100% - 10px) / 2 */
+        width: calc(50% - 5px);
+    }
+
+    .banner-type-orta-banner.HoverCardBanner.triple .banner-item {
+        /* 3 öğe, 2 boşluk (20px) -> (100% - 20px) / 3 */
+        width: calc(50% - 6.67px);
+    }
+
+    .banner-type-orta-banner.HoverCardBanner.quad .banner-item {
+        /* 4 öğe, 3 boşluk (30px) -> (100% - 30px) / 4 */
+        width: calc(50% - 7.5px);
+    }
+
+    .banner-type-orta-banner.HoverCardBanner.quinary .banner-item {
+        /* 5 öğe, 4 boşluk (40px) -> (100% - 40px) / 5 */
+        width: calc(50% - 8px);
+    }
+}
+
+@media  (max-width: 768px) {
+    .banner-type-orta-banner.HoverCardBanner.double .banner-item {
+        /* 2 öğe, 1 boşluk (10px) -> (100% - 10px) / 2 */
+        width: calc(100% - 5px);
+    }
+
+    .banner-type-orta-banner.HoverCardBanner.triple .banner-item {
+        /* 3 öğe, 2 boşluk (20px) -> (100% - 20px) / 3 */
+        width: calc(100% - 6.67px);
+    }
+
+    .banner-type-orta-banner.HoverCardBanner.quad .banner-item {
+        /* 4 öğe, 3 boşluk (30px) -> (100% - 30px) / 4 */
+        width: calc(100% - 7.5px);
+    }
+
+    .banner-type-orta-banner.HoverCardBanner.quinary .banner-item {
+        /* 5 öğe, 4 boşluk (40px) -> (100% - 40px) / 5 */
+        width: calc(100% - 8px);
+    }
+}

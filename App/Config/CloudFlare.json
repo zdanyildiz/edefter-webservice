@@ -1,0 +1,48 @@
+{
+    "default": {
+        "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+        "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+    },
+    "sites": {
+        "globalpozitif.com.tr": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "handtuchmeister.com": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "homesturm.com": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "lilalinda.com.tr": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "mete.com.tr": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "meteplastic.us": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "plasfed.org.tr": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "pozitifeticaret.com": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "sertsantaban.com.tr": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        },
+        "uretimelemanlari.com": {
+            "site_key": "0x4AAAAAAA19NVlw-EmSFsid",
+            "secret_key": "0x4AAAAAAA19NQAS69tLHRcYZNOkljSWGew"
+        }
+    }
+}

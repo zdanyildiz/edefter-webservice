@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema Sistemi Test - Pozitif E-ticaret</title>
+    
+    <!-- Güncellenmiş index.css dosyasını yükle -->
+    <link rel="stylesheet" href="../Public/CSS/index.css">
+    
+    <style>
+        body {
+            font-family: var(--font-family-primary);
+            background-color: var(--body-bg-color);
+            color: var(--body-text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: var(--line-height-base);
+        }
+        
+        .container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            background: var(--content-bg-color);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-base);
+            box-shadow: var(--box-shadow-base);
+        }
+        
+        .section {
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            border: var(--border-base);
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: var(--font-size-xlarge);
+            margin-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        .color-box {
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            margin: var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            line-height: 50px;
+            color: var(--text-light-color);
+            font-size: var(--font-size-small);
+            font-weight: var(--font-weight-bold);
+        }
+        
+        .primary-color { background-color: var(--primary-color); }
+        .secondary-color { background-color: var(--secondary-color); color: var(--text-dark-color); }
+        .accent-color { background-color: var(--accent-color); }
+        .success-color { background-color: var(--success-color); }
+        .warning-color { background-color: var(--warning-color); color: var(--text-dark-color); }
+        .danger-color { background-color: var(--danger-color); }
+        
+        .test-button {
+            background-color: var(--button-color);
+            color: var(--button-text-color);
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-base);
+            cursor: pointer;
+            margin: var(--spacing-sm);
+            font-size: var(--font-size-normal);
+            transition: all var(--transition-speed) var(--transition-timing);
+        }
+        
+        .test-button:hover {
+            background-color: var(--button-hover-color);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-md);
+        }
+        
+        .test-input {
+            background-color: var(--input-bg-color);
+            color: var(--input-color);
+            border: var(--input-border);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius-base);
+            margin: var(--spacing-sm);
+            font-size: var(--font-size-normal);
+        }
+        
+        .test-input:focus {
+            border: var(--input-focus-border);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(235, 110, 46, 0.2);
+        }
+        
+        .alert {
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-base);
+            margin: var(--spacing-sm) 0;
+        }
+        
+        .alert-success {
+            background-color: var(--alert-success-bg);
+            color: var(--alert-success-text);
+        }
+        
+        .alert-warning {
+            background-color: var(--alert-warning-bg);
+            color: var(--alert-warning-text);
+        }
+        
+        .alert-danger {
+            background-color: var(--alert-danger-bg);
+            color: var(--alert-danger-text);
+        }
+        
+        .product-box {
+            background-color: var(--homepage-product-box-bg-color);
+            color: var(--homepage-product-box-color);
+            border-radius: var(--border-radius-base);
+            padding: var(--spacing-md);
+            margin: var(--spacing-sm);
+            box-shadow: var(--box-shadow-sm);
+            transition: all var(--transition-speed) var(--transition-timing);
+            display: inline-block;
+            width: 200px;
+        }
+        
+        .product-box:hover {
+            background-color: var(--homepage-product-box-hover-bg-color);
+            box-shadow: var(--box-shadow-md);
+            transform: translateY(-5px);
+        }
+        
+        .product-price {
+            color: var(--homepage-product-box-price-color);
+            font-size: var(--font-size-large);
+            font-weight: var(--font-weight-bold);
+        }
+        
+        .variable-display {
+            background: var(--background-light-color);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            font-family: monospace;
+            font-size: var(--font-size-small);
+            margin: var(--spacing-xs) 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: var(--primary-color); text-align: center;">
+            🎨 Pozitif E-ticaret Tema Sistemi Test
+        </h1>
+        
+        <div class="section">
+            <h2 class="section-title">🎨 Renk Paleti</h2>
+            <div class="color-box primary-color">Primary</div>
+            <div class="color-box secondary-color">Secondary</div>
+            <div class="color-box accent-color">Accent</div>
+            <div class="color-box success-color">Success</div>
+            <div class="color-box warning-color">Warning</div>
+            <div class="color-box danger-color">Danger</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">🔘 Butonlar</h2>
+            <button class="test-button">Ana Buton</button>
+            <button class="test-button" style="background-color: var(--button-secondary-color); color: var(--button-secondary-text-color);">İkincil Buton</button>
+            <button class="test-button" style="background-color: var(--button-disabled-color); cursor: not-allowed;">Devre Dışı</button>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">📝 Form Elemanları</h2>
+            <input type="text" class="test-input" placeholder="Metin girin..." value="Test metni">
+            <input type="email" class="test-input" placeholder="E-posta adresiniz">
+            <select class="test-input" style="background-color: var(--select-bg-color); color: var(--select-text-color);">
+                <option>Seçenek 1</option>
+                <option>Seçenek 2</option>
+            </select>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">⚠️ Uyarılar</h2>
+            <div class="alert alert-success">✅ İşlem başarıyla tamamlandı!</div>
+            <div class="alert alert-warning">⚠️ Dikkat: Bu işlem geri alınamaz.</div>
+            <div class="alert alert-danger">❌ Hata: Bir sorun oluştu.</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">🛍️ Ürün Kutuları</h2>
+            <div class="product-box">
+                <h4>Örnek Ürün 1</h4>
+                <p>Ürün açıklaması burada yer alır.</p>
+                <div class="product-price">₺299.99</div>
+            </div>
+            <div class="product-box">
+                <h4>Örnek Ürün 2</h4>
+                <p>Başka bir ürün açıklaması.</p>
+                <div class="product-price">₺199.99</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">📏 Tipografi</h2>
+            <p style="font-size: var(--font-size-xs);">XS Boyut Metin (var(--font-size-xs))</p>
+            <p style="font-size: var(--font-size-small);">Küçük Boyut Metin (var(--font-size-small))</p>
+            <p style="font-size: var(--font-size-normal);">Normal Boyut Metin (var(--font-size-normal))</p>
+            <p style="font-size: var(--font-size-large);">Büyük Boyut Metin (var(--font-size-large))</p>
+            <p style="font-size: var(--font-size-xlarge);">XL Boyut Metin (var(--font-size-xlarge))</p>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">🔧 CSS Değişken Değerleri</h2>
+            <div class="variable-display">--primary-color: <span style="color: var(--primary-color);">var(--primary-color)</span></div>
+            <div class="variable-display">--secondary-color: <span style="background: var(--secondary-color); padding: 2px 8px;">var(--secondary-color)</span></div>
+            <div class="variable-display">--accent-color: <span style="color: var(--accent-color);">var(--accent-color)</span></div>
+            <div class="variable-display">--content-max-width: var(--content-max-width)</div>
+            <div class="variable-display">--border-radius-base: var(--border-radius-base)</div>
+            <div class="variable-display">--transition-speed: var(--transition-speed)</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">📱 Responsive Test</h2>
+            <p>Bu sayfa şu breakpoint'leri kullanıyor:</p>
+            <ul>
+                <li>SM: var(--breakpoint-sm) = 576px</li>
+                <li>MD: var(--breakpoint-md) = 768px</li>
+                <li>LG: var(--breakpoint-lg) = 992px</li>
+                <li>XL: var(--breakpoint-xl) = 1200px</li>
+                <li>XXL: var(--breakpoint-xxl) = 1400px</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Sayfa yüklendiğinde tema değişkenlerini konsola yazdır
+        console.log('🎨 Tema Sistemi Yüklendi!');
+        
+        // CSS değişkenlerini al
+        const rootStyles = getComputedStyle(document.documentElement);
+        
+        console.log('Ana Renkler:', {
+            primary: rootStyles.getPropertyValue('--primary-color').trim(),
+            secondary: rootStyles.getPropertyValue('--secondary-color').trim(),
+            accent: rootStyles.getPropertyValue('--accent-color').trim()
+        });
+        
+        console.log('Boyutlar:', {
+            contentMaxWidth: rootStyles.getPropertyValue('--content-max-width').trim(),
+            borderRadius: rootStyles.getPropertyValue('--border-radius-base').trim(),
+            transitionSpeed: rootStyles.getPropertyValue('--transition-speed').trim()
+        });
+    </script>
+</body>
+</html>

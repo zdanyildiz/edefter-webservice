@@ -1,0 +1,140 @@
+/* Ana Banner Konteyneri (.banner-item.BgImageCenterText eklendiğinde) */
+.banner-type-orta-banner.BgImageCenterText{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+/* .BgImageCenterText sınıfı .banner-type-orta-banner ile birlikte ana .banner div'inde olacak */
+.banner-type-orta-banner.BgImageCenterText .banner-item {
+    position: relative; /* Mutlak konumlandırma için */
+    overflow: hidden; /* Taşmaları engelle */
+    box-sizing: border-box;
+    /* !!! KART YÜKSEKLİĞİ: Sabit yükseklik gereklidir */
+    border-radius: var(--border-radius-base); /* Köşe yuvarlaklığı */
+    /* Sıfırlamalar */
+    cursor: pointer; text-align: start;
+    border: var(--border-style) var(--border-width) var(--border-color);
+}
+
+/* Görseli Arkaplan Gibi Yap */
+.banner-type-orta-banner.BgImageCenterText .banner-item .banner-image {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+    /* Sıfırlamalar */
+    border-radius: 0; border: none; padding: 0; background-color: transparent;
+    box-shadow: none; overflow: hidden; flex-shrink: 0; flex: none;
+    max-width: none; margin: 0; box-sizing: border-box;
+}
+
+.banner-type-orta-banner.BgImageCenterText .banner-item .banner-image img {
+    display: block; width: 100%; height: 100%; object-fit: cover; /* Resmi kapla */
+    /* Sıfırlamalar */
+    border-radius: 0; transform: none;
+    transition: transform 0.3s ease; /* Hover efekti için */
+}
+
+/* Hover durumunda görsel efekti */
+.banner-type-orta-banner.BgImageCenterText .banner-item:hover .banner-image img {
+    transform: scale(1.05); /* Hover durumunda hafif zoom */
+}
+
+/* İçerik Konteyneri - Hizalama ve Overlay için */
+.banner-type-orta-banner.BgImageCenterText .banner-item {
+    display: flex; align-items: center; justify-content: center; /* İçeriği ortala */
+    /* Sıfırlamalar */
+    flex-direction: initial; width: 100%; flex-wrap: nowrap; gap: 0; margin: 0;
+    max-width: none; overflow: visible;
+}
+
+/* Overlay Katmanı */
+.banner-type-orta-banner.BgImageCenterText .banner-item:before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+
+    z-index: 2; /* İçeriğin arkasında, ama resmin üstünde */
+    border-radius: inherit; /* Ana yuvarlaklığı al */
+    transition: background-color 0.3s ease; /* Hover efekti için */
+}
+
+/* Hover durumunda overlay efekti */
+.banner-type-orta-banner.BgImageCenterText .banner-item:hover:before {
+    background-color: rgba(0, 0, 0, 0.6); /* Hover durumunda biraz daha koyu */
+}
+
+/* İçerik Kutusu - Metin Hizalama */
+.banner-type-orta-banner.BgImageCenterText .banner-item .content-box {
+    /* Sıfırlamalar */
+    position: relative; width: 100%; height: auto;
+    padding: 20px; opacity: 1; visibility: visible; transform: none;
+    z-index: 3; flex: none; max-width: 100%;
+    /* Hizalama */
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+
+    transition: transform 0.3s ease; /* Hover efekti için */
+}
+
+/* Hover durumunda içerik kutusu efekti */
+.banner-type-orta-banner.BgImageCenterText .banner-item:hover .content-box {
+    transform: translateY(-5px); /* Hover durumunda hafif yukarı hareket */
+}
+
+/* Başlık */
+.banner-type-orta-banner.BgImageCenterText .banner-item .content-box .title {
+    font-weight: 600; color: inherit; margin-bottom: 15px;
+    /* Sıfırlama */ text-transform: none; letter-spacing: 0; line-height: 1.3;
+}
+
+/* İçerik */
+.banner-type-orta-banner.BgImageCenterText .banner-item .content-box .content {
+    line-height: 1.5; margin-bottom: 20px;
+    max-width: 90%; /* Genişliği sınırla */
+}
+
+/* Buton Konteyneri */
+.banner-type-orta-banner.BgImageCenterText .banner-item .content-box .button-container {
+    display: inline-block; /* Göster */
+}
+
+/* Buton */
+.banner-type-orta-banner.BgImageCenterText .banner-item .content-box .button-container button {
+    padding: 10px 25px; border: var(--border-style) var(--border-width) var(--border-color);
+    text-transform: uppercase; letter-spacing: 1px;
+    cursor: pointer; transition: background-color 0.3s ease; border-radius: var(--border-style) var(--border-width) var(--border-color);
+}
+
+.banner-type-orta-banner.BgImageCenterText .banner-item .content-box .button-container button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* layout_group="text" (Sadece Metin) durumu için uyarlama */
+.banner-type-orta-banner.BgImageCenterText .banner-item.text-only-layout .content-box {
+    padding: 40px; /* Daha fazla iç boşluk */
+    background-color: rgba(0, 0, 0, 0.8); /* Daha koyu arka plan */
+}
+
+/* layout_group="image" (Sadece Resim) durumu için uyarlama */
+.banner-type-orta-banner.BgImageCenterText .banner-item.image-only-layout:before {
+    background-color: rgba(0, 0, 0, 0.2); /* Daha hafif overlay */
+}
+
+/* Responsive ayarlamaları */
+@media (max-width: 768px) {
+    .banner-type-orta-banner.BgImageCenterText .banner-item {
+        height: 250px; /* Mobil cihazlarda daha az yükseklik */
+    }
+
+    .banner-type-orta-banner.BgImageCenterText .banner-item .content-box .title {
+        font-size: 1.3em; /* Daha küçük başlık */
+    }
+
+    .banner-type-orta-banner.BgImageCenterText .banner-item .content-box .content {
+        font-size: 0.9em; /* Daha küçük içerik metni */
+        margin-bottom: 15px;
+    }
+
+    .banner-type-orta-banner.BgImageCenterText .banner-item .content-box .button-container button {
+        padding: 8px 20px; /* Daha küçük buton */
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "require": {
+        "phpoffice/phpspreadsheet": "^3.3",
+        "ext-ftp": "*",
+        "ext-ssh2": "*",
+        "phpseclib/phpseclib": "~3.0",
+        "iyzico/iyzipay-php": "^2.0.59",
+        "ext-curl": "*",
+        "ext-simplexml": "*",
+        "ext-openssl": "*",
+        "ext-pdo": "*",
+        "robmorgan/phinx": "^0.16.9"
+    }
+}

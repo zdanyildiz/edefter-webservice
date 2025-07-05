@@ -1,0 +1,143 @@
+/* Ana Banner Konteyneri (.banner-item.ImageTextOverlayBottom eklendiğinde) */
+.banner-type-orta-banner.ImageTextOverlayBottom{
+    display: flex;
+    width:100%;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+/* .ImageTextOverlayBottom sınıfı .banner-type-orta-banner ile birlikte ana .banner div'inde olacak */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    /* !!! KART YÜKSEKLİĞİ: Sabit yükseklik gereklidir */
+    height: 280px; /* Örnek yükseklik, içeriğe göre ayarlayın */
+    border-radius: var(--border-radius-base);
+    border: var(--border-style) var(--border-width) var(--border-color);
+    /* Sıfırlamalar */
+    display: block;
+    min-height: initial;
+    cursor: pointer;
+    text-align: start;
+}
+
+/* Banner içindeki a etiketi */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Görseli Arkaplan Gibi Yap */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item .banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Sıfırlamalar */
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    overflow: hidden;
+    flex-shrink: 0;
+    flex: none;
+    max-width: none;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item .banner-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Sıfırlama */
+    border-radius: 0;
+    transition: transform 0.4s ease;
+}
+
+/* Hover durumunda görsel efekti */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item:hover .banner-image img {
+    transform: scale(1.05);
+}
+
+/* İçerik Kutusu (Altta Overlay Bant) */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item .content-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 10%, rgba(0,0,0,0) 100%); /* Degrade overlay */
+    padding: 40px 15px 15px 15px; /* Alt boşluk fazla */
+    /* Sıfırlamalar */
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+    z-index: 2;
+    flex: none;
+    max-width: 100%;
+    display: block;
+    text-align: start;
+}
+
+/* Başlık */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item .content-box .title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    /* Sıfırlama */
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.3;
+}
+
+/* İçerik */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item .content-box .content {
+    line-height: 1.4;
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+/* Buton Konteyneri (Gizli) */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item .content-box .button-container {
+    display: none;
+}
+
+/* layout_group="text" (Sadece Metin) durumu için uyarlama */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item.text-only-layout .content-box {
+    background: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* layout_group="image" (Sadece Resim) durumu için uyarlama */
+.banner-type-orta-banner.ImageTextOverlayBottom .banner-item.image-only-layout .content-box {
+    display: none;
+}
+
+/* Responsive ayarlamaları */
+@media (max-width: 768px) {
+    .banner-type-orta-banner.ImageTextOverlayBottom .banner-item {
+        height: 220px; /* Daha düşük yükseklik */
+    }
+
+    .banner-type-orta-banner.ImageTextOverlayBottom .banner-item .content-box {
+        padding: 30px 15px 12px 15px; /* Daha az padding */
+    }
+}

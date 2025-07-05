@@ -1,0 +1,181 @@
+/* ====================================================================
+   BOTTOM BANNER GÖRÜNÜM STİLLERİ
+   ====================================================================
+   Bottom banner'ların genel görünümünü ve farklı stil sınıflarını yönetir.
+   Bu dosya, banner'ın nasıl göründüğüne odaklanır.
+   Banner'ın sayfadaki yeri için tepe-banner.css kullanılır.
+   Güncelleme tarihi: 16 Haziran 2025
+   ==================================================================== */
+
+
+/* TBottom Banner Genel Görünüm Stili - .bottom-banner ana sınıfı */
+.bottom-banner {position: relative}
+.bottom-banner .banner-container {
+    margin:0 auto;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+
+/* Banner item genel stili */
+.bottom-banner .banner-item {
+
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Text ve Image Layout Stilleri */
+.bottom-banner.text-image-layout .banner-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+  text-align: start;
+}
+
+/* Content Box Stilleri */
+.bottom-banner .content-box {
+    position: absolute;
+  padding: 20px;
+  z-index: 2;
+    max-width: 60%;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Banner Image Stilleri */
+.bottom-banner .banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+.bottom-banner .banner-image img{
+    width: 100%;
+    height:100%;
+}
+.bottom-banner .banner-item:hover .banner-image {
+    transform: scale(1.02);
+    transition: transform 0.4s ease-in-out;
+}
+
+/* Banner Title Stilleri */
+.bottom-banner .banner-title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  line-height: 1.2;
+  color: inherit;}
+
+/* Banner Content Stilleri */
+.bottom-banner .banner-content {
+  line-height: 1.6;
+  margin-bottom: 20px;
+  opacity: 0.9;
+  color: inherit;
+}
+
+/* Banner Button Stilleri */
+.bottom-banner .banner-button {
+  display: inline-block;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.bottom-banner .banner-button:hover {
+  transform: translateY(-2px);
+ }
+
+.bottom-banner.content-on-image .content-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 60%;
+    border-radius: 8px;
+}
+
+.bottom-banner.content-on-image .banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.bottom-banner.content-on-image .content-box {
+    z-index: 2;
+}
+
+/* Text Only Layout */
+.bottom-banner.text-only-layout .banner-item {
+    padding: 30px;
+}
+
+.bottom-banner.text-only-layout .content-box {
+    background: transparent;
+    box-shadow: none;
+    max-width: 80%;
+}
+
+/* Image Only Layout */
+.bottom-banner.image-only-layout .content-box {
+    display: none;
+}
+
+/* ====================================================================
+   RESPONSIVE TASARIM
+   ==================================================================== */
+@media (max-width: 1399px) {
+    .banner-type-alt-banner.bottom-banner .banner-container{
+        width: 100%; max-width: 100%; display: inline-block; height: auto;
+    }
+}
+
+@media (max-width: 992px) {
+    .bottom-banner .content-box{width: 100%;max-width: 100%}
+    .bottom-banner.text-image-layout .banner-item {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+    .bottom-banner .banner-title {
+        font-size: clamp(1.3rem, 3.2vw, 2rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .bottom-banner .banner-item {
+        padding: 15px;
+    }
+    .bottom-banner .banner-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bottom-banner .banner-content {
+        font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+    }
+    .bottom-banner .banner-button {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ====================================================================
+   ACCESSIBILITY SUPPORT
+   ==================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .bottom-banner .banner-container,
+    .bottom-banner .banner-item:hover .banner-image {
+        transition: none !important;
+    }
+}

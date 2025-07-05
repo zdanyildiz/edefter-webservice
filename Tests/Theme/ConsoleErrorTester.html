@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema Sayfası Konsol Tester</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #4285f4;
+        }
+        
+        .console-log {
+            background: #1a1a1a;
+            color: #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 20px 0;
+            border: 2px solid #333;
+        }
+        
+        .error { color: #ff4444; }
+        .warning { color: #ffaa00; }
+        .info { color: #00aaff; }
+        .success { color: #00ff00; }
+        
+        .test-button {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Tema Sayfası Konsol Tester</h1>
+        
+        <div class="test-section">
+            <h3>📊 Otomatik Test Durumu</h3>
+            <p>Bu sayfa tema sayfasının konsol hatalarını otomatik olarak tespit eder.</p>
+            
+            <button class="test-button" onclick="testThemePage()">🧪 Tema Sayfasını Test Et</button>
+            <button class="test-button" onclick="testColorThemes()">🎨 Renk Temalarını Test Et</button>
+            <button class="test-button" onclick="testTabSystem()">📋 Sekme Sistemini Test Et</button>
+            <button class="test-button" onclick="clearLog()">🗑️ Logu Temizle</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>📜 Konsol Logları</h3>
+            <div class="console-log" id="consoleLog">
+                Test başlatmak için yukarıdaki butonları kullanın...
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔧 Manuel Test Komutları</h3>
+            <p>Tema sayfasını açtıktan sonra Console'da bu komutları deneyin:</p>
+            <ul>
+                <li><code>typeof window.themeEditorInstance</code></li>
+                <li><code>window.themeEditorInstance.getFormData()</code></li>
+                <li><code>applyColorTheme('blue')</code></li>
+                <li><code>$('.tab-pane.active').length</code></li>
+                <li><code>$('#general-panel').hasClass('active')</code></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        let logCounter = 0;
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString('tr-TR');
+            const logDiv = document.getElementById('consoleLog');
+            logCounter++;
+            
+            logDiv.innerHTML += `<div class="${type}">[${timestamp}] ${logCounter}. ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function clearLog() {
+            document.getElementById('consoleLog').innerHTML = '';
+            logCounter = 0;
+            log('Log temizlendi', 'info');
+        }
+        
+        async function testThemePage() {
+            log('🧪 Tema sayfası testi başlatılıyor...', 'info');
+            
+            try {
+                // Tema sayfasını test et
+                const response = await fetch('http://l.erhanozel/_y/s/s/tasarim/Theme.php');
+                
+                if (response.ok) {
+                    log('✅ Tema sayfası başarıyla yüklendi (HTTP 200)', 'success');
+                    
+                    const html = await response.text();
+                    
+                    // JavaScript dosyalarının yüklenip yüklenmediğini kontrol et
+                    if (html.includes('core.js')) {
+                        log('✅ core.js dosyası referansı bulundu', 'success');
+                    } else {
+                        log('❌ core.js dosyası referansı bulunamadı', 'error');
+                    }
+                    
+                    if (html.includes('theme-editor.js')) {
+                        log('✅ theme-editor.js dosyası referansı bulundu', 'success');
+                    } else {
+                        log('❌ theme-editor.js dosyası referansı bulunamadı', 'error');
+                    }
+                    
+                    // Form elementi kontrol
+                    if (html.includes('id="themeForm"')) {
+                        log('✅ themeForm elementi bulundu', 'success');
+                    } else {
+                        log('❌ themeForm elementi bulunamadı', 'error');
+                    }
+                    
+                    // Tab sistemi kontrol
+                    if (html.includes('id="general-panel"')) {
+                        log('✅ general-panel sekmesi bulundu', 'success');
+                    } else {
+                        log('❌ general-panel sekmesi bulunamadı', 'error');
+                    }
+                    
+                } else {
+                    log(`❌ Tema sayfası yüklenemedi (HTTP ${response.status})`, 'error');
+                }
+                
+            } catch (error) {
+                log(`❌ Tema sayfası test hatası: ${error.message}`, 'error');
+            }
+        }
+        
+        function testColorThemes() {
+            log('🎨 Renk tema sistemi test ediliyor...', 'info');
+            
+            // Tema sayfasını aç ve test et
+            const testWindow = window.open('http://l.erhanozel/_y/s/s/tasarim/Theme.php', 'themeTest', 'width=1200,height=800');
+            
+            if (testWindow) {
+                log('✅ Tema sayfası test penceresi açıldı', 'success');
+                
+                setTimeout(() => {
+                    try {
+                        // postMessage ile test komutları gönder
+                        testWindow.postMessage({
+                            action: 'test',
+                            command: 'checkThemeEditor'
+                        }, '*');
+                        
+                        log('📨 Test komutları gönderildi', 'info');
+                        
+                    } catch (error) {
+                        log(`❌ Test komutu gönderme hatası: ${error.message}`, 'error');
+                    }
+                }, 3000);
+                
+            } else {
+                log('❌ Test penceresi açılamadı (popup blocker?)', 'error');
+            }
+        }
+        
+        function testTabSystem() {
+            log('📋 Sekme sistemi test ediliyor...', 'info');
+            
+            const testWindow = window.open('http://l.erhanozel/_y/s/s/tasarim/Theme.php', 'tabTest', 'width=1200,height=800');
+            
+            if (testWindow) {
+                log('✅ Sekme testi penceresi açıldı', 'success');
+                log('ℹ️ Manuel olarak sekmelere tıklayın ve içeriklerin göründüğünü kontrol edin', 'info');
+            } else {
+                log('❌ Sekme test penceresi açılamadı', 'error');
+            }
+        }
+        
+        // PostMessage dinleyicisi
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'testResult') {
+                log(`📨 Test sonucu: ${event.data.message}`, event.data.success ? 'success' : 'error');
+            }
+        });
+        
+        // Sayfa yüklendiğinde
+        window.addEventListener('load', function() {
+            log('🔧 Tema Test Arayüzü hazır', 'info');
+            log('💡 İpucu: Önce "Tema Sayfasını Test Et" butonuna tıklayın', 'info');
+        });
+    </script>
+</body>
+</html>

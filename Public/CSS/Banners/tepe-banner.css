@@ -1,0 +1,20 @@
+/* ====================================================================
+   TEPE BANNER YERLEŞİM STİL SİSTEMİ
+   ====================================================================
+   Bu dosya, tepe banner gruplarının sayfadaki genel yerleşimini tanımlar.
+   Görünüm stilleri için top-banner.css dosyasına bakınız.
+   Güncelleme tarihi: 16 Haziran 2025
+   ==================================================================== */
+
+/* 
+  Tepe Banner Ana Konteyner Yerleşimi 
+  HTML'de banner-type-tepe-banner sınıfı ile kullanılır.
+  BannerController.php içinde $bannerTypeName = "tepe-banner" olarak üretilir.
+*/
+.banner-type-tepe-banner {
+  margin: 10px auto 20px auto; /* Üst, sağ/sol auto, alt */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+

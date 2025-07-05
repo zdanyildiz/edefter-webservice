@@ -1,0 +1,113 @@
+/* Ana Banner Konteyneri (.ProfileCard eklendiğinde) */
+.ProfileCard {
+    display: flex; /* İçeriği (banner-content-container) dikeyde hizalamak için */
+    flex-direction: column;
+    align-items: center; /* Yatayda ortala */
+    text-align: center;
+    box-sizing: border-box;
+    /* Genişlik aşağıda .quad vb. ile ayarlanacak */
+    /* Diğer banner tiplerinden kalan stilleri sıfırlama */
+    overflow: visible; /* HoverCardBanner'dan kalabilecek 'hidden'ı sıfırla */
+    height: auto; /* HoverCardBanner'dan kalabilecek sabit yüksekliği sıfırla */
+    background-color: transparent; /* ImageRightBanner'dan kalabilecek rengi sıfırla */
+    min-height: initial; /* ImageRightBanner'dan kalabilecek min-height'ı sıfırla */
+    position: relative;
+}
+
+/* İçerik Konteyneri */
+.ProfileCard .banner-content-container {
+    display: flex; /* Bu sefer içindekileri (image-wrapper, content-box) dikey sıralamak için */
+    flex-direction: column;
+    align-items: center; /* Yatayda ortala */
+    width: 100%; /* Konteynerin genişliğini alsın */
+    /* Diğer bannerlardan kalan stilleri sıfırlama */
+    flex-wrap: nowrap;
+    justify-content: initial;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    overflow: visible;
+}
+
+/* Görsel Sarmalayıcı (Yuvarlak olacak) */
+.ProfileCard .banner-image-wrapper {
+    width: 160px; /* İstenen boyut */
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    padding: 6px;
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    margin-bottom: 20px; /* Yazı ile arasına boşluk */
+    overflow: hidden; /* İçindeki resmin taşmasını engelle */
+    box-sizing: border-box; /* Padding ve border dahil */
+    flex-shrink: 0; /* Küçülmesini engelle */
+    /* Diğer bannerlardan kalan stilleri sıfırlama */
+    flex: none; /* Flex item olmasın */
+    max-width: none; /* max-width sınırlamasını kaldır */
+    position: static; /* z-index için gereken relative/absolute olmasın */
+    z-index: auto;
+}
+
+/* Görsel */
+.ProfileCard .banner-image-wrapper img { /* ID yerine sınıf kullanmak daha iyi olur ama yapı böyleyse ID'ye özel stil yazılabilir */
+    /* .ProfileCard img[id^="bannerImage-"] gibi de seçilebilir */
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Resmin kendisi de yuvarlak olmalı */
+    /* Diğer bannerlardan kalan stilleri sıfırlama */
+    transform: none; /* Hover efektini sıfırla */
+    transition: none; /* Hover efektini sıfırla */
+}
+
+/* İçerik Kutusu (Resmin altında) */
+.ProfileCard .banner-content-box {
+    /* Flex/pozisyon sıfırlamaları */
+    position: static; /* Absolute olmasın */
+    width: auto; /* Tam genişlik olmasın */
+    height: auto;
+    background-color: transparent; /* Hover efektini sıfırla */
+    color: inherit; /* Yazı rengini sıfırla (aşağıda ayarlanacak) */
+    padding: 0; /* Genel padding sıfırla (iç öğeler kendi margin'ini ayarlar) */
+    opacity: 1; /* Hover efektini sıfırla */
+    visibility: visible; /* Hover efektini sıfırla */
+    transform: none; /* Hover efektini sıfırla */
+    transition: none; /* Hover efektini sıfırla */
+    z-index: auto;
+    /* Flex item sıfırlamaları */
+    flex: none;
+    max-width: none;
+    /* Hizalama (zaten .ProfileCard'dan geliyor ama garanti olsun) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Banner Başlığı (İsim olarak kullanılacak) */
+.ProfileCard .bannerTitle { /* ID yerine sınıf kullanmak daha iyi */
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px; /* Alt boşluk */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* Diğer bannerlardan kalan stilleri sıfırla */
+    line-height: 1.3; /* Varsayılana yakın */
+}
+
+/* Banner İçeriği (Unvan olarak kullanılacak) */
+.ProfileCard .bannerContent { /* ID yerine sınıf kullanmak daha iyi */
+    font-size: 0.9em;
+    color: #777;
+    line-height: 1.4;
+    /* Diğer bannerlardan kalan stilleri sıfırla */
+    margin-bottom: 0; /* Altına buton gelmeyeceği için boşluğu sıfırla */
+}
+
+/* Buton Konteyneri (Gizlenecek) */
+.ProfileCard .bannerButton {
+    display: none; /* Bu stilde butonu gösterme */
+}

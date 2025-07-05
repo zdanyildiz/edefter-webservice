@@ -1,0 +1,9 @@
+{
+  "Host": "smtp.yandex.com",
+  "Username": "info@pozitifeticaret.com",
+  "Password": "krfalsqppujwhltm",
+  "SMTPSecure": "ssl",
+  "Port": 465,
+  "FromEmail": "info@pozitifeticaret.com",
+  "FromName": "Bilgi Pozitif Eticaret"
+}

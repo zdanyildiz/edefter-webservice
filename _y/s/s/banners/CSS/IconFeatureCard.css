@@ -1,0 +1,88 @@
+.IconFeatureCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* İçeriği yatayda ortala */
+    text-align: center; /* Metinleri ortala */
+    box-sizing: border-box;
+    /* Önceki stillerden sıfırlamalar */
+    overflow: visible; height: auto;
+    background-color: transparent; min-height: initial; cursor: default;
+    position: relative;
+    justify-content: center;
+}
+
+/* İç Konteyner */
+.IconFeatureCard .banner-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Resim ve metin kutusunu ortala */
+    width: 100%; height: 100%;
+    /* Sıfırlamalar */
+    flex-wrap: nowrap; justify-content: initial; gap: 0; margin: 0;
+    padding: 0; max-width: none; overflow: visible;
+    border:solid 1px #eee; border-radius: 5px;
+}
+
+/* Görsel (İkon) Sarmalayıcı */
+.IconFeatureCard .banner-image-wrapper {
+    /* Boyut ve Boşluk */
+    width: 55px; /* İkon genişliği */
+    height: 55px; /* İkon yüksekliği */
+    margin-bottom: 25px; /* İkon ile başlık arası boşluk */
+    /* Önceki stilleri sıfırla/değiştir */
+    border-radius: 0; border: none; padding: 0;
+    background-color: transparent; box-shadow: none;
+    overflow: visible; flex-shrink: 0; flex: none;
+    max-width: none; position: static; z-index: auto;
+    box-sizing: content-box; /* Önemli: border/padding yok, content'e göre boyutlansın */
+}
+
+/* Görsel (İkon) */
+.IconFeatureCard .banner-image-wrapper img {
+    display: block;
+    width: 100%; /* Wrapper boyutunu alsın */
+    height: 100%;
+    object-fit: contain; /* İkonu bozmadan sığdır */
+    /* Sıfırlamalar */
+    border-radius: 0; transform: none; transition: none;
+}
+
+/* İçerik Kutusu */
+.IconFeatureCard .banner-content-box {
+    /* Sıfırlamalar */
+    position: static; width: auto; height: auto;
+    background-color: transparent; color: inherit; padding: 0;
+    opacity: 1; visibility: visible; transform: none; transition: none;
+    z-index: auto; flex: none; max-width: 100%;
+    /* Hizalama */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Banner Başlığı (Özellik Başlığı) */
+.IconFeatureCard .bannerTitle {
+    font-size: 1em; /* Örnek boyut */
+    font-weight: 500; /* Biraz kalın */
+    color: #444; /* Koyu gri */
+    margin-bottom: 15px; /* Alt boşluk */
+    text-transform: uppercase; /* Büyük harf */
+    letter-spacing: 1.5px; /* Harf aralığı */
+    /* Sıfırlama */
+    line-height: 1.3;
+}
+
+/* Banner İçeriği (Açıklama Metni) */
+.IconFeatureCard .bannerContent {
+    font-size: 0.95em; /* Örnek boyut */
+    color: #777; /* Açık gri */
+    line-height: 1.6; /* Satır yüksekliği */
+    max-width: 300px; /* Açıklamanın çok genişlemesini önle (isteğe bağlı) */
+    /* Sıfırlama */
+    margin-bottom: 0;
+}
+
+/* Buton Konteyneri (Gizlenecek) */
+.IconFeatureCard .bannerButton {
+    display: none;
+}

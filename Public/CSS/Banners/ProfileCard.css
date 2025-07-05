@@ -1,0 +1,139 @@
+/* Ana Banner Konteyneri (.banner-item.ProfileCard eklendiğinde) */
+.banner-type-orta-banner.ProfileCard{
+    display: flex;
+    width:100%;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+/* .ProfileCard sınıfı .banner-type-orta-banner ile birlikte ana .banner div'inde olacak */
+.banner-type-orta-banner.ProfileCard .banner-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    border-radius: var(--border-radius-base);
+    border: var(--border-style) var(--border-width) var(--border-color);
+    /* Sıfırlamalar */
+    overflow: visible;
+    height: auto;
+    background-color: transparent;
+    min-height: initial;
+    position: relative;
+}
+
+/* Banner içindeki a etiketi */
+.banner-type-orta-banner.ProfileCard .banner-item > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Görsel (Yuvarlak profil resmi) */
+.banner-type-orta-banner.ProfileCard .banner-item .banner-image {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid var(--text-light-color);
+    padding: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    /* Sıfırlamalar */
+    flex: none;
+    max-width: none;
+    position: static;
+    z-index: auto;
+    background-color: var(--background-light-color);
+}
+
+.banner-type-orta-banner.ProfileCard .banner-item .banner-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    /* Sıfırlamalar */
+    transform: none;
+    transition: transform 0.3s ease;
+}
+
+/* Hover efekti için hafif dönme animasyonu */
+.banner-type-orta-banner.ProfileCard .banner-item:hover .banner-image img {
+    transform: scale(1.08);
+}
+
+/* İçerik Kutusu (Resmin altında) */
+.banner-type-orta-banner.ProfileCard .banner-item .content-box {
+    /* Flex/pozisyon sıfırlamaları */
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    padding: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+    z-index: auto;
+    /* Flex item sıfırlamaları */
+    flex: none;
+    max-width: none;
+    /* Hizalama */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Başlık (İsim olarak kullanılacak) */
+.banner-type-orta-banner.ProfileCard .banner-item .content-box .title {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    /* Sıfırlamalar */
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+/* İçerik (Unvan olarak kullanılacak) */
+.banner-type-orta-banner.ProfileCard .banner-item .content-box .content {
+    line-height: 1.4;
+    /* Sıfırlamalar */
+    margin-bottom: 0;
+}
+
+/* Buton Konteyneri (Gizli) */
+.banner-type-orta-banner.ProfileCard .banner-item .content-box .button-container {
+    display: none;
+}
+
+/* layout_group="text" (Sadece Metin) durumu için uyarlama */
+.banner-type-orta-banner.ProfileCard .banner-item.text-only-layout .content-box {
+    padding: 20px;
+    border: var(--border-style) var(--border-width) var(--border-color);
+    border-radius: var(--border-radius-base);
+    width: 100%;
+}
+
+/* layout_group="image" (Sadece Resim) durumu için uyarlama */
+.banner-type-orta-banner.ProfileCard .banner-item.image-only-layout .banner-image {
+    margin-bottom: 0;
+}
+
+/* Responsive ayarlamaları */
+@media (max-width: 768px) {
+    .banner-type-orta-banner.ProfileCard .banner-item .banner-image {
+        width: 130px;
+        height: 130px;
+    }
+}

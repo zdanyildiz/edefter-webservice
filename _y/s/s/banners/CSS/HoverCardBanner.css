@@ -1,0 +1,118 @@
+/* Ana Banner Konteyneri (.HoverCardBanner eklendiğinde) */
+.HoverCardBanner {
+    position: relative; /* Mutlak konumlandırılmış içerik kutusu için */
+    overflow: hidden; /* Taşmaları gizle */
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* İçerik Konteyneri (Mevcut yapıdaki) */
+.HoverCardBanner .banner-content-container {
+    height: 100%; /* Ana konteynerin yüksekliğini almalı */
+    /* ImageRightBanner'dan kalabilecek flex ayarlarını sıfırlıyoruz */
+    display: block; /* Bu banner tipinde flex'e gerek yok */
+    flex-direction: initial;
+    justify-content: initial;
+    align-items: initial;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    overflow: visible; /* İçindeki absolute konumlandırmayı engellememeli */
+}
+
+/* Görsel Sarmalayıcı */
+.HoverCardBanner .banner-image-wrapper {
+    height: 100%; /* Konteyner yüksekliğini kapla */
+    width: 100%; /* Genişliği de kaplasın */
+    /* ImageRightBanner'dan kalabilecek ayarları sıfırla */
+    flex: none;
+    max-width: none;
+    text-align: left;
+    box-sizing: border-box; /* Önemli olabilir */
+    position: relative; /* Z-index için gerekebilir */
+    z-index: 1; /* İçerik kutusunun altında kalması için */
+}
+
+/* Görsel */
+.HoverCardBanner .banner-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Alanı doldur, oranı koru */
+    transition: transform 0.4s ease;
+}
+
+/* İçerik Kutusu (Bu artık overlay olacak) */
+.HoverCardBanner .banner-content-box {
+    position: absolute; /* Görselin ve wrapper'ın üzerine yerleş */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    color: #ffffff;
+    padding: 20px; /* İç boşlukları buradan verelim */
+    box-sizing: border-box; /* Padding'i içeri dahil et */
+    z-index: 2; /* Görselin üzerinde olmalı */
+
+    display: flex; /* İçeriği (h2, div, button) ortalamak için */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    opacity: 0; /* Başlangıçta gizli */
+    visibility: hidden;
+    transform: translateY(10px); /* Hafif aşağıdan gelme efekti */
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+
+    /* ImageRightBanner'dan kalabilecek ayarları sıfırla */
+    flex: none;
+    max-width: none;
+}
+
+/* Hover Durumu */
+.HoverCardBanner:hover .banner-content-box {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.HoverCardBanner:hover .banner-image-wrapper img {
+    transform: scale(1.08); /* İsteğe bağlı zoom */
+}
+
+/* İçerik Kutusu İçindeki Elemanlar (Stiller aynı kalabilir) */
+.HoverCardBanner .banner-content-box .bannerTitle {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.HoverCardBanner .banner-content-box .bannerContent {
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Buton Konteyneri ve Buton */
+/* .bannerButton için ek stil gerekmiyorsa kaldırılabilir */
+.HoverCardBanner .banner-content-box .bannerButton button {
+    padding: 10px 22px;
+    border: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.HoverCardBanner .banner-content-box .bannerButton button:hover,
+.HoverCardBanner .banner-content-box .bannerButton button:focus {
+    background-color: #fff;
+    color: #000;
+    outline: none;
+}

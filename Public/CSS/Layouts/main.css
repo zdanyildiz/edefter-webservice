@@ -1,0 +1,16 @@
+.store-whatsapp {
+width: 50px;height: 50px;
+    position: fixed;z-index: 9998;right: 20px;bottom: 25px;display:block;align-items: center;justify-content: center;padding: 15px; border-radius: 50%;background: lawngreen;box-shadow: 0 0 20px transparent;
+    -webkit-animation: slide-down .3s ease-out;
+    -moz-animation: slide-down .3s ease-out;}
+.store-whatsapp:hover {background: #128C7E;box-shadow: 0 0 20px rgb(75 57 75 / 50%);color: #128C7E}
+.store-whatsapp svg {width: 25px;height: auto}
+@-webkit-keyframes slide-down {0% {opacity:0;-webkit-transform:translateY(-15%)}100%{opacity:1;-webkit-transform:translateY(0)}}
+@-moz-keyframes slide-down {0% {opacity:0;-moz-transform:translateY(-15%)}100%{opacity:1;-moz-transform:translateY(0)}}
+.store-whatsapp:before,.store-whatsapp:after{display:block;content:'';position:absolute;width:45px;height:45px;background:lightgreen;z-index:-1;animation:.7s clockwise infinite;border-radius:50%}
+.store-whatsapp:after{background:#25D366;animation:2s counterclockwise infinite}
+
+@keyframes clockwise {0% {top:-3px;left:0}12% {top:-2px;left:2px}25% {top:0;left:3px}37% {top:2px;left:2px}50% {top:3px;left:0}62% {top:2px;left:-2px}75% {top:0;left:-3px}87% {top:-2px;left:-2px}100% {top:-3px;left:0}}
+@keyframes counterclockwise {0% {top:-5px;right:0}12% {top:-2px;right:2px}25% {top:0;right:5px}37% {top:2px;right:2px}50% {top:5px;right:0}62% {top:2px;right:-2px}75% {top:0;right:-5px}87% {top:-2px;right:-2px}100% {top:-5px;right:0}}
+.store-whatsapp:hover:after{background:#6969c7;transition:.7s}
+.store-whatsapp:hover:before{background:#a4a4ec;transition:.7s}

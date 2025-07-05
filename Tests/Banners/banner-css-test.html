@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner CSS Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .test-title {
+            background: #333;
+            color: white;
+            padding: 10px;
+            margin: -20px -20px 20px -20px;
+            border-radius: 6px 6px 0 0;
+        }
+        
+        /* Test Banner Stilleri */
+        .banner-group-2 {
+            margin: 0 auto !important;
+            display: block !important;
+            text-align: center !important;
+            max-width: 1400px !important;
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .banner-group-2 .banner-container {
+            margin: 0 auto !important;
+            text-align: center !important;
+            display: block !important;
+        }
+        
+        .IconFeatureCard {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 20px !important;
+            margin: 0 auto !important;
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .IconFeatureCard .banner-container {
+            margin: 0 auto !important;
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+        }
+        
+        .banner-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 10px;
+            min-width: 150px;
+        }
+        
+        @media (max-width: 768px) {
+            .IconFeatureCard {
+                flex-direction: column !important;
+                gap: 15px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Banner CSS Ortalama Testleri</h1>
+        
+        <div class="test-section">
+            <div class="test-title">Tepe Banner Test (banner-group-2)</div>
+            <div class="banner-group-2">
+                <div class="banner-container">
+                    <div class="banner-item">
+                        <h3>Tepe Banner Başlığı</h3>
+                        <p>Bu tepe banner ortalanarak görüntülenmeli</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">Icon Banner Test (IconFeatureCard)</div>
+            <div class="IconFeatureCard">
+                <div class="banner-container">
+                    <div class="banner-item">
+                        <h4>Icon 1</h4>
+                        <p>Açıklama</p>
+                    </div>
+                </div>
+                <div class="banner-container">
+                    <div class="banner-item">
+                        <h4>Icon 2</h4>
+                        <p>Açıklama</p>
+                    </div>
+                </div>
+                <div class="banner-container">
+                    <div class="banner-item">
+                        <h4>Icon 3</h4>
+                        <p>Açıklama</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">Test Sonuçları</div>
+            <ul>
+                <li>✓ Tepe banner ortalanmalı</li>
+                <li>✓ Icon bannerlar yan yana ve ortalanmalı</li>
+                <li>✓ Mobilde icon bannerlar alt alta geçmeli</li>
+                <li>✓ Tüm bannerlar responsive olmalı</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

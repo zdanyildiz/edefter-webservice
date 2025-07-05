@@ -1,0 +1,416 @@
+<!-- Header Ayarları Detayları -->
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Üst İletişim ve Sosyal Medya -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fa fa-phone"></i> Üst İletişim & Sosyal Medya</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fa fa-desktop"></i> Desktop Ayarları</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Arkaplan Rengi</label>
+                                    <input type="color" name="top-contact-and-social-bg-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-bg-color'] ?? '#f8f9fa')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Link Rengi</label>
+                                    <input type="color" name="top-contact-and-social-link-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-link-color'] ?? '#5f6368')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Link Hover Rengi</label>
+                                    <input type="color" name="top-contact-and-social-link-hover-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-link-hover-color'] ?? '#4285f4')?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>İkon Rengi</label>
+                                    <input type="color" name="top-contact-and-social-icon-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-icon-color'] ?? '#5f6368')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>İkon Hover Rengi</label>
+                                    <input type="color" name="top-contact-and-social-icon-hover-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-icon-hover-color'] ?? '#4285f4')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Üst Boşluk (px)</label>
+                                    <input type="number" name="top-contact-and-social-container-margin-top" class="form-control" min="0" max="100" value="<?=sanitizeNumericValue($customCSS['top-contact-and-social-container-margin-top'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fa fa-mobile"></i> Mobile Ayarları</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Mobil Arkaplan Rengi</label>
+                                    <input type="color" name="top-contact-and-social-bg-color-mobile" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-bg-color-mobile'] ?? $customCSS['top-contact-and-social-bg-color'] ?? '#f8f9fa')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Mobil Link Rengi</label>
+                                    <input type="color" name="top-contact-and-social-link-color-mobile" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-link-color-mobile'] ?? $customCSS['top-contact-and-social-link-color'] ?? '#5f6368')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Mobil Link Hover Rengi</label>
+                                    <input type="color" name="top-contact-and-social-link-hover-color-mobile" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-link-hover-color-mobile'] ?? $customCSS['top-contact-and-social-link-hover-color'] ?? '#4285f4')?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Mobil İkon Rengi</label>
+                                    <input type="color" name="top-contact-and-social-icon-color-mobile" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-icon-color-mobile'] ?? $customCSS['top-contact-and-social-icon-color'] ?? '#5f6368')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Mobil İkon Hover Rengi</label>
+                                    <input type="color" name="top-contact-and-social-icon-hover-color-mobile" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['top-contact-and-social-icon-hover-color-mobile'] ?? $customCSS['top-contact-and-social-icon-hover-color'] ?? '#4285f4')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Mobil Üst Boşluk (px)</label>
+                                    <input type="number" name="top-contact-and-social-container-mobile-margin-top" class="form-control" min="0" max="150" value="<?=sanitizeNumericValue($customCSS['top-contact-and-social-container-mobile-margin-top'] ?? '80', 'px', 80)?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                                    
+        
+        <!-- Alışveriş İkonları -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fa fa-shopping-cart"></i> Alışveriş İkonları</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fa fa-desktop"></i> Desktop Alışveriş İkonları</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Arama İkonu Rengi</label>
+                                    <input type="color" name="shop-menu-container-icon-color-search" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['shop-menu-container-icon-color-search'] ?? '#333333')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Üye İkonu Rengi</label>
+                                    <input type="color" name="shop-menu-container-icon-color-member" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['shop-menu-container-icon-color-member'] ?? '#333333')?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Favoriler İkonu Rengi</label>
+                                    <input type="color" name="shop-menu-container-icon-color-favorites" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['shop-menu-container-icon-color-favorites'] ?? '#333333')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sepet İkonu Rengi</label>
+                                    <input type="color" name="shop-menu-container-icon-color-basket" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['shop-menu-container-icon-color-basket'] ?? '#333333')?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Desktop İkonlar Hover Rengi</label>
+                            <input type="color" name="shop-menu-container-icon-hover-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['shop-menu-container-icon-hover-color'] ?? '#4285f4')?>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fa fa-mobile"></i> Mobile Alışveriş İkonları</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Telefon İkonu Arkaplan</label>
+                                    <input type="color" name="mobile-action-icon-phone-bg-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['mobile-action-icon-phone-bg-color'] ?? '#28a745')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>WhatsApp İkonu Arkaplan</label>
+                                    <input type="color" name="mobile-action-icon-whatsapp-bg-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['mobile-action-icon-whatsapp-bg-color'] ?? '#25d366')?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sepet İkonu Arkaplan</label>
+                                    <input type="color" name="mobile-action-icon-basket-bg-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['mobile-action-icon-basket-bg-color'] ?? '#4285f4')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sepet Sayacı Arkaplan</label>
+                                    <input type="color" name="mobile-action-icon-basket-counter-bg-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['mobile-action-icon-basket-counter-bg-color'] ?? '#dc3545')?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobile İkon Boyutu (px)</label>
+                                    <input type="number" name="mobile-action-icon-size" class="form-control" min="24" max="48" value="<?=sanitizeNumericValue($customCSS['mobile-action-icon-size'] ?? '32', 'px', 32)?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobile İkonlar Arası Boşluk (px)</label>
+                                    <input type="number" name="mobile-action-icon-gap" class="form-control" min="8" max="20" value="<?=sanitizeNumericValue($customCSS['mobile-action-icon-gap'] ?? '12', 'px', 12)?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logo Detay Ayarları -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fa fa-image"></i> Logo Detay Ayarları</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fa fa-desktop"></i> Desktop Logo</h5>
+                        <div class="form-group">
+                            <label>Logo Genişliği (px)</label>
+                            <input type="number" name="header-logo-width" class="form-control" min="80" max="300" value="<?=sanitizeNumericValue($customCSS['header-logo-width'] ?? '150', 'px', 150)?>">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Üst Margin (px)</label>
+                                    <input type="number" name="header-logo-margin-top" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-logo-margin-top'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sağ Margin (px)</label>
+                                    <input type="number" name="header-logo-margin-right" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-logo-margin-right'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Alt Margin (px)</label>
+                                    <input type="number" name="header-logo-margin-bottom" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-logo-margin-bottom'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sol Margin (px)</label>
+                                    <input type="number" name="header-logo-margin-left" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-logo-margin-left'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fa fa-mobile"></i> Mobile Logo</h5>
+                        <div class="form-group">
+                            <label>Mobil Logo Genişliği (px)</label>
+                            <input type="number" name="header-mobile-logo-width" class="form-control" min="60" max="200" value="<?=sanitizeNumericValue($customCSS['header-mobile-logo-width'] ?? '100', 'px', 100)?>">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobil Üst Margin (px)</label>
+                                    <input type="number" name="header-mobile-logo-margin-top" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-mobile-logo-margin-top'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobil Sağ Margin (px)</label>
+                                    <input type="number" name="header-mobile-logo-margin-right" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-mobile-logo-margin-right'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobil Alt Margin (px)</label>
+                                    <input type="number" name="header-mobile-logo-margin-bottom" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-mobile-logo-margin-bottom'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobil Sol Margin (px)</label>
+                                    <input type="number" name="header-mobile-logo-margin-left" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-mobile-logo-margin-left'] ?? '0', 'px', 0)?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Header Ana Görünüm -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fa fa-window-maximize"></i> Header Ana Görünüm</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header Arka Plan Rengi</label>
+                                    <input type="color" name="header-bg-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['header-bg-color'] ?? '#ffffff')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header Yüksekliği (px)</label>
+                                    <input type="number" name="header-min-height" class="form-control" min="50" max="150" value="<?=sanitizeNumericValue($customCSS['header-min-height'] ?? '80', 'px', 80)?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header Padding (px)</label>
+                                    <input type="number" name="header-padding" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-padding'] ?? '15', 'px', 15)?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header Sınır Genişliği (px)</label>
+                                    <input type="number" name="header-border-width" class="form-control" min="0" max="10" value="<?=sanitizeNumericValue($customCSS['header-border-width'] ?? '1', 'px', 1)?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Header Sınır Rengi</label>
+                            <input type="color" name="header-border-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['header-border-color'] ?? '#e9ecef')?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Header Mobile Ayarları -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fa fa-mobile"></i> Header Mobile Görünüm</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header Mobile Arka Plan Rengi</label>
+                                    <input type="color" name="header-mobile-bg-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['header-mobile-bg-color'] ?? '#ffffff')?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobil Header Yüksekliği (px)</label>
+                                    <input type="number" name="header-mobile-min-height" class="form-control" min="40" max="100" value="<?=sanitizeNumericValue($customCSS['header-mobile-min-height'] ?? '60', 'px', 60)?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header Mobil Padding (px)</label>
+                                    <input type="number" name="header-mobile-padding" class="form-control" min="0" max="50" value="<?=sanitizeNumericValue($customCSS['header-mobile-padding'] ?? '15', 'px', 15)?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header Mobile Sınır Genişliği (px)</label>
+                                    <input type="number" name="header-mobile-border-width" class="form-control" min="0" max="10" value="<?=sanitizeNumericValue($customCSS['header-mobile-border-width'] ?? '1', 'px', 1)?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Header Mobile Sınır Rengi</label>
+                            <input type="color" name="header-mobile-border-color" class="form-control color-picker" value="<?=sanitizeColorValue($customCSS['header-mobile-border-color'] ?? '#e9ecef')?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hızlı Header Temaları -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fa fa-magic"></i> Hızlı Header Temaları</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="theme-card" onclick="applyHeaderTheme('light')">
+                            <h6>Açık Tema</h6>
+                            <div class="theme-preview-colors">
+                                <div class="theme-preview-color" style="background: #ffffff;"></div>
+                                <div class="theme-preview-color" style="background: #4285f4;"></div>
+                                <div class="theme-preview-color" style="background: #333333;"></div>
+                            </div>
+                            <small>Temiz ve minimal tasarım</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="theme-card" onclick="applyHeaderTheme('dark')">
+                            <h6>Koyu Tema</h6>
+                            <div class="theme-preview-colors">
+                                <div class="theme-preview-color" style="background: #2c3e50;"></div>
+                                <div class="theme-preview-color" style="background: #3498db;"></div>
+                                <div class="theme-preview-color" style="background: #ecf0f1;"></div>
+                            </div>
+                            <small>Koyu ve şık görünüm</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="theme-card" onclick="applyHeaderTheme('transparent')">
+                            <h6>Şeffaf</h6>
+                            <div class="theme-preview-colors">
+                                <div class="theme-preview-color" style="background: rgba(255,255,255,0.9);"></div>
+                                <div class="theme-preview-color" style="background: #4285f4;"></div>
+                                <div class="theme-preview-color" style="background: #333333;"></div>
+                            </div>
+                            <small>Şeffaf modern stil</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="theme-card" onclick="applyHeaderTheme('gradient')">
+                            <h6>Gradient</h6>
+                            <div class="theme-preview-colors">
+                                <div class="theme-preview-color" style="background: linear-gradient(45deg, #667eea, #764ba2);"></div>
+                                <div class="theme-preview-color" style="background: #ffffff;"></div>
+                                <div class="theme-preview-color" style="background: #f8f9fa;"></div>
+                            </div>
+                            <small>Renkli gradient efekt</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

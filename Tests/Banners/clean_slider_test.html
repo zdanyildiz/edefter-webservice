@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temiz Slider Tek Banner Testi</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 40px 0; padding: 20px; border: 2px solid #ddd; border-radius: 8px; }
+        .test-title { color: #333; margin-bottom: 15px; }
+        
+        /* Banner temel stilleri */
+        .banner-type-slider { position: relative; overflow: hidden; margin: 20px 0; }
+        .slider-container { position: relative; width: 100%; height: 300px; background: #f8f9fa; }
+        .banner-item { 
+            display: none; 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: white;
+            padding: 40px; 
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .banner-item.active { display: flex; }
+        .banner-item .title { font-size: 28px; margin-bottom: 15px; text-align: center; }
+        .banner-item .content { font-size: 16px; text-align: center; opacity: 0.9; }
+        
+        /* Slider kontrolleri */
+        .slider-controls { 
+            position: absolute; 
+            top: 50%; 
+            left: 20px; 
+            right: 20px;
+            transform: translateY(-50%); 
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 10; 
+        }
+        .slider-controls button { 
+            pointer-events: all; 
+            background: rgba(0, 0, 0, 0.6); 
+            color: white; 
+            border: none; 
+            padding: 15px 20px; 
+            cursor: pointer; 
+            border-radius: 50%; 
+            font-size: 20px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-controls button:hover { background: rgba(0, 0, 0, 0.8); }
+        
+        .status { background: #e3f2fd; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .status.single { background: #fff3e0; }
+        .status.multiple { background: #e8f5e8; }
+    </style>
+</head>
+<body>
+    <h1>Temiz Slider Tek Banner Testi</h1>
+    <p><strong>Yaklaşım:</strong> CSS dosyası yok, HTML'de gereksiz elementler yok, JS'de şartlı logic</p>
+    
+    <div class="test-section">
+        <h2 class="test-title">Test 1: Tek Banner (Kontroller Yok)</h2>
+        <div class="status single">Bu slider'da sadece 1 banner var - kontrol butonları HTML'de oluşturulmadı</div>
+        
+        <div class="banner-group-999 banner-type-slider fullwidth">
+            <div class="slider-container">
+                <div class="banner-item">
+                    <h2 class="title">Tek Banner</h2>
+                    <div class="content">Bu tek banner. Butonlar yok, otomatik oynatma yok.</div>
+                </div>
+            </div>
+            <!-- Burada slider-controls DIV'i yok çünkü tek banner -->
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2 class="test-title">Test 2: Çoklu Banner (Kontroller Var)</h2>
+        <div class="status multiple">Bu slider'da 2 banner var - kontrol butonları HTML'de oluşturuldu</div>
+        
+        <div class="banner-group-998 banner-type-slider fullwidth">
+            <div class="slider-container">
+                <div class="banner-item">
+                    <h2 class="title">İlk Banner</h2>
+                    <div class="content">Bu çoklu banner sistemi. Butonlar var, otomatik oynatma var.</div>
+                </div>
+                <div class="banner-item">
+                    <h2 class="title">İkinci Banner</h2>
+                    <div class="content">Bu ikinci banner. 5 saniye sonra otomatik geçiş.</div>
+                </div>
+            </div>
+            <!-- Burada slider-controls DIV'i var çünkü çoklu banner -->
+            <div class="slider-controls">
+                <button class="prev-slide">&#10094;</button>
+                <button class="next-slide">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tek banner için basit gösterim
+        (function() {
+            function waitForPageLoad(callback) {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', callback);
+                } else {
+                    callback();
+                }
+            }
+            
+            waitForPageLoad(function() {
+                // Tek banner slider
+                const singleSlider = document.querySelector('.banner-group-999 .slider-container');
+                if (singleSlider) {
+                    const slide = singleSlider.querySelector('.banner-item');
+                    if (slide) {
+                        slide.classList.add('active');
+                        slide.style.display = 'flex';
+                        slide.style.opacity = '1';
+                        console.log('Tek banner aktifleştirildi');
+                    }
+                }
+                
+                // Çoklu banner slider
+                const multiSlider = document.querySelector('.banner-group-998');
+                const slides = multiSlider.querySelectorAll('.banner-item');
+                const prevBtn = multiSlider.querySelector('.prev-slide');
+                const nextBtn = multiSlider.querySelector('.next-slide');
+                
+                if (slides.length > 1 && prevBtn && nextBtn) {
+                    let currentIndex = 0;
+                    
+                    function showSlide(index) {
+                        slides.forEach((slide, i) => {
+                            slide.classList.toggle('active', i === index);
+                        });
+                        console.log('Slide gösteriliyor:', index + 1);
+                    }
+                    
+                    function nextSlide() {
+                        currentIndex = (currentIndex + 1) % slides.length;
+                        showSlide(currentIndex);
+                    }
+                    
+                    function prevSlide() {
+                        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                        showSlide(currentIndex);
+                    }
+                    
+                    // İlk slide'ı göster
+                    showSlide(0);
+                    
+                    // Buton event'leri
+                    nextBtn.addEventListener('click', nextSlide);
+                    prevBtn.addEventListener('click', prevSlide);
+                    
+                    // Otomatik oynatma - sadece çoklu bannerlarda
+                    setInterval(nextSlide, 3000);
+                    console.log('Çoklu banner slider başlatıldı - otomatik oynatma aktif');
+                }
+            });
+        })();
+    </script>
+
+    <div style="margin-top: 40px; padding: 20px; background: #f0f8ff; border-radius: 8px;">
+        <h3>✅ Temiz Yaklaşımın Avantajları:</h3>
+        <ul>
+            <li><strong>Performans:</strong> Gereksiz CSS dosyası yok</li>
+            <li><strong>Temiz HTML:</strong> Tek banner'da kontrol divleri hiç oluşturulmuyor</li>
+            <li><strong>Basit JS:</strong> Tek banner varsa otomatik oynatma hiç başlatılmıyor</li>
+            <li><strong>Bakım:</strong> Tek dosyada tüm logic</li>
+            <li><strong>SEO:</strong> Gereksiz HTML elementleri yok</li>
+        </ul>
+        
+        <h4>🔍 Test Sonuçları:</h4>
+        <p><strong>Tek Banner:</strong> Kontrol div'i HTML'de yok ✅</p>
+        <p><strong>Çoklu Banner:</strong> Kontrol div'i HTML'de var, otomatik oynatma aktif ✅</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.banner-type-alt-banner{margin:10px auto 20px auto;padding:0;box-sizing:border-box}
+#banner-type-alt-banner{text-align: center;}
+#banner-type-alt-banner>div.banner-type-alt-banner{margin-top:30px;margin-bottom:30px;display: inline-block;}
+.single .banner-item{width:100%}
+.double .banner-item{width:50%}.triple .banner-item{width:33.333%}
+.quad .banner-item{width:25%}
+.quinary .banner-item{width:20%}
+
+@media (max-width:1399px){
+    #banner-type-alt-banner>div.banner-type-alt-banner{max-width: 100%;
+    width: 100%;}
+}

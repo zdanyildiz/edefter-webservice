@@ -1,0 +1,25 @@
+.categoryMainContentContent details {
+    margin-bottom: var(--spacing-lg);
+    border: var(--border-style) var(--border-width) var(--border-color);
+    padding: var(--spacing-md);
+}
+.categoryMainContentContent details summary {
+    font-size: var(--font-size-normal);
+    font-weight: bold;
+    cursor: pointer;
+}
+.categoryMainContentContent details summary:hover {
+    color: var(--accent-color);
+}
+.categoryMainContentContent details div {
+    margin-top: var(--spacing-lg);
+}
+.categoryLeftAsideContent.summary li{
+    border-bottom: var(--border-style) var(--border-width) var(--border-color);
+    padding-bottom: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+.categoryLeftAsideContent.summary a{
+    font-size: var(--font-size-small);
+    color: var(--link-color);
+}

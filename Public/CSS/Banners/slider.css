@@ -1,0 +1,427 @@
+/* ============================================
+   SLİDER BANNER MODERN CSS - STATIK VERSİYON
+   ============================================ */
+
+/* CSS Custom Properties (Varsayılan Değerler) */
+:root {
+    --slider-primary-color: #007bff;
+    --slider-secondary-color: #6c757d;
+    --slider-text-color: #333333;
+    --slider-bg-color: #ffffff;
+    --slider-border-radius: 8px;
+    --slider-animation-duration: 0.8s;
+    --slider-height: 500px;
+    --slider-opacity: 0.9;
+    --mobile-breakpoint: 768px;
+    --tablet-breakpoint: 1024px;
+}
+
+
+/* Banner genel stilleri - DİNAMİK SELECTORS */
+.banner-type-slider
+ {
+    position: relative;
+    min-height: var(--slider-height);
+    overflow: hidden;
+    border-radius: var(--slider-border-radius);
+    background: var(--slider-bg-color);
+}
+
+/* Slider container - DİNAMİK SELECTORS */
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: all var(--slider-animation-duration) ease;
+}
+
+/* Banner item - Modern Grid Layout */
+.banner-type-slider .banner-item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: opacity var(--slider-animation-duration) ease-in-out,
+                transform var(--slider-animation-duration) ease-in-out;
+    transform: scale(0.95);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+/* Aktif slide */
+.banner-type-slider .banner-item.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+}
+
+/* Zoom animasyonunu kontrol etme sınıfları */
+.banner-type-slider .banner-item.no-zoom {
+    transform: scale(1);
+    transition: opacity var(--slider-animation-duration) ease-in-out;
+}
+
+.banner-type-slider .banner-item.with-zoom {
+    transition: opacity var(--slider-animation-duration) ease-in-out, 
+                transform var(--slider-animation-duration) ease-in-out;
+}
+
+/* Animasyonlar için ek sınıflar */
+.banner-type-slider .banner-item.active.slide-next.with-zoom {
+    animation: zoomEffectIn var(--slider-animation-duration) ease-in-out forwards;
+}
+
+.banner-type-slider .banner-item.active.slide-prev.with-zoom {
+    animation: zoomEffectIn var(--slider-animation-duration) ease-in-out forwards;
+}
+
+.banner-type-slider .banner-item.active.slide-next.no-zoom,
+.banner-type-slider .banner-item.active.slide-prev.no-zoom {
+    animation: simpleOpacity var(--slider-animation-duration) ease-in-out forwards;
+}
+
+/* Görüntü stilleri - Modern object-fit */
+.banner-type-slider .banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.banner-type-slider .banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 1s ease-in-out, filter 0.3s ease;
+    filter: brightness(1) contrast(1.05);
+}
+
+.banner-type-slider .banner-item:hover .banner-image img {
+    transform: scale(1.03);
+    filter: brightness(1.1) contrast(1.1);
+}
+
+
+/* Slider kontrol düğmeleri */
+.banner-type-slider .slider-controls {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.banner-type-slider .prev-slide, .next-slide {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+    pointer-events: auto !important;
+    opacity: 0.7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 20;
+}
+
+.banner-type-slider .prev-slide:hover, .next-slide:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* Başlık ve içerik stilleri */
+.banner-type-slider .title {
+    margin: 0 0 15px 0;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.banner-type-slider .content {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Düğme stilleri */
+.banner-type-slider .button-container {
+    margin-top: 15px;
+}
+
+.banner-type-slider .banner-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Animasyon Efektleri */
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes simpleOpacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomEffectIn {
+    from {
+        opacity: 0;
+        transform: scale(0.90);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Yön belirleyici animasyonlar */
+@keyframes slideFromRight {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateX(5%);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateX(-5%);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
+}
+
+.banner-type-slider .effect-fade .banner-item.active {
+    animation: fadeEffect 0.8s ease-in-out forwards;
+}
+
+.banner-type-slider .effect-slide .banner-item.active {
+    animation: slideAnimation 0.8s ease-in-out forwards;
+}
+
+/* Yöne göre animasyonlar */
+.banner-type-slider .effect-slide .banner-item.active.slide-next {
+    animation: slideFromRight 0.8s ease-in-out forwards;
+}
+
+.banner-type-slider .effect-slide .banner-item.active.slide-prev {
+    animation: slideFromLeft 0.8s ease-in-out forwards;
+}
+
+.banner-type-slider .effect-zoom .banner-item.active {
+    animation: zoomEffect 1s ease-in-out forwards;
+}
+
+@keyframes zoomEffect {
+    0% {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Tam genişlik slider */
+.banner-type-slider .view-fullwidth-slide .banner-item {
+    height: 70vh;
+}
+
+/* Kutulu slider */
+.banner-type-slider .view-box .slider-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Grup Başlığı Stilleri */
+.banner-type-slider .banner-group-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.banner-type-slider .banner-group-title {
+    font-size: 36px;
+    font-weight: 300;
+    margin: 0 0 15px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.banner-type-slider .banner-group-desc {
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+@media (max-width: 1024px) {
+    .banner-type-slider .banner-group-header {
+        margin-bottom: 25px;
+        padding: 15px;
+    }
+    .banner-type-slider .banner-group-title {
+        font-size: 28px;
+    }
+    .banner-type-slider .banner-group-desc {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner-type-slider .banner-group-header {
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+    .banner-type-slider .banner-group-title {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+    .banner-type-slider .banner-group-desc {
+        font-size: 15px;
+    }
+}
+
+/* Responsive tasarım - Tablet */
+@media (max-width: 992px) {
+    .banner-type-slider .content-box {
+        max-width: 70%;
+    }
+
+    .banner-type-slider .title {
+        font-size: 1.5rem !important;
+    }
+
+    .banner-type-slider .content {
+        font-size: 1rem !important;
+    }
+}
+
+/* Responsive tasarım - Mobil */
+@media (max-width: 768px) {
+    .banner-type-slider .content-box {
+        max-width: 80%;
+        padding: 15px;
+    }
+
+
+
+    .banner-type-slider .banner-button {
+        padding: 8px 15px;
+    }
+
+    .banner-type-slider .prev-slide, .next-slide {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive tasarım - Küçük Mobil */
+@media (max-width: 480px) {
+    .banner-type-slider .content-box {
+        max-width: 90%;
+        padding: 10px;
+    }
+
+
+
+    .banner-type-slider .banner-button {
+        padding: 5px 10px;
+        font-size: 0.8rem !important;
+    }
+
+    .banner-type-slider .slider-controls {
+        padding: 0 10px;
+    }
+}
+
+.banner-type-slider .image-only-layout .content-box {
+    display: none;
+}
+
+.banner-type-slider .text-only-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-type-slider .text-only-layout .content-box {
+    position: static;
+    transform: none;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+/* Karanlık mod için alternatif içerik kutusu */
+.banner-type-slider .dark-theme .content-box {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
+.banner-type-slider .dark-theme .title {
+    color: #fff;
+}
+
+.banner-type-slider .dark-theme .content {
+    color: #eee;
+}

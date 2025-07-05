@@ -1,0 +1,9 @@
+Açıklama kısmında virgülden sonrasını ayırın. Okunaklı olsun
+
+Açıklama="Ürün: arzum okka minio ok004 türk kahvesi makinesi, marka: Arzum, Kategori: Elektrikli Mutfak Aletleri, Fiyat:  629.99 TL, Model: okka minio ok004, Kargo Dahil Fiyat, Aynı gün kargo"
+
+Kelimeler="arzum okka minio ok004,türk kahvesi makinesi,arzum kahve makinası,beyaz eşya & küçük ev aletleri,elektrikli mutfak aletleri,türk kahvesi makinesi,arzum okka minio ok004 fiyatı,arzum okka minio ok004 özellikleri"
+
+Kelimeler="arnica tesla premium et-14300, toz torbasız elektrikli süpürge,arnica tesla premium et-14300 rose,beyaz eşya & küçük ev aletleri,elektrikli ev aletleri,elektrikli süpürge,arnica tesla premium et-14300 rose fiyatı,arnica tesla premium et-14300 rose özellikleri"
+
+Açıklama="Arnica Tesla Premium et-14300, toz torbasız elektrikli süpürge. Ürün özellikleri ve uygun fiyatları ile kargo dahil 629.99 TL. Aynı gün kargo"

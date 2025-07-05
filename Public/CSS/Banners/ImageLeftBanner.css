@@ -1,0 +1,218 @@
+/* Ana Banner Konteyneri (.banner-item.ImageLeftBanner eklendiğinde) */
+.banner-type-orta-banner.ImageLeftBanner{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 60px;
+}
+
+/* Grup Başlığı Stilleri */
+.banner-type-orta-banner.ImageLeftBanner .banner-group-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.banner-type-orta-banner.ImageLeftBanner .banner-group-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 15px;
+    line-height: 1.2;
+}
+
+.banner-type-orta-banner.ImageLeftBanner .banner-group-desc {
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 850px;
+    color: #666;
+}
+
+@media (max-width: 1024px) {
+    .banner-type-orta-banner.ImageLeftBanner .banner-container{
+        width: 100% ;
+        max-width: 100% ;
+    }
+    .banner-type-orta-banner.ImageLeftBanner .banner-group-header {
+        margin-bottom: 25px;
+        padding: 15px;
+    }
+    .banner-type-orta-banner.ImageLeftBanner .banner-group-title {
+        font-size: 26px;
+    }
+    .banner-type-orta-banner.ImageLeftBanner .banner-group-desc {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner-type-orta-banner.ImageLeftBanner .banner-group-header {
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+    .banner-type-orta-banner.ImageLeftBanner .banner-group-title {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+    .banner-type-orta-banner.ImageLeftBanner .banner-group-desc {
+        font-size: 15px;
+    }
+}
+/* .ImageLeftBanner sınıfı .banner-type-orta-banner ile birlikte ana .banner div'inde olacak */
+.banner-type-orta-banner.ImageLeftBanner .banner-item {
+    width: 100%;
+    min-height: 350px;
+    overflow: hidden;
+    box-sizing: border-box;
+    /* Sıfırlamalar */
+    cursor: pointer;
+    max-width: none;
+    padding: 0; /* padding'i a etiketine taşıyoruz */
+}
+
+/* Banner içindeki a etiketi - tüm içeriği yatay düzenler */
+.banner-type-orta-banner.ImageLeftBanner .banner-item > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    gap: 30px;
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
+}
+
+/* Görsel Sol Tarafta */
+.banner-type-orta-banner.ImageLeftBanner .banner-item .banner-image {
+    flex: 1;
+    max-width: 50%;
+    /* Sıfırlamalar */
+    position: static;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.banner-type-orta-banner.ImageLeftBanner .banner-item .banner-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    /* Sıfırlamalar */
+    border-radius: 0;
+    transform: none;
+}
+
+/* Hover durumunda görsel efekti */
+.banner-type-orta-banner.ImageLeftBanner .banner-item:hover .banner-image img {
+    transform: scale(1.05);
+}
+
+/* İçerik Kutusu - Sağ Tarafta */
+.banner-type-orta-banner.ImageLeftBanner .banner-item .content-box {
+    flex: 1;
+    max-width: 50%;
+    padding-inline-start: 30px;
+    text-align: start;
+    /* Sıfırlamalar */
+    position: static;
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    z-index: 2;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+/* Hover durumunda içerik kutusu efekti */
+.banner-type-orta-banner.ImageLeftBanner .banner-item:hover .content-box {
+    transform: translateX(5px);
+}
+
+/* Başlık */
+.banner-type-orta-banner.ImageLeftBanner .banner-item .content-box .title {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    /* Sıfırlamalar */
+    line-height: 1.3;
+}
+
+/* İçerik */
+.banner-type-orta-banner.ImageLeftBanner .banner-item .content-box .content {
+    line-height: 1.6;
+    margin-bottom: 30px;
+    /* Sıfırlamalar */
+    max-width: none;
+}
+
+/* Buton Konteyneri */
+.banner-type-orta-banner.ImageLeftBanner .banner-item .content-box .button-container {
+    display: inline-block;
+}
+
+/* Buton */
+.banner-type-orta-banner.ImageLeftBanner .banner-item .content-box .button-container button {
+    padding: 10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+/* layout_group="text" (Sadece Metin) durumu için uyarlama */
+.banner-type-orta-banner.ImageLeftBanner .banner-item.text-only-layout .content-box {
+    max-width: 100%;
+    padding: 40px;
+    text-align: center;
+}
+
+/* layout_group="image" (Sadece Resim) durumu için uyarlama */
+.banner-type-orta-banner.ImageLeftBanner .banner-item.image-only-layout .banner-image {
+    max-width: 100%;
+    text-align: center;
+}
+
+/* Responsive ayarlamaları */
+@media (max-width: 768px) {
+    .banner-type-orta-banner.ImageLeftBanner .banner-item {
+        min-height: auto;
+    }
+
+    .banner-type-orta-banner.ImageLeftBanner .banner-item > a {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .banner-type-orta-banner.ImageLeftBanner .banner-item .banner-image,
+    .banner-type-orta-banner.ImageLeftBanner .banner-item .content-box {
+        max-width: 100%;
+        padding: 15px 10px;
+    }
+
+    .banner-type-orta-banner.ImageLeftBanner .banner-item .content-box {
+        text-align: center;
+    }
+}

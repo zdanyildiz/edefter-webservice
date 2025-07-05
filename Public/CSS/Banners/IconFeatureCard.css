@@ -1,0 +1,112 @@
+.banner-type-orta-banner.IconFeatureCard{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-type-orta-banner.IconFeatureCard .banner-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+/* İç Konteyner - .banner-item */
+.banner-type-orta-banner.IconFeatureCard .banner-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* <a> etiketini .banner-item içinde ortalar */
+    text-align: center; /* <a> içindeki metinleri ve inline-block öğeleri ortalar */
+    width: 100%;
+    /* Sıfırlamalar */
+    flex-wrap: nowrap; justify-content: initial; gap: 0; margin: 0;
+    padding: 20px 10px; /* Biraz iç boşluk ekleyelim */
+    max-width: none; overflow: visible;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-base);
+    border: var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Yumuşak geçiş için */
+}
+
+.banner-type-orta-banner.IconFeatureCard .banner-item:hover {
+    transform: translateY(-5px); /* Hover durumunda yukarı hareket */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Hover durumunda gölge */
+}
+
+/* Tıklanabilir alan <a> etiketi için ek stiller (isteğe bağlı) */
+.banner-type-orta-banner.IconFeatureCard .banner-item a {
+    display: flex; /* <a> etiketini flex container yapalım */
+    flex-direction: column; /* İçeriği (ikon ve metin kutusu) dikeyde sırala */
+    align-items: center; /* İçeriği yatayda ortala */
+    text-decoration: none;
+    color: inherit;
+    width: 100%; /* .banner-item genişliğini alsın */
+}
+
+/* Görsel (İkon) Sarmalayıcı */
+.banner-type-orta-banner.IconFeatureCard .banner-image {
+    /* Boyut ve Boşluk */
+    width: 55px; /* İkon genişliği */
+    height: 55px; /* İkon yüksekliği */
+    margin-bottom: 25px; /* İkon ile başlık arası boşluk */
+    /* Önceki stilleri sıfırla/değiştir */
+    border-radius: 0; border: none; padding: 0;
+    background-color: transparent; box-shadow: none;
+    overflow: visible; flex-shrink: 0; flex: none;
+    max-width: none; position: static; z-index: auto;
+    box-sizing: content-box; /* Önemli: border/padding yok, content'e göre boyutlansın */
+}
+
+/* Görsel (İkon) */
+.banner-type-orta-banner.IconFeatureCard .banner-image img {
+    display: block;
+    width: 100%; /* Wrapper boyutunu alsın */
+    height: 100%;
+    object-fit: contain; /* İkonu bozmadan sığdır */
+    /* Sıfırlamalar */
+    border-radius: 0; transform: none; transition: none;
+}
+
+/* İçerik Kutusu */
+.banner-type-orta-banner.IconFeatureCard .content-box { /* .banner-content-box -> .content-box olarak düzeltildi */
+    /* Sıfırlamalar */
+    position: static; width: auto; height: auto;
+    background-color: transparent; color: inherit; padding: 0;
+    opacity: 1; visibility: visible; transform: none; transition: none;
+    z-index: auto; flex: none; max-width: 100%; /* Genişlik içeriğe göre ayarlanacak */
+    /* Hizalama */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* .title ve .content bloklarını ortalar */
+}
+
+/* Banner Başlığı (Özellik Başlığı) */
+.banner-type-orta-banner.IconFeatureCard .title { /* .bannerTitle -> .title olarak düzeltildi */
+    font-size: 1em; /* Örnek boyut */
+    font-weight: 500; /* Biraz kalın */
+    color: #444; /* Koyu gri */
+    margin-bottom: 10px; /* Alt boşluk (15px'ten 10px'e düşürüldü) */
+    text-transform: uppercase; /* Büyük harf */
+    letter-spacing: 1.5px; /* Harf aralığı */
+    /* Sıfırlama */
+    line-height: 1.3;
+    text-align: center; /* Başlık metnini ortala */
+}
+
+/* Banner İçeriği (Açıklama Metni) */
+.banner-type-orta-banner.IconFeatureCard .content { /* .bannerContent -> .content olarak düzeltildi */
+    font-size: 0.95em; /* Örnek boyut */
+    color: #777; /* Açık gri */
+    line-height: 1.6; /* Satır yüksekliği */
+    max-width: 300px; /* Açıklamanın çok genişlemesini önle (isteğe bağlı) */
+    /* Sıfırlama */
+    margin-bottom: 0;
+    text-align: center; /* İçerik metnini ortala */
+}
+
+/* Buton Konteyneri (Gizlenecek) */
+.banner-type-orta-banner.IconFeatureCard .button-container { /* .bannerButton -> .button-container olarak düzeltildi */
+    display: none;
+}

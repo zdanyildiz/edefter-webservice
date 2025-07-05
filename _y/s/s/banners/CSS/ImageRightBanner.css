@@ -1,0 +1,70 @@
+/* Genel Banner Konteyner Stilleri */
+.ImageRightBanner{
+    display: flex;
+    position: relative;
+    background-color: rgba(255,243,0,1);
+    min-height: 384px;
+    align-items: center;
+}
+.ImageRightBanner .banner-content-container {
+    display: flex; /* İçerik ve görseli yan yana getirmek için */
+    flex-wrap: wrap; /* Ekran küçüldüğünde alt satıra geçmesi için */
+    align-items: center; /* Öğeleri dikeyde ortalamak için */
+    justify-content: space-between; /* İçerik ve görsel arasına boşluk bırakmak için */
+    margin: 20px auto; /* Sayfada ortalamak ve üst/alt boşluk */
+    padding: 20px 0; /* İç boşluk */
+    gap: 30px; /* Flex öğeleri arasındaki boşluk */
+    overflow: hidden; /* Taşan içerikleri gizle (isteğe bağlı) */
+    flex-direction: row-reverse;
+    max-width:75%;
+}
+.ImageRightBanner .banner-content-box {
+    flex: 1; /* Esnek genişlik, mevcut alana yayılır */
+    max-width: 50%; /* İçeriğin çok daralmasını önler */
+    box-sizing: border-box;
+    padding-left:40px
+}
+.ImageRightBanner .banner-image-wrapper {
+    flex: 1; /* Esnek genişlik */
+    max-width: 50%; /* Görselin çok daralmasını önler */
+    text-align: center; /* Mobil görünümde görseli ortalamak için */
+    box-sizing: border-box;
+}
+.ImageRightBanner .banner-image-wrapper img{
+    max-width: 100%;
+}
+.ImageRightBanner .bannerTitle {
+    font-weight: 300; /* Daha ince yazı tipi (görseldeki gibi) */
+    text-transform: uppercase; /* Büyük harf */
+    letter-spacing: 2px; /* Harf arası boşluk */
+    margin-bottom: 20px; /* Alt boşluk */
+    font-size: 24px;
+}
+.ImageRightBanner .bannerContent {
+    line-height: 1.6; /* Satır yüksekliği */
+    margin-bottom: 30px; /* Alt boşluk */
+    font-size:18px
+}
+.ImageRightBanner .bannerButton button {
+    padding: 10px 20px; /* İç boşluk */
+    border: 1px solid #000; /* Kenarlık */
+    text-transform: uppercase; /* Büyük harf */
+    letter-spacing: 1px; /* Harf arası boşluk */
+    cursor: pointer; /* İmleç tipi */
+    font-size: 16px;
+    background-color: #000;
+    color:#fff
+}
+.ImageRightBanner .bannerButton button:hover,
+.ImageRightBanner .bannerButton button:focus {
+    outline: none;
+    background-color: #fff;
+    color: #000;
+}
+
+.ImageRightBanner.triple .banner-content-container,.ImageRightBanner.quad .banner-content-container{
+    max-width: 95%;
+}
+.ImageRightBanner.triple .banner-content-box,.ImageRightBanner.quad .banner-content-box{
+    padding-left:0
+}

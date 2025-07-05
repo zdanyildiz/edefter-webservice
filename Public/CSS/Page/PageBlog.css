@@ -1,0 +1,30 @@
+.pageMainContent{
+    display: flex;
+    flex-direction: row;
+    max-width: var(--desktop-max-width);
+    margin:0 auto;
+    gap: 20px;
+}
+.pageRightAside{
+    max-width: 250px;
+    padding: 10px;
+}
+.pageRightAsideTitle{
+    margin-bottom: 20px;
+}
+.pageRightAsideContainer a{
+    font-size: var(--font-size-small);
+}
+.pageRightAsideContent li.active{
+    font-weight: bold;
+}
+
+@media (max-width: 960px) {
+    .pageMainContent{
+        flex-direction: column;
+    }
+    .pageRightAside{
+        max-width: 100%;
+        padding: 20px;
+    }
+}
