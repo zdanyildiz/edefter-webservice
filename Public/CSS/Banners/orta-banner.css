@@ -1,0 +1,193 @@
+/* ============================================
+   ORTA BANNER MODERN CSS - GELİŞTİRİLMİŞ VERSİYON
+   ============================================ */
+
+/* CSS Custom Properties (Dinamik Değerler) */
+:root {
+    --orta-primary-color: #007bff;
+    --orta-secondary-color: #6c757d;
+    --orta-text-color: #333333;
+    --orta-bg-color: #ffffff;
+    --orta-border-radius: 12px;
+    --orta-animation-duration: 0.3s;
+    --orta-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --orta-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+    --orta-spacing: 20px;
+}
+
+/* Banner genel stilleri - Modern Card Design + DİNAMİK SELECTORS */
+.banner-type-orta-banner {
+    margin: var(--orta-spacing) 0;
+    padding: var(--orta-spacing) 0;
+    text-align: center;
+    display: grid;
+    gap: var(--orta-spacing);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-inline-left: auto;
+    margin-inline-end: auto;
+}
+
+
+
+.single .banner-item{width:100%}
+.double .banner-item{width:50%}
+.triple .banner-item{width:33.333%}
+.quad .banner-item{width:25%}
+.quinary .banner-item{width:20%}
+
+/* ============================================
+   RESPONSIVE TASARIM - MODERN APPROACH
+   ============================================ */
+
+/* Container responsive grid */
+@media (max-width: 1024px) {
+    .middleContentBannersContainer {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+}
+
+/* Tablet görünümü */
+@media (max-width: 768px) {
+    .middleContentBannersContainer {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 15px 0;
+        padding: 15px;
+    }
+
+    .banner-type-orta-banner .banner-image {
+        height: 180px;
+    }
+
+    .banner-type-orta-banner .content-box {
+        padding: clamp(12px, 3vw, 20px);
+    }
+
+    .banner-type-orta-banner .title {
+        font-size: clamp(1rem, 3.5vw, 1.2rem);
+        margin-bottom: 10px;
+    }
+
+    .banner-type-orta-banner .content {
+        font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+        margin-bottom: 12px;
+    }
+
+    .banner-type-orta-banner .banner-button {
+        padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
+        font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+        min-width: 100px;
+    }
+}
+
+/* Mobil görünümü */
+@media (max-width: 480px) {
+    .middleContentBannersContainer {
+        margin: 10px 0;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .banner-type-orta-banner {
+        border-radius: 8px;
+    }
+
+    .banner-type-orta-banner .banner-image {
+        height: 150px;
+    }
+
+    .banner-type-orta-banner .content-box {
+        padding: 15px;
+    }
+
+    .banner-type-orta-banner .title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .banner-type-orta-banner .content {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+
+    .banner-type-orta-banner .banner-button {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+        min-width: 90px;
+    }
+
+    .banner-type-orta-banner .text-only-layout {
+        min-height: 120px;
+        padding: 15px;
+    }
+
+    .banner-type-orta-banner .centered-layout {
+        min-height: 200px;
+    }
+}
+
+/* Küçük mobil cihazlar */
+@media (max-width: 360px) {
+    .middleContentBannersContainer {
+        padding: 5px;
+        gap: 8px;
+    }
+
+    .banner-type-orta-banner .banner-image {
+        height: 120px;
+    }
+
+    .banner-type-orta-banner .content-box {
+        padding: 12px;
+    }
+}
+
+
+/* Print stilleri */
+@media print {
+    .banner-type-orta-banner {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+    }
+
+    .banner-type-orta-banner:hover {
+        transform: none;
+    }
+
+    .banner-type-orta-banner .banner-button {
+        display: none;
+    }
+}
+
+/* Reduced motion desteği */
+@media (prefers-reduced-motion: reduce) {
+    .banner-type-orta-banner,
+    .banner-type-orta-banner * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .banner-type-orta-banner:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode desteği */
+@media (prefers-contrast: high) {
+    .banner-type-orta-banner {
+        border: 2px solid var(--orta-text-color);
+    }
+
+    .banner-type-orta-banner .banner-button {
+        border: 2px solid var(--orta-primary-color);
+    }
+
+    .banner-type-orta-banner .centered-layout .content-box {
+        background: rgba(255, 255, 255, 1);
+        border: 2px solid var(--orta-text-color);
+    }
+}

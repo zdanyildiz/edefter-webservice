@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renk Tema Test Arayüzü</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #4285f4;
+        }
+        
+        .test-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .test-button {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .test-button.blue { background: linear-gradient(145deg, #4285f4, #1976d2); }
+        .test-button.green { background: linear-gradient(145deg, #28a745, #155724); }
+        .test-button.purple { background: linear-gradient(145deg, #6f42c1, #4e2a8e); }
+        .test-button.orange { background: linear-gradient(145deg, #fd7e14, #d63384); }
+        
+        .result-log {
+            background: #1a1a1a;
+            color: #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 20px 0;
+            border: 2px solid #333;
+        }
+        
+        .info-box {
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .warning-box {
+            background: linear-gradient(145deg, #fff3e0, #ffcc02);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff9800;
+            color: #e65100;
+        }
+        
+        .instructions {
+            background: linear-gradient(145deg, #f3e5f5, #e1bee7);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #9c27b0;
+        }
+        
+        .clear-log {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-loading { background: #ffc107; }
+        .status-success { background: #28a745; }
+        .status-error { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Renk Tema Test Arayüzü</h1>
+        
+        <div class="info-box">
+            <h3>ℹ️ Bu Test Arayüzü Hakkında</h3>
+            <p>Bu arayüz, tema editörü renk sistemi için otomatik testler sunar. Tema sayfasının aynı tarayıcıda açık olması gerekir.</p>
+            <p><strong>Test URL:</strong> <a href="http://l.erhanozel/_y/s/s/tasarim/Theme.php" target="_blank">http://l.erhanozel/_y/s/s/tasarim/Theme.php</a></p>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Test Talimatları</h3>
+            <ol>
+                <li>Önce yukarıdaki tema sayfasını aynı tarayıcıda açın</li>
+                <li>Bu sayfaya geri dönün</li>
+                <li>Aşağıdaki test butonlarına tıklayın</li>
+                <li>Sonuçları log alanında gözlemleyin</li>
+                <li>Tema sayfasındaki değişiklikleri kontrol edin</li>
+            </ol>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Renk Tema Testleri</h3>
+            <div class="test-buttons">
+                <button class="test-button blue" onclick="testColorTheme('blue')">
+                    <span class="status-indicator status-loading" id="status-blue"></span>
+                    Mavi Tema Test Et
+                </button>
+                <button class="test-button green" onclick="testColorTheme('green')">
+                    <span class="status-indicator status-loading" id="status-green"></span>
+                    Yeşil Tema Test Et
+                </button>
+                <button class="test-button purple" onclick="testColorTheme('purple')">
+                    <span class="status-indicator status-loading" id="status-purple"></span>
+                    Mor Tema Test Et
+                </button>
+                <button class="test-button orange" onclick="testColorTheme('orange')">
+                    <span class="status-indicator status-loading" id="status-orange"></span>
+                    Turuncu Tema Test Et
+                </button>
+            </div>
+            
+            <button class="test-button" onclick="testAllThemes()" style="grid-column: 1 / -1;">
+                🚀 Tüm Temaları Sırayla Test Et
+            </button>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 Test Sonuçları</h3>
+            <button class="clear-log" onclick="clearLog()">🗑️ Logu Temizle</button>
+            <div class="result-log" id="resultLog">
+                Test sonuçları burada görünecek...
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <h3>⚠️ Önemli Notlar</h3>
+            <ul>
+                <li>Bu testler tema sayfası ile iletişim kurar</li>
+                <li>Tema sayfasının aynı domain'de açık olması gerekir</li>
+                <li>Cross-origin kısıtlamaları nedeniyle direkt erişim mümkün değildir</li>
+                <li>Testler localStorage ve postMessage kullanır</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        let testResults = [];
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString('tr-TR');
+            const logDiv = document.getElementById('resultLog');
+            const color = type === 'success' ? '#00ff00' : type === 'error' ? '#ff4444' : '#00aaff';
+            
+            logDiv.innerHTML += `<div style="color: ${color};">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function clearLog() {
+            document.getElementById('resultLog').innerHTML = '';
+            testResults = [];
+        }
+        
+        function updateStatus(theme, status) {
+            const statusElement = document.getElementById(`status-${theme}`);
+            statusElement.className = `status-indicator status-${status}`;
+        }
+        
+        async function testColorTheme(themeName) {
+            log(`🎨 ${themeName.charAt(0).toUpperCase() + themeName.slice(1)} tema testi başlatılıyor...`);
+            updateStatus(themeName, 'loading');
+            
+            try {
+                // Tema sayfasıyla iletişim kurmaya çalış
+                const testWindow = window.open('http://l.erhanozel/_y/s/s/tasarim/Theme.php', 'themeTest');
+                
+                if (!testWindow) {
+                    throw new Error('Tema sayfası açılamadı. Popup blocker kontrol edin.');
+                }
+                
+                // Sayfa yüklenene kadar bekle
+                await new Promise((resolve) => {
+                    const checkInterval = setInterval(() => {
+                        try {
+                            if (testWindow.document.readyState === 'complete') {
+                                clearInterval(checkInterval);
+                                resolve();
+                            }
+                        } catch (e) {
+                            // Cross-origin hatası göz ardı et
+                        }
+                    }, 500);
+                });
+                
+                // Tema fonksiyonunu çalıştırmaya çalış
+                testWindow.postMessage({
+                    action: 'applyColorTheme',
+                    theme: themeName
+                }, '*');
+                
+                log(`✅ ${themeName} tema komutu gönderildi`, 'success');
+                updateStatus(themeName, 'success');
+                
+                // Pencereyi kapat
+                setTimeout(() => {
+                    testWindow.close();
+                }, 2000);
+                
+            } catch (error) {
+                log(`❌ ${themeName} tema testi başarısız: ${error.message}`, 'error');
+                updateStatus(themeName, 'error');
+            }
+        }
+        
+        async function testAllThemes() {
+            const themes = ['blue', 'green', 'purple', 'orange'];
+            log('🚀 Tüm tema testleri başlatılıyor...');
+            
+            for (const theme of themes) {
+                await testColorTheme(theme);
+                await new Promise(resolve => setTimeout(resolve, 3000)); // 3 saniye bekle
+            }
+            
+            log('🎉 Tüm tema testleri tamamlandı!', 'success');
+        }
+        
+        // PostMessage dinleyicisi
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'themeTestResult') {
+                log(`📨 Tema sayfasından yanıt: ${event.data.message}`, event.data.success ? 'success' : 'error');
+            }
+        });
+        
+        // Sayfa yüklendiğinde başlangıç mesajı
+        window.addEventListener('load', function() {
+            log('🔧 Renk Tema Test Arayüzü hazır');
+            log('ℹ️ Tema sayfasını açmak için yukarıdaki linke tıklayın');
+        });
+    </script>
+</body>
+</html>

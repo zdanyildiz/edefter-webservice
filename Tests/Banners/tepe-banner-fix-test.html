@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tepe Banner Düzeltme Test</title>
+    
+    <!-- Ana tema CSS -->
+    <link rel="stylesheet" href="../Public/CSS/index.css">
+    
+    <!-- Acil banner düzeltme CSS -->
+    <link rel="stylesheet" href="../Public/CSS/Banners/tepe-banner-emergency-fix.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .test-header {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .test-section {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .test-title {
+            color: #eb6e2e;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eb6e2e;
+        }
+        
+        /* Debug için görsel işaretler */
+        .debug .banner-group-2 {
+            border: 2px dashed red !important;
+            background: rgba(255, 0, 0, 0.05) !important;
+        }
+        
+        .debug .banner-group-2 .banner-container {
+            border: 2px dashed blue !important;
+            background: rgba(0, 0, 255, 0.05) !important;
+        }
+        
+        .check-button {
+            background: #eb6e2e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🔧 Tepe Banner Düzeltme Test Sayfası</h1>
+            <p>Canlı sitedeki tepe banner ortalama sorunu için test ortamı</p>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">1. Tepe Banner Test (banner-group-2)</h2>
+            
+            <!-- Test banner HTML yapısı - canlı sitedeki gibi -->
+            <div class="banner-group-2" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; color: white;">
+                <div class="banner-container">
+                    <div class="banner-item">
+                        <h2>Akıllı Asistan, Sınırsız Destek!</h2>
+                        <p>7/24 çalışan, 60+ dil konuşan yapay zeka asistanı ile ziyaretçilerinizi müşteriye dönüştürün</p>
+                        <button style="background: #FFD700; color: #333; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold;">Detaylar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="check-button" onclick="checkBannerAlignment()">Ortalamayı Kontrol Et</button>
+            <button class="check-button" onclick="toggleDebug()">Debug Modunu Aç/Kapat</button>
+            
+            <div id="check-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">2. Alternatif Layout Testleri</h2>
+            
+            <!-- HoverCardBanner testi -->
+            <div class="HoverCardBanner" style="background: #f8f9fa; padding: 30px; margin: 10px 0;">
+                <div class="banner-container">
+                    <div class="banner-item">
+                        <h3>HoverCardBanner Test</h3>
+                        <p>Bu banner da ortalanmalı</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BgImageCenterText testi -->
+            <div class="BgImageCenterText" style="background: #e9ecef; padding: 30px; margin: 10px 0;">
+                <div class="banner-container">
+                    <div class="banner-item">
+                        <h3>BgImageCenterText Test</h3>
+                        <p>Bu banner da ortalanmalı</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">3. CSS Değişken Test</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div style="background: var(--primary-color, #eb6e2e); color: white; padding: 15px; border-radius: 5px; text-align: center;">
+                    <strong>Primary Color</strong><br>
+                    var(--primary-color)
+                </div>
+                <div style="background: var(--secondary-color, rgba(122,122,122,0.1)); padding: 15px; border-radius: 5px; text-align: center;">
+                    <strong>Secondary Color</strong><br>
+                    var(--secondary-color)
+                </div>
+                <div style="border: 2px solid var(--accent-color, #0066ff); padding: 15px; border-radius: 5px; text-align: center;">
+                    <strong>Accent Color</strong><br>
+                    var(--accent-color)
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">4. Responsive Test</h2>
+            <p>Sayfayı farklı boyutlarda test edin:</p>
+            <button class="check-button" onclick="testResponsive('mobile')">Mobil (768px)</button>
+            <button class="check-button" onclick="testResponsive('tablet')">Tablet (992px)</button>
+            <button class="check-button" onclick="testResponsive('desktop')">Desktop (1200px+)</button>
+            <button class="check-button" onclick="testResponsive('reset')">Sıfırla</button>
+        </div>
+    </div>
+    
+    <script>
+        function checkBannerAlignment() {
+            const banner = document.querySelector('.banner-group-2');
+            const container = document.querySelector('.banner-group-2 .banner-container');
+            const result = document.getElementById('check-result');
+            
+            const bannerRect = banner.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const windowWidth = window.innerWidth;
+            
+            const bannerCenter = bannerRect.left + (bannerRect.width / 2);
+            const windowCenter = windowWidth / 2;
+            const centerDiff = Math.abs(bannerCenter - windowCenter);
+            
+            let resultHTML = '<h4>Ortalama Analizi:</h4>';
+            resultHTML += `<p><strong>Banner genişliği:</strong> ${bannerRect.width.toFixed(2)}px</p>`;
+            resultHTML += `<p><strong>Container genişliği:</strong> ${containerRect.width.toFixed(2)}px</p>`;
+            resultHTML += `<p><strong>Banner merkezi:</strong> ${bannerCenter.toFixed(2)}px</p>`;
+            resultHTML += `<p><strong>Sayfa merkezi:</strong> ${windowCenter.toFixed(2)}px</p>`;
+            resultHTML += `<p><strong>Merkez farkı:</strong> ${centerDiff.toFixed(2)}px</p>`;
+            
+            if (centerDiff < 5) {
+                resultHTML += '<p style="color: green; font-weight: bold;">✅ Banner mükemmel ortalanmış!</p>';
+            } else if (centerDiff < 20) {
+                resultHTML += '<p style="color: orange; font-weight: bold;">⚠️ Banner neredeyse ortalı (kabul edilebilir)</p>';
+            } else {
+                resultHTML += '<p style="color: red; font-weight: bold;">❌ Banner ortalanmamış! Düzeltme gerekli.</p>';
+            }
+            
+            // CSS özelliklerini kontrol et
+            const bannerStyles = getComputedStyle(banner);
+            resultHTML += '<h4>CSS Özellikleri:</h4>';
+            resultHTML += `<p><strong>margin:</strong> ${bannerStyles.margin}</p>`;
+            resultHTML += `<p><strong>text-align:</strong> ${bannerStyles.textAlign}</p>`;
+            resultHTML += `<p><strong>display:</strong> ${bannerStyles.display}</p>`;
+            resultHTML += `<p><strong>justify-content:</strong> ${bannerStyles.justifyContent}</p>`;
+            resultHTML += `<p><strong>align-items:</strong> ${bannerStyles.alignItems}</p>`;
+            
+            result.innerHTML = resultHTML;
+            result.style.display = 'block';
+        }
+        
+        function toggleDebug() {
+            document.body.classList.toggle('debug');
+        }
+        
+        function testResponsive(size) {
+            const container = document.querySelector('.test-container');
+            
+            switch(size) {
+                case 'mobile':
+                    container.style.maxWidth = '768px';
+                    break;
+                case 'tablet':
+                    container.style.maxWidth = '992px';
+                    break;
+                case 'desktop':
+                    container.style.maxWidth = '1400px';
+                    break;
+                case 'reset':
+                default:
+                    container.style.maxWidth = '1400px';
+                    break;
+            }
+            
+            // Ortalamayı yeniden kontrol et
+            setTimeout(checkBannerAlignment, 100);
+        }
+        
+        // Sayfa yüklendiğinde otomatik kontrol
+        window.addEventListener('load', function() {
+            console.log('🔧 Tepe Banner Test Sayfası Yüklendi');
+            console.log('CSS değişkenleri:', {
+                primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-color'),
+                contentMaxWidth: getComputedStyle(document.documentElement).getPropertyValue('--content-max-width'),
+                borderRadius: getComputedStyle(document.documentElement).getPropertyValue('--border-radius-base')
+            });
+        });
+        
+        // Pencere boyutu değiştiğinde otomatik kontrol
+        window.addEventListener('resize', function() {
+            const result = document.getElementById('check-result');
+            if (result.style.display !== 'none') {
+                checkBannerAlignment();
+            }
+        });
+    </script>
+</body>
+</html>

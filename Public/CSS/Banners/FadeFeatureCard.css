@@ -1,0 +1,168 @@
+/* Ana Banner Konteyneri (.banner-item.FadeFeatureCard eklendiğinde) */
+/* .FadeFeatureCard sınıfı .banner-type-orta-banner ile birlikte ana .banner div'inde olacak */
+.banner-type-orta-banner.FadeFeatureCard{
+    display: flex;
+    width:100%;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.banner-type-orta-banner.FadeFeatureCard .banner-item {
+    box-sizing: border-box;
+    border-radius: var(--border-radius-base); /* Köşe yuvarlaklığı */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Gölge */
+    padding: 25px; /* İç boşluk */
+    /* !!! KART YÜKSEKLİĞİ: İçeriğin sığması için önemlidir */
+    height: 230px; /* Yüksekliği içeriğe göre ayarlayın */
+    position: relative; /* İçerideki absolute konumlandırma için */
+    overflow: hidden; /* Geçiş sırasında taşmaları gizle */
+    text-align: center; /* Genel hizalama */
+    transition: background-color 0.4s ease;
+    /* Sıfırlamalar */
+    display: block; min-height: initial; cursor: pointer;
+    border: var(--border-style) var(--border-width) var(--border-color);
+}
+
+/* İçerik Konteyneri - Banner Item */
+.banner-type-orta-banner.FadeFeatureCard .banner-item {
+    height: 100%;
+    /* Hizalama ve Sıfırlamalar */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Yatayda ortala */
+    justify-content: center; /* Dikeyde ortala */
+    width: 100%; flex-wrap: nowrap; gap: 0; margin: 0;
+    padding: 0; max-width: none; overflow: visible;
+}
+
+/* Görsel (İkon) Sarmalayıcı */
+.banner-type-orta-banner.FadeFeatureCard .banner-item .banner-image {
+    width: 45px;
+    height: 45px;
+    margin: 15px auto; /* Başlık ile arası */
+    transition: opacity 0.3s ease, transform 0.4s ease; /* Geçiş efekti */
+    /* Sıfırlamalar ve Konum */
+    border-radius: 0; border: none; padding: 0; background-color: transparent;
+    box-shadow: none; overflow: visible; flex-shrink: 0; flex: none;
+    max-width: none; position: relative; z-index: 1; box-sizing: content-box;
+}
+
+.banner-type-orta-banner.FadeFeatureCard .banner-item .banner-image img {
+    display: block; width: 100%; height: 100%; object-fit: contain;
+    border-radius: 0; transform: none; transition: none;
+}
+
+/* İçerik Kutusu */
+.banner-type-orta-banner.FadeFeatureCard .banner-item .content-box {
+    /* Sıfırlamalar */
+    position: static; /* Başlık ve içerik normal akışta olabilir */
+    width: 100%; /* Tam genişlik */
+    height: auto; background-color: transparent; color: inherit; padding: 0;
+    opacity: 1; visibility: visible; transform: none;
+    z-index: auto; flex: none; max-width: 100%;
+    /* Hizalama */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Banner Başlığı */
+.banner-type-orta-banner.FadeFeatureCard .banner-item .content-box .title {
+
+    font-weight: 500;
+    padding: 0 10px;
+    margin: 0 0 10px 0; /* İkon yerine geldiğinde altta boşluk bırakır */
+    width: 100%; /* Tam genişliği kaplasın (önemli olabilir) */
+    transition: transform 0.4s ease 0.1s, margin-top 0.4s ease; /* Geçiş efekti */
+    position: relative; /* z-index için */
+    z-index: 1; /* İçeriğin üzerinde kalması için */
+    /* Sıfırlama */
+    text-transform: none; letter-spacing: 0;
+}
+
+/* Banner İçeriği (Açıklama) - Başlangıçta gizli */
+.banner-type-orta-banner.FadeFeatureCard .banner-item .content-box .content {
+
+    max-width: 90%; /* Kenarlara yapışmasın */
+    text-align: center;
+    /* Başlangıç durumu */
+    opacity: 0;
+    transform: translateY(10px); /* Biraz aşağıda başlasın */
+    transition: opacity 0.3s ease 0.15s, transform 0.4s ease 0.15s; /* Gecikmeli giriş */
+    /* Konumlandırma (Başlığın altında) */
+    position: relative; /* Normal akışta kalsın */
+    /* Sıfırlama */
+    margin: 0; /* Üst boşluğu title verir */
+}
+
+/* Buton Konteyneri (Gizli) */
+.banner-type-orta-banner.FadeFeatureCard .banner-item .content-box .button-container {
+    display: none;
+}
+
+/* --- Hover Etkileşimleri --- */
+
+.banner-type-orta-banner.FadeFeatureCard .banner-item:hover .banner-image {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.8); /* Yukarı kaybolurken küçülsün */
+}
+
+.banner-type-orta-banner.FadeFeatureCard .banner-item:hover .content-box .title {
+    /* Başlığın yeni konumu (ikon kaybolduktan sonra) */
+    margin-top: -30px; /* İkonun yerini doldurmak için yukarı çek (ayarlayın) */
+    margin-bottom: 15px; /* İçerikle arasına boşluk */
+}
+
+.banner-type-orta-banner.FadeFeatureCard .banner-item:hover .content-box .content {
+    opacity: 1;
+    transform: translateY(0); /* Normal konumuna gelsin */
+}
+
+/* layout_group="text" (Sadece Metin) durumu için uyarlama */
+.banner-type-orta-banner.FadeFeatureCard .banner-item.text-only-layout .content-box {
+    padding: 20px; /* İç boşluk */
+}
+
+.banner-type-orta-banner.FadeFeatureCard .banner-item.text-only-layout .content-box .title {
+    margin-top: 0; /* İkon olmadığından margin sıfırlama */
+}
+
+.banner-type-orta-banner.FadeFeatureCard .banner-item.text-only-layout .content-box .content {
+    opacity: 1; /* İçerik her zaman görünür */
+    transform: translateY(0);
+}
+
+/* layout_group="image" (Sadece Resim) durumu için uyarlama */
+.banner-type-orta-banner.FadeFeatureCard .banner-item.image-only-layout .banner-image {
+    width: auto;
+    height: auto;
+    margin: 0;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+/* Responsive ayarlamaları */
+@media (max-width: 768px) {
+    .banner-type-orta-banner.FadeFeatureCard .banner-item {
+        height: 200px; /* Daha küçük yükseklik */
+        padding: 15px; /* Daha az iç boşluk */
+    }
+
+    .banner-type-orta-banner.FadeFeatureCard .banner-item .banner-image {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px; /* Daha az boşluk */
+    }
+
+    .banner-type-orta-banner.FadeFeatureCard .banner-item .content-box .title {
+        font-size: 0.95em; /* Daha küçük başlık */
+    }
+
+    .banner-type-orta-banner.FadeFeatureCard .banner-item .content-box .content {
+        font-size: 0.8em; /* Daha küçük içerik */
+        max-width: 95%; /* Mobil için daha fazla genişlik */
+    }
+}

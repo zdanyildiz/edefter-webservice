@@ -1,0 +1,102 @@
+/* Box slider stilleri */
+.banner-type-slider.box {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+/* Slider container */
+.banner-type-slider.box .slider-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    overflow-x: hidden;
+}
+
+/* Banner item */
+.banner-type-slider.box .banner-item {
+    min-width: 32%;
+    flex: 0 0 32%;
+    margin-inline-end: 2%;
+    position: relative;
+    display: block;
+    opacity: 1;
+    transform: none;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.banner-type-slider.box .banner-item:last-child {
+    margin-inline-end: 0;
+}
+
+.banner-type-slider.box .banner-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Görüntü stilleri */
+.banner-type-slider.box .banner-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.banner-type-slider.box .banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* İçerik kutusu stilleri */
+.banner-type-slider.box .content-box {
+    padding: 15px;
+    background-color: #fff;
+}
+
+.banner-type-slider.box .title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.banner-type-slider.box .content {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+/* Slider kontrol düğmeleri */
+.banner-type-slider.box .slider-controls {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 -15px;
+}
+
+/* Responsive tasarım - Tablet */
+@media (max-width: 992px) {
+    .banner-type-slider.box .banner-item {
+        min-width: 48%;
+        flex: 0 0 48%;
+        margin-inline-end: 4%;
+    }
+}
+
+/* Responsive tasarım - Mobil */
+@media (max-width: 768px) {
+    .banner-type-slider.box .banner-item {
+        min-width: 100%;
+        flex: 0 0 100%;
+        margin-inline-end: 0;
+    }
+
+    .banner-type-slider.box .banner-image {
+        height: 180px;
+    }
+}

@@ -1,0 +1,94 @@
+/* Fullwidth slider stilleri */
+.banner-type-slider.fullwidth {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Slider container */
+.banner-type-slider.fullwidth .slider-container {
+    position: relative;
+    display: block;
+    height: auto;
+}
+
+/* Banner item */
+.banner-type-slider.fullwidth .banner-item {
+    width: 100%;
+    height: auto;
+    position: absolute; /* relative yerine absolute kullanıyoruz */
+    left: 0;
+    top: 0;
+    display: none;
+    opacity: 0;
+    transform: scale(0.95);
+    will-change: opacity, transform;
+}
+
+/* İlk yükleme için stiller - JS aktif etmeden önce */
+.banner-type-slider.fullwidth .banner-item.initial-visible {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+    transition: none;
+}
+
+/* Active sınıfı için animasyonlar */
+.banner-type-slider.fullwidth .banner-item.active {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+/* İlk slayt için özel stil - ilk aktivasyon animasyonu yok */
+.banner-type-slider.fullwidth  .banner-item.first-activation {
+    transition: none !important;
+}
+
+/* İçerik kutusu stilleri */
+.banner-type-slider.fullwidth .content-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width:100%;
+    max-width: 60%;
+    padding: 20px;
+    z-index: 2;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Responsive tasarım - Tablet */
+@media (max-width: 992px) {
+    .banner-type-slider.fullwidth .slider-container {
+        min-height: 50vh;
+    }
+    .banner-type-slider.fullwidth .banner-item {
+        height: 50vh;
+    }
+
+    .banner-type-slider.fullwidth .content-box {
+        max-width: 70%;
+    }
+}
+
+/* Responsive tasarım - Mobil */
+@media (max-width: 768px) {
+    .banner-type-slider.fullwidth .slider-container {
+        min-height: 40vh;
+    }
+    .banner-type-slider.fullwidth .banner-item {
+        height: 40vh;
+    }
+
+    .banner-type-slider.fullwidth .content-box {
+        max-width: 80%;
+    }
+}

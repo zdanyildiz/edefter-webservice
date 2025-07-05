@@ -1,0 +1,63 @@
+/* --- ImageTextOverlayBottom Stilleri (Resim Üzeri Alt Bant Metin) --- */
+
+.ImageTextOverlayBottom {
+    position: relative; overflow: hidden; box-sizing: border-box;
+    /* !!! KART YÜKSEKLİĞİ: Sabit yükseklik gereklidir */
+    height: 280px; /* Örnek yükseklik, içeriğe göre ayarlayın */
+    border-radius: 8px; background-color: #eee;
+    /* Sıfırlamalar */
+    display: block; min-height: initial; cursor: pointer; text-align: left;
+}
+/* Opsiyonel: Hover'da resmi büyütme */
+.ImageTextOverlayBottom img { transition: transform 0.4s ease; }
+.ImageTextOverlayBottom:hover img { transform: scale(1.05); }
+
+/* Görseli Arkaplan Gibi Yap */
+.ImageTextOverlayBottom .banner-image-wrapper {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+    /* Sıfırlamalar */
+    border-radius:0; border:none; padding:0; background-color:transparent;
+    box-shadow:none; overflow:hidden; flex-shrink:0; flex:none;
+    max-width:none; margin:0; box-sizing:border-box;
+}
+.ImageTextOverlayBottom .banner-image-wrapper img {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    /* Sıfırlama */ border-radius:0; transition: transform 0.4s ease;
+}
+
+/* İçerik Konteyneri (Konumlandırma için) */
+.ImageTextOverlayBottom .banner-content-container {
+    position: relative; z-index: 3; height: 100%;
+    /* Sıfırlamalar */
+    display: block; flex-direction: initial; align-items: initial; width: 100%;
+    flex-wrap: nowrap; justify-content: initial; gap: 0; margin: 0;
+    padding: 0; max-width: none; overflow: visible;
+}
+
+/* İçerik Kutusu (Altta Overlay Bant) */
+.ImageTextOverlayBottom .banner-content-box {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 10%, rgba(0,0,0,0) 100%); /* Degrade overlay */
+    padding: 40px 15px 15px 15px; /* Alt boşluk fazla */
+    color: #ffffff;
+    /* Sıfırlamalar */
+    height: auto; opacity: 1; visibility: visible; transform: none; transition: none;
+    z-index: 2; flex: none; max-width: 100%; display: block; text-align: left;
+}
+
+/* Başlık */
+.ImageTextOverlayBottom .bannerTitle {
+    font-size: 1.2em; font-weight: 600; color: inherit; margin-bottom: 5px;
+    /* Sıfırlama */ text-transform: none; letter-spacing: 0; line-height: 1.3;
+}
+
+/* İçerik (Opsiyonel) */
+.ImageTextOverlayBottom .bannerContent {
+    font-size: 0.85em; color: rgba(255, 255, 255, 0.9); line-height: 1.4; margin-bottom: 0;
+    /* İsterseniz başlangıçta gizleyebilirsiniz: */
+    /* display: none; */
+}
+
+/* Buton (Gizli) */
+.ImageTextOverlayBottom .bannerButton { display: none; }

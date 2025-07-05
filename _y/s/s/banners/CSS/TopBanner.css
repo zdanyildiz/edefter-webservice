@@ -1,0 +1,74 @@
+#previewPanel>div.top-banner{
+    width:100%;
+    min-height: 120px;
+    text-align: center;
+    overflow: hidden;
+    background-color: rgba(255,243,0,1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
+    background-image: url(/_y/m/r/banner/banner_slider1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+#previewPanel>div.top-banner>.banner-content-container {
+    display: flex; /* İçerik ve görseli yan yana getirmek için */
+    flex-wrap: wrap; /* Ekran küçüldüğünde alt satıra geçmesi için */
+    align-items: center; /* Öğeleri dikeyde ortalamak için */
+    justify-content: center; /* İçerik ve görsel arasına boşluk bırakmak için */
+    width: 100%; /* Banner'ın maksimum genişliği */
+    margin: 20px auto; /* Sayfada ortalamak ve üst/alt boşluk */
+    padding: 20px 0; /* İç boşluk */
+    gap: 30px; /* Flex öğeleri arasındaki boşluk */
+    overflow: hidden; /* Taşan içerikleri gizle (isteğe bağlı) */
+    max-width:75%;
+}
+#previewPanel>div.top-banner .banner-image-wrapper{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+
+}
+#previewPanel>div.top-banner .banner-image-wrapper img{
+    width: 100%; height: 100%; object-fit: cover;
+}
+#previewPanel>div.top-banner .banner-content-box {
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9); /* Hafif şeffaf beyaz arka plan */
+    padding: 15px 15px; /* İç boşluk */
+    text-align: center; /* İçeriği ortala */
+    max-width:80%; /* Maksimum genişlik */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* İsteğe bağlı gölge */
+}
+#previewPanel>div.top-banner button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 4.5px 14px;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: rgba(0,0,0,1);
+    color: rgba(255,255,255,1);
+}
+.bannerTitle,.bannerContent,.bannerButton{
+    margin: 0;
+}
+.bannerTitle,.bannerContent{
+    color:#000
+}

@@ -1,0 +1,324 @@
+section#top-contactAndSocial{
+    display: block;
+    width: 100%;
+    z-index: 1;
+    background: var(--top-contact-and-social-bg-color);
+    margin-top: var(--top-contact-and-social-container-margin-top);
+}
+section#top-contactAndSocial .top-contactAndSocialContainer{
+    float: none;
+    margin: 0 auto;
+    height: 35px;
+    line-height: 35px;
+    width: 100%;
+    max-width: var(--desktop-max-width);
+}
+section#top-contactAndSocial a{
+    font-size: var(--font-size-small);
+    color: var(--top-contact-and-social-link-color);
+    line-height: 35px;
+}
+section#top-contactAndSocial a:hover{
+    color: var(--top-contact-and-social-link-hover-color);
+}
+
+section#top-contactAndSocial #top-contacts {
+    width: 50%;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    position: relative;
+}
+section#top-contactAndSocial #top-contacts>div {
+   line-height: 35px;
+    height: 35px;
+}
+section#top-contactAndSocial #top-contacts div a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+section#top-contactAndSocial #top-contacts svg {
+    width: 20px; height: 20px; fill:var(--top-contact-and-social-icon-color);
+}
+section#top-contactAndSocial #top-contacts a:hover svg {
+    fill: var(--top-contact-and-social-icon-hover-color);
+}
+
+section#top-contactAndSocial #top-socialMedia {
+    width: 50%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    position: relative; padding-inline-start: 20px;height: 35px;
+}
+section#top-contactAndSocial #top-socialMedia div {
+    /* Add more styles as needed */
+}
+section#top-contactAndSocial #top-socialMedia div a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+section#top-contactAndSocial #top-socialMedia svg {
+    width: 15px; height: 15px; fill: var(--top-contact-and-social-icon-color);
+}
+section#top-contactAndSocial #top-socialMedia a:hover svg {
+    fill: var(--top-contact-and-social-icon-hover-color);
+}
+section#top-contactAndSocial #top-socialMedia span {
+    font-size: var(--font-size-small);display: none;
+}
+
+/* Ana container için stil */
+.header-container {
+    display: flex;
+    background: var(--header-bg-color);
+    align-items: center;
+}
+.header {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: var(--header-min-height);
+    max-width: var(--desktop-max-width);
+    padding: var(--header-padding);
+    margin: 0 auto;
+}
+/* Logo container için stil */
+.logo-container {
+    width: 30%;
+}
+.logo-container a {
+    display: block;
+    width: var(--header-logo-width);
+    max-width: var(--header-logo-width);
+    float: none;
+    margin-top: var(--header-logo-margin-top);
+    margin-inline-end: var(--header-logo-margin-right);
+    margin-bottom: var(--header-logo-margin-bottom);
+    margin-inline-start: var(--header-logo-margin-left);
+}
+.logo-container img {
+    width: 100%;
+    height: auto;
+}
+
+/* Ürün arama container için stil */
+.product-search-container {
+    width: 40%; /* veya istediğiniz başka bir yüzde */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+.product-search-container form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Genişliği ayarladık */
+}
+.close-search {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    display: none;
+    background: var(--secondary-color);
+    padding: 5px;
+}
+.close-search svg {
+    width: 15px;
+    height: 15px;
+    fill: var(--primary-color);
+}
+.product-search-container input {
+    width: 100%;
+    padding: 10px;
+    border: var(--border-style) var(--border-width) var(--border-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: var(--input-bg-color);
+}
+.product-search-container input:focus {
+    outline: 0;
+    border-color: var(--input-focus-border-color);
+}
+
+.product-search-container button {
+    min-width: 100px;
+    padding: var(--btn-padding-y) var(--btn-padding-x);
+    border-radius: var(--btn-border-radius);
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: var(--btn-primary-bg-color);
+    color: var(--btn-primary-text-color);
+    border: var(--border-style) var(--border-width) var(--btn-primary-border-color);
+}
+.product-search-container button:hover {
+    background-color: var(--btn-primary-hover-bg-color);
+}
+/* Alışveriş menü container için stil */
+.shop-menu-container {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* içerik arasında boşluk bırakalım */
+    gap: 20px;
+    padding-inline-end: 20px;
+}
+/* Stilize the SVG icons */
+.svg-icon-container {
+    display: inline-block;
+}
+.svg-icon-container a {
+    line-height: 20px;
+    position: relative;
+}
+.svg-icon-container.search {
+    display: none;
+}
+
+.svg-icon-container .svg-icon {
+    width: 25px; /* Fill the container */
+    height: auto;
+    display: inline-block;
+    float: left;
+    margin: 0 auto;
+}
+.svg-icon-container .svg-icon:hover {
+    fill: var(--shop-menu-container-icon-hover-color);
+}
+.svg-icon-container span{
+    display: none; font-size: var(--font-size-small); text-align: center;float:left;mmargin-inline-start:8px
+}
+/* Example styles for icons */
+.svg-icon-search {
+    fill: var(--shop-menu-container-icon-color-search); /* Change the color of the search icon */
+}
+.svg-icon-member {
+    fill: var(--shop-menu-container-icon-color-member); /* Change the color of the member icon */
+}
+.svg-icon-favorites {
+    fill: var(--shop-menu-container-icon-color-favorites); /* Change the color of the favorites icon */
+}
+.svg-icon-basket {
+    fill: var(--shop-menu-container-icon-color-basket); /* Change the color of the basket icon */
+}
+/* Mobil modda görünsün diye stil */
+.basket-count {
+    position: absolute;
+    top: -15px;
+    right: 1px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    z-index: 1;
+}
+
+@media (max-width: 1360px){
+    section#top-contactAndSocial {
+        position: relative;
+        padding-inline-end: 20px;
+    }
+}
+@media screen and (max-width: 960px) {
+    .svg-icon-container.search {
+        display: block; /* Mobilde görünsün */
+    }
+    .product-search-container {
+        display: none; /* başta gizli */
+    }
+    .show-on-mobile {
+        display: block; /* tıklandığında görünsün */
+    }
+
+    section#top-contactAndSocial{
+        top:var(--top-contact-and-social-container-mobile-margin-top);
+        width: 80%;z-index: 4;right: 0;left: unset;
+        position: absolute;
+        background: var(--top-contact-and-social-bg-color-mobile);}
+    section#top-contactAndSocial a{
+        color: var(--top-contact-and-social-link-color-mobile);
+    }
+    section#top-contactAndSocial a:hover{
+        color: var(--top-contact-and-social-link-hover-color-mobile);
+    }
+    section#top-contactAndSocial #top-socialMedia{display: none;}
+    section#top-contactAndSocial #top-contacts{width: 100%;display: block;padding-inline-end: 0}
+    section#top-contactAndSocial #top-contacts>div.social-icon,section#top-contactAndSocial #top-contacts>div.contact-icon{
+        width: 33.333%;overflow: hidden;display: inline-block;float: left;position: relative;
+    }
+
+    section#top-contactAndSocial #top-contacts svg {
+        fill:var(--top-contact-and-social-icon-color-mobile);
+    }
+    section#top-contactAndSocial #top-contacts a:hover svg {
+        fill: var(--top-contact-and-social-icon-hover-color-mobile);
+    }
+
+    section#top-contactAndSocial #top-contacts>div>a{
+        display:block;
+        overflow: hidden;
+        width: 30px;height: 30px;
+        float: none;
+        margin: 0 auto;
+        padding: 5px}
+    .svg-icon-container .svg-icon {width: 20px;}
+
+    .header-container {
+        min-height: var(--header-mobile-min-height);
+    }
+
+    .logo-container, .shop-menu-container {
+        width: 40%;
+    }
+
+    .logo-container a{
+        width:var(--header-logo-mobile-width);
+        margin-top: var(--header-mobile-logo-margin-top);
+        margin-inline-end: var(--header-mobile-logo-margin-right);
+        margin-bottom: var(--header-mobile-logo-margin-bottom);
+        margin-inline-start: var(--header-mobile-logo-margin-left);
+    }
+
+
+    .product-search-container.mobile-search-active{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--primary-light-color);
+        z-index: 4;
+        padding-top: 50px;
+    }
+    .close-search {
+        display: block;
+    }
+
+    .product-search-container form {
+        top: 100px;
+        left: 0;
+        transform: none;
+        padding: 0 10px
+    }
+
+    .shop-menu-container{padding-inline-end: 30px}
+}

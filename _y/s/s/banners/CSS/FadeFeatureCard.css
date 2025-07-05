@@ -1,0 +1,125 @@
+/* Ana Konteyner (.FadeFeatureCard) */
+.FadeFeatureCard {
+    box-sizing: border-box;
+    background-color: #ffffff; /* Kart arkaplanı */
+    border-radius: 10px; /* Köşe yuvarlaklığı */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Gölge */
+    padding: 25px; /* İç boşluk */
+    /* !!! KART YÜKSEKLİĞİ: İçeriğin sığması için önemlidir */
+    height: 230px; /* Yüksekliği içeriğe göre ayarlayın */
+    position: relative; /* İçerideki absolute konumlandırma için */
+    overflow: hidden; /* Geçiş sırasında taşmaları gizle */
+    text-align: center; /* Genel hizalama */
+    transition: background-color 0.4s ease;
+    /* Sıfırlamalar */
+    display: block; min-height: initial; cursor: default;
+}
+
+/* İç Konteyner */
+.FadeFeatureCard .banner-content-container {
+    height: 100%;
+    /* Hizalama ve Sıfırlamalar */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Yatayda ortala */
+    justify-content: center; /* Dikeyde ortala */
+    position: relative; /* İçerik konumlandırması için */
+    width: 100%; flex-wrap: nowrap; gap: 0; margin: 0;
+    padding: 0; max-width: none; overflow: visible;
+}
+
+/* Görsel (İkon) Sarmalayıcı */
+.FadeFeatureCard .banner-image-wrapper {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 15px; /* Başlık ile arası */
+    transition: opacity 0.3s ease, transform 0.4s ease; /* Geçiş efekti */
+    /* Sıfırlamalar ve Konum */
+    border-radius:0; border:none; padding:0; background-color:transparent;
+    box-shadow:none; overflow:visible; flex-shrink:0; flex:none;
+    max-width:none; position:relative; z-index: 1; box-sizing:content-box;
+}
+.FadeFeatureCard .banner-image-wrapper img {
+    display: block; width: 100%; height: 100%; object-fit: contain;
+    border-radius:0; transform:none; transition:none;
+}
+
+/* İçerik Kutusu */
+.FadeFeatureCard .banner-content-box {
+    /* Sıfırlamalar */
+    position: static; /* Başlık ve içerik normal akışta olabilir */
+    width: 100%; /* Tam genişlik */
+    height: auto; background-color: transparent; color: inherit; padding: 0;
+    opacity: 1; visibility: visible; transform: none; transition: none;
+    z-index: auto; flex: none; max-width: 100%;
+    /* Hizalama */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Banner Başlığı */
+.FadeFeatureCard .bannerTitle {
+    font-size: 1.05em;
+    font-weight: 500;
+    color: #2c3e50;
+    line-height: 1.4;
+    padding: 0 10px;
+    margin: 0 0 10px 0; /* İkon yerine geldiğinde altta boşluk bırakır */
+    width: 100%; /* Tam genişliği kaplasın (önemli olabilir) */
+    transition: transform 0.4s ease 0.1s, margin-top 0.4s ease; /* Geçiş efekti */
+    position: relative; /* z-index için */
+    z-index: 1; /* İçeriğin üzerinde kalması için */
+    /* Sıfırlama */
+    text-transform: none; letter-spacing: 0;
+}
+
+/* Banner İçeriği (Açıklama) - Başlangıçta gizli */
+.FadeFeatureCard .bannerContent {
+    font-size: 0.88em;
+    color: #555;
+    line-height: 1.5;
+    max-width: 90%; /* Kenarlara yapışmasın */
+    text-align: center;
+    /* Başlangıç durumu */
+    opacity: 0;
+    transform: translateY(10px); /* Biraz aşağıda başlasın */
+    transition: opacity 0.3s ease 0.15s, transform 0.4s ease 0.15s; /* Gecikmeli giriş */
+    /* Konumlandırma (Başlığın altında) */
+    position: relative; /* Normal akışta kalsın */
+    /* Sıfırlama */
+    margin: 0; /* Üst boşluğu bannerTitle verir */
+}
+
+/* Buton Konteyneri (Gizli) */
+.FadeFeatureCard .bannerButton {
+    display: none;
+}
+
+/* --- Hover Etkileşimleri --- */
+
+.FadeFeatureCard:hover .banner-image-wrapper {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.8); /* Yukarı kaybolurken küçülsün */
+}
+
+.FadeFeatureCard:hover .bannerTitle {
+    /* Başlığın yeni konumu (ikon kaybolduktan sonra) */
+    /* Eğer tam ortaya gelmesi gerekiyorsa farklı bir yöntem gerekebilir */
+    margin-top: -30px; /* İkonun yerini doldurmak için yukarı çek (ayarlayın) */
+    margin-bottom: 15px; /* İçerikle arasına boşluk */
+    /* transform: translateY(-10px); /* Veya sadece transform ile */
+}
+
+.FadeFeatureCard:hover .bannerContent {
+    opacity: 1;
+    transform: translateY(0); /* Normal konumuna gelsin */
+}
+.fade-feature-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 10px;
+    box-sizing: border-box;
+}

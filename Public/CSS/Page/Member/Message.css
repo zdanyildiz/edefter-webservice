@@ -1,0 +1,146 @@
+.member-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    clear: both;
+    padding: 0 5%;
+    padding-top: 20px;
+    gap: 20px;
+}
+/* h1 tek satır olsun, sonraki divler ondan sonra başlasın */
+.member-container h1 {
+    margin-bottom: 20px;
+    clear: both;
+    width: 100%;display: block;
+}
+.member-container p {
+    margin-bottom: 20px;font-size: 12px;
+}
+.member-container form {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.mamber-container form a {
+    display: block;
+    margin-bottom: 20px;
+}
+.member-container form input{
+    box-sizing: border-box;
+}
+.message-card-container {
+    width: 50%;
+}
+.member-container .message-card {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    float: left; display: inline-block;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.message-card-container summary {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.message-card-container summary::-webkit-details-marker {
+    display: none;
+}
+.message-card-container summary::marker {
+    display: none;
+}
+.message-card-container summary::before {
+    content: '▶';
+    padding-inline-end: 5px;
+}
+.message-card-container details[open] summary::before {
+    content: '▼';
+}
+.message-card-container details {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.message-card h2 {
+    margin-bottom: 10px;
+}
+.message-card a {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    float: right;
+    color: #f00;
+}
+.member-message-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clear: both;
+}
+.member-message-form-container {
+    width: 100%;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.form-group textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 200px;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+.form-group small {
+    display: block;
+    margin-top: 5px;
+}
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-primary {
+    background-color: #0056b3;
+    color: #fff;
+}
+.btn-primary:hover {
+    background-color: #003366;
+}
+.btn-primary:focus {
+    outline: none;
+}
+.btn-primary:active {
+    transform: scale(0.95);
+}
+.btn-primary:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+.btn-primary:disabled:hover {
+    background-color: #ccc;
+}
+.btn-primary:disabled:focus {
+    outline: none;
+}

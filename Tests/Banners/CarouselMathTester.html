@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel Math Test - Banner Kaydırma Düzeltme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-title {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .debug-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        .carousel-demo {
+            width: 100%;
+            height: 300px;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .demo-items {
+            display: flex;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .demo-item {
+            flex: 0 0 33.333%;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px;
+            border-radius: 8px;
+        }
+        .demo-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        .demo-prev {
+            left: 10px;
+        }
+        .demo-next {
+            right: 10px;
+        }
+        .demo-controls:hover {
+            background: rgba(0,0,0,0.9);
+        }
+        .test-buttons {
+            margin-top: 20px;
+        }
+        .test-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .test-btn:hover {
+            background: #218838;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔧 Carousel Math Fix Test - Banner Kaydırma Düzeltme</h1>
+        
+        <div class="test-section">
+            <div class="test-title">📏 Carousel Matematik Test Demo</div>
+            <div class="carousel-demo" id="mathTestDemo">
+                <div class="demo-items" id="demoItems">
+                    <div class="demo-item">Banner 1</div>
+                    <div class="demo-item">Banner 2</div>
+                    <div class="demo-item">Banner 3</div>
+                    <div class="demo-item">Banner 4</div>
+                    <div class="demo-item">Banner 5</div>
+                </div>
+                <button class="demo-controls demo-prev" onclick="scrollDemo(-1)">‹</button>
+                <button class="demo-controls demo-next" onclick="scrollDemo(1)">›</button>
+            </div>
+            
+            <div class="debug-info" id="mathDebugInfo">
+                Math debug bilgileri burada görünecek...
+            </div>
+            
+            <div class="test-buttons">
+                <button class="test-btn" onclick="testCarouselMath()">Matematik Testi Çalıştır</button>
+                <button class="test-btn" onclick="testRealCarousel()">Gerçek Carousel Test</button>
+                <button class="test-btn" onclick="clearDebug()">Debug Temizle</button>
+            </div>
+            
+            <div id="testStatus" class="status" style="display:none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">🌐 Canlı Site Test</div>
+            <p>Ana siteyi test etmek için:</p>
+            <div class="test-buttons">
+                <button class="test-btn" onclick="window.open('http://l.globalpozitif', '_blank')">Ana Siteyi Aç</button>
+                <button class="test-btn" onclick="testLiveSite()">Canlı Site Carousel Test</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">📊 Test Sonuçları</div>
+            <div id="testResults">
+                <p>Test sonuçları burada görünecek...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPosition = 0;
+        const itemWidth = 33.333; // % olarak
+        
+        function scrollDemo(direction) {
+            const container = document.getElementById('demoItems');
+            const maxPosition = -66.666; // 2 item kaydırma için
+            
+            currentPosition += direction * itemWidth;
+            
+            // Sınırları kontrol et
+            if (currentPosition > 0) currentPosition = 0;
+            if (currentPosition < maxPosition) currentPosition = maxPosition;
+            
+            container.style.transform = `translateX(${currentPosition}%)`;
+            
+            updateMathDebug(direction, currentPosition);
+        }
+        
+        function updateMathDebug(direction, position) {
+            const debugInfo = document.getElementById('mathDebugInfo');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            debugInfo.innerHTML += `
+[${timestamp}] Scroll Direction: ${direction > 0 ? 'Next' : 'Prev'}<br>
+[${timestamp}] Current Position: ${position}%<br>
+[${timestamp}] Item Width Used: ${itemWidth}%<br>
+[${timestamp}] Transform Applied: translateX(${position}%)<br>
+<br>`;
+            
+            // Scroll to bottom
+            debugInfo.scrollTop = debugInfo.scrollHeight;
+        }
+        
+        function testCarouselMath() {
+            showStatus('info', '🧮 Carousel matematik testi başlıyor...');
+            
+            // Simulate different item calculations
+            const testCases = [
+                { containerWidth: 1200, itemCount: 3, expectedScroll: 400 },
+                { containerWidth: 800, itemCount: 4, expectedScroll: 200 },
+                { containerWidth: 600, itemCount: 2, expectedScroll: 300 }
+            ];
+            
+            let passedTests = 0;
+            let totalTests = testCases.length;
+            
+            testCases.forEach((testCase, index) => {
+                setTimeout(() => {
+                    const calculatedScroll = testCase.containerWidth / testCase.itemCount;
+                    const isCorrect = Math.abs(calculatedScroll - testCase.expectedScroll) < 1;
+                    
+                    const debugInfo = document.getElementById('mathDebugInfo');
+                    debugInfo.innerHTML += `
+<strong>Test ${index + 1}:</strong><br>
+Container: ${testCase.containerWidth}px<br>
+Items: ${testCase.itemCount}<br>
+Expected: ${testCase.expectedScroll}px<br>
+Calculated: ${calculatedScroll}px<br>
+Result: ${isCorrect ? '✅ PASS' : '❌ FAIL'}<br>
+<br>`;
+                    
+                    if (isCorrect) passedTests++;
+                    
+                    if (index === totalTests - 1) {
+                        const status = passedTests === totalTests ? 'success' : 'error';
+                        const message = `Test tamamlandı: ${passedTests}/${totalTests} başarılı`;
+                        showStatus(status, message);
+                    }
+                }, index * 1000);
+            });
+        }
+        
+        function testRealCarousel() {
+            showStatus('info', '🔍 Gerçek carousel test ediliyor...');
+            
+            // Try to find carousel elements in parent window or iframe
+            try {
+                const parentWindow = window.parent;
+                const carousels = parentWindow.document.querySelectorAll('.Carousel');
+                
+                if (carousels.length > 0) {
+                    showStatus('success', `✅ ${carousels.length} adet carousel bulundu`);
+                    
+                    carousels.forEach((carousel, index) => {
+                        const container = carousel.querySelector('.carousel-container');
+                        const items = carousel.querySelectorAll('.banner-item');
+                        
+                        if (container && items.length > 0) {
+                            const debugInfo = document.getElementById('mathDebugInfo');
+                            debugInfo.innerHTML += `
+<strong>Carousel ${index + 1}:</strong><br>
+Container Width: ${container.clientWidth}px<br>
+Items Count: ${items.length}<br>
+First Item Width: ${items[0].getBoundingClientRect().width}px<br>
+<br>`;
+                        }
+                    });
+                } else {
+                    showStatus('error', '❌ Carousel bulunamadı');
+                }
+            } catch (error) {
+                showStatus('error', '❌ Carousel test hatası: ' + error.message);
+            }
+        }
+        
+        function testLiveSite() {
+            showStatus('info', '🌐 Canlı site test başlatılıyor...');
+            
+            // Open live site and inject test script
+            const liveWindow = window.open('http://l.globalpozitif', 'liveTest');
+            
+            setTimeout(() => {
+                try {
+                    if (liveWindow && !liveWindow.closed) {
+                        liveWindow.console.log('🔧 Carousel test başlatıldı');
+                        
+                        // Inject test script
+                        const script = liveWindow.document.createElement('script');
+                        script.textContent = `
+                            console.log('🔍 Carousel elementi aranıyor...');
+                            const carousels = document.querySelectorAll('.Carousel');
+                            console.log('Bulunan carousel sayısı:', carousels.length);
+                            
+                            carousels.forEach((carousel, index) => {
+                                console.log('Carousel ' + (index + 1) + ' analiz ediliyor...');
+                                const container = carousel.querySelector('.carousel-container');
+                                const items = carousel.querySelectorAll('.banner-item');
+                                const prevBtn = carousel.querySelector('.prev-carousel');
+                                const nextBtn = carousel.querySelector('.next-carousel');
+                                
+                                if (container && items.length > 0) {
+                                    console.log('Container genişliği:', container.clientWidth + 'px');
+                                    console.log('Item sayısı:', items.length);
+                                    console.log('İlk item genişliği:', items[0].getBoundingClientRect().width + 'px');
+                                    console.log('Prev buton:', prevBtn ? 'Var' : 'Yok');
+                                    console.log('Next buton:', nextBtn ? 'Var' : 'Yok');
+                                }
+                            });
+                        `;
+                        liveWindow.document.head.appendChild(script);
+                        
+                        showStatus('success', '✅ Canlı site test script\'i enjekte edildi. Konsolu kontrol edin.');
+                    }
+                } catch (error) {
+                    showStatus('error', '❌ Canlı site test hatası: ' + error.message);
+                }
+            }, 2000);
+        }
+        
+        function clearDebug() {
+            document.getElementById('mathDebugInfo').innerHTML = 'Debug bilgileri temizlendi...';
+            document.getElementById('testResults').innerHTML = '<p>Test sonuçları burada görünecek...</p>';
+            hideStatus();
+        }
+        
+        function showStatus(type, message) {
+            const status = document.getElementById('testStatus');
+            status.className = `status ${type}`;
+            status.textContent = message;
+            status.style.display = 'block';
+        }
+        
+        function hideStatus() {
+            document.getElementById('testStatus').style.display = 'none';
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showStatus('info', '🚀 Carousel Math Test aracı hazır. Test butonlarını kullanarak başlayın.');
+        });
+    </script>
+</body>
+</html>

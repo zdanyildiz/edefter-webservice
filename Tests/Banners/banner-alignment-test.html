@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner Ortalama Test</title>
+    <style>
+        /* Sayfa genel stilleri */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        /* Mevcut tepe-banner minified CSS */
+        .banner-type-tepe-banner{position:relative;overflow:hidden}.banner-type-tepe-banner .banner-container{position:relative;display:block}.banner-type-tepe-banner .banner-item{width:100%;position:relative;display:block;overflow:hidden;text-align:center}.banner-type-tepe-banner .banner-image{width:100%;height:100%;overflow:hidden}.banner-type-tepe-banner .banner-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease-in-out}.banner-type-tepe-banner .banner-item:hover .banner-image img{transform:scale(1.02)}.banner-type-tepe-banner .content-box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:50%;padding:20px;z-index:2;border-radius:8px}.banner-type-tepe-banner .title{margin:0 0 15px;font-weight:700}.banner-type-tepe-banner .content{margin-bottom:15px}.banner-type-tepe-banner .button-container{margin-top:15px}.banner-type-tepe-banner .banner-button{display:inline-block;padding:10px 20px;border:0;border-radius:4px;cursor:pointer;text-decoration:none;text-align:center;transition:all .3s ease}.banner-type-tepe-banner .banner-button:hover{opacity:.9}.banner-type-tepe-banner .text-only-layout{padding:30px;text-align:center;display:flex;align-items:center;justify-content:center;min-height:inherit}.banner-type-tepe-banner .text-only-layout .content-box{position:static;transform:none;max-width:80%;margin:0 auto;background:0 0;box-shadow:none}.banner-type-tepe-banner .image-only-layout .content-box{display:none}.banner-type-tepe-banner .text-image-layout .banner-image{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}.banner-type-tepe-banner .text-image-layout .banner-image img{width:100%;height:100%;object-fit:cover}.banner-type-tepe-banner .text-image-layout .content-box{position:relative;z-index:2}.banner-type-tepe-banner .view-single .banner-container{margin:0 auto}@media (max-width:992px){.banner-type-tepe-banner .content-box{max-width:70%;left:5%}.banner-type-tepe-banner .title{font-size:1.5rem!important}}@media (max-width:768px){.banner-type-tepe-banner .content-box{max-width:80%;left:10%;padding:15px}.banner-type-tepe-banner .content,.banner-type-tepe-banner .title{margin-bottom:8px}.banner-type-tepe-banner .banner-button{padding:8px 15px}.banner-type-tepe-banner .text-only-layout{padding:20px}}@media (max-width:480px){.banner-type-tepe-banner .content-box{max-width:90%;left:5%;padding:10px}.banner-type-tepe-banner .title{margin-bottom:5px}.banner-type-tepe-banner .content{font-size:.8rem!important;margin-bottom:5px}.banner-type-tepe-banner .banner-button{padding:5px 10px}.banner-type-tepe-banner .text-only-layout{padding:15px}}.dark-theme .banner-type-tepe-banner .content-box{background-color:rgba(0,0,0,.7);color:#fff}.dark-theme .banner-type-tepe-banner .title{color:#fff}.dark-theme .banner-type-tepe-banner .content{color:#eee}
+        
+        /* BannerController dinamik CSS simülasyonu */
+        .banner-group-2 {
+            width: 100%;
+            max-width: 100%;
+            /* Burada ortalama sorunu olabilir */
+        }
+        
+        /* Ortalama düzeltmeleri */
+        .banner-group-2-fix {
+            width: 100% !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            display: block !important;
+        }
+        
+        .banner-group-2-fix .banner-container {
+            margin: 0 auto !important;
+            text-align: center !important;
+        }
+        
+        /* Test için görsel */
+        .test-banner-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        /* Sayfa container */
+        .page-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .test-title {
+            background: #333;
+            color: white;
+            padding: 10px;
+            margin: -20px -20px 20px -20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <h1>Banner Ortalama Test</h1>
+        
+        <div class="test-section">
+            <div class="test-title">1. Mevcut Banner Yapısı (Sorunlu)</div>
+            <div class="banner-group-2 banner-type-tepe-banner">
+                <div class="banner-container">
+                    <div class="banner-item text-image-layout">
+                        <div class="banner-image">
+                            <div class="test-banner-image">Banner Resmi (Ortalanmamış)</div>
+                        </div>
+                        <div class="content-box">
+                            <div class="title">Banner Başlığı</div>
+                            <div class="content">Banner açıklaması burada yer alır.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">2. Düzeltilmiş Banner Yapısı (Ortalanmış)</div>
+            <div class="banner-group-2-fix banner-type-tepe-banner">
+                <div class="banner-container">
+                    <div class="banner-item text-image-layout">
+                        <div class="banner-image">
+                            <div class="test-banner-image">Banner Resmi (Ortalanmış)</div>
+                        </div>
+                        <div class="content-box">
+                            <div class="title">Banner Başlığı</div>
+                            <div class="content">Banner açıklaması burada yer alır.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">3. Icon Banner Test</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div style="border: 1px solid #ddd; padding: 20px; text-align: center;">
+                    <div style="width: 60px; height: 60px; background: #667eea; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white;">📦</div>
+                    <h4>Ücretsiz Kargo</h4>
+                    <p>500 TL üzeri siparişlerde</p>
+                </div>
+                <div style="border: 1px solid #ddd; padding: 20px; text-align: center;">
+                    <div style="width: 60px; height: 60px; background: #764ba2; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white;">🔄</div>
+                    <h4>Kolay İade</h4>
+                    <p>14 gün içinde iade hakkı</p>
+                </div>
+                <div style="border: 1px solid #ddd; padding: 20px; text-align: center;">
+                    <div style="width: 60px; height: 60px; background: #f093fb; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white;">🛡️</div>
+                    <h4>Güvenli Ödeme</h4>
+                    <p>SSL sertifikası ile korunuyor</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        console.log('Banner Test Sayfası Yüklendi');
+        
+        // Banner boyutlarını kontrol et
+        const banners = document.querySelectorAll('.banner-group-2, .banner-group-2-fix');
+        banners.forEach((banner, index) => {
+            const rect = banner.getBoundingClientRect();
+            console.log(`Banner ${index + 1}:`, {
+                width: rect.width,
+                offsetLeft: banner.offsetLeft,
+                center: (window.innerWidth - rect.width) / 2
+            });
+        });
+    </script>
+</body>
+</html>

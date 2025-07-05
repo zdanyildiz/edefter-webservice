@@ -1,0 +1,41 @@
+/* --- 'box' Tipi Slayt Stilleri --- */
+.slide {
+    width: 100%; /* Sabit genişlik */
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.slide.box-double{width:50%}
+.slide.box-triple{width:33.333%}
+.slide.box-quad{width:25%}
+    /* 'box' içindeki içerik konteyneri */
+.slide .banner-content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/* 'box' içindeki görseller */
+.slide .banner-image-wrapper img,
+.slide.onlyImage > .banner-content-container > img { /* onlyImage durumu */
+    max-height: 180px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* 'box' içindeki sadece görsel durumu */
+.slide.onlyImage .banner-content-container { padding: 0; }
+.slide.onlyImage > .banner-content-container > img { max-height: none; height: 100%; object-fit: cover; }
+.slide.onlyImage .bannerButton { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 5; }
+
+/* 'box' içindeki metin/buton */
+.slide .banner-content-box { padding: 10px; text-align: center; }
+.slide .bannerTitle { font-size: 1.1em; margin-bottom: 8px; }
+.slide .bannerContent { font-size: 0.9em; margin-bottom: 10px; }
+.slide .bannerButton button { padding: 5px 10px; font-size: 0.85em; }
+.slide .bannerLabel { /* Stil aynı kalabilir */ }

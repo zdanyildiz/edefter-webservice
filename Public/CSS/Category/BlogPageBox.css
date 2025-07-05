@@ -1,0 +1,54 @@
+.page-box {
+    background-color: var(--product-box-background-color);
+    border: var(--border-style) var(--border-width) var(--product-box-border-color);
+    border-radius: var(--product-box-padding);
+    padding: var(--product-box-padding);
+    overflow: hidden;
+    box-shadow: var(--box-shadow-base);
+    width: var(--category-product-box-width);
+}
+.page-box:hover {
+    border-color: var(--product-box-hover-border-color);
+}
+
+.page-box-title {
+    padding: var(--spacing-xl) 0;
+}
+
+.page-box-title h2 {
+    font-size: var(--font-size-normal);
+    color: var(--product-title-color);
+    font-weight: 500;
+}
+
+.page-box-image{
+    overflow: hidden;
+}
+
+.page-box-content {
+    padding: var(--spacing-md) var(--spacing-md);
+}
+
+.page-box-image img {
+    width: 100%;
+}
+
+.page-box-link {
+    text-align: end;
+}
+
+.page-box-link a {
+
+
+}
+.page-box button{
+    background-color: var(--add-to-cart-bg-color);
+    color: var(--add-to-cart-text-color);
+    border: none;
+    padding: var(--btn-padding-y) var(--btn-padding-x);
+    border-radius: var(--input-border-radius);
+    cursor: pointer;
+}
+.page-box button:hover {
+    background-color: var(--add-to-cart-hover-bg-color);
+}

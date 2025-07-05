@@ -1,0 +1,1 @@
+<?php $siteDomain="makinaelemanlari.com";?>

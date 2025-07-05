@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Renk Input Test Sayfası</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .form-control[type="color"] {
+            width: 80px;
+            height: 40px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+        
+        .color-info {
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .test-results {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .error {
+            background: #ffe6e6;
+            border-color: #ffb3b3;
+            color: #d63384;
+        }
+        
+        .success {
+            color: #198754;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🎨 HTML5 Color Input Test Sayfası</h1>
+        <p>Bu sayfa, renk input'larının çeşitli değerlerle nasıl davrandığını test eder.</p>
+        
+        <div class="form-group">
+            <label>Test 1: Normal Hex Renk</label>
+            <input type="color" class="form-control color-picker" value="#4285f4" data-fallback="#4285f4">
+            <span class="color-info">#4285f4</span>
+        </div>
+        
+        <div class="form-group">
+            <label>Test 2: Geçersiz Hex Renk (sıfırlanacak)</label>
+            <input type="color" class="form-control color-picker" value="#xyz123" data-fallback="#ff0000">
+            <span class="color-info">#xyz123 → #ff0000</span>
+        </div>
+        
+        <div class="form-group">
+            <label>Test 3: 3 Haneli Hex (6 haneli yapılacak)</label>
+            <input type="color" class="form-control color-picker" value="#f00" data-fallback="#ff0000">
+            <span class="color-info">#f00 → #ff0000</span>
+        </div>
+        
+        <div class="form-group">
+            <label>Test 4: # İşaretsiz Hex</label>
+            <input type="color" class="form-control color-picker" value="00ff00" data-fallback="#00ff00">
+            <span class="color-info">00ff00 → #00ff00</span>
+        </div>
+        
+        <div class="form-group">
+            <label>Test 5: Boş Değer</label>
+            <input type="color" class="form-control color-picker" value="" data-fallback="#ffffff">
+            <span class="color-info">(boş) → #ffffff</span>
+        </div>
+        
+        <div class="form-group">
+            <label>Test 6: RGB Renk</label>
+            <input type="color" class="form-control color-picker" value="rgb(255, 165, 0)" data-fallback="#ffa500">
+            <span class="color-info">rgb(255, 165, 0) → #ffa500</span>
+        </div>
+        
+        <button onclick="testAllColors()">🧪 Tüm Renkleri Test Et</button>
+        <button onclick="validateAllInputs()">✅ Renk Validasyonu Çalıştır</button>
+        <button onclick="showColorValues()">👁️ Değerleri Göster</button>
+        
+        <div id="testResults" class="test-results">
+            <strong>📊 Test Sonuçları:</strong>
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Renk normalizasyon fonksiyonu (Theme.php'den kopyalandı)
+        function normalizeColorValue(value) {
+            if (!value) return '#ffffff';
+            
+            value = value.toString().trim().toLowerCase();
+            
+            // CSS renk adlarını hex'e çevir
+            const colorMap = {
+                'white': '#ffffff', 'black': '#000000', 'red': '#ff0000',
+                'green': '#008000', 'blue': '#0000ff', 'yellow': '#ffff00',
+                'cyan': '#00ffff', 'magenta': '#ff00ff', 'silver': '#c0c0c0',
+                'gray': '#808080', 'grey': '#808080', 'orange': '#ffa500',
+                'purple': '#800080', 'navy': '#000080', 'transparent': '#ffffff'
+            };
+            
+            if (colorMap[value]) {
+                return colorMap[value];
+            }
+            
+            // # işareti ekle
+            if (value && !value.startsWith('#')) {
+                value = '#' + value;
+            }
+            
+            // 3 haneli hex'i 6 haneli yap
+            if (/^#[0-9a-fA-F]{3}$/.test(value)) {
+                const r = value.charAt(1);
+                const g = value.charAt(2);
+                const b = value.charAt(3);
+                return '#' + r + r + g + g + b + b;
+            }
+            
+            // RGB/RGBA değerlerini parse et
+            if (value.includes('rgb')) {
+                const matches = value.match(/(\d+)/g);
+                if (matches && matches.length >= 3) {
+                    const r = Math.min(255, parseInt(matches[0]));
+                    const g = Math.min(255, parseInt(matches[1]));
+                    const b = Math.min(255, parseInt(matches[2]));
+                    return '#' + 
+                           r.toString(16).padStart(2, '0') +
+                           g.toString(16).padStart(2, '0') +
+                           b.toString(16).padStart(2, '0');
+                }
+            }
+            
+            return value;
+        }
+        
+        // Hex renk doğrulama
+        function isValidHexColor(hex) {
+            return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
+        }
+        
+        // Güçlü renk değeri validasyonu (Theme.php'den kopyalandı)
+        function validateAllColorInputs() {
+            const results = [];
+            
+            $('.color-picker').each(function() {
+                const $input = $(this);
+                let value = $input.val();
+                let originalValue = value;
+                
+                // Boş değer kontrolü
+                if (!value || value.trim() === '') {
+                    value = '#ffffff';
+                }
+                
+                // Çeşitli renk formatlarını normalize et
+                value = normalizeColorValue(value);
+                
+                // Son kontrol: Geçerli hex değeri mi?
+                if (!isValidHexColor(value)) {
+                    const fallbackColor = $input.data('fallback') || $input.attr('data-default') || '#ffffff';
+                    value = fallbackColor;
+                    results.push(`⚠️ Geçersiz renk değeri düzeltildi: ${originalValue} → ${value}`);
+                }
+                
+                // Değer değiştiyse güncelle
+                if (value !== originalValue) {
+                    $input.val(value);
+                    results.push(`✅ Renk değeri güncellendi: ${originalValue} → ${value}`);
+                } else {
+                    results.push(`✅ Renk değeri geçerli: ${value}`);
+                }
+                
+                try {
+                    const testInput = document.createElement('input');
+                    testInput.type = 'color';
+                    testInput.value = value;
+                    
+                    if (testInput.value !== value) {
+                        const fallbackColor = $input.data('fallback') || '#ffffff';
+                        $input.val(fallbackColor);
+                        results.push(`🔧 Tarayıcı uyumsuzluğu düzeltildi: ${value} → ${fallbackColor}`);
+                    }
+                } catch (e) {
+                    results.push(`❌ Color input validation hatası: ${e}`);
+                }
+            });
+            
+            return results;
+        }
+        
+        // Test fonksiyonları
+        function testAllColors() {
+            const results = validateAllColorInputs();
+            $('#results').html(results.map(r => `<div>${r}</div>`).join(''));
+        }
+        
+        function validateAllInputs() {
+            testAllColors();
+        }
+        
+        function showColorValues() {
+            const values = [];
+            $('.color-picker').each(function() {
+                const label = $(this).closest('.form-group').find('label').text();
+                const value = $(this).val();
+                const fallback = $(this).data('fallback');
+                values.push(`${label}: ${value} (fallback: ${fallback})`);
+            });
+            $('#results').html(values.map(v => `<div>${v}</div>`).join(''));
+        }
+        
+        // Sayfa yüklendiğinde otomatik test
+        $(document).ready(function() {
+            console.log('🎨 Renk Input Test Sayfası Yüklendi');
+            
+            // 1 saniye sonra otomatik test
+            setTimeout(() => {
+                testAllColors();
+            }, 1000);
+            
+            // Her renk değişikliğinde test
+            $('.color-picker').on('change input', function() {
+                setTimeout(() => {
+                    testAllColors();
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

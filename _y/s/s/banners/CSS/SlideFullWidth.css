@@ -1,0 +1,58 @@
+/* --- 'fullwidth' Tipi Slayt Stilleri --- */
+.fullwidth {
+    /* Önizlemede 'box' gibi davranması için geçici genişlik */
+    width: 100%; /* Veya farklı bir önizleme genişliği */
+    border: 1px solid #007bff; /* Farklı olduğunu belirtmek için */
+    box-sizing: border-box;
+    /* Gerçek implementasyonda width: 100%; display: none; olacak */
+    /* Gerçek implementasyonda .active { display: block; } olacak */
+}
+
+/* 'fullwidth' içindeki içerik konteyneri */
+.fullwidth .banner-content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    /* Önizleme için minimum yükseklik */
+    min-height: 250px;
+}
+
+/* 'fullwidth' içindeki görsel (Arkaplan gibi) */
+.fullwidth .banner-image-wrapper {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+.fullwidth .banner-image-wrapper img {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+}
+
+/* 'fullwidth' içindeki içerik kutusu (Overlay) */
+.fullwidth .banner-content-box {
+    position: relative;
+    z-index: 3;
+    padding: 30px;
+    border-radius: 5px;
+    max-width: 70%; /* Genişliği ayarla */
+    text-align: center;
+}
+
+/* 'fullwidth' içindeki metin/buton */
+.fullwidth .bannerTitle { font-size: 2em; margin-bottom: 15px; font-weight: bold; color: inherit; }
+.fullwidth .bannerContent { font-size: 1em; margin-bottom: 25px; line-height: 1.6; color: inherit; }
+.fullwidth .bannerButton button {
+    padding: 10px 25px; font-size: 0.9em; background-color: #fff; color: #333; border: none; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease;
+}
+.fullwidth .bannerButton button:hover { background-color: #eee; color: #000; }
+
+/* 'fullwidth' içindeki sadece görsel durumu */
+.fullwidth.onlyImage .banner-content-box { display: none; }
+.fullwidth.onlyImage .banner-content-container { padding: 0; }
+.fullwidth.onlyImage .bannerButton { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 5; }

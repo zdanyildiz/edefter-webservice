@@ -1,0 +1,13 @@
+.top-menu{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+@media screen and (max-width: 1024px) {
+    #top-contacts>div.top-menu{
+        display: none;
+    }
+}

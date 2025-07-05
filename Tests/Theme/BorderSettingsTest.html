@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sınır & Köşe Ayarları Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-container { max-width: 800px; margin: 0 auto; }
+        .test-result { 
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+            border-radius: 6px; 
+            padding: 15px; 
+            margin: 10px 0; 
+        }
+        .success { border-left: 4px solid #28a745; }
+        .error { border-left: 4px solid #dc3545; }
+        .warning { border-left: 4px solid #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔧 Sınır & Köşe Ayarları Test Sonuçları</h1>
+        
+        <div class="test-result success">
+            <h3>✅ Tamamlanan Düzeltmeler</h3>
+            <ul>
+                <li><strong>updateBorderPreview() fonksiyonu eklendi</strong> - core.js dosyasına</li>
+                <li><strong>Özel event listener eklendi</strong> - Sınır ayarları için hızlı güncelleme</li>
+                <li><strong>sanitizeNumericValue() düzeltildi</strong> - px değerlerini doğru işliyor</li>
+                <li><strong>Form input değerleri düzeltildi</strong> - intval() ile sayısal değerler</li>
+                <li><strong>updatePreview() güncellendi</strong> - updateBorderPreview() çağrısı eklendi</li>
+            </ul>
+        </div>
+        
+        <div class="test-result warning">
+            <h3>⚠️ Test Edilmesi Gerekenler</h3>
+            <ul>
+                <li><strong>Tarayıcıda manuel test:</strong> http://l.erhanozel/_y/s/s/tasarim/Theme.php</li>
+                <li><strong>Genel Görünüm sekmesi</strong> → Sınır & Köşe Ayarları bölümü</li>
+                <li><strong>Önizleme kutuları:</strong> Değerler değiştiğinde canlı güncelleniyor mu?</li>
+                <li><strong>JavaScript konsolu:</strong> Hata mesajları var mı?</li>
+            </ul>
+        </div>
+        
+        <div class="test-result">
+            <h3>📋 Test Senaryoları</h3>
+            <ol>
+                <li><strong>Sınır Genişliği:</strong> 1-10px arasında değiştirin</li>
+                <li><strong>Sınır Rengi:</strong> Farklı renkler seçin</li>
+                <li><strong>Sınır Stili:</strong> Solid, dashed, dotted test edin</li>
+                <li><strong>Köşe Yuvarlaklığı:</strong> 0-50px arasında değiştirin</li>
+                <li><strong>Önizleme Kutuları:</strong> Her değişiklikte güncelleniyor mu?</li>
+            </ol>
+        </div>
+        
+        <div class="test-result error">
+            <h3>🚨 Olası Sorunlar ve Çözümler</h3>
+            <p><strong>Eğer hala çalışmıyorsa:</strong></p>
+            <ul>
+                <li><strong>Browser Cache:</strong> Ctrl+F5 ile sayfayı yenileyin</li>
+                <li><strong>JavaScript Hatası:</strong> F12 → Console'u kontrol edin</li>
+                <li><strong>CSS Çakışması:</strong> Existing CSS rules override olabilir</li>
+                <li><strong>Form Name Mismatch:</strong> Input name'leri kontrol edin</li>
+            </ul>
+        </div>
+        
+        <div class="test-result success">
+            <h3>🎯 Beklenen Sonuç</h3>
+            <p>Sınır & Köşe Ayarları bölümündeki herhangi bir değer değiştiğinde:</p>
+            <ul>
+                <li>✅ Sağdaki önizleme kutuları anında güncellenmeli</li>
+                <li>✅ Her kutu kendi değişkeniyle (border-radius-base, card-border-radius, vb.) güncellenmelidir</li>
+                <li>✅ JavaScript konsol'da hata olmamalı</li>
+                <li>✅ Değerler kaydetme sonrası korunmalı</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

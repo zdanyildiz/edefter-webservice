@@ -1,0 +1,162 @@
+<?php
+
+class AdminSession
+{
+    private string $cookieExpire;
+    private string $cookiePath;
+    private string $cookieDomain;
+    private bool $cookieSecure;
+    private bool $cookieHttpOnly;
+    private string $cookieSameSite;
+    private $key;
+    private Helper $helper;
+
+    public function __construct($key, $expire = 3600, $path = "/", $domain = "", $secure = false, $httponly = false, $samesite = "")
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+
+            //Log::adminWrite("Session->Oturum Başlatılmamış","special");
+
+            if (!array_key_exists("adminCasper", $_SESSION)) {
+
+                //Log::adminWrite("Session->Casper oturumu yok","special");
+
+                $this->addSession("adminCasper", new AdminCasper());
+            }
+            /*else{
+                Log::adminWrite("Session->Casper oturumu var","special");
+            }*/
+        }
+
+        $this->cookieExpire = $expire * 24 * 30;
+        $this->cookiePath = $path;
+        $this->cookieDomain = $domain;
+        $this->cookieSecure = $secure;
+        $this->cookieHttpOnly = $httponly;
+        $this->cookieSameSite = $samesite;
+
+        $this->key = $key;
+        $this->helper = new Helper();
+    }
+
+    public function getAdminCasper()
+    {
+        //Log::adminWrite("Session->Casper alındı","special");
+
+        return $_SESSION["adminCasper"];
+    }
+
+    public function deleteAdminCasper()
+    {
+        //Log::adminWrite("Session->Casper silindi","special");
+
+        unset($_SESSION["adminCasper"]);
+    }
+
+    // Add data to the session
+    public function addSession($key, $value): void
+    {
+        //Log::adminWrite("Session->Oturum oluşturuldu: $key","special");
+
+        $_SESSION[$key] = $value;
+    }
+
+    // Get data from the session
+    public function getSession($key): mixed
+    {
+        return $_SESSION[$key] ?? [];
+    }
+
+    function updateSession(string $key, mixed $value): bool
+    {
+        //Log::adminWrite("Session->Oturum güncelleniyor: $key","special");
+        // Oturum başlatılmamışsa başlatalım
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Anahtar mevcut değilse hata mesajı verip false dönelim
+        if (!array_key_exists($key, $_SESSION)) {
+            Log::adminWrite("Oturum bulunamadı: $key", "special");
+            echo "Oturumda '$key' anahtarı bulunamadı.";
+            return false;
+
+        }
+
+        // Yeni değeri atayalım
+        $_SESSION[$key] = $value;
+
+        //Log::adminWrite("Session->Oturum güncellendi: $key","special");
+        // Oturumdaki değişiklikleri kaydedelim
+        //session_commit();
+
+        return true;
+    }
+
+    // Remove data from the session
+    public function removeSession($key): void
+    {
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
+    }
+
+    // Add or update object in the session
+    public function setObject($key, $object): void
+    {
+        $_SESSION[$key] = serialize($object);
+    }
+
+    // Get object from session
+    public function getObject($key): ?object
+    {
+        return isset($_SESSION[$key]) ? unserialize($_SESSION[$key]) : null;
+    }
+
+    // Add a cookie
+    public function addCookie($cookieName, array $value, $expire = 1): void
+    {
+
+        //gelen expire değerini ay olarak kabul edelim ve bugün itibariyle  x ay ekleyelim.
+        $expire = time() + ($this->cookieExpire * $expire);
+
+        $cookieSettings = [
+            'expires' => $expire,
+            'path' => $this->cookiePath,
+            'domain' => $this->cookieDomain,
+            'secure' => $this->cookieSecure,
+            'httponly' => $this->cookieHttpOnly,
+            'samesite' => $this->cookieSameSite,
+        ];
+        //Log::adminWrite("Cookie Ayarları:" .json_encode($cookieSettings),"error");
+
+        $encodedValue = json_encode($value);
+        $encryptedValue = $this->helper->encrypt($encodedValue, $this->key);
+        //print_r($cookieSettings);
+        //die("$cookieName");
+        setcookie($cookieName, $encryptedValue, $cookieSettings);
+
+    }
+
+    // Get a cookie
+    public function getCookie($cookieName): ?array
+    {
+        if (isset($_COOKIE[$cookieName])) {
+            $decryptedValue = $this->helper->decrypt($_COOKIE[$cookieName], $this->key);
+            return json_decode($decryptedValue, true);
+        }
+        return [];
+    }
+
+    // Delete a cookie
+    public function deleteCookie($cookieName): bool
+    {
+        if (isset($_COOKIE[$cookieName])) {
+            setcookie($cookieName, '', time() - 3600, $this->cookiePath, $this->cookieDomain, $this->cookieSecure, $this->cookieHttpOnly);
+            unset($_COOKIE[$cookieName]);
+        }
+        return true;
+    }
+}

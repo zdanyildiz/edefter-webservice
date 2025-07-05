@@ -1,0 +1,405 @@
+/* Carousel Banner CSS */
+.Carousel {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    height: auto;
+    margin: 0 auto;
+}
+.Carousel .carousel-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0; /* Dış boşluk kaldırıldı, padding ile yönetilecek */
+    /* Yatay kaydırma için temel stiller eklendi */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox için kaydırma çubuğunu gizle */
+    padding: 20px 0; /* İçerik için dikey boşluk */
+}
+
+/* Tüm carousel'lar için kaydırma çubuğunu gizle */
+.Carousel .carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Banner-item genişlikleri - daha güçlü seçiciler */
+.Carousel.single .banner-item {width: 100% !important;}
+.Carousel.double .banner-item {width: 50% !important;}
+.Carousel.triple .banner-item {width: 33.333% !important;}
+.Carousel.quad .banner-item {width: 25% !important;}
+.Carousel.quinary .banner-item {width: 20% !important;}
+
+/* Banner-item ortak stilleri */
+.Carousel .carousel-container .banner-item {
+    flex: 0 0 auto;
+    transition: transform 0.5s ease-in-out;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Banner görselleri için ayarlar */
+.Carousel .carousel-container .banner-item .banner-image {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 8px 0 0;
+}
+
+.Carousel .carousel-container .banner-item .banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* İçerik kutusu stilleri */
+.Carousel .carousel-container .banner-item .content-box {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Başlık stilleri */
+.Carousel .carousel-container .banner-item .content-box .title {
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+/* İçerik metni stilleri */
+.Carousel .carousel-container .banner-item .content-box .content {
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+/* Alıntı görünümü için özel stil */
+.Carousel .carousel-container .banner-item .content-box .content div {
+    position: relative;
+    font-style: italic;
+}
+
+.Carousel .carousel-container .banner-item .content-box .content div::before {
+    content: open-quote;
+    font-size: 20px;
+    color: #ccc;
+    padding-inline-end: 5px;
+}
+
+.Carousel .carousel-container .banner-item .content-box .content div::after {
+    content: close-quote;
+    font-size: 20px;
+    color: #ccc;
+    padding-inline-start: 5px;
+}
+
+/* Link stilleri */
+.Carousel .carousel-container .banner-item a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.Carousel .carousel-container .banner-item a:hover {
+    transform: translateY(-5px);
+}
+
+/* Carousel kontrol düğmeleri - Konteyner boyutuna göre dinamik hizalama */
+.Carousel .carousel-controls {
+    position: absolute;
+    width: 100%; /* Konteynerin tam genişliği */
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px; /* Butonları kenarlardan uzak tutmak için padding */
+    box-sizing: border-box;
+    z-index: 10;
+    pointer-events: none; /* Konteynerin kendisi tıklanamaz */
+}
+
+/* Butonların pozisyonunu flexbox ile yönet, absolute positioning kaldırıldı */
+.Carousel .carousel-controls .prev-carousel, .Carousel .carousel-controls .next-carousel {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer !important;
+    transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+    pointer-events: auto !important; /* Butonlar tıklanabilir */
+    opacity: 0.7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1); /* Hover için temel transform */
+    position: static; /* Olası absolute kurallarını geçersiz kıl */
+}
+
+.Carousel .carousel-controls .prev-carousel:hover, .Carousel .carousel-controls .next-carousel:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1); /* Hover'da sadece büyüt */
+    opacity: 1;
+}
+
+/* Multi-carousel özel stiller - Artık sadece öğe boyutlandırması için kullanılıyor */
+.Carousel .carousel-container.multi-carousel {
+    /* Kaydırma stilleri ana .Carousel .carousel-container'a taşındı */
+}
+
+/* Kaydırma çubuğunu gizle - Chrome, Safari - Genele taşındı */
+
+/* Carousel içindeki banner-item'ların genişliklerini ayarla */
+.Carousel .carousel-container.multi-carousel .banner-item {
+    min-width: 280px; /* minimum genişlik */
+    margin-inline-end: 15px; /* öğeler arası boşluk */
+    flex: 0 0 auto; /* boyut korunsun */
+}
+
+/* Son item için sağ margin kaldır */
+.Carousel .carousel-container.multi-carousel .banner-item:last-child {
+    margin-inline-end: 0;
+}
+
+/* Yorumlar carousel'ı için özel düzenlemeler */
+.banner-type-alt-banner.Carousel .banner-item {
+    margin-bottom: 20px;
+}
+
+/* Responsive tasarım - Tablet */
+@media (max-width: 992px) {
+    .Carousel .carousel-container.double .banner-item,
+    .Carousel .carousel-container.triple .banner-item,
+    .Carousel .carousel-container.quad .banner-item,
+    .Carousel .carousel-container.quinary .banner-item {
+        width: 50% !important;
+    }
+}
+
+/* Responsive tasarım - Mobil */
+@media (max-width: 768px) {
+    .Carousel .carousel-container.double .banner-item,
+    .Carousel .carousel-container.triple .banner-item,
+    .Carousel .carousel-container.quad .banner-item,
+    .Carousel .carousel-container.quinary .banner-item {
+        width: 100% !important;
+    }
+
+    .Carousel .carousel-controls .prev-carousel, .Carousel .carousel-controls .next-carousel {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+
+    .Carousel .carousel-container .banner-item .content-box {
+        padding: 15px;
+    }
+
+    .Carousel .carousel-container .banner-item .content-box .title {
+        font-size: 16px;
+    }
+
+    .Carousel .carousel-container .banner-item .content-box .content {
+        font-size: 13px;
+        -webkit-line-clamp: 3;
+    }
+}
+
+/* Responsive tasarım - Küçük Mobil */
+@media (max-width: 480px) {
+    .Carousel .carousel-controls {
+        padding: 0 10px;
+    }
+
+    .Carousel .carousel-container .banner-item {
+        padding: 5px;
+    }
+
+    .Carousel .carousel-container .banner-item .banner-image {
+        height: 120px;
+    }
+}
+
+
+/* === CAROUSEL MATH FIX ENHANCEMENTS === */
+/* Banner kaydırma problemi için CSS düzeltmeleri */
+
+/* Carousel container için gelişmiş ayarlar */
+.Carousel .carousel-container {
+    /* Scroll davranışını optimize et */
+    scroll-snap-type: x mandatory !important;
+    
+    /* Container'ın genişliğini netleştir */
+    width: 100% !important;
+    max-width: 100% !important;
+    
+    /* Flex ayarlarını optimize et */
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    
+    /* Gap sistemi ile düzenli aralık */
+    gap: 0 !important; /* Gap'i sıfırla, padding ile kontrol et */
+    
+    /* Overflow kontrol */
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    
+    /* Scrollbar gizleme */
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+.Carousel .carousel-container::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* Banner item'ları için optimize flex ayarları */
+.Carousel .carousel-container .banner-item {
+    /* Flex shrink'i engelle - önemli! */
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    
+    /* Box-sizing'i garanti et */
+    box-sizing: border-box !important;
+    
+    /* Scroll snap davranışı */
+    scroll-snap-align: start !important;
+    
+    /* Padding tutarlılığı */
+    padding: 10px !important;
+    
+    /* Minimum genişlik garantisi */
+    min-width: 0 !important;
+}
+
+/* Genişlik sınıfları için daha güçlü seçiciler */
+.Carousel.single .Carousel .carousel-container .banner-item {
+    flex-basis: calc(100% - 20px) !important;
+    width: calc(100% - 20px) !important;
+    max-width: calc(100% - 20px) !important;
+}
+
+.Carousel.double .Carousel .carousel-container .banner-item {
+    flex-basis: calc(50% - 20px) !important;
+    width: calc(50% - 20px) !important;
+    max-width: calc(50% - 20px) !important;
+}
+
+.Carousel.triple .Carousel .carousel-container .banner-item {
+    flex-basis: calc(33.333% - 20px) !important;
+    width: calc(33.333% - 20px) !important;
+    max-width: calc(33.333% - 20px) !important;
+}
+
+.Carousel.quad .Carousel .carousel-container .banner-item {
+    flex-basis: calc(25% - 20px) !important;
+    width: calc(25% - 20px) !important;
+    max-width: calc(25% - 20px) !important;
+}
+
+.Carousel.quinary .Carousel .carousel-container .banner-item {
+    flex-basis: calc(20% - 20px) !important;
+    width: calc(20% - 20px) !important;
+    max-width: calc(20% - 20px) !important;
+}
+
+/* Responsive düzeltmeler */
+@media (max-width: 992px) {
+    .Carousel.quad .Carousel .carousel-container .banner-item,
+    .Carousel.quinary .Carousel .carousel-container .banner-item {
+        flex-basis: calc(33.333% - 20px) !important;
+        width: calc(33.333% - 20px) !important;
+        max-width: calc(33.333% - 20px) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .Carousel.triple .Carousel .carousel-container .banner-item,
+    .Carousel.quad .Carousel .carousel-container .banner-item,
+    .Carousel.quinary .Carousel .carousel-container .banner-item {
+        flex-basis: calc(50% - 20px) !important;
+        width: calc(50% - 20px) !important;
+        max-width: calc(50% - 20px) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .Carousel .Carousel .carousel-container .banner-item {
+        flex-basis: calc(100% - 20px) !important;
+        width: calc(100% - 20px) !important;
+        max-width: calc(100% - 20px) !important;
+    }
+}
+
+/* Banner içeriği için ayarlar */
+.Carousel .carousel-container .banner-item .banner-image {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 200px !important;
+}
+
+.Carousel .carousel-container .banner-item .banner-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* İçerik kutusu için tutarlı boyutlar */
+.Carousel .carousel-container .banner-item .content-box {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    padding: 15px !important;
+    margin: 0 !important;
+}
+
+/* Başlık ve içerik için optimize stilleri */
+.Carousel .carousel-container .banner-item .content-box .title {
+    margin: 0 0 10px 0 !important;
+    font-size: 1.1em !important;
+    font-weight: bold !important;
+    line-height: 1.3 !important;
+}
+
+.Carousel .carousel-container .banner-item .content-box .content {
+    flex-grow: 1 !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    font-size: 0.9em !important;
+}
+
+/* Debug mode - geliştirme sırasında aktif edilebilir */
+/*
+.Carousel .carousel-container {
+    border: 2px solid red !important;
+}
+.Carousel .carousel-container .banner-item {
+    border: 1px solid blue !important;
+}
+.Carousel .carousel-container .banner-item .content-box {
+    border: 1px solid green !important;
+}
+*/

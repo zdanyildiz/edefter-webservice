@@ -1,0 +1,174 @@
+/* ==========================================================================
+   Popup Banner Styles
+   ========================================================================== */
+
+/* Ana Popup Banner Konteyneri */
+#previewPanel > div.popup-banner {
+    /* Boyutlandırma ve Konumlandırma */
+    width: 85%;                     /* Önizleme paneline göre genişlik */
+    max-width: 650px;               /* Maksimum genişlik */
+    min-height: 280px;              /* Minimum yükseklik */
+    margin: 30px auto;              /* Dikeyde boşluk, yatayda ortala */
+
+    position: relative;             /* İçeriğin mutlak konumlandırılması için */
+    text-align: center;             /* İçeriği yatayda ortala */
+    overflow: hidden;               /* Arkaplan resmi ve köşe yuvarlaması için */
+    border-radius: 10px;            /* Popup'lar için yuvarlak köşeler */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2); /* Belirgin bir gölge */
+
+    /* Arkaplan (Resim ve Renk) */
+    /* PHP tarafından dinamik olarak ayarlanacak (örn: style="background-color:...") */
+    background-color: #ffffff;      /* Varsayılan arkaplan rengi */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    /* İçeriği ortalamak için Flexbox */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;        /* Dikeyde ortala */
+    align-items: center;            /* Yatayda ortala */
+    padding: 25px;                  /* Popup içi dolgu */
+    gap: 18px;                      /* Doğrudan alt öğeler arası boşluk */
+}
+
+/* İçerik Ana Konteyneri (Metin, resim, butonları tutar) */
+#previewPanel > div.popup-banner > .banner-content-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 1; /* Arkaplan resminin üzerinde olması için */
+    /* background-color: rgba(0, 0, 0, 0.1); /* Metin okunurluğu için hafif koyu overlay (isteğe bağlı) */
+}
+
+/* İçerik Kutusu (Metin elemanları için, gerekirse belirgin bir arkaplan sağlar) */
+#previewPanel > div.popup-banner .banner-content-box {
+    /* PHP tarafından dinamik olarak ayarlanacak (örn: style="background-color:...") */
+    padding: 18px 22px;
+    border-radius: 6px;
+    /* background-color: rgba(255, 255, 255, 0.9); /* Varsayılan, PHP tarafından üzerine yazılabilir */
+    text-align: center;
+    max-width: 95%;
+    /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Kutu için hafif gölge */
+}
+
+/* Başlık Stili */
+#previewPanel > div.popup-banner .bannerTitle {
+    /* PHP tarafından dinamik olarak ayarlanacak (örn: style="color:...; font-size:...;") */
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* color: #2c3e50; /* Varsayılan */
+    /* font-size: 24px; /* Varsayılan */
+}
+
+/* İçerik Metni Stili */
+#previewPanel > div.popup-banner .bannerContent {
+    /* PHP tarafından dinamik olarak ayarlanacak (örn: style="color:...; font-size:...;") */
+    margin-bottom: 18px;
+    line-height: 1.65;
+    /* color: #34495e; /* Varsayılan */
+    /* font-size: 16px; /* Varsayılan */
+}
+
+/* Buton Stili */
+#previewPanel > div.popup-banner .bannerButton button {
+    /* PHP tarafından dinamik olarak ayarlanacak (örn: style="background-color:...; color:...; font-size:...;") */
+    display: inline-block;
+    padding: 12px 24px;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    user-select: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s;
+    /* background-color: #3498db; /* Varsayılan */
+    /* color: white; /* Varsayılan */
+    /* font-size: 15px; /* Varsayılan */
+}
+
+/* Buton Hover Etkisi (PHP hover renklerini sağlar, bu CSS geçişi yumuşatır) */
+#previewPanel > div.popup-banner .bannerButton button:hover {
+    opacity: 0.85; /* PHP'den gelen hover renkleri yoksa basit bir etki */
+}
+
+/* "onlyImage" (Sadece Resim) varyantı için stiller */
+#previewPanel > div.popup-banner.onlyImage {
+    padding: 0; /* Sadece resim varsa dolguyu kaldır */
+    background-color: transparent; /* Resim içeriğin kendisi olacak */
+    box-shadow: none; /* Sadece resim varsa gölge gerekmeyebilir */
+}
+
+#previewPanel > div.popup-banner.onlyImage .banner-content-container {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+#previewPanel > div.popup-banner.onlyImage .banner-content-box {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+#previewPanel > div.popup-banner.onlyImage img[id^="bannerImage-"] {
+    display: block;
+    width: 100%; /* Popup genişliğine tam uysun */
+    height: 100%; /* Popup yüksekliğine tam uysun */
+    object-fit: cover; /* Resmi kırparak alanı doldurur, aspect ratio'yu korur */
+    border-radius: 10px; /* Ana popup konteynerinin köşe yuvarlaklığıyla eşleşsin */
+}
+
+/* "onlyImage" varyantında buton konumlandırması */
+#previewPanel > div.popup-banner.onlyImage .bannerButton {
+    position: absolute;
+    z-index: 2; /* Resmin üzerinde */
+    /* Varsayılan konum (örn: alt-orta) */
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* "onlyImage" için özel buton konumları (location-[X] sınıflarına göre) */
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-0 { /* Varsayılan (Alt Orta gibi davranabilir) */
+    bottom: 15px; left: 50%; transform: translateX(-50%);
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-1 { /* Üst Sol */
+    top: 15px; left: 15px; transform: none;
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-2 { /* Üst Orta */
+    top: 15px; left: 50%; transform: translateX(-50%);
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-3 { /* Üst Sağ */
+    top: 15px; right: 15px; left: auto; transform: none;
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-4 { /* Orta Sol */
+    top: 50%; left: 15px; transform: translateY(-50%);
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-5 { /* Orta */
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-6 { /* Orta Sağ */
+    top: 50%; right: 15px; left: auto; transform: translateY(-50%);
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-7 { /* Alt Sol */
+    bottom: 15px; left: 15px; transform: none;
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-8 { /* Alt Orta */
+    bottom: 15px; left: 50%; transform: translateX(-50%);
+}
+#previewPanel > div.popup-banner.onlyImage .bannerButton.location-9 { /* Alt Sağ */
+    bottom: 15px; right: 15px; left: auto; transform: none;
+}
+
+
+/* Banner etiketini (bannerLabel) popup'larda gizle (genellikle gereksiz) */
+#previewPanel > div.popup-banner > .bannerLabel {
+    display: none;
+}
+
+

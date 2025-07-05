@@ -1,0 +1,28 @@
+.CancellationRefundExchangeResponse-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--content-bg-color);
+    max-width: var(--desktop-max-width);
+}
+
+.CancellationRefundExchangeResponse-form-container {
+    width: 48%; /* Form genişliği */
+}
+
+.CancellationRefundExchangeResponse-content-container {
+    width: 48%; /* İçerik genişliği */
+    line-height: 21px;
+}
+
+@media (max-width: 768px) {
+    .CancellationRefundExchangeResponse-container {
+        flex-direction: column;
+    }
+
+    .CancellationRefundExchangeResponse-form-container,
+    .CancellationRefundExchangeResponse-content-container {
+        width: 100%; /* Mobilde tam genişlik */
+        margin-bottom: 20px; /* Alt boşluk */
+    }
+}

@@ -1,0 +1,75 @@
+.BgImageCenterText {
+    position: relative; /* Mutlak konumlandırma için */
+    overflow: hidden; /* Taşmaları engelle */
+    box-sizing: border-box;
+    /* !!! KART YÜKSEKLİĞİ: Sabit yükseklik gereklidir */
+    height: 300px; /* Örnek yükseklik, içeriğe göre ayarlayın */
+    border-radius: 8px; /* Opsiyonel: Köşe yuvarlaklığı */
+    background-color: #eee; /* Görsel yüklenene kadar */
+    /* Sıfırlamalar */
+    display: block; min-height: initial; cursor: default; text-align: left;
+}
+
+/* Görseli Arkaplan Gibi Yap */
+.BgImageCenterText .banner-image-wrapper {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+    /* Sıfırlamalar */
+    border-radius:0; border:none; padding:0; background-color:transparent;
+    box-shadow:none; overflow:hidden; flex-shrink:0; flex:none;
+    max-width:none; margin:0; box-sizing:border-box;
+}
+.BgImageCenterText .banner-image-wrapper img {
+    display: block; width: 100%; height: 100%; object-fit: cover; /* Resmi kapla */
+    /* Sıfırlamalar */
+    border-radius:0; transform:none; transition:none;
+}
+
+/* İçerik Konteyneri - Hizalama ve Overlay için */
+.BgImageCenterText .banner-content-container {
+    position: relative; z-index: 3; height: 100%;
+    display: flex; align-items: center; justify-content: center; /* İçeriği ortala */
+    padding: 20px; box-sizing: border-box;
+    /* Sıfırlamalar */
+    flex-direction: initial; width: 100%; flex-wrap: nowrap; gap: 0; margin: 0;
+    max-width: none; overflow: visible;
+}
+
+/* Overlay Katmanı */
+.BgImageCenterText .banner-content-container::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah */
+    z-index: -1; /* İçeriğin arkasında */
+    border-radius: inherit; /* Ana yuvarlaklığı al */
+}
+
+/* İçerik Kutusu - Metin Hizalama */
+.BgImageCenterText .banner-content-box {
+    /* Sıfırlamalar */
+    position: static; width: 100%; height: auto; background-color: transparent;
+    padding: 0; opacity: 1; visibility: visible; transform: none; transition: none;
+    z-index: 2; flex: none; max-width: 100%;
+    /* Hizalama */
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    color: #ffffff; /* Beyaz metin */
+}
+
+/* Başlık */
+.BgImageCenterText .bannerTitle {
+    font-size: 1.6em; font-weight: 600; color: inherit; margin-bottom: 15px;
+    /* Sıfırlama */ text-transform: none; letter-spacing: 0; line-height: 1.3;
+}
+
+/* İçerik */
+.BgImageCenterText .bannerContent {
+    font-size: 1em; color: inherit; line-height: 1.5; margin-bottom: 20px;
+    max-width: 90%; /* Genişliği sınırla */
+}
+
+/* Buton */
+.BgImageCenterText .bannerButton { display: inline-block; /* Göster */ }
+.BgImageCenterText .bannerButton button {
+    padding: 10px 25px; border: 1px solid #fff; background-color: rgba(255, 255, 255, 0.2);
+    color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9em;
+    cursor: pointer; transition: background-color 0.3s ease; border-radius: 4px;
+}
+.BgImageCenterText .bannerButton button:hover { background-color: rgba(255, 255, 255, 0.4); }

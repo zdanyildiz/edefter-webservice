@@ -1,0 +1,175 @@
+{
+  "project_info": {
+    "name": "yeni.globalpozitif.com.tr",
+    "type": "PHP MVC",
+    "database": "MySQL",
+    "updated": "2025-06-15"
+  },
+  
+  "database": {
+    "connection": {
+      "host": "localhost",
+      "username": "root", 
+      "password": "Global2019*",
+      "database": "yeni.globalpozitif.com.tr"
+    },
+    "common_queries": {
+      "get_banner_layouts": "SELECT * FROM banner_layouts ORDER BY id",
+      "get_banners_by_type": "SELECT * FROM banners WHERE type_id = ?",
+      "check_table_structure": "DESCRIBE table_name"
+    }
+  },
+
+  "functions": {
+    "banner_system": {
+      "BannerManager": {
+        "getInstance()": "Singleton instance döndürür",
+        "initialize(array $bannerInfo, Casper $casper)": "Banner Manager'ı başlatır",
+        "renderAllBannerTypes(?int $pageId, ?int $categoryId)": "Tüm banner tiplerini render eder",
+        "getSliderBanners(?int $pageId, ?int $categoryId)": "Slider bannerları döndürür",
+        "getTopBanners(?int $pageId, ?int $categoryId)": "Tepe bannerları döndürür",
+        "clearCache()": "Tüm banner cache'ini temizler",
+        "onSiteConfigChange()": "Site config değiştiğinde cache'i temizler"
+      },
+      "BannerController": {
+        "renderBannersByType(int $typeId, ?int $pageId, ?int $categoryId)": "Belirli tip banner'ları render eder",
+        "getBannersByType(int $typeId, ?int $pageId, ?int $categoryId)": "Tip filtrelemesi yapar",
+        "generateBannerCSS(array $banners)": "Banner'lar için CSS oluşturur"
+      }
+    },
+    
+    "core_system": {
+      "Config": {
+        "includeClass(string $className)": "Sınıf dosyasını include eder",
+        "loadView(string $viewName, array $data)": "View dosyasını yükler"
+      },
+      "Casper": {
+        "getBannerCache()": "Banner cache'ini döndürür",
+        "setBannerCache(array $cache)": "Banner cache'ini set eder",
+        "clearBannerCache()": "Banner cache'ini temizler",
+        "getSiteConfig()": "Site config döndürür"
+      },
+      "Database": {
+        "select(string $query, array $params)": "SELECT sorgusu çalıştırır",
+        "query(string $sql)": "Genel SQL sorgusu çalıştırır"
+      }
+    }
+  },
+
+  "test_templates": {
+    "database_connection_test": {
+      "file": "Tests/Database/connection_test.php",
+      "purpose": "Veritabanı bağlantısını test eder"
+    },
+    "banner_render_test": {
+      "file": "Tests/Banners/render_test.php", 
+      "purpose": "Banner render işlemini test eder"
+    },
+    "cache_test": {
+      "file": "Tests/Banners/cache_test.php",
+      "purpose": "Cache sistemini test eder"
+    }
+  },
+
+  "common_issues": {
+    "class_not_found": {
+      "solution": "Manual include kontrolü veya Config::includeClass kullan",
+      "code": "if (!class_exists('ClassName')) { require_once 'path/to/Class.php'; }"
+    },
+    "display_rules_error": {
+      "solution": "matchesPageAndCategory metodunu kullan",
+      "note": "display_rules yerine doğrudan page_id/category_id kullan"
+    }
+  },
+
+  "development_workflow": {
+    "steps": [
+      "1. Tests/Temp/ altında geçici test dosyası oluştur",
+      "2. Syntax kontrolü yap: php -l dosya.php", 
+      "3. İşlev testini yap",
+      "4. Gerçek koda entegre et",
+      "5. Dokümantasyonu güncelle"
+    ]
+  },
+
+  "development_environment": {
+    "os": "Windows 11",
+    "web_server": "IIS (Internet Information Services)",
+    "php_version": "PHP 8.3.4", 
+    "ide": "Visual Studio Code",
+    "shell": "PowerShell",
+    "project_path": "c:\\Users\\zdany\\PhpstormProjects\\yeni.globalpozitif.com.tr",
+    "terminal_format": {
+      "correct": "cd \"c:\\Users\\zdany\\PhpstormProjects\\yeni.globalpozitif.com.tr\"; php Tests\\TestRunner.php",
+      "incorrect": "cd \"c:\\Users\\zdany\\PhpstormProjects\\yeni.globalpozitif.com.tr\" && php Tests\\TestRunner.php"
+    },
+    "vscode_extensions": {
+      "installed": [
+        "josee9988.minifyall",
+        "mgmcdermott.vscode-language-babel"
+      ],
+      "recommended": [
+        "bmewburn.vscode-intelephense-client",
+        "esbenp.prettier-vscode", 
+        "ecmel.vscode-html-css",
+        "pranaygp.vscode-css-peek"
+      ]
+    },
+    "minify_workflow": {
+      "method": "IDE Extension (MinifyAll)",
+      "auto_minify": false,
+      "commands": [
+        "Right click -> Minify this document",
+        "Ctrl+Shift+P -> MinifyAll: Minify this document"
+      ],
+      "settings": {
+        "removeComments": true,
+        "colorOptimizations": true,
+        "mergeMediaQueries": true,
+        "discardEmpty": true
+      }
+    }
+  },
+
+  "file_structure": {
+    "app": {
+      "controllers": {
+        "BannerController.php": "Banner ile ilgili işlemleri yönetir",
+        "HomePageController.php": "Ana sayfa işlemlerini yönetir"
+      },
+      "core": {
+        "BannerManager.php": "Banner yönetim işlemleri için",
+        "Config.php": "Sistem yapılandırma ayarları için",
+        "Casper.php": "Genel amaçlı yardımcı sınıf"
+      },
+      "database": {
+        "database.sql": "Ana veritabanı yapısı için",
+        "banners.sql": "Bannerlar için gerekli tablolar"
+      },
+      "model": {
+        "BannerModel.php": "Banner verileri ile ilgili işlemler",
+        "SiteConfig.php": "Site yapılandırma verileri ile ilgili işlemler"
+      },
+      "view": {
+        "banner_view.php": "Bannerların görüntülenmesi için view dosyası",
+        "homepage_view.php": "Ana sayfanın görüntülenmesi için view dosyası"
+      }
+    },
+    "public": {
+      "css": {
+        "slider.css": "Slider için stil dosyası",
+        "orta-banner.css": "Orta boy bannerlar için stil dosyası",
+        "alt-banner.css": "Alt bannerlar için stil dosyası",
+        "tepe-banner.css": "Üstteki büyük banner için stil dosyası"
+      },
+      "js": {
+        "app.js": "Uygulama genelinde kullanılan JavaScript dosyası",
+        "banner.js": "Banner ile ilgili etkileşimler için JavaScript dosyası"
+      },
+      "images": {
+        "logo.png": "Site logosu",
+        "banner-placeholder.png": "Bannerlar için yer tutucu görsel"
+      }
+    }
+  }
+}
