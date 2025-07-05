@@ -1,0 +1,223 @@
+{
+    "comparison_date": "2025-07-05 19:50:02",
+    "db1_name": "e-defter.globalpozitif.com.tr",
+    "db2_name": "johwears.globalpozitif.com.tr",
+    "tables_only_in_db1": {
+        "14": "banner_groups_backup_20250705_194849",
+        "16": "banner_layouts_backup_20250705_194849",
+        "18": "banner_styles_backup_20250705_194849",
+        "23": "chatbot_packages",
+        "24": "chatbot_requests_log",
+        "87": "user_chatbot_usage",
+        "88": "user_consent",
+        "89": "user_sessions",
+        "90": "user_sessions_log"
+    },
+    "tables_only_in_db2": [],
+    "common_tables": {
+        "0": "ad_conversion_code",
+        "1": "ayaranaliz",
+        "2": "ayarbanka",
+        "3": "ayarfirma",
+        "4": "ayarfiyat",
+        "5": "ayargaleri",
+        "6": "ayargalerislayt",
+        "7": "ayargenel",
+        "8": "ayarlogo",
+        "9": "ayarsatisdonusumkodu",
+        "10": "ayarsosyalmedya",
+        "11": "bankaeft",
+        "12": "banner_display_rules",
+        "13": "banner_groups",
+        "15": "banner_layouts",
+        "17": "banner_styles",
+        "19": "banner_types",
+        "20": "banners",
+        "21": "cart_conversion_code",
+        "22": "chat_completion",
+        "25": "dil",
+        "26": "dilbirlestir",
+        "27": "dillistesi",
+        "28": "dilsabitleri",
+        "29": "dinamik_fiyatlandirma",
+        "30": "dosya",
+        "31": "formiletisim",
+        "32": "google_merchant_categories",
+        "33": "iptaliadedegisim",
+        "34": "kampanya_kombinasyonlari",
+        "35": "kampanya_kurallari",
+        "36": "kampanya_miktar_indirim",
+        "37": "kampanya_urunleri",
+        "38": "kampanyalar",
+        "39": "kargo",
+        "40": "kargobolgeleri",
+        "41": "kargodesiayar",
+        "42": "kargosehirler",
+        "43": "kargoucret",
+        "44": "kategori",
+        "45": "kuponlar",
+        "46": "language_category_mapping",
+        "47": "language_copy_jobs",
+        "48": "language_page_mapping",
+        "49": "menu",
+        "50": "newsletter",
+        "51": "odemeyontemi",
+        "52": "payment_provider_settings",
+        "53": "payment_providers",
+        "54": "product_transfer",
+        "55": "puan_islemleri",
+        "56": "resim",
+        "57": "resimgaleri",
+        "58": "resimgaleriliste",
+        "59": "resimklasor",
+        "60": "sayfa",
+        "61": "sayfalistedosya",
+        "62": "sayfalistegaleri",
+        "63": "sayfalistekategori",
+        "64": "sayfalisteresim",
+        "65": "sayfalistevideo",
+        "66": "sayfapaylasim",
+        "67": "sayfatip",
+        "68": "seo",
+        "69": "site_config_versions",
+        "70": "site_settings",
+        "71": "sorusor",
+        "72": "tag_manager",
+        "73": "teklif",
+        "74": "urun_arama",
+        "75": "urunekozellikler",
+        "76": "urungrup",
+        "77": "uruniliski",
+        "78": "urunmarka",
+        "79": "urunmiktarbirim",
+        "80": "urunmiktarbirimceviri",
+        "81": "urunozellikleri",
+        "82": "urunparabirim",
+        "83": "urunvaryant",
+        "84": "urunvaryant_translate",
+        "85": "urunvaryantgrup",
+        "86": "urunvaryantgrup_translate",
+        "91": "uye",
+        "92": "uye_puanlari",
+        "93": "uyeadres",
+        "94": "uyebayigrup",
+        "95": "uyebayiozellikleri",
+        "96": "uyesepet",
+        "97": "uyesepetdurum",
+        "98": "uyesiparis",
+        "99": "uyesiparisdurum",
+        "100": "uyesiparisdurumceviri",
+        "101": "variant_properties",
+        "102": "videos",
+        "103": "yerilce",
+        "104": "yermahalle",
+        "105": "yersehir",
+        "106": "yersemt",
+        "107": "yerulke",
+        "108": "yoneticiler",
+        "109": "yoneticilerlog",
+        "110": "yoneticilerlogeylemlistesi",
+        "111": "yoneticilerlogislemler",
+        "112": "yoneticilerlogislemlistesi",
+        "113": "yorum",
+        "114": "ziyaretcisayfa"
+    },
+    "column_differences": {
+        "banner_groups": [
+            {
+                "type": "missing_in_db2",
+                "column": "bannerDuration",
+                "db1_info": {
+                    "type": "int",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                },
+                "db2_info": null
+            }
+        ],
+        "language_category_mapping": [
+            {
+                "type": "missing_in_db1",
+                "column": "translation_status",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "enum('pending','completed','failed')",
+                    "null": "NO",
+                    "key": "",
+                    "default": "pending",
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "last_attempt_date",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "datetime",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "error_message",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "text",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            }
+        ],
+        "language_page_mapping": [
+            {
+                "type": "missing_in_db1",
+                "column": "translation_status",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "enum('pending','completed','failed')",
+                    "null": "NO",
+                    "key": "",
+                    "default": "pending",
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "last_attempt_date",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "datetime",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            },
+            {
+                "type": "missing_in_db1",
+                "column": "error_message",
+                "db1_info": null,
+                "db2_info": {
+                    "type": "text",
+                    "null": "YES",
+                    "key": "",
+                    "default": null,
+                    "extra": ""
+                }
+            }
+        ]
+    },
+    "statistics": {
+        "db1_table_count": 115,
+        "db2_table_count": 106,
+        "common_table_count": 106,
+        "total_differences": 7
+    }
+}

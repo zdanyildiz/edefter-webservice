@@ -1,0 +1,82 @@
+📊 VERİTABANI KARŞILAŞTIRMA RAPORU
+================================
+
+📅 Tarih: 2025-07-05 18:57:29
+🏢 DB1: e-defter.globalpozitif.com.tr
+🏢 DB2: johwears.globalpozitif.com.tr
+
+📈 İSTATİSTİKLER
+---------------
+DB1 Tablo Sayısı: 110
+DB2 Tablo Sayısı: 106
+Ortak Tablo Sayısı: 104
+Toplam Sütun Farkı: 30
+
+⚠️  SADECE DB1'DE OLAN TABLOLAR
+------------------------------
+• chatbot_packages
+• chatbot_requests_log
+• user_chatbot_usage
+• user_consent
+• user_sessions
+• user_sessions_log
+
+⚠️  SADECE DB2'DE OLAN TABLOLAR
+------------------------------
+• language_copy_jobs
+• site_config_versions
+
+🔍 SÜTUN FARKLILIKLARI
+----------------------
+
+📋 Tablo: banner_groups
+---------------------
+  ❌ Sütun DB2'de yok: bannerDuration (int)
+  ➕ Sütun DB1'de yok: group_title (varchar(100))
+  ➕ Sütun DB1'de yok: group_desc (varchar(255))
+  ➕ Sütun DB1'de yok: group_kind (varchar(100))
+  ➕ Sütun DB1'de yok: group_view (varchar(20))
+  ➕ Sütun DB1'de yok: style_class (varchar(50))
+  ➕ Sütun DB1'de yok: background_color (varchar(50))
+  ➕ Sütun DB1'de yok: group_title_color (varchar(50))
+  ➕ Sütun DB1'de yok: group_desc_color (varchar(50))
+  ➕ Sütun DB1'de yok: group_full_size (tinyint)
+  ➕ Sütun DB1'de yok: banner_duration (int)
+  ➕ Sütun DB1'de yok: banner_full_size (tinyint)
+
+📋 Tablo: banner_layouts
+----------------------
+  ➕ Sütun DB1'de yok: layout_group (varchar(50))
+  ➕ Sütun DB1'de yok: layout_view (varchar(20))
+
+📋 Tablo: banner_styles
+---------------------
+  ➕ Sütun DB1'de yok: banner_height_size (int)
+  ➕ Sütun DB1'de yok: content_box_bg_color (varchar(25))
+  ➕ Sütun DB1'de yok: show_button (tinyint(1))
+  ➕ Sütun DB1'de yok: button_hover_background (varchar(25))
+  ➕ Sütun DB1'de yok: button_hover_color (varchar(25))
+  🔄 Sütun farkı: background_color
+     • type: 'varchar(20)' → 'varchar(25)'
+  🔄 Sütun farkı: title_color
+     • type: 'varchar(20)' → 'varchar(25)'
+  🔄 Sütun farkı: content_color
+     • type: 'varchar(20)' → 'varchar(25)'
+  🔄 Sütun farkı: button_background
+     • type: 'varchar(20)' → 'varchar(25)'
+  🔄 Sütun farkı: button_color
+     • type: 'varchar(20)' → 'varchar(25)'
+
+📋 Tablo: language_category_mapping
+---------------------------------
+  ➕ Sütun DB1'de yok: translation_status (enum('pending','completed','failed'))
+  ➕ Sütun DB1'de yok: last_attempt_date (datetime)
+  ➕ Sütun DB1'de yok: error_message (text)
+
+📋 Tablo: language_page_mapping
+-----------------------------
+  ➕ Sütun DB1'de yok: translation_status (enum('pending','completed','failed'))
+  ➕ Sütun DB1'de yok: last_attempt_date (datetime)
+  ➕ Sütun DB1'de yok: error_message (text)
+
+✅ Rapor tamamlandı.

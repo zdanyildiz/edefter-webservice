@@ -1,0 +1,339 @@
+{
+    "sync_date": "2025-07-05 19:48:49",
+    "db1_name": "e-defter.globalpozitif.com.tr",
+    "db2_name": "johwears.globalpozitif.com.tr",
+    "tables_to_create": [
+        "language_copy_jobs",
+        "site_config_versions"
+    ],
+    "columns_to_add": [
+        {
+            "table": "banner_groups",
+            "column": "group_title",
+            "definition": {
+                "type": "varchar(100)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "group_desc",
+            "definition": {
+                "type": "varchar(255)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "group_kind",
+            "definition": {
+                "type": "varchar(100)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "group_view",
+            "definition": {
+                "type": "varchar(20)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "style_class",
+            "definition": {
+                "type": "varchar(50)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "background_color",
+            "definition": {
+                "type": "varchar(50)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "group_title_color",
+            "definition": {
+                "type": "varchar(50)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "group_desc_color",
+            "definition": {
+                "type": "varchar(50)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "group_full_size",
+            "definition": {
+                "type": "tinyint",
+                "null": "YES",
+                "key": "",
+                "default": "1",
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "banner_duration",
+            "definition": {
+                "type": "int",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_groups",
+            "column": "banner_full_size",
+            "definition": {
+                "type": "tinyint",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_layouts",
+            "column": "layout_group",
+            "definition": {
+                "type": "varchar(50)",
+                "null": "NO",
+                "key": "",
+                "default": "text_and_image",
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_layouts",
+            "column": "layout_view",
+            "definition": {
+                "type": "varchar(20)",
+                "null": "NO",
+                "key": "",
+                "default": "single",
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "banner_height_size",
+            "definition": {
+                "type": "int",
+                "null": "NO",
+                "key": "",
+                "default": "0",
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "content_box_bg_color",
+            "definition": {
+                "type": "varchar(25)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "show_button",
+            "definition": {
+                "type": "tinyint(1)",
+                "null": "NO",
+                "key": "",
+                "default": "1",
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "button_hover_background",
+            "definition": {
+                "type": "varchar(25)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "button_hover_color",
+            "definition": {
+                "type": "varchar(25)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        }
+    ],
+    "columns_to_modify": [
+        {
+            "table": "banner_styles",
+            "column": "background_color",
+            "old_definition": {
+                "type": "varchar(20)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            "new_definition": {
+                "type": "varchar(25)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "title_color",
+            "old_definition": {
+                "type": "varchar(20)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            "new_definition": {
+                "type": "varchar(25)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "content_color",
+            "old_definition": {
+                "type": "varchar(20)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            "new_definition": {
+                "type": "varchar(25)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "button_background",
+            "old_definition": {
+                "type": "varchar(20)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            "new_definition": {
+                "type": "varchar(25)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        },
+        {
+            "table": "banner_styles",
+            "column": "button_color",
+            "old_definition": {
+                "type": "varchar(20)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            "new_definition": {
+                "type": "varchar(25)",
+                "null": "YES",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        }
+    ],
+    "migration_queries": [
+        "CREATE TABLE `language_copy_jobs` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `source_language_id` int NOT NULL,\n  `target_language_id` int NOT NULL,\n  `translate_with_ai` tinyint(1) NOT NULL DEFAULT '0',\n  `status` enum('pending','processing','completed','failed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',\n  `error_message` text COLLATE utf8mb4_unicode_ci,\n  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `source_language_id` (`source_language_id`),\n  KEY `target_language_id` (`target_language_id`),\n  CONSTRAINT `language_copy_jobs_ibfk_1` FOREIGN KEY (`source_language_id`) REFERENCES `dil` (`dilid`),\n  CONSTRAINT `language_copy_jobs_ibfk_2` FOREIGN KEY (`target_language_id`) REFERENCES `dil` (`dilid`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
+        "CREATE TABLE `site_config_versions` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `language_id` int NOT NULL,\n  `version` int NOT NULL DEFAULT '1',\n  `last_updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `unique_language_version` (`language_id`)\n) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `group_title` varchar(100) NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `group_desc` varchar(255) NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `group_kind` varchar(100) NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `group_view` varchar(20) NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `style_class` varchar(50) NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `background_color` varchar(50) NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `group_title_color` varchar(50) NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `group_desc_color` varchar(50) NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `group_full_size` tinyint NULL DEFAULT '1';",
+        "ALTER TABLE `banner_groups` ADD COLUMN `banner_duration` int NULL;",
+        "ALTER TABLE `banner_groups` ADD COLUMN `banner_full_size` tinyint NULL;",
+        "ALTER TABLE `banner_layouts` ADD COLUMN `layout_group` varchar(50) NOT NULL DEFAULT 'text_and_image';",
+        "ALTER TABLE `banner_layouts` ADD COLUMN `layout_view` varchar(20) NOT NULL DEFAULT 'single';",
+        "ALTER TABLE `banner_styles` ADD COLUMN `banner_height_size` int NOT NULL DEFAULT '0';",
+        "ALTER TABLE `banner_styles` ADD COLUMN `content_box_bg_color` varchar(25) NULL;",
+        "ALTER TABLE `banner_styles` ADD COLUMN `show_button` tinyint(1) NOT NULL DEFAULT '1';",
+        "ALTER TABLE `banner_styles` ADD COLUMN `button_hover_background` varchar(25) NULL;",
+        "ALTER TABLE `banner_styles` ADD COLUMN `button_hover_color` varchar(25) NULL;",
+        "ALTER TABLE `banner_styles` MODIFY COLUMN `background_color` varchar(25) NULL;",
+        "ALTER TABLE `banner_styles` MODIFY COLUMN `title_color` varchar(25) NULL;",
+        "ALTER TABLE `banner_styles` MODIFY COLUMN `content_color` varchar(25) NULL;",
+        "ALTER TABLE `banner_styles` MODIFY COLUMN `button_background` varchar(25) NULL;",
+        "ALTER TABLE `banner_styles` MODIFY COLUMN `button_color` varchar(25) NULL;"
+    ],
+    "backup_queries": [
+        "CREATE TABLE IF NOT EXISTS `banner_groups_backup_20250705_194849` AS SELECT * FROM `banner_groups`;",
+        "CREATE TABLE IF NOT EXISTS `banner_layouts_backup_20250705_194849` AS SELECT * FROM `banner_layouts`;",
+        "CREATE TABLE IF NOT EXISTS `banner_styles_backup_20250705_194849` AS SELECT * FROM `banner_styles`;"
+    ],
+    "statistics": {
+        "tables_created": 2,
+        "columns_added": 18,
+        "columns_modified": 5,
+        "total_queries": 25
+    }
+}

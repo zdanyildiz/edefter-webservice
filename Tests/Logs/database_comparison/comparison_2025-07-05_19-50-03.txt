@@ -1,0 +1,46 @@
+📊 VERİTABANI KARŞILAŞTIRMA RAPORU
+================================
+
+📅 Tarih: 2025-07-05 19:50:02
+🏢 DB1: e-defter.globalpozitif.com.tr
+🏢 DB2: johwears.globalpozitif.com.tr
+
+📈 İSTATİSTİKLER
+---------------
+DB1 Tablo Sayısı: 115
+DB2 Tablo Sayısı: 106
+Ortak Tablo Sayısı: 106
+Toplam Sütun Farkı: 7
+
+⚠️  SADECE DB1'DE OLAN TABLOLAR
+------------------------------
+• banner_groups_backup_20250705_194849
+• banner_layouts_backup_20250705_194849
+• banner_styles_backup_20250705_194849
+• chatbot_packages
+• chatbot_requests_log
+• user_chatbot_usage
+• user_consent
+• user_sessions
+• user_sessions_log
+
+🔍 SÜTUN FARKLILIKLARI
+----------------------
+
+📋 Tablo: banner_groups
+---------------------
+  ❌ Sütun DB2'de yok: bannerDuration (int)
+
+📋 Tablo: language_category_mapping
+---------------------------------
+  ➕ Sütun DB1'de yok: translation_status (enum('pending','completed','failed'))
+  ➕ Sütun DB1'de yok: last_attempt_date (datetime)
+  ➕ Sütun DB1'de yok: error_message (text)
+
+📋 Tablo: language_page_mapping
+-----------------------------
+  ➕ Sütun DB1'de yok: translation_status (enum('pending','completed','failed'))
+  ➕ Sütun DB1'de yok: last_attempt_date (datetime)
+  ➕ Sütun DB1'de yok: error_message (text)
+
+✅ Rapor tamamlandı.

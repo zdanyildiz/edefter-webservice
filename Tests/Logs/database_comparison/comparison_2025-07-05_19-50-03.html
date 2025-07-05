@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='tr'>
+<head>
+<meta charset='UTF-8'>
+<title>Veritabanı Karşılaştırma Raporu</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+.header { background: #f4f4f4; padding: 20px; border-radius: 5px; }
+.stats { display: flex; gap: 20px; margin: 20px 0; }
+.stat-box { background: #e9f4ff; padding: 15px; border-radius: 5px; text-align: center; }
+.table-section { margin: 20px 0; }
+.table-list { background: #fff; border: 1px solid #ddd; padding: 15px; }
+.difference { background: #fff3cd; border: 1px solid #ffeaa7; margin: 10px 0; padding: 15px; }
+.missing-db2 { color: #d63031; }
+.missing-db1 { color: #00b894; }
+.column-diff { color: #e17055; }
+</style>
+</head>
+<body>
+<div class='header'>
+<h1>📊 Veritabanı Karşılaştırma Raporu</h1>
+<p><strong>Tarih:</strong> 2025-07-05 19:50:02</p>
+<p><strong>DB1:</strong> e-defter.globalpozitif.com.tr</p>
+<p><strong>DB2:</strong> johwears.globalpozitif.com.tr</p>
+</div>
+<div class='stats'>
+<div class='stat-box'><h3>115</h3><p>DB1 Tablo</p></div>
+<div class='stat-box'><h3>106</h3><p>DB2 Tablo</p></div>
+<div class='stat-box'><h3>106</h3><p>Ortak Tablo</p></div>
+<div class='stat-box'><h3>7</h3><p>Sütun Farkı</p></div>
+</div>
+<div class='table-section'>
+<h2>⚠️ Sadece DB1'de Olan Tablolar</h2>
+<div class='table-list'>
+<p>• banner_groups_backup_20250705_194849</p>
+<p>• banner_layouts_backup_20250705_194849</p>
+<p>• banner_styles_backup_20250705_194849</p>
+<p>• chatbot_packages</p>
+<p>• chatbot_requests_log</p>
+<p>• user_chatbot_usage</p>
+<p>• user_consent</p>
+<p>• user_sessions</p>
+<p>• user_sessions_log</p>
+</div>
+</div>
+<div class='table-section'>
+<h2>🔍 Sütun Farklılıkları</h2>
+<div class='difference'>
+<h3>📋 banner_groups</h3>
+<p class='missing-db2'>❌ Sütun DB2'de yok: <strong>bannerDuration</strong> (int)</p>
+</div>
+<div class='difference'>
+<h3>📋 language_category_mapping</h3>
+<p class='missing-db1'>➕ Sütun DB1'de yok: <strong>translation_status</strong> (enum(&#039;pending&#039;,&#039;completed&#039;,&#039;failed&#039;))</p>
+<p class='missing-db1'>➕ Sütun DB1'de yok: <strong>last_attempt_date</strong> (datetime)</p>
+<p class='missing-db1'>➕ Sütun DB1'de yok: <strong>error_message</strong> (text)</p>
+</div>
+<div class='difference'>
+<h3>📋 language_page_mapping</h3>
+<p class='missing-db1'>➕ Sütun DB1'de yok: <strong>translation_status</strong> (enum(&#039;pending&#039;,&#039;completed&#039;,&#039;failed&#039;))</p>
+<p class='missing-db1'>➕ Sütun DB1'de yok: <strong>last_attempt_date</strong> (datetime)</p>
+<p class='missing-db1'>➕ Sütun DB1'de yok: <strong>error_message</strong> (text)</p>
+</div>
+</div>
+</body>
+</html>
