@@ -120,19 +120,12 @@ class AdminPage
 
     public function updatePage($updateData): array
     {
-        $updatePageData = [
-            'sayfatarihguncel' => $updateData['pageUpdateDate'],
-            'sayfaid' => $updateData['pageID'],
-            'sayfaad' => $updateData['pageName'],
-            'sayfaicerik' => $updateData['pageContent'],
-            'sayfaaktif' => $updateData['pageActive'] ?? 1,
-            'sayfalink' => $updateData['pageLink']
-        ];
 
         $sql ="
             UPDATE sayfa
             SET
                 sayfatarihguncel = :sayfatarihguncel,
+                sayfatip = :sayfatip,
                 sayfaad = :sayfaad,
                 sayfaicerik = :sayfaicerik,
                 sayfaaktif = :sayfaaktif,
@@ -140,6 +133,16 @@ class AdminPage
             WHERE
                 sayfaid = :sayfaid
         ";
+
+        $updatePageData = [
+            'sayfatarihguncel' => $updateData['pageUpdateDate'],
+            'sayfatip' => $updateData['pageType'],
+            'sayfaid' => $updateData['pageID'],
+            'sayfaad' => $updateData['pageName'],
+            'sayfaicerik' => $updateData['pageContent'],
+            'sayfaaktif' => $updateData['pageActive'] ?? 0,
+            'sayfalink' => $updateData['pageLink']
+        ];
 
         $updateResult = $this->db->update($sql, $updatePageData);
 

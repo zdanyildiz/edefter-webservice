@@ -370,6 +370,7 @@ elseif($action == "updatePage"){
     $pageLink = $requestData["pageLink"] ?? null;
     $pageOrder = $requestData["pageOrder"] ?? 0;
     $customCSS = $requestData["customCSS"] ?? "";
+    
 
     $checkPage = $adminPageModel->checkPageWithPageID($pageID, $pageName,$pageCategoryID);
     if($checkPage>0){

@@ -1720,7 +1720,11 @@ if(!empty($pageGallery)){
                     changeLanguageID();
                 });                
                 $(document).on("submit", "#addPageForm", function(e){
+                    
                     e.preventDefault();
+                    //form öğelerini konsol'a yazdıralım
+                    //console.log("Form Array:", $("#addPageForm").serializeArray());
+
                     $(".videoResult").html("");
                     $("#alertModal .card-head").removeClass("style-success").addClass("style-danger");
                     //lütfen bekleyiniz yazıp modalı gösterelim
@@ -1806,6 +1810,8 @@ if(!empty($pageGallery)){
                     if (pageID > 0) {
                         action = "updatePage";
                     }
+
+                    
 
                     //console.log(action);
                     $.ajax({

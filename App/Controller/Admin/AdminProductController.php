@@ -452,6 +452,7 @@ elseif( $action == "updateProduct"){
 
     $updatePageData = [
         'pageUpdateDate' => $updateDate,
+        'pageType' => 7,
         'pageID' => $requestData['productID'],
         'pageName' => $requestData['productName'],
         'pageContent' => $requestData['productContent'],
