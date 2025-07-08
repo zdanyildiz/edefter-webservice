@@ -8,11 +8,38 @@ class AdminChatCompletion
 
     public function __construct($db, $adminID)
     {
-        $this->apiKey = getenv('OPENAI_API_KEY') ?: '';
+        $this->apiKey = $this->getOpenAIApiKey();
         $this->apiEndpoint = 'https://api.openai.com/v1/chat/completions';
         $this->db = $db;
         $this->adminID = $adminID;
         $this->createChatCompletionTable();
+    }
+
+    /**
+     * .env dosyasından OPENAI_API_KEY değerini okur
+     * @return string API anahtarı
+     */
+    private function getOpenAIApiKey(): string
+    {
+        $envFile = ROOT . '.env';
+        $openaiApiKey = '';
+        
+        if (file_exists($envFile)) {
+            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        
+            foreach ($lines as $line) {
+                if (str_starts_with(trim($line), '#')) {
+                    continue;
+                }
+                if (str_contains($line, 'OPENAI_API_KEY')) {
+                    list($name, $value) = explode('=', $line, 2);
+                    $openaiApiKey = trim($value);
+                    break;
+                }
+            }
+        }
+        
+        return $openaiApiKey;
     }
 
     public function createChatCompletionTable(){
@@ -50,6 +77,7 @@ class AdminChatCompletion
 
         return $this->db->insert($sql, $params);
     }
+
     /**
      * Dil çeviri fonksiyonu
      * @param string $text Çevrilecek metin
@@ -61,7 +89,9 @@ class AdminChatCompletion
         $prompt = "Translate the following text to {$targetLanguage} in a concise manner, responding only with the translated text in JSON format, without any additional comments or alternatives. The response should be exactly in this format: {\"translation\": \"<translated text>\"}. Here is the text: \"{$text}\"";
 
         return $this->makeApiRequestForTranslate($prompt);
-    }    public function translateHtmlContent(string $htmlContent, string $targetLanguage): string
+    }
+    
+    public function translateHtmlContent(string $htmlContent, string $targetLanguage): string
     {
         $prompt = "Translate the following HTML content into {$targetLanguage}. It is crucial that you preserve all HTML tags (like <p>, <strong>, <ul>, <li>, <br>, etc.) exactly as they are in the original text. Only translate the text content within these tags. Do not add, remove, or alter any HTML tags. Additionally, do not translate any words enclosed in square brackets (e.g., [firmaadres], [firmaunvan]). These are placeholders and should remain unchanged in the output. 
 

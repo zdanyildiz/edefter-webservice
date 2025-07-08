@@ -4,14 +4,14 @@
 $documentRoot = str_replace("\\", "/", realpath(dirname(__FILE__, 3)));
 $directorySeparator = str_replace("\\", "/", DIRECTORY_SEPARATOR);
 include_once $documentRoot . $directorySeparator . 'App/Core/CronGlobal.php';
-echo "CronGlobal.php yüklendi, betik devam ediyor.\n";
+Log::adminWrite("CronGlobal.php yüklendi, betik devam ediyor.", "info", "cron-copier");
 
 /**
  * @var AdminDatabase $db
  * @var Helper $helper
  */
 
-echo "Model sınıfları yükleniyor...\n";
+Log::adminWrite("Model sınıfları yükleniyor...", "info", "cron-copier");
 
 // --- Model Sınıflarının Başlatılması ---
 include_once MODEL . "Admin/AdminLanguage.php";
@@ -36,21 +36,20 @@ $adminBannerGroupModel = new AdminBannerGroupModel($db);
 $adminBannerModel = new AdminBannerModel($db);
 $adminBannerStyleModel = new AdminBannerStyleModel($db);
 
-echo "Model sınıfları yüklendi. Loglama başlıyor.\n";
+Log::adminWrite("Model sınıfları yüklendi. Loglama başlıyor.", "info", "cron-copier");
 
 Log::adminWrite("ContentCopier cron job'u başladı.", "info", "cron-copier");
 
-echo "Bekleyen kopyalama işi aranıyor...\n";
+Log::adminWrite("Bekleyen kopyalama işi aranıyor...", "info", "cron-copier");
 
 $pendingJob = $adminLanguage->getPendingCopyJob();
 
 if (!$pendingJob) {
-    echo "Bekleyen kopyalama iş emri bulunamadı. Çıkılıyor.\n";
     Log::adminWrite("Bekleyen kopyalama iş emri bulunamadı. Çıkılıyor.", "info", "cron-copier");
     exit();
 }
 
-echo "İş emri bulundu: ID #{$pendingJob['id']}. Try bloğuna giriliyor.\n";
+Log::adminWrite("İş emri bulundu: ID #{$pendingJob['id']}. Try bloğuna giriliyor.", "info", "cron-copier");
 
 
 $jobId = $pendingJob['id'];
@@ -78,24 +77,18 @@ try {
     ];
 
     // 1. ADIM: KATEGORİLERİ VE SAYFALARI KOPYALA
-    echo "Adım 1: Kategori ve Sayfa kopyalama başlıyor...\n";
     Log::adminWrite("Adım 1: Kategori ve Sayfa kopyalama başlıyor.", "info", "cron-copier");
     copyCategoryAndChildren(0, 0, $sourceLangId, $targetLangId, $translationStatus, $models);
-    echo "Adım 1: Kategori ve Sayfa kopyalama tamamlandı.\n";
     Log::adminWrite("Adım 1: Kategori ve Sayfa kopyalama tamamlandı.", "info", "cron-copier");
 
     // 2. ADIM: MENÜLERİ KOPYALA
-    echo "Adım 2: Menü kopyalama başlıyor...\n";
     Log::adminWrite("Adım 2: Menü kopyalama başlıyor.", "info", "cron-copier");
     copyMenus($sourceLangId, $targetLangId, $adminMenu);
-    echo "Adım 2: Menü kopyalama tamamlandı.\n";
     Log::adminWrite("Adım 2: Menü kopyalama tamamlandı.", "info", "cron-copier");
 
     // 3. ADIM: BANNER'LARI KOPYALA
-    echo "Adım 3: Banner kopyalama başlıyor...\n";
     Log::adminWrite("Adım 3: Banner kopyalama başlıyor.", "info", "cron-copier");
     copyBanners($sourceLangId, $targetLangId, $adminLanguage, $adminBannerDisplayRulesModel, $adminBannerGroupModel, $adminBannerModel, $adminBannerStyleModel);
-    echo "Adım 3: Banner kopyalama tamamlandı.\n";
     Log::adminWrite("Adım 3: Banner kopyalama tamamlandı.", "info", "cron-copier");
 
 
@@ -105,7 +98,7 @@ try {
     Log::adminWrite("İş emri #{$jobId} başarıyla tamamlandı.", "info", "cron-copier");
 
 } catch (Exception $e) {
-    echo "Hata yakalandı: " . $e->getMessage() . "\n";
+    Log::adminWrite("Hata yakalandı: " . $e->getMessage(), "error", "cron-copier");
     // Hata durumunda rollback yap
     $db->rollback("ContentCopier-Job#{$jobId}");
     
@@ -393,19 +386,19 @@ function copyBanners($sourceLangId, $targetLangId, $adminLanguage, $adminBannerD
         $originalGroupId = $rule['group_id'];
 
         // 1. Banner Grubunu Kopyala
-        echo " - Banner grubu kopyalanıyor. Orijinal Grup ID: {$originalGroupId}\n";
+        Log::adminWrite("Banner grubu kopyalanıyor. Orijinal Grup ID: {$originalGroupId}", "info", "cron-copier");
         $originalGroup = $adminBannerGroupModel->getGroupById($originalGroupId);
         if (!$originalGroup) {
-            echo " - Orijinal banner grubu bulunamadı, atlanıyor. Grup ID: {$originalGroupId}\n";
+            Log::adminWrite("Orijinal banner grubu bulunamadı, atlanıyor. Grup ID: {$originalGroupId}", "warning", "cron-copier");
             continue;
         }
-        echo " - Orijinal grup verisi: " . json_encode($originalGroup) . "\n";
+        Log::adminWrite("Orijinal grup verisi: " . json_encode($originalGroup), "info", "cron-copier");
 
         $validLayoutId = $originalGroup[0]['layout_id'];
         // Geçici çözüm: Eğer layout_id 13 ise 1 olarak değiştir (çünkü 13 geçerli değil gibi görünüyor)
         if ($validLayoutId == 13) {
             $validLayoutId = 1; // Varsayılan geçerli bir layout ID
-            echo " - Geçersiz layout_id (13) tespit edildi, varsayılan 1 kullanılıyor.\n";
+            Log::adminWrite("Geçersiz layout_id (13) tespit edildi, varsayılan 1 kullanılıyor.", "warning", "cron-copier");
         }
 
         $newGroupId = $adminBannerGroupModel->addGroup(
@@ -417,11 +410,11 @@ function copyBanners($sourceLangId, $targetLangId, $adminLanguage, $adminBannerD
             $originalGroup[0]['visibility_start'], $originalGroup[0]['visibility_end'], $originalGroup[0]['banner_duration'], 
             $originalGroup[0]['banner_full_size']
         );
-        echo " - Yeni banner grubu oluşturuluyor. Kullanılan Layout ID: {$validLayoutId}\n";
+        Log::adminWrite("Yeni banner grubu oluşturuluyor. Kullanılan Layout ID: {$validLayoutId}", "info", "cron-copier");
         if (!$newGroupId) {
             throw new Exception("Banner grubu kopyalanamadı. Grup ID: {$originalGroupId}. addGroup metodu false döndü.");
         }
-        echo " - Yeni banner grubu oluşturuldu. Yeni Grup ID: {$newGroupId}\n";
+        Log::adminWrite("Yeni banner grubu oluşturuldu. Yeni Grup ID: {$newGroupId}", "info", "cron-copier");
 
         // 2. Görüntüleme Kuralını Yeni Grup ID'si ile Kopyala
         $categoryId = $rule['category_id'] ? ($adminLanguage->getTargetCategoryID($targetLangId, $rule['category_id'])[0]['translated_category_id'] ?? null) : null;

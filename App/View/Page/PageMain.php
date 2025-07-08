@@ -148,6 +148,11 @@ elseif($pageType == 29){
     $pageData['languageCode'] = $languageCode;
     $config->loadView("Page/Appointment",$pageData);
 }
+elseif($pageType == 30){
+    // Online Randevu Formu
+    $pageData['languageCode'] = $languageCode;
+    $config->loadView("Page/eDefterWeb",$pageData);
+}
 else{
     $config->loadView("Page/PageDetail",$pageData);
 }

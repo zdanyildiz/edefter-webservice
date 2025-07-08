@@ -1209,7 +1209,7 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`kategoriid`, `dilid`, `kategoritariholustur`, `kategoritarihguncel`, `ustkategoriid`, `kategorikatman`, `kategoriad`, `resimid`, `kategoriicerik`, `kategorilink`, `kategorisira`, `kategorisiralama`, `kategorigrup`, `anasayfa`, `kategoriaktif`, `kategorisil`, `benzersizid`) VALUES
-(1, 1, '2019-03-01 00:00:00.000000', '2022-12-05 12:46:24.000000', 0, 0, 'Anasayfa', 0, '', '/anasayfa', 0, 0, 0, 1, 1, 0, '00000ANASAYFA0000000');
+(1, 1, '2019-03-01 00:00:00.000000', '2022-12-05 12:46:24.000000', 0, 0, 'Anasayfa', 0, '', '/anasayfa', 0, 0, 23, 1, 1, 0, '00000ANASAYFA0000000');
 
 -- --------------------------------------------------------
 
@@ -1625,7 +1625,9 @@ INSERT INTO `sayfatip` (`sayfatipid`, `sayfatipad`, `yetki`, `gorunum`, `sayfati
 (24, 'Blog', 1, 1, 0),
 (25, 'KVKK', 1, 1, 0),
 (26, 'SSS', 1, 1, 0),
-(27, 'Hizmetler', 0, 1, 0);
+(27, 'Hizmetler', 0, 1, 0),
+(28, 'Referanslar', 0, 1, 0),
+(29, 'Online Randevu', 1, 1, 0);
 
 -- --------------------------------------------------------
 

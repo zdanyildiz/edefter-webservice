@@ -24,7 +24,7 @@ if (!$adminCasper instanceof AdminCasper) {
 }
 
 $action = $requestData['action'] ?? null;
-Log::adminWrite("action: ".$action,"special");
+//Log::adminWrite("action: ".$action,"special");
 $permissionToPass=false;
 if(!empty($action)){
     if($action == "loginWithEmailOrPhone" || $action == "loginWithEmailOrPhoneAndPassword" || $action == "loginWithPIN" || $action == "logOut"){
