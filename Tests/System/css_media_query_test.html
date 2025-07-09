@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables Media Query Test</title>
+    <style>
+        :root {
+            --tablet-breakpoint: 992px;
+            --mobile-breakpoint: 768px;
+        }
+
+        .test-box {
+            width: 100%;
+            height: 100px;
+            background: blue;
+            color: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 60px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Test 1: Statik değer */
+        @media screen and (max-width: 992px) {
+            .test-static {
+                background: red;
+            }
+
+            .test-static::after {
+                content: " - Statik 992px ÇALIŞIYOR!";
+            }
+        }
+
+        /* Test 2: CSS Variable */
+        @media screen and (max-width: var(--tablet-breakpoint)) {
+            .test-variable {
+                background: green;
+            }
+
+            .test-variable::after {
+                content: " - CSS Variable ÇALIŞIYOR!";
+            }
+        }
+
+        /* Test 3: Alternatif syntax */
+        @media (max-width: var(--tablet-breakpoint)) {
+            .test-alt {
+                background: orange;
+            }
+
+            .test-alt::after {
+                content: " - Alternatif Syntax ÇALIŞIYOR!";
+            }
+        }
+
+        /* Responsive Info */
+        .info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: black;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        <div>Viewport: <span id="viewport"></span></div>
+        <div>--tablet-breakpoint: <span id="breakpoint"></span></div>
+        <div>Media Query Match: <span id="match"></span></div>
+    </div>
+
+    <h1>CSS Variables Media Query Test</h1>
+
+    <div class="test-box test-static">
+        Test 1: Statik 992px
+    </div>
+
+    <div class="test-box test-variable">
+        Test 2: CSS Variable var(--tablet-breakpoint)
+    </div>
+
+    <div class="test-box test-alt">
+        Test 3: Alternatif Syntax
+    </div>
+
+    <div style="margin-top: 50px; padding: 20px; background: #f0f0f0;">
+        <h3>Test Talimatları:</h3>
+        <ol>
+            <li>Tarayıcı genişliğini 992px'in altına getirin</li>
+            <li>Kutular renk değiştirirse media query çalışıyor demektir</li>
+            <li>Yeşil kutu çalışmıyorsa CSS Variables desteklenmiyor</li>
+            <li>F12 açıp Console'da JavaScript komutlarını test edin</li>
+        </ol>
+    </div>
+
+    <script>
+        function updateInfo() {
+            document.getElementById('viewport').textContent = window.innerWidth + 'px';
+
+            const breakpoint = getComputedStyle(document.documentElement)
+                .getPropertyValue('--tablet-breakpoint').trim();
+            document.getElementById('breakpoint').textContent = breakpoint;
+
+            // CSS Variable'ı parse et
+            const breakpointValue = parseInt(breakpoint);
+
+            // JavaScript ile media query test et
+            const jsMediaQuery = window.innerWidth <= breakpointValue;
+            document.getElementById('match').textContent = jsMediaQuery ? 'TRUE (JS)' : 'FALSE (JS)';
+
+            // CSS Variable media query test et
+            try {
+                const cssMatch = window.matchMedia('(max-width: var(--tablet-breakpoint))').matches;
+                document.getElementById('match').textContent += ` | CSS: ${cssMatch ? 'TRUE' : 'FALSE'}`;
+            } catch (e) {
+                document.getElementById('match').textContent += ' | CSS: ERROR';
+            }
+        }
+
+        updateInfo();
+        window.addEventListener('resize', updateInfo);
+
+        // Console'da kullanım için global fonksiyonlar
+        window.testCSS = function () {
+            console.log('Viewport:', window.innerWidth + 'px');
+            const breakpoint = getComputedStyle(document.documentElement).getPropertyValue('--tablet-breakpoint');
+            console.log('--tablet-breakpoint:', breakpoint);
+
+            const breakpointValue = parseInt(breakpoint);
+            console.log('JavaScript Media Query Match:', window.innerWidth <= breakpointValue);
+            console.log('CSS Variable Media Query Match:', window.matchMedia('(max-width: var(--tablet-breakpoint))').matches);
+            console.log('Statik Media Query Match:', window.matchMedia('(max-width: 992px)').matches);
+
+            // Tarayıcı bilgisi
+            console.log('User Agent:', navigator.userAgent);
+            console.log('CSS Variables Support:', CSS.supports('color', 'var(--test)'));
+        };
+
+        console.log('🔍 CSS Test Hazır! window.testCSS() komutunu çalıştırın.');
+        console.log('📱 Tarayıcı:', navigator.userAgent.match(/(Chrome|Firefox|Safari|Edge)\/[\d.]+/));
+    </script>
+</body>
+
+</html>

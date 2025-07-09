@@ -285,7 +285,7 @@ if ($action == "saveDesign" || $action == "savePreviewDesign"){
     $spacing_lg = "24";
     $spacing_xl = "32";
     $spacing_xxl = "48";
-
+    /*
     $themeConfig = [
         'primary-color' => $primaryColor,
         'primary-light-color' => $primaryLightColor,
@@ -411,7 +411,7 @@ if ($action == "saveDesign" || $action == "savePreviewDesign"){
         "font-size-xlarge" => "24",
         "font-size-xxlarge" => "32",
     ];
-
+    */
     $requestData['spacing-xs'] = $spacing_xs;
     $requestData['spacing-sm'] = $spacing_sm;
     $requestData['spacing-md'] = $spacing_md;
@@ -430,6 +430,26 @@ if ($action == "saveDesign" || $action == "savePreviewDesign"){
     $requestData['category-product-box-width'] =  "23%";
     $requestData['search-product-box-width'] =  "23%";
     $requestData['page-product-box-width'] =  "23%";
+
+    $requestData['border-radius-sm'] =  "4";               /* Küçük köşe yuvarlaklığı */
+    $requestData['border-radius-lg'] =  "16";              /* Büyük köşe yuvarlaklığı */
+    $requestData['border-radius-pill'] =  "500";           /* Pill buton için yuvarlaklık */
+
+    /* ========= Gölge ve Derinlik ========= */
+    $requestData['box-shadow-base'] =  "0 2px 10px rgba(0, 0, 0, 0.075)";
+    $requestData['box-shadow-sm'] =  "0 1px 3px rgba(0, 0, 0, 0.05)";
+    $requestData['box-shadow-md'] =  "0 4px 6px rgba(0, 0, 0, 0.1)";
+    $requestData['box-shadow-lg'] =  "0 10px 25px rgba(0, 0, 0, 0.15)";
+    $requestData['box-shadow'] =  "0 2px 5px rgba(0, 0, 0, 0.1)";
+    $requestData['text-shadow'] =  "1px 1px 2px rgba(0, 0, 0, 0.1)";
+
+    /* ========= Boşluk ve Ölçüler ========= */
+    $requestData['spacing-xs'] =  "4";
+    $requestData['spacing-sm'] =  "8";
+    $requestData['spacing-md'] =  "16";
+    $requestData['spacing-lg'] =  "24";
+    $requestData['spacing-xl'] =  "32";
+    $requestData['spacing-xxl'] =  "48";
 
     unset($requestData["action"]);
     unset($requestData["languageID"]);
@@ -474,7 +494,7 @@ if ($action == "saveDesign" || $action == "savePreviewDesign"){
                 // Sayısal değerler için birim ekleme mantığı
                 if (is_numeric($value) && $value != 0) {
                     // Belirli anahtar kelimeler için px ekle
-                    $px_keys = ['width', 'height', 'size', 'radius', 'padding', 'margin', 'spacing'];
+                    $px_keys = ['width', 'height', 'size', 'radius', 'padding', 'margin', 'spacing', 'breakpoint'];
                     $add_px = false;
                     foreach ($px_keys as $px_key) {
                         if (strpos($key, $px_key) !== false) {

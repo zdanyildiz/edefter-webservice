@@ -60,10 +60,59 @@ main {
     scrollbar-color: var(--accent-color) var(--secondary-color); /* Renkler */
 }
 
-@media screen and (max-width: var(--desktop-max-width)) {
-    --desktop-max-width: calc(100% - 40px);
+.breadcrumbContainer {
+    width: 100%;
+    clear: both;
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: var(--spacing-lg) 0;
 }
+
+.breadcrumb {
+    border: 0;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: var(--desktop-max-width);
+}
+
+.breadcrumb .breadcrumb-item {
+    display: inline-block;
+    margin-inline-end: var(--spacing-xs);
+}
+
+.breadcrumb .breadcrumb-item::after {
+    content: ">";
+    margin-inline-start: var(--spacing-xs);
+    color: var(--accent-color);
+    font-size: var(--font-size-small);
+}
+
+.breadcrumb .breadcrumb-item:last-child::after {
+    content: "";
+}
+
+.breadcrumb .breadcrumb-item a {
+    color: var(--accent-color);
+    font-size: var(--font-size-small);
+    text-decoration: none;
+}
+
+.breadcrumb .breadcrumb-item a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
 @media screen and (max-width:1024px){
     .language-select{display:none}
 }
 
+@media screen and (max-width:992px){
+    body,a,p,span,div,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,label,fieldset,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time {
+        line-height: var(--mobile-line-height);
+    }
+    .breadcrumbContainer{
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+}
