@@ -144,6 +144,10 @@ if ($action == "status"){
         returnAndExit("error", "Kullanıcı onayı kaydedilemedi.", [], 500);
     }
 } else if ($action == "message"){
+    //test için dönüş yapalım
+    /*returnAndExit("success", "Test mesajı alındı.", [
+        "message" => "Bu bir test mesajıdır. Gerçek API çağrısı yapılmadı."
+    ]);*/
     $userMessage = $requestData['message'] ?? null;
 
     if (empty($userMessage)) {
@@ -199,7 +203,17 @@ if ($action == "status"){
 
     $initialPrompt = $assistantPrompt;
     if (!empty($systemInfo)) {
-        $initialPrompt .= "\n\nKullanıcı Sistem Bilgileri: " . json_encode($systemInfo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);;
+        $initialPrompt .= "\n\n--- KULLANICI SİSTEM BİLGİLERİ ---\n";
+        $initialPrompt .= "İşletim Sistemi: " . ($systemInfo['osInfo'] ?? 'Belirtilmedi') . "\n";
+        $initialPrompt .= "Mimari: " . ($systemInfo['architecture'] ?? 'Belirtilmedi') . "\n";
+        $initialPrompt .= "Java Durumu: " . ($systemInfo['javaStatus'] ?? 'Belirtilmedi') . "\n";
+        $initialPrompt .= "AKIS Durumu: " . ($systemInfo['akisStatus'] ?? 'Belirtilmedi') . "\n";
+        $initialPrompt .= "JNLP Durumu: " . ($systemInfo['jnlpStatus'] ?? 'Belirtilmedi') . "\n";
+        if (!empty($systemInfo['detailedInfo'])) {
+            $initialPrompt .= "Detaylı Bilgi: " . $systemInfo['detailedInfo'] . "\n";
+        }
+        $initialPrompt .= "--- SİSTEM BİLGİLERİ SONU ---\n\n";
+        $initialPrompt .= "Bu sistem bilgilerini dikkate alarak kullanıcıya yardım et.";
     }
     $contents[] = ['parts' => [['text' => $initialPrompt]], 'role' => 'user'];
 
