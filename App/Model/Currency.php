@@ -163,6 +163,6 @@ class Currency
         ";
         $result = $this->db->select($sql, ['currencyId' => $currencyId]);
 
-        return $result ? $result[0]['parabirimkur'] : 1;
+        return ($result && !is_null($result[0]['parabirimkur'])) ? $result[0]['parabirimkur'] : 1;
     }
 }

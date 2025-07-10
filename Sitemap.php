@@ -14,7 +14,7 @@ $config = new Config();
 
 $db=new Database($config->dbServerName, $config->dbName, $config->dbUsername, $config->dbPassword);
 
-define("DOMAIN", $config->domain);
+define("DOMAIN", $config->domain[0]);
 
 include_once MODEL."Seo.php";
 include_once MODEL."SitemapGenerator.php";
@@ -48,16 +48,15 @@ foreach ($languages as $language) {
     $siteConfigInfo = new SiteConfig($db,$languageID);
     $siteConfigInfo->createSiteConfig();
     $siteConfig = $siteConfigInfo->getSiteConfig();
-    //echo '<pre>';
-    //print_r($siteConfig);exit;
+    //echo '<pre>';print_r($siteConfig);exit;
     $generalSettings = $siteConfig['generalSettings'];
     //print_r($generalSettings);exit;
     $siteDomain = "https://".$generalSettings["domain"];
     $siteType = $generalSettings["sitetip"];
     $priceSettings = $siteConfig['priceSettings'];
-    $priceUnitID = $priceSettings["parabirim"];
-    $currency = $currencyModel->getCurrencySymbolOrCode($priceUnitID);
-    $currencyCode = $currency['parabirimkod'];
+    $priceUnitID = $priceSettings[0]["parabirim"];
+    $currencyCode = $currencyModel->getCurrencySymbolOrCode($priceUnitID);
+    
     $currentRates = $currencyModel->getCurrentRates($priceUnitID);
 
 
@@ -87,12 +86,14 @@ foreach ($languages as $language) {
         }, $seos);
 
         $sitemapGenerator = new SitemapGenerator($seos);
+        //echo '<pre>';print_r($seos);echo '</pre>';exit;
         $sitemap = $sitemapGenerator->generateSitemap();
         $imageSitemap = $sitemapGenerator->generateImageSitemap();
 
         if($siteType==1){
 
             $merchantProducts = $productModel->getAllProductsForMerchantCenter($languageID);
+            //echo '<pre>';print_r($merchantProducts);echo '</pre>';exit;
             $merchantCenterSitemap = $sitemapGenerator->generateMerchantCenterSitemap($siteDomain,$merchantProducts,$currentRates,$currencyCode,strtoupper($languageCode));
 
             $productList = $sitemapGenerator->generateProductList($siteDomain,$merchantProducts);

@@ -158,7 +158,7 @@ elseif ($action == "addBanner" || $action == "updateBanner"){
 
     //banner_styles tablosuna eklemek için banner bilgilerini döngüye alalım
     for ($i=0; $i < count($bannerSlogans); $i++){
-        $bannerHeightSize = $requestData["bannerHeightSize"][$i] ?? 0;
+        $bannerHeightSize = $requestData["bannerHeightSize"][$i] ?? "";
         $bannerBgColor = $requestData["bannerBgColor"][$i] ?? "";
         $bannerContentBoxColor = $requestData["bannerContentBoxBgColor"][$i] ?? "";
         $bannerTitleColor = $requestData["titleFontColor"][$i] ?? "";

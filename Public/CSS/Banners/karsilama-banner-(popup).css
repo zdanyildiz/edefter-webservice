@@ -56,22 +56,26 @@
     /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Kutu için hafif gölge */
 }
 
+.banner-type-karsilama-banner-popup.popup-banner .banner-image img{
+    width: 100%;
+    height: auto; /* Resim boyutlandırması için */
+    border-radius: var(--border-radius-base);
+    object-fit: cover; /* Resmi kırparak alanı doldurur, aspect ratio'yu korur */
+}
 /* Başlık Stili */
 .banner-type-karsilama-banner-popup.popup-banner .title {
     /* PHP tarafından dinamik olarak ayarlanacak (örn: style="color:...; font-size:...;") */
     font-weight: bold;
     margin-bottom: 10px;
-    /* color: #2c3e50; /* Varsayılan */
-    /* font-size: 24px; /* Varsayılan */
+    color: var(--heading-color);
 }
 
 /* İçerik Metni Stili */
 .banner-type-karsilama-banner-popup.popup-banner .content {
     /* PHP tarafından dinamik olarak ayarlanacak (örn: style="color:...; font-size:...;") */
     margin-bottom: 18px;
-    line-height: 1.65;
-    /* color: #34495e; /* Varsayılan */
-    /* font-size: 16px; /* Varsayılan */
+    color: var(--body-text-color);
+    font-size: var(--font-size-normal);
 }
 
 /* Buton Stili */
