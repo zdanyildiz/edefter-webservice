@@ -1,0 +1,553 @@
+{
+    "summary": {
+        "file1_count": 237,
+        "file2_count": 196,
+        "only_in_file1": 46,
+        "only_in_file2": 5,
+        "different_values": 92,
+        "same_variables": 99
+    },
+    "differences": {
+        "only_in_file1": {
+            "font-family-primary": "'Roboto', 'Segoe UI', Arial, sans-serif",
+            "font-family-secondary": "'Open Sans', 'Helvetica Neue', sans-serif",
+            "font-weight-light": "300",
+            "font-weight-regular": "400",
+            "font-weight-medium": "500",
+            "font-weight-bold": "700",
+            "line-height-base": "1.5",
+            "line-height-heading": "1.2",
+            "top-banner-bg-color": "var(--primary-color)",
+            "top-banner-h1-color": "var(--content-bg-color)",
+            "top-banner-p-color": "var(--content-bg-color)",
+            "top-banner-h1-font-size": "var(--font-size-large)",
+            "top-banner-p-font-size": "var(--font-size-normal)",
+            "middle-content-banner-width": "50%",
+            "bottom-banner-width": "100%",
+            "input-color": "var(--text-primary-color)",
+            "input-focus-color": "var(--text-primary-color)",
+            "input-border": "1px solid var(--accent-color)",
+            "input-focus-border": "1px solid var(--primary-color)",
+            "select-bg-color": "var(--secondary-color)",
+            "select-text-color": "var(--text-primary-color)",
+            "select-focus-color": "var(--text-primary-color)",
+            "overlay-bg-color": "rgba(0, 0, 0, 0.5)",
+            "modal-bg-color": "var(--content-bg-color)",
+            "modal-text-color": "var(--text-primary-color)",
+            "tooltip-bg-color": "#333333",
+            "tooltip-text-color": "#ffffff",
+            "pagination-bg-color": "var(--primary-color)",
+            "pagination-active-bg-color": "var(--secondary-color)",
+            "pagination-text-color": "var(--text-primary-color)",
+            "pagination-active-text-color": "var(--accent-color)",
+            "alert-success-bg": "#d4edda",
+            "alert-success-text": "#155724",
+            "alert-warning-bg": "#fff3cd",
+            "alert-warning-text": "#856404",
+            "alert-danger-bg": "#f8d7da",
+            "alert-danger-text": "#721c24",
+            "alert-info-bg": "#d1ecf1",
+            "alert-info-text": "#0c5460",
+            "footer-menu-bg-color": "var(--content-bg-color)",
+            "footer-logo-width": "400px",
+            "footer-logo-height": "400px",
+            "transition-speed": "0.3s",
+            "transition-timing": "ease",
+            "breakpoint-sm": "576px",
+            "breakpoint-xxl": "1400px"
+        },
+        "only_in_file2": {
+            "body-text-color": "#212529",
+            "input-border-radius-1": "5px",
+            "btn-border-radius": "5px",
+            "product-image-aspect-ratio": "1\/1",
+            "enable-touch-swipe": "on"
+        },
+        "different_values": {
+            "primary-color": {
+                "file1": "#1d4ed8",
+                "file2": "#0d6efd"
+            },
+            "primary-light-color": {
+                "file1": "#ff9f5e",
+                "file2": "#6ea8fe"
+            },
+            "primary-dark-color": {
+                "file1": "#cc5a1e",
+                "file2": "#0a58ca"
+            },
+            "secondary-color": {
+                "file1": "rgba(122,122,122,0.1)",
+                "file2": "#6c757d"
+            },
+            "secondary-light-color": {
+                "file1": "rgba(122,122,122,0.05)",
+                "file2": "#e9ecef"
+            },
+            "secondary-dark-color": {
+                "file1": "rgba(122,122,122,0.15)",
+                "file2": "#495057"
+            },
+            "accent-color": {
+                "file1": "#0066ff",
+                "file2": "#0d6efd"
+            },
+            "success-color": {
+                "file1": "#28a745",
+                "file2": "#198754"
+            },
+            "info-color": {
+                "file1": "#17a2b8",
+                "file2": "#0dcaf0"
+            },
+            "text-primary-color": {
+                "file1": "#000000",
+                "file2": "#212529"
+            },
+            "text-muted-color": {
+                "file1": "#999999",
+                "file2": "#869ab8"
+            },
+            "link-color": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#0d6efd"
+            },
+            "link-hover-color": {
+                "file1": "var(--accent-color)",
+                "file2": "#0a58ca"
+            },
+            "heading-color": {
+                "file1": "#1a1a1a",
+                "file2": "#0a2540"
+            },
+            "body-bg-color": {
+                "file1": "#efefef",
+                "file2": "#f8f9fa"
+            },
+            "background-secondary-color": {
+                "file1": "#efefef",
+                "file2": "#f8f9fa"
+            },
+            "background-light-color": {
+                "file1": "#f8f9fa",
+                "file2": "#ffffff"
+            },
+            "font-size-large": {
+                "file1": "20px",
+                "file2": "18px"
+            },
+            "font-size-xlarge": {
+                "file1": "24px",
+                "file2": "22px"
+            },
+            "font-size-xxlarge": {
+                "file1": "32px",
+                "file2": "26px"
+            },
+            "top-contact-and-social-container-margin-top": {
+                "file1": "0",
+                "file2": ""
+            },
+            "top-contact-and-social-container-mobile-margin-top": {
+                "file1": "85px",
+                "file2": "95px"
+            },
+            "top-contact-and-social-bg-color": {
+                "file1": "var(--content-bg-color)",
+                "file2": "#f8f9fa"
+            },
+            "top-contact-and-social-link-color": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#6c757d"
+            },
+            "top-contact-and-social-link-hover-color": {
+                "file1": "var(--primary-color)",
+                "file2": "#0d6efd"
+            },
+            "top-contact-and-social-icon-color": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#6c757d"
+            },
+            "top-contact-and-social-icon-hover-color": {
+                "file1": "var(--primary-color)",
+                "file2": "#0d6efd"
+            },
+            "top-contact-and-social-bg-color-mobile": {
+                "file1": "var(--content-bg-color)",
+                "file2": "#ffffff"
+            },
+            "top-contact-and-social-link-color-mobile": {
+                "file1": "var(--content-bg-color)",
+                "file2": "#6c757d"
+            },
+            "top-contact-and-social-link-hover-color-mobile": {
+                "file1": "var(--accent-color)",
+                "file2": "#0d6efd"
+            },
+            "top-contact-and-social-icon-color-mobile": {
+                "file1": "var(--primary-color)",
+                "file2": "#6c757d"
+            },
+            "top-contact-and-social-icon-hover-color-mobile": {
+                "file1": "var(--accent-color)",
+                "file2": "#0d6efd"
+            },
+            "header-bg-color": {
+                "file1": "var(--content-bg-color)",
+                "file2": "#ffffff"
+            },
+            "header-min-height": {
+                "file1": "80px",
+                "file2": "75px"
+            },
+            "header-mobile-min-height": {
+                "file1": "80px",
+                "file2": "75px"
+            },
+            "header-logo-width": {
+                "file1": "231px",
+                "file2": "180px"
+            },
+            "header-logo-mobile-width": {
+                "file1": "150px",
+                "file2": "140px"
+            },
+            "header-border-color": {
+                "file1": "#e9ecef",
+                "file2": "#dee2e6"
+            },
+            "header-mobile-bg-color": {
+                "file1": "var(--content-bg-color)",
+                "file2": "#ffffff"
+            },
+            "header-mobile-border-color": {
+                "file1": "#e9ecef",
+                "file2": "#dee2e6"
+            },
+            "shop-menu-container-icon-color-search": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#212529"
+            },
+            "shop-menu-container-icon-color-member": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#212529"
+            },
+            "shop-menu-container-icon-color-favorites": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#212529"
+            },
+            "shop-menu-container-icon-color-basket": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#212529"
+            },
+            "shop-menu-container-icon-hover-color": {
+                "file1": "var(--primary-color)",
+                "file2": "#0d6efd"
+            },
+            "mobile-action-icon-gap": {
+                "file1": "12px",
+                "file2": "12"
+            },
+            "mobile-action-icon-phone-bg-color": {
+                "file1": "#28a745",
+                "file2": "#198754"
+            },
+            "mobile-action-icon-basket-bg-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "shop-menu-container-mobile-icon-color-search": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#212529"
+            },
+            "shop-menu-container-mobile-icon-color-member": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#212529"
+            },
+            "shop-menu-container-mobile-icon-color-favorites": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#212529"
+            },
+            "shop-menu-container-mobile-icon-color-basket": {
+                "file1": "var(--text-primary-color)",
+                "file2": "#212529"
+            },
+            "menu-text-color": {
+                "file1": "#333333",
+                "file2": "#495057"
+            },
+            "menu-hover-color": {
+                "file1": "#4285f4",
+                "file2": "#000000"
+            },
+            "menu-active-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "menu-active-bg-color": {
+                "file1": "rgba(66,133,244,0.1)",
+                "file2": "#000000"
+            },
+            "submenu-text-color": {
+                "file1": "#333333",
+                "file2": "#495057"
+            },
+            "submenu-hover-color": {
+                "file1": "#4285f4",
+                "file2": "#000000"
+            },
+            "submenu-border-color": {
+                "file1": "#e9ecef",
+                "file2": "#dee2e6"
+            },
+            "submenu-width": {
+                "file1": "200px",
+                "file2": "220px"
+            },
+            "mobile-menu-text-color": {
+                "file1": "#333333",
+                "file2": "#212529"
+            },
+            "mobile-menu-hover-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "mobile-menu-divider-color": {
+                "file1": "#e9ecef",
+                "file2": "#dee2e6"
+            },
+            "hamburger-icon-color": {
+                "file1": "#333333",
+                "file2": "#212529"
+            },
+            "product-box-border-color": {
+                "file1": "#e9ecef",
+                "file2": "#dee2e6"
+            },
+            "product-box-hover-border-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "product-box-border-radius": {
+                "file1": "8px",
+                "file2": "5px"
+            },
+            "product-title-color": {
+                "file1": "#212529",
+                "file2": "#0a2540"
+            },
+            "product-discount-badge-color": {
+                "file1": "#dc3545",
+                "file2": "#198754"
+            },
+            "add-to-cart-bg-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "add-to-cart-hover-bg-color": {
+                "file1": "#3367d6",
+                "file2": "#0a58ca"
+            },
+            "input-border-radius": {
+                "file1": "4px",
+                "file2": "5px"
+            },
+            "input-focus-border-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "input-text-color": {
+                "file1": "#495057",
+                "file2": "#212529"
+            },
+            "form-success-color": {
+                "file1": "#28a745",
+                "file2": "#198754"
+            },
+            "btn-primary-bg-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "btn-primary-hover-bg-color": {
+                "file1": "#3367d6",
+                "file2": "#0a58ca"
+            },
+            "btn-primary-border-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "btn-secondary-hover-bg-color": {
+                "file1": "#5a6268",
+                "file2": "#5c636a"
+            },
+            "btn-outline-color": {
+                "file1": "#4285f4",
+                "file2": "#0d6efd"
+            },
+            "input-height": {
+                "file1": "38px",
+                "file2": "40px"
+            },
+            "btn-padding-y": {
+                "file1": "12px",
+                "file2": "10px"
+            },
+            "btn-padding-x": {
+                "file1": "24px",
+                "file2": "20px"
+            },
+            "footer-background-color": {
+                "file1": "#343a40",
+                "file2": "#0a2540"
+            },
+            "footer-text-color": {
+                "file1": "#ffffff",
+                "file2": "#adb5bd"
+            },
+            "footer-link-color": {
+                "file1": "#adb5bd",
+                "file2": "#ffffff"
+            },
+            "footer-link-hover-color": {
+                "file1": "#ffffff",
+                "file2": "#6ea8fe"
+            },
+            "copyright-background-color": {
+                "file1": "#212529",
+                "file2": "#051321"
+            },
+            "copyright-text-color": {
+                "file1": "#6c757d",
+                "file2": "#869ab8"
+            },
+            "copyright-border-top-color": {
+                "file1": "#495057",
+                "file2": "#213d5b"
+            },
+            "desktop-max-width": {
+                "file1": "1400px",
+                "file2": "1200px"
+            },
+            "mobile-line-height": {
+                "file1": "1.5",
+                "file2": "1.5px"
+            }
+        },
+        "same_variables": {
+            "warning-color": "#ffc107",
+            "danger-color": "#dc3545",
+            "text-secondary-color": "#6c757d",
+            "text-light-color": "#ffffff",
+            "text-dark-color": "#000000",
+            "content-bg-color": "#ffffff",
+            "background-primary-color": "#ffffff",
+            "background-dark-color": "#dee2e6",
+            "font-size-xs": "10px",
+            "font-size-small": "12px",
+            "font-size-normal": "14px",
+            "border-color": "#dee2e6",
+            "border-light-color": "#f1f3f4",
+            "border-dark-color": "#adb5bd",
+            "border-style": "solid",
+            "border-width": "1px",
+            "border-radius-base": "4px",
+            "card-border-radius": "4px",
+            "border-radius-sm": "4px",
+            "border-radius-lg": "16px",
+            "border-radius-pill": "500px",
+            "box-shadow-base": "0 2px 10px rgba(0, 0, 0, 0.075)",
+            "box-shadow-sm": "0 1px 3px rgba(0, 0, 0, 0.05)",
+            "box-shadow-md": "0 4px 6px rgba(0, 0, 0, 0.1)",
+            "box-shadow-lg": "0 10px 25px rgba(0, 0, 0, 0.15)",
+            "box-shadow": "0 2px 5px rgba(0, 0, 0, 0.1)",
+            "text-shadow": "1px 1px 2px rgba(0, 0, 0, 0.1)",
+            "spacing-xs": "4px",
+            "spacing-sm": "8px",
+            "spacing-md": "16px",
+            "spacing-lg": "24px",
+            "spacing-xl": "32px",
+            "spacing-xxl": "48px",
+            "header-logo-margin-top": "0",
+            "header-logo-margin-right": "0",
+            "header-logo-margin-bottom": "0",
+            "header-logo-margin-left": "0",
+            "header-mobile-logo-margin-top": "0",
+            "header-mobile-logo-margin-right": "0",
+            "header-mobile-logo-margin-bottom": "0",
+            "header-mobile-logo-margin-left": "0",
+            "header-padding": "15px",
+            "header-border-width": "1px",
+            "header-mobile-border-width": "1px",
+            "header-mobile-padding": "15px",
+            "action-icon-basket-counter-bg-color": "#dc3545",
+            "mobile-action-icon-size": "32px",
+            "mobile-action-icon-whatsapp-bg-color": "#25d366",
+            "mobile-action-icon-basket-counter-bg-color": "#dc3545",
+            "menu-background-color": "#ffffff",
+            "menu-hover-bg-color": "#f8f9fa",
+            "menu-font-size": "16px",
+            "menu-height": "60px",
+            "menu-padding": "15px",
+            "submenu-bg-color": "#ffffff",
+            "submenu-hover-bg-color": "#f8f9fa",
+            "submenu-font-size": "14px",
+            "mobile-menu-background-color": "#ffffff",
+            "mobile-menu-hover-bg-color": "#f8f9fa",
+            "mobile-menu-font-size": "16px",
+            "mobile-menu-padding": "15px",
+            "product-box-background-color": "#ffffff",
+            "product-box-padding": "15px",
+            "product-price-color": "#212529",
+            "product-sale-price-color": "#dc3545",
+            "product-old-price-color": "#6c757d",
+            "add-to-cart-text-color": "#ffffff",
+            "homepage-product-box-width": "18%",
+            "category-product-box-width": "23%",
+            "search-product-box-width": "23%",
+            "page-product-box-width": "23%",
+            "input-bg-color": "#ffffff",
+            "input-border-color": "#ced4da",
+            "input-placeholder-color": "#6c757d",
+            "form-label-color": "#212529",
+            "form-required-color": "#dc3545",
+            "form-error-color": "#dc3545",
+            "btn-primary-text-color": "#ffffff",
+            "btn-secondary-bg-color": "#6c757d",
+            "btn-secondary-text-color": "#ffffff",
+            "input-padding": "12px",
+            "copyright-link-color": "#adb5bd",
+            "social-icon-color": "#adb5bd",
+            "social-icon-hover-color": "#ffffff",
+            "social-icon-size": "24px",
+            "footer-padding-y": "40px",
+            "footer-font-size": "14px",
+            "copyright-padding": "20px",
+            "mobile-container-padding": "15px",
+            "tablet-container-padding": "20px",
+            "mobile-base-font-size": "14px",
+            "mobile-h1-font-size": "24px",
+            "mobile-section-margin": "20px",
+            "mobile-card-margin": "10px",
+            "mobile-button-height": "44px",
+            "touch-target-size": "44px",
+            "mobile-breakpoint": "768px",
+            "tablet-breakpoint": "992px",
+            "desktop-breakpoint": "1200px"
+        }
+    },
+    "categories": {
+        "Renk değişkenleri": 97,
+        "Boyut değişkenleri": 19,
+        "Tipografi değişkenleri": 10,
+        "Spacing değişkenleri": 4,
+        "Border değişkenleri": 6,
+        "Header değişkenleri": 0,
+        "Menu değişkenleri": 0,
+        "Product değişkenleri": 1,
+        "Form değişkenleri": 0,
+        "Footer değişkenleri": 0,
+        "Mobile değişkenleri": 1,
+        "Diğer": 5
+    },
+    "generated_at": "2025-07-10 08:17:10"
+}

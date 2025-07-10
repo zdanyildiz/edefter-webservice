@@ -3,40 +3,61 @@
 /* Ana Tema (default) - Pozitif E-ticaret */
 :root {
     /* ========= Temel Renkler ========= */
-    --primary-color: #1d4ed8;              /* Ana renk - Pozitif Turuncu */
-    --primary-light-color: #ff9f5e;        /* Ana rengin açık tonu */
-    --primary-dark-color: #cc5a1e;         /* Ana rengin koyu tonu */
-    --secondary-color: rgba(122,122,122,0.1); /* İkincil renk */
-    --secondary-light-color: rgba(122,122,122,0.05);
-    --secondary-dark-color: rgba(122,122,122,0.15);
-    --accent-color: #0066ff;               /* Vurgu rengi - Mavi */
-    --success-color: #28a745;              /* Başarı rengi - Yeşil */
-    --info-color: #17a2b8;                 /* Bilgi rengi */
-    --warning-color: #ffc107;              /* Uyarı rengi */
-    --danger-color: #dc3545;               /* Tehlike rengi - Kırmızı */
+    --primary-color: #1d4ed8;
+    /* Ana renk - Pozitif Turuncu */
+    --primary-light-color: #ff9f5e;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #cc5a1e;
+    /* Ana rengin koyu tonu */
+    --secondary-color: rgba(122, 122, 122, 0.1);
+    /* İkincil renk */
+    --secondary-light-color: rgba(122, 122, 122, 0.05);
+    --secondary-dark-color: rgba(122, 122, 122, 0.15);
+    --accent-color: #0066ff;
+    /* Vurgu rengi - Mavi */
+    --success-color: #28a745;
+    /* Başarı rengi - Yeşil */
+    --info-color: #17a2b8;
+    /* Bilgi rengi */
+    --danger-color: #ffc107;
+    /* Uyarı rengi */
+    --danger-color: #dc3545;
+    /* Tehlike rengi - Kırmızı */
 
     /* ========= Metin Renkleri ========= */
-    --text-primary-color: #000000;         /* Ana metin rengi */
-    --text-secondary-color: #6c757d;       /* İkincil metin rengi */
-    --text-muted-color: #999999;           /* Soluk metin rengi */
-    --text-light-color: #ffffff;           /* Açık zemin üzerindeki metin */
-    --text-dark-color: #000000;            /* Koyu zemin üzerindeki metin */
-    --link-color: var(--text-primary-color);  /* Bağlantı rengi */
-    --link-hover-color: var(--accent-color); /* Bağlantı üzerine gelindiğindeki renk */
-    --heading-color: #1a1a1a;              /* Başlık Rengi */
+    --text-primary-color: #000000;
+    /* Ana metin rengi */
+    --text-secondary-color: #6c757d;
+    /* İkincil metin rengi */
+    --text-muted-color: #999999;
+    /* Soluk metin rengi */
+    --text-light-color: #ffffff;
+    /* Açık zemin üzerindeki metin */
+    --text-dark-color: #000000;
+    /* Koyu zemin üzerindeki metin */
+    --link-color: var(--text-primary-color);
+    /* Bağlantı rengi */
+    --link-hover-color: var(--accent-color);
+    /* Bağlantı üzerine gelindiğindeki renk */
+    --heading-color: #1a1a1a;
+    /* Başlık Rengi */
 
     /* ========= Arka Plan Renkleri ========= */
-    --body-bg-color: #efefef;              /* Sayfa arka planı */
-    --content-bg-color: #ffffff;           /* İçerik arka planı */
-    --background-primary-color: #ffffff;   /* Ana arka plan rengi */
-    --background-secondary-color: #efefef; /* İkincil arka plan rengi */
-    --background-light-color: #f8f9fa;     /* Açık arka plan rengi */
-    --background-dark-color: #dee2e6;      /* Koyu arka plan rengi */
+    --body-bg-color: #efefef;
+    /* Sayfa arka planı */
+    --content-bg-color: #ffffff;
+    /* İçerik arka planı */
+    --background-primary-color: #ffffff;
+    /* Ana arka plan rengi */
+    --background-secondary-color: #efefef;
+    /* İkincil arka plan rengi */
+    --background-light-color: #f8f9fa;
+    /* Açık arka plan rengi */
+    --background-dark-color: #dee2e6;
+    /* Koyu arka plan rengi */
 
-    /* ========= Yazı Tipi ve Tipografi ========= */
-    --font-family-primary: 'Roboto', 'Segoe UI', Arial, sans-serif;
-    --font-family-secondary: 'Open Sans', 'Helvetica Neue', sans-serif;
-    --font-size-xs: 10px;
+
+
     --font-size-small: 12px;
     --font-size-normal: 14px;
     --font-size-large: 20px;
@@ -50,16 +71,26 @@
     --line-height-heading: 1.2;
 
     /* ========= Sınır ve Kenarlıklar ========= */
-    --border-color: #dee2e6;               /* Kenar rengi */
-    --border-light-color: #f1f3f4;         /* Açık kenar rengi */
-    --border-dark-color: #adb5bd;          /* Koyu kenar rengi */
-    --border-style: solid;            /* Kenar stili */
-    --border-width: 1px;                    /* Kenar genişliği */
-    --border-radius-base: 4px;        /* Temel köşe yuvarlaklığı */
-    --card-border-radius: 4px;          /* Kart köşe yuvarlaklığı */ 
-    --border-radius-sm: 4px;               /* Küçük köşe yuvarlaklığı */
-    --border-radius-lg: 16px;              /* Büyük köşe yuvarlaklığı */
-    --border-radius-pill: 500px;           /* Pill buton için yuvarlaklık */
+    --border-color: #dee2e6;
+    /* Kenar rengi */
+    --border-light-color: #f1f3f4;
+    /* Açık kenar rengi */
+    --border-dark-color: #adb5bd;
+    /* Koyu kenar rengi */
+    --border-style: solid;
+    /* Kenar stili */
+    --border-width: 1px;
+    /* Kenar genişliği */
+    --border-radius-base: 4px;
+    /* Temel köşe yuvarlaklığı */
+    --card-border-radius: 4px;
+    /* Kart köşe yuvarlaklığı */
+    --border-radius-sm: 4px;
+    /* Küçük köşe yuvarlaklığı */
+    --border-radius-lg: 16px;
+    /* Büyük köşe yuvarlaklığı */
+    --border-radius-pill: 500px;
+    /* Pill buton için yuvarlaklık */
 
     /* ========= Gölge ve Derinlik ========= */
     --box-shadow-base: 0 2px 10px rgba(0, 0, 0, 0.075);
@@ -121,26 +152,27 @@
     --shop-menu-container-icon-color-favorites: var(--text-primary-color);
     --shop-menu-container-icon-color-basket: var(--text-primary-color);
     --shop-menu-container-icon-hover-color: var(--primary-color);
-    --action-icon-basket-counter-bg-color: #dc3545; /* Sepet ikonu için sayaç arka plan rengi */
+    --action-icon-basket-counter-bg-color: #dc3545;
+    /* Sepet ikonu için sayaç arka plan rengi */
     --mobile-action-icon-gap: 12px;
     --mobile-action-icon-size: 32px;
     --mobile-action-icon-phone-bg-color: #28a745;
     --mobile-action-icon-whatsapp-bg-color: #25d366;
     --mobile-action-icon-basket-bg-color: #4285f4;
-    --mobile-action-icon-basket-counter-bg-color: #dc3545;    
+    --mobile-action-icon-basket-counter-bg-color: #dc3545;
 
     --shop-menu-container-mobile-icon-color-search: var(--text-primary-color);
     --shop-menu-container-mobile-icon-color-member: var(--text-primary-color);
     --shop-menu-container-mobile-icon-color-favorites: var(--text-primary-color);
     --shop-menu-container-mobile-icon-color-basket: var(--text-primary-color);
-    
+
     /* ========= Ana Menü Stilleri ========= */
     --menu-background-color: #ffffff;
     --menu-text-color: #333333;
     --menu-hover-color: #4285f4;
     --menu-hover-bg-color: #f8f9fa;
     --menu-active-color: #4285f4;
-    --menu-active-bg-color: rgba(66,133,244,0.1);
+    --menu-active-bg-color: rgba(66, 133, 244, 0.1);
     --menu-font-size: 16px;
     --menu-height: 60px;
     --menu-padding: 15px;
@@ -184,15 +216,7 @@
     --category-product-box-width: 23%;
     --search-product-box-width: 23%;
     --page-product-box-width: 23%;
-
-    /* ========= Banner Stilleri ========= */
-    --top-banner-bg-color: var(--primary-color);
-    --top-banner-h1-color: var(--content-bg-color);
-    --top-banner-p-color: var(--content-bg-color);
-    --top-banner-h1-font-size: var(--font-size-large);
-    --top-banner-p-font-size: var(--font-size-normal);
-    --middle-content-banner-width: 50%;
-    --bottom-banner-width: 100%;
+ 
 
 
     /* ========= Form Elemanları ========= */
@@ -221,32 +245,17 @@
 
     --input-color: var(--text-primary-color);
     --input-focus-color: var(--text-primary-color);
-    --input-border: 1px solid var(--accent-color);
+    
     --input-focus-border: 1px solid var(--primary-color);
     --select-bg-color: var(--secondary-color);
     --select-text-color: var(--text-primary-color);
-    --select-focus-color: var(--text-primary-color);    /* ========= Overlay ve Modal ========= */
-    --overlay-bg-color: rgba(0, 0, 0, 0.5);
-    --modal-bg-color: var(--content-bg-color);
-    --modal-text-color: var(--text-primary-color);
-
-    /* ========= Tooltip ========= */
-    --tooltip-bg-color: #333333;
-    --tooltip-text-color: #ffffff;
-
-    /* ========= Pagination ========= */
-    --pagination-bg-color: var(--primary-color);
-    --pagination-active-bg-color: var(--secondary-color);
-    --pagination-text-color: var(--text-primary-color);
-    --pagination-active-text-color: var(--accent-color);
+    --select-focus-color: var(--text-primary-color);
+    
 
     /* ========= Alert ve Bildirimler ========= */
-    --alert-success-bg: #d4edda;
-    --alert-success-text: #155724;
-    --alert-warning-bg: #fff3cd;
-    --alert-warning-text: #856404;
-    --alert-danger-bg: #f8d7da;
-    --alert-danger-text: #721c24;
+
+    --warning-color: #fff3cd;
+    --danger-color: #f8d7da;
     --alert-info-bg: #d1ecf1;
     --alert-info-text: #0c5460;
 
@@ -266,9 +275,8 @@
     --footer-font-size: 14px;
     --copyright-padding: 20px;
 
-    --footer-menu-bg-color: var(--content-bg-color);
-    --footer-logo-width: 400px;
-    --footer-logo-height: 400px;
+    
+
 
     /* ========= Geçiş ve Animasyon ========= */
     --transition-speed: 0.3s;
@@ -294,9 +302,11 @@
 }
 
 /* Geçiş Efekti */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     transition: background-color var(--transition-speed) var(--transition-timing),
-                color var(--transition-speed) var(--transition-timing),
-                border-color var(--transition-speed) var(--transition-timing),
-                box-shadow var(--transition-speed) var(--transition-timing);
+        color var(--transition-speed) var(--transition-timing),
+        border-color var(--transition-speed) var(--transition-timing),
+        box-shadow var(--transition-speed) var(--transition-timing);
 }

@@ -73,7 +73,7 @@
     </div>
 </div>
 <div class="remind-password-form-modal">
-    <span class="close-remind-password-form-modal">&times;</span>
+    <span class="close-remind-password-form-modal btn">&times;</span>
     <div class="remind-password-form-container">
         <h1><?=_giris_form_sifre_hatirlat_baslik_yazi?></h1>
         <form id="remindPasswordForm" action="/?/control/member/post/remindPasswordByEmail" method="post">

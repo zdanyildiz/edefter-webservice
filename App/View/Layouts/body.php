@@ -202,7 +202,7 @@ if(isset($popupBannerResults['groupId']) && !empty($popupBannerResults['groupId'
 
         if(!empty($popupBannerHtml)){
             echo '<div id="PopupBanner">';
-            echo '<button id="popupBannerClose" data-banner-group-id="'.$popupBannerGroupId.'" class="popup-banner-close">&times;</button>';
+            echo '<button id="popupBannerClose" data-banner-group-id="'.$popupBannerGroupId.'" class="popup-banner-close btn">&times;</button>';
             echo $popupBannerHtml;
             echo '</div>';
         }
@@ -257,7 +257,7 @@ if($bodyShowAssistant == 1){
         <div class="chat-header">
             Pozitif Asistan
             <span id="assistant-minimize" class="assistant-minimize">&minus;</span>
-            <span id="assistant-close" class="assistant-close">&times;</span>
+            <span id="assistant-close" class="assistant-close btn">&times;</span>
         </div>
         <div id="chat-messages" class="chat-messages"></div>
         <div class="chat-input-container">
@@ -288,7 +288,7 @@ if(empty($cookieConsent)){
         <div id="cookie-consent-popup-modal-content">
             <div id="cookie-consent-popup-modal-header">
                 <h2><?=_body_cerez_ayar?></h2>
-                <button id="cookie-consent-popup-modal-close" class="cookie-consent-popup-modal-close">X</button>
+                <button id="cookie-consent-popup-modal-close" class="cookie-consent-popup-modal-close btn">X</button>
             </div>
             <div id="cookie-consent-popup-modal-body">
                 <div id="cookie-consent-popup-modal-body-content">
@@ -332,8 +332,8 @@ if(empty($cookieConsent)){
                     </details>
 
                     <div class="button-container">
-                        <button id="cookie-consent-popup-modal-close" class="cookie-consent-popup-modal-close"><?=_body_cerez_ayar_button_kapat?></button>
-                        <button id="cookie-consent-popup-modal-accept"><?=_body_cerez_ayar_button_kaydet?></button>
+                        <button id="cookie-consent-popup-modal-close" class="cookie-consent-popup-modal-close btn"><?=_body_cerez_ayar_button_kapat?></button>
+                        <button id="cookie-consent-popup-modal-accept" class="btn><?=_body_cerez_ayar_button_kaydet?></button>
                     </div>
                 </div>
 

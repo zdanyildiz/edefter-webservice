@@ -71,39 +71,11 @@ form#appointment-form {
     color: var(--text-secondary-color);
 }
 
-#appointment-form .form-group input {
-    width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: var(--input-border);
-    border-radius: var(--border-radius-sm);
-    box-sizing: border-box;
-    font-size: var(--font-size-normal);
-}
 
-#appointment-form .form-group input:focus {
-    outline: none;
-    border-color: var(--input-focus-color);
-}
 
-#appointment-form .form-group textarea {
-    width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: var(--input-border);
-    border-radius: var(--border-radius-sm);
-    box-sizing: border-box;
-    font-size: var(--font-size-normal);
-}
 
 /* Select elementi için şık stiller */
 #appointment-form .form-group select {
-    width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: var(--input-border);
-    border-radius: var(--border-radius-sm);
-    box-sizing: border-box;
-    font-size: var(--font-size-normal);
-    background-color: var(--input-bg-color);
-    color: var(--input-text-color);
     cursor: pointer;
     transition: all 0.3s ease;
     /* Custom dropdown arrow */
@@ -260,11 +232,11 @@ iframe {
 
 .alert-danger {
     color: var(--alert-danger-text);
-    background-color: var(--alert-danger-bg);
+    background-color: var(--danger-color);
     border-color: var(--alert-danger-text);
 }
 
-@media screen and (max-width: var(--tablet-breakpoint)) {
+@media screen and (max-width: 962px) {
     .page-container {
         width: 100%;
         padding: 0 var(--spacing-md);

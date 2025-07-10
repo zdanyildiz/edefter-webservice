@@ -104,6 +104,70 @@ main {
     text-decoration: underline;
 }
 
+.form-group input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--input-padding);
+    border-radius: var(--input-border-radius);
+    border: var(--border-style) var(--border-width) var(--input-border-color);
+    font-size: var(--font-size-normal);
+    color: var(--input-text-color);
+    background-color: var(--input-bg-color);
+}
+.form-group input:focus{
+    outline: none;
+    border-color: var(--input-focus-color);
+}
+
+.form-group textarea{
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--input-padding);
+    border-radius: var(--input-border-radius);
+    border: var(--border-style) var(--border-width) var(--input-border-color);
+    font-size: var(--font-size-normal);
+    color: var(--input-text-color);
+    background-color: var(--input-bg-color);
+}
+.form-group textarea:focus{
+    outline: none;
+    border-color: var(--input-focus-color);
+}
+.form-group select{
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--input-padding);
+    border-radius: var(--input-border-radius);
+    border: var(--border-style) var(--border-width) var(--input-border-color);
+    font-size: var(--font-size-normal);
+    color: var(--input-text-color);
+    background-color: var(--input-bg-color);
+}
+.form-group select:focus{
+    outline: none;
+    border-color: var(--input-focus-color);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-normal);
+    color: var(--form-label-color);
+}
+
+.btn{
+    display: inline-block;
+    padding: var(--btn-padding-y) var(--btn-padding-x);
+    border-radius: var(--btn-border-radius);
+    font-size: var(--font-size-normal);
+    color: var(--btn-primary-text-color);
+    background-color: var(--btn-primary-bg-color);
+    border: var(--border-style) var(--border-width) var(--btn-primary-border-color);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
 @media screen and (max-width:1024px){
     .language-select{display:none}
 }

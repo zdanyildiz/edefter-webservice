@@ -171,7 +171,7 @@ $orders=$visitor['visitorIsMember']['memberOrders'];
             <label for="description">Açıklama:</label>
             <textarea name="description" id="description" rows="4"></textarea>
             <button type="submit">Gönder</button>
-            <button type="button" class="close-popup">Kapat</button>
+            <button type="button" class="close-popup btn">Kapat</button>
         </form>
     </div>
 </div>

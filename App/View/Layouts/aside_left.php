@@ -40,7 +40,7 @@ if ($memberStatus) {
     <div class="user-container">
         <div class="user-header">
             <h1><?=_uyelik_bilgilerim_yazi?></h1>
-            <span class="aside-left-user-close" title="<?=_sol_kapat_yazi?>">X</span>
+            <span class="aside-left-user-close btn" title="<?=_sol_kapat_yazi?>">X</span>
         </div>
         <div class="user-content">
             <div class="user-info">
@@ -79,7 +79,7 @@ if ($memberStatus) {
     <div class="user-container">
         <div class="user-header">
             <h1><?=_sol_ziyaretci_yazi?></h1>
-            <span class="aside-left-user-close">X</span>
+            <span class="aside-left-user-close btn">X</span>
         </div>
         <div class="user-content">
             <div class="user-info">

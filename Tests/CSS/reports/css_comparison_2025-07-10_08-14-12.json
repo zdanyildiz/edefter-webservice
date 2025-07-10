@@ -1,0 +1,443 @@
+{
+    "timestamp": "2025-07-10 08:14:12",
+    "files": {
+        "file1": "index.css",
+        "file2": "index-1.css"
+    },
+    "statistics": {
+        "total_variables_index": 237,
+        "total_variables_index1": 196,
+        "only_in_index_count": 46,
+        "only_in_index1_count": 5,
+        "different_values_count": 92,
+        "common_variables": 191,
+        "similarity_percentage": 100
+    },
+    "differences": {
+        "only_in_index": {
+            "font-family-primary": "'Roboto', 'Segoe UI', Arial, sans-serif",
+            "font-family-secondary": "'Open Sans', 'Helvetica Neue', sans-serif",
+            "font-weight-light": "300",
+            "font-weight-regular": "400",
+            "font-weight-medium": "500",
+            "font-weight-bold": "700",
+            "line-height-base": "1.5",
+            "line-height-heading": "1.2",
+            "top-banner-bg-color": "var(--primary-color)",
+            "top-banner-h1-color": "var(--content-bg-color)",
+            "top-banner-p-color": "var(--content-bg-color)",
+            "top-banner-h1-font-size": "var(--font-size-large)",
+            "top-banner-p-font-size": "var(--font-size-normal)",
+            "middle-content-banner-width": "50%",
+            "bottom-banner-width": "100%",
+            "input-color": "var(--text-primary-color)",
+            "input-focus-color": "var(--text-primary-color)",
+            "input-border": "1px solid var(--accent-color)",
+            "input-focus-border": "1px solid var(--primary-color)",
+            "select-bg-color": "var(--secondary-color)",
+            "select-text-color": "var(--text-primary-color)",
+            "select-focus-color": "var(--text-primary-color)",
+            "overlay-bg-color": "rgba(0, 0, 0, 0.5)",
+            "modal-bg-color": "var(--content-bg-color)",
+            "modal-text-color": "var(--text-primary-color)",
+            "tooltip-bg-color": "#333333",
+            "tooltip-text-color": "#ffffff",
+            "pagination-bg-color": "var(--primary-color)",
+            "pagination-active-bg-color": "var(--secondary-color)",
+            "pagination-text-color": "var(--text-primary-color)",
+            "pagination-active-text-color": "var(--accent-color)",
+            "alert-success-bg": "#d4edda",
+            "alert-success-text": "#155724",
+            "alert-warning-bg": "#fff3cd",
+            "alert-warning-text": "#856404",
+            "alert-danger-bg": "#f8d7da",
+            "alert-danger-text": "#721c24",
+            "alert-info-bg": "#d1ecf1",
+            "alert-info-text": "#0c5460",
+            "footer-menu-bg-color": "var(--content-bg-color)",
+            "footer-logo-width": "400px",
+            "footer-logo-height": "400px",
+            "transition-speed": "0.3s",
+            "transition-timing": "ease",
+            "breakpoint-sm": "576px",
+            "breakpoint-xxl": "1400px"
+        },
+        "only_in_index1": {
+            "body-text-color": "#212529",
+            "input-border-radius-1": "5px",
+            "btn-border-radius": "5px",
+            "product-image-aspect-ratio": "1\/1",
+            "enable-touch-swipe": "on"
+        },
+        "different_values": {
+            "primary-color": {
+                "index.css": "#1d4ed8",
+                "index-1.css": "#0d6efd"
+            },
+            "primary-light-color": {
+                "index.css": "#ff9f5e",
+                "index-1.css": "#6ea8fe"
+            },
+            "primary-dark-color": {
+                "index.css": "#cc5a1e",
+                "index-1.css": "#0a58ca"
+            },
+            "secondary-color": {
+                "index.css": "rgba(122,122,122,0.1)",
+                "index-1.css": "#6c757d"
+            },
+            "secondary-light-color": {
+                "index.css": "rgba(122,122,122,0.05)",
+                "index-1.css": "#e9ecef"
+            },
+            "secondary-dark-color": {
+                "index.css": "rgba(122,122,122,0.15)",
+                "index-1.css": "#495057"
+            },
+            "accent-color": {
+                "index.css": "#0066ff",
+                "index-1.css": "#0d6efd"
+            },
+            "success-color": {
+                "index.css": "#28a745",
+                "index-1.css": "#198754"
+            },
+            "info-color": {
+                "index.css": "#17a2b8",
+                "index-1.css": "#0dcaf0"
+            },
+            "text-primary-color": {
+                "index.css": "#000000",
+                "index-1.css": "#212529"
+            },
+            "text-muted-color": {
+                "index.css": "#999999",
+                "index-1.css": "#869ab8"
+            },
+            "link-color": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#0d6efd"
+            },
+            "link-hover-color": {
+                "index.css": "var(--accent-color)",
+                "index-1.css": "#0a58ca"
+            },
+            "heading-color": {
+                "index.css": "#1a1a1a",
+                "index-1.css": "#0a2540"
+            },
+            "body-bg-color": {
+                "index.css": "#efefef",
+                "index-1.css": "#f8f9fa"
+            },
+            "background-secondary-color": {
+                "index.css": "#efefef",
+                "index-1.css": "#f8f9fa"
+            },
+            "background-light-color": {
+                "index.css": "#f8f9fa",
+                "index-1.css": "#ffffff"
+            },
+            "font-size-large": {
+                "index.css": "20px",
+                "index-1.css": "18px"
+            },
+            "font-size-xlarge": {
+                "index.css": "24px",
+                "index-1.css": "22px"
+            },
+            "font-size-xxlarge": {
+                "index.css": "32px",
+                "index-1.css": "26px"
+            },
+            "top-contact-and-social-container-margin-top": {
+                "index.css": "0",
+                "index-1.css": ""
+            },
+            "top-contact-and-social-container-mobile-margin-top": {
+                "index.css": "85px",
+                "index-1.css": "95px"
+            },
+            "top-contact-and-social-bg-color": {
+                "index.css": "var(--content-bg-color)",
+                "index-1.css": "#f8f9fa"
+            },
+            "top-contact-and-social-link-color": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#6c757d"
+            },
+            "top-contact-and-social-link-hover-color": {
+                "index.css": "var(--primary-color)",
+                "index-1.css": "#0d6efd"
+            },
+            "top-contact-and-social-icon-color": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#6c757d"
+            },
+            "top-contact-and-social-icon-hover-color": {
+                "index.css": "var(--primary-color)",
+                "index-1.css": "#0d6efd"
+            },
+            "top-contact-and-social-bg-color-mobile": {
+                "index.css": "var(--content-bg-color)",
+                "index-1.css": "#ffffff"
+            },
+            "top-contact-and-social-link-color-mobile": {
+                "index.css": "var(--content-bg-color)",
+                "index-1.css": "#6c757d"
+            },
+            "top-contact-and-social-link-hover-color-mobile": {
+                "index.css": "var(--accent-color)",
+                "index-1.css": "#0d6efd"
+            },
+            "top-contact-and-social-icon-color-mobile": {
+                "index.css": "var(--primary-color)",
+                "index-1.css": "#6c757d"
+            },
+            "top-contact-and-social-icon-hover-color-mobile": {
+                "index.css": "var(--accent-color)",
+                "index-1.css": "#0d6efd"
+            },
+            "header-bg-color": {
+                "index.css": "var(--content-bg-color)",
+                "index-1.css": "#ffffff"
+            },
+            "header-min-height": {
+                "index.css": "80px",
+                "index-1.css": "75px"
+            },
+            "header-mobile-min-height": {
+                "index.css": "80px",
+                "index-1.css": "75px"
+            },
+            "header-logo-width": {
+                "index.css": "231px",
+                "index-1.css": "180px"
+            },
+            "header-logo-mobile-width": {
+                "index.css": "150px",
+                "index-1.css": "140px"
+            },
+            "header-border-color": {
+                "index.css": "#e9ecef",
+                "index-1.css": "#dee2e6"
+            },
+            "header-mobile-bg-color": {
+                "index.css": "var(--content-bg-color)",
+                "index-1.css": "#ffffff"
+            },
+            "header-mobile-border-color": {
+                "index.css": "#e9ecef",
+                "index-1.css": "#dee2e6"
+            },
+            "shop-menu-container-icon-color-search": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#212529"
+            },
+            "shop-menu-container-icon-color-member": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#212529"
+            },
+            "shop-menu-container-icon-color-favorites": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#212529"
+            },
+            "shop-menu-container-icon-color-basket": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#212529"
+            },
+            "shop-menu-container-icon-hover-color": {
+                "index.css": "var(--primary-color)",
+                "index-1.css": "#0d6efd"
+            },
+            "mobile-action-icon-gap": {
+                "index.css": "12px",
+                "index-1.css": "12"
+            },
+            "mobile-action-icon-phone-bg-color": {
+                "index.css": "#28a745",
+                "index-1.css": "#198754"
+            },
+            "mobile-action-icon-basket-bg-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "shop-menu-container-mobile-icon-color-search": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#212529"
+            },
+            "shop-menu-container-mobile-icon-color-member": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#212529"
+            },
+            "shop-menu-container-mobile-icon-color-favorites": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#212529"
+            },
+            "shop-menu-container-mobile-icon-color-basket": {
+                "index.css": "var(--text-primary-color)",
+                "index-1.css": "#212529"
+            },
+            "menu-text-color": {
+                "index.css": "#333333",
+                "index-1.css": "#495057"
+            },
+            "menu-hover-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#000000"
+            },
+            "menu-active-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "menu-active-bg-color": {
+                "index.css": "rgba(66,133,244,0.1)",
+                "index-1.css": "#000000"
+            },
+            "submenu-text-color": {
+                "index.css": "#333333",
+                "index-1.css": "#495057"
+            },
+            "submenu-hover-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#000000"
+            },
+            "submenu-border-color": {
+                "index.css": "#e9ecef",
+                "index-1.css": "#dee2e6"
+            },
+            "submenu-width": {
+                "index.css": "200px",
+                "index-1.css": "220px"
+            },
+            "mobile-menu-text-color": {
+                "index.css": "#333333",
+                "index-1.css": "#212529"
+            },
+            "mobile-menu-hover-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "mobile-menu-divider-color": {
+                "index.css": "#e9ecef",
+                "index-1.css": "#dee2e6"
+            },
+            "hamburger-icon-color": {
+                "index.css": "#333333",
+                "index-1.css": "#212529"
+            },
+            "product-box-border-color": {
+                "index.css": "#e9ecef",
+                "index-1.css": "#dee2e6"
+            },
+            "product-box-hover-border-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "product-box-border-radius": {
+                "index.css": "8px",
+                "index-1.css": "5px"
+            },
+            "product-title-color": {
+                "index.css": "#212529",
+                "index-1.css": "#0a2540"
+            },
+            "product-discount-badge-color": {
+                "index.css": "#dc3545",
+                "index-1.css": "#198754"
+            },
+            "add-to-cart-bg-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "add-to-cart-hover-bg-color": {
+                "index.css": "#3367d6",
+                "index-1.css": "#0a58ca"
+            },
+            "input-border-radius": {
+                "index.css": "4px",
+                "index-1.css": "5px"
+            },
+            "input-focus-border-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "input-text-color": {
+                "index.css": "#495057",
+                "index-1.css": "#212529"
+            },
+            "form-success-color": {
+                "index.css": "#28a745",
+                "index-1.css": "#198754"
+            },
+            "btn-primary-bg-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "btn-primary-hover-bg-color": {
+                "index.css": "#3367d6",
+                "index-1.css": "#0a58ca"
+            },
+            "btn-primary-border-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "btn-secondary-hover-bg-color": {
+                "index.css": "#5a6268",
+                "index-1.css": "#5c636a"
+            },
+            "btn-outline-color": {
+                "index.css": "#4285f4",
+                "index-1.css": "#0d6efd"
+            },
+            "input-height": {
+                "index.css": "38px",
+                "index-1.css": "40px"
+            },
+            "btn-padding-y": {
+                "index.css": "12px",
+                "index-1.css": "10px"
+            },
+            "btn-padding-x": {
+                "index.css": "24px",
+                "index-1.css": "20px"
+            },
+            "footer-background-color": {
+                "index.css": "#343a40",
+                "index-1.css": "#0a2540"
+            },
+            "footer-text-color": {
+                "index.css": "#ffffff",
+                "index-1.css": "#adb5bd"
+            },
+            "footer-link-color": {
+                "index.css": "#adb5bd",
+                "index-1.css": "#ffffff"
+            },
+            "footer-link-hover-color": {
+                "index.css": "#ffffff",
+                "index-1.css": "#6ea8fe"
+            },
+            "copyright-background-color": {
+                "index.css": "#212529",
+                "index-1.css": "#051321"
+            },
+            "copyright-text-color": {
+                "index.css": "#6c757d",
+                "index-1.css": "#869ab8"
+            },
+            "copyright-border-top-color": {
+                "index.css": "#495057",
+                "index-1.css": "#213d5b"
+            },
+            "desktop-max-width": {
+                "index.css": "1400px",
+                "index-1.css": "1200px"
+            },
+            "mobile-line-height": {
+                "index.css": "1.5",
+                "index-1.css": "1.5px"
+            }
+        }
+    }
+}

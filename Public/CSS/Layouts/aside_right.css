@@ -7,27 +7,31 @@
     top: 0;
     right: -401px;
     z-index: 4;
-    background: #fff;
+    background: var(--content-bg-color);
     height: 100%;
     overflow-y: auto;
-    box-shadow: -5px 0 5px -5px #ccc;
+    box-shadow: var(--box-shadow-base);
     transition: all .5s ease-in-out;
 }
 .aside-right-cart.active {
-    right: 0;margin-inline-end: 0;
+    right: 0;
+    margin-inline-end: 0;
 }
 
 .aside-right-cart .mycart-container {
     width: 100%;
     margin: 0 auto;
-    padding: 5px;
+    padding: var(--spacing-sm);
 }
 
 .aside-right-cart .cart-header {
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-md)
 }
 .aside-right-cart .cart-header h1 a{
-     color:#3485ad; font-weight: 500; text-decoration: none;
+     color:var(--heading-color);
+        font-size: var(--font-size-normal);
+     font-weight: 500; 
+     text-decoration: none;
  }
 .aside-right-cart-close {
     position: absolute;
@@ -132,16 +136,13 @@
     text-align: center;
 }
 .quantity-input.qty{border:solid 1px #dedede}
-.aside-right-cart .cart-item-quantity input {
-    width: 50px;
-    text-align: center;line-height: 24px;font-size: 12px;
-}
+
 .aside-right-cart .cart-item-quantity input::-webkit-inner-spin-button, .aside-right-cart .cart-item-quantity input::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 .aside-right-cart .cart-item-quantity input[type=number] {
-    -moz-appearance: textfield;
+    -appearance: textfield;
 }
 .aside-right-cart .cart-item-quantity input[type=number]::-webkit-inner-spin-button, .aside-right-cart .cart-item-quantity input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -202,7 +203,7 @@
 
 .aside-right-cart .cart-summary {
     text-align: right;
-    float: right;
+    float: inline-end;
     padding: 10px;
     display: inline-block;
     margin-bottom: 10px;
@@ -229,8 +230,8 @@
     display: inline-block;
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
-    border: var(--input-border);
+    border-radius: var(--border-radius-base);
+    border: var(--border-style) var(--border-width) var(--border-color);
     color: var(--button-text-color);
     background-color: var(--button-color);
     font-size: 12px;

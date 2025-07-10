@@ -119,17 +119,8 @@
     font-size: 13px;
     color: #777;
 }
-.member-container .form-group input,.remind-password-form-container .form-group input {
-    width: 100%;
-    padding: 8px 10px;
-    border: var(--input-border);
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-.member-container .form-group input:focus,.remind-password-form-container .form-group input:focus {
-    outline: none;
-    border-color: var(--input-focus-color);
-}
+
+
 .member-container .form-group small,.remind-password-form-container .form-group small {
     display: block;
     margin-top: 5px;
@@ -233,7 +224,7 @@
     z-index: 4;
 }
 
-@media (max-width: var(--tablet-breakpoint)) {
+@media (max-width: 962px) {
     .member-container{min-height: unset;    height: auto; }
     .member-user-and-password-container{flex-direction: column;}
     .member-card-container, .member-password-container{width: 100%;}

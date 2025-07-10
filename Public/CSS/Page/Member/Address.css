@@ -28,14 +28,7 @@
     display: block;
     margin-bottom: var(--spacing-lg);
 }
-.member-container form input{
-    box-sizing: border-box;
-    background-color: var(--input-bg-color);
-    color: var(--input-text-color);
-    border: var(--border-style) var(--border-width) var(--input-border-color);
-    border-radius: var(--input-border-radius);
-    padding: var(--input-padding);
-}
+
 .address-card-container {
     width: 50%;
 }
