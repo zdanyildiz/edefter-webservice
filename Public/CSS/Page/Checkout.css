@@ -210,15 +210,7 @@ label.invoice {
     margin-bottom: var(--spacing-lg);
 }
 
-.address-form-container form input,
-.invoice-container input {
-    box-sizing: border-box;
-    border: var(--border-style) var(--border-width) var(--input-border-color);
-    border-radius: var(--input-border-radius);
-    background-color: var(--input-bg-color);
-    padding: var(--input-padding);
-    color: var(--input-text-color);
-}
+
 
 .invoice-container {
     border: none;
@@ -248,35 +240,11 @@ label.invoice {
     clear: both;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: var(--spacing-xs);
-    font-size: var(--font-size-normal);
-    color: var(--form-label-color);
-}
 
-.form-group input {
-    width: 100%;
-    padding: var(--input-padding);
-    border: var(--border-style) var(--border-width) var(--input-border-color);
-    border-radius: var(--input-border-radius);
-    background-color: var(--input-bg-color);
-    color: var(--input-text-color);
-}
 
-.form-group input:focus {
-    outline: none;
-    border-color: var(--input-focus-color);
-}
 
-.form-group select {
-    width: 100%;
-    padding: var(--input-padding);
-    border: var(--border-style) var(--border-width) var(--input-border-color);
-    border-radius: var(--input-border-radius);
-    background-color: var(--input-bg-color);
-    color: var(--input-text-color);
-}
+
+
 
 .form-group small {
     margin-top: var(--spacing-xs);
@@ -291,16 +259,7 @@ label.invoice {
     line-height: 35px;
 }
 
-.form-group textarea {
-    width: 100%;
-    padding: var(--spacing-md);
-    border: var(--border-style) var(--border-width) var(--input-border-color);
-    border-radius: var(--input-border-radius);
-    background-color: var(--input-bg-color);
-    color: var(--input-text-color);
-    min-height: 100px;
-    box-sizing: border-box;
-}
+
 
 .form-group input[type="checkbox"] {
     float: inline-start;
@@ -690,14 +649,14 @@ label.invoice {
 
 .alert-danger {
     color: var(--alert-danger-text);
-    background-color: var(--alert-danger-bg);
+    background-color: var(--danger-color);
     border: var(--border-style) var(--border-width) var(--alert-danger-text);
 }
 
 .alert-warning {
-    color: var(--alert-warning-text);
-    background-color: var(--alert-warning-bg);
-    border-color: var(--alert-warning-text);
+    color: var(--warning-color);
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
 }
 
 @media (max-width: 992px) {

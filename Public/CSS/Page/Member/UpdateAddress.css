@@ -27,9 +27,6 @@
     display: block;
     margin-bottom: 20px;
 }
-.member-container form input{
-    box-sizing: border-box;
-}
 
 .member-address-container {
     width: 50%;
@@ -49,26 +46,9 @@
     float: left;
     padding: 0 10px;
 }
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-.form-group input:focus {
-    outline: none;
-    border-color: #0056b3;
-}
-.form-group select {
-    width: 100%;
-    padding: 9px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+
+
+
 .form-group small {
     display: block;
     margin-top: 5px;

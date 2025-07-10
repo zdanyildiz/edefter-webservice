@@ -214,7 +214,7 @@ if(!empty($topBannersHtml)){
         <?php if($headerShowSearch==1): ?>
         <div class="product-search-container">
             <form action="/" method="get">
-                <div class="close-search"><a href="#close"><svg class="svg-icon svg-icon-close" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" xml:space="preserve"><path d="M512,25.6L486.4,0L256,230.4L25.6,0L0,25.6l230.4,230.4L0,486.4L25.6,512l230.4-230.4L486.4,512l25.6-25.6 L281.6,256L512,25.6z"/></svg></a></div>
+                <div class="close-search btn"><a href="#close"><svg class="svg-icon svg-icon-close" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 512 512" xml:space="preserve"><path d="M512,25.6L486.4,0L256,230.4L25.6,0L0,25.6l230.4,230.4L0,486.4L25.6,512l230.4-230.4L486.4,512l25.6-25.6 L281.6,256L512,25.6z"/></svg></a></div>
                 <input type="hidden" name="languageID" value="<?=$languageID?>">
                 <input type="text" name="q" placeholder="<?=_header_arama_title?>" />
                 <button type="submit"><?=_header_ara_buton?></button>

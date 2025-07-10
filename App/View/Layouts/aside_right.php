@@ -173,7 +173,7 @@ if($config->localhost){?>
 <aside class="aside-right-visitor">
     <div class="visitor-header">
         <h1>Ziayertçi Bilgileri</h1>
-        <span class="aside-right-visitor-close">X</span>
+        <span class="aside-right-visitor-close btn">X</span>
     </div>
     <?php if($routerResult["contentName"]=="Page"){?>
     <div style="padding:10px;width:100%;overflow: auto"><pre><?php print_r($page)?></pre></div>

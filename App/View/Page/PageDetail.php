@@ -139,7 +139,7 @@ $pageVideos = $page['pageVideos'] ?? [];
 <?php if (count($imageUrls) > 0) {?>
 <div id="pageModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close btn">&times;</span>
         <a class="prev">&#10094;</a>
         <img class="modal-img" src="" alt="">
         <a class="next">&#10095;</a>

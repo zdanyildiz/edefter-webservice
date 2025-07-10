@@ -79,38 +79,7 @@ svg.contact-svg {
     color: var(--heading-color);
 }
 
-#contactForm .form-group {
-    margin-bottom: var(--spacing-lg);
-}
-#contactForm .form-group label{
-    display: block;
-    margin-bottom: 5px;
-    font-size: var(--font-size-small);
-    color: var(--form-label-color);
-}
-#contactForm .form-group input {
-    width: 100%;
-    background-color: var(--input-bg-color);
-    padding: var(--input-padding);
-    border: var(--border-style) var(--border-width) var(--border-color);
-    border-radius: var(--input-border-radius);
-    box-sizing: border-box;
-    font-size: var(--font-size-normal);
-    border-color: var(--input-border-color);
-    height: var(--input-height);
-}
-#contactForm .form-group input:focus {
-    outline: none;
-    border-color: var(--input-focus-border-color);
-}
-#contactForm .form-group textarea {
-    width: 100%;
-    padding: var(--input-padding);
-    border: var(--border-style) var(--border-width) var(--border-color);
-    border-radius: var(--input-border-radius);
-    box-sizing: border-box;
-    font-size: var(--font-size-normal);
-}
+
 #contactForm .form-group small {
     display: block;
     margin-top: 5px;
@@ -145,9 +114,10 @@ svg.contact-svg {
 }
 
 #contactForm .form-group{
-    width: 50%;
+    width: 100%;
     float: left;
     padding: 0 var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 #contactForm .form-group.row {
     width: 100%;
@@ -217,9 +187,6 @@ iframe{width: 50%}
         line-height: 25px;
     }
 
-    #contactForm .form-group {
-        width: 100%;
-    }
     .contactInfo{
         margin-bottom: 20px;
     }

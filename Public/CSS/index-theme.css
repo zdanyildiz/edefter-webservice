@@ -3,34 +3,58 @@
 /* Ana Tema (default) - Modern E-ticaret */
 :root {
     /* ========= Temel Renkler ========= */
-    --primary-color: #4285f4;             /* Ana renk - Google Mavi */
-    --primary-light-color: #74a9ff;       /* Ana rengin açık tonu */
-    --primary-dark-color: #0d5bdd;        /* Ana rengin koyu tonu */
-    --secondary-color: rgba(122,122,122,0.1); /* İkincil renk */
-    --secondary-light-color: rgba(122,122,122,0.05);
-    --secondary-dark-color: rgba(122,122,122,0.15);
-    --accent-color: #fbbc05;              /* Vurgu rengi - Google Sarı */
-    --success-color: #34a853;             /* Başarı rengi - Google Yeşil */
-    --info-color: #4fc3f7;                /* Bilgi rengi */
-    --warning-color: #ffab40;             /* Uyarı rengi */
-    --danger-color: #ea4335;              /* Tehlike rengi - Google Kırmızı */    /* ========= Metin Renkleri ========= */
+    --primary-color: #4285f4;
+    /* Ana renk - Google Mavi */
+    --primary-light-color: #74a9ff;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #0d5bdd;
+    /* Ana rengin koyu tonu */
+    --secondary-color: rgba(122, 122, 122, 0.1);
+    /* İkincil renk */
+    --secondary-light-color: rgba(122, 122, 122, 0.05);
+    --secondary-dark-color: rgba(122, 122, 122, 0.15);
+    --accent-color: #fbbc05;
+    /* Vurgu rengi - Google Sarı */
+    --success-color: #34a853;
+    /* Başarı rengi - Google Yeşil */
+    --info-color: #4fc3f7;
+    /* Bilgi rengi */
+    --danger-color: #ffab40;
+    /* Uyarı rengi */
+    --danger-color: #ea4335;
+    /* Tehlike rengi - Google Kırmızı */
+    /* ========= Metin Renkleri ========= */
 
-    --text-primary-color: #202124;        /* Ana metin rengi */
-    --text-secondary-color: #5f6368;      /* İkincil metin rengi */
-    --text-muted-color: #9aa0a6;          /* Soluk metin rengi */
-    --text-light-color: #ffffff;          /* Açık zemin üzerindeki metin */
-    --text-dark-color: #202124;           /* Koyu zemin üzerindeki metin */
-    --heading-color: #202124;             /* Başlık rengi - Theme.php uyumlu */
-    --link-color: #1a73e8;                /* Bağlantı rengi */
-    --link-hover-color: #174ea6;          /* Bağlantı üzerine gelindiğindeki renk */
+    --text-primary-color: #202124;
+    /* Ana metin rengi */
+    --text-secondary-color: #5f6368;
+    /* İkincil metin rengi */
+    --text-muted-color: #9aa0a6;
+    /* Soluk metin rengi */
+    --text-light-color: #ffffff;
+    /* Açık zemin üzerindeki metin */
+    --text-dark-color: #202124;
+    /* Koyu zemin üzerindeki metin */
+    --heading-color: #202124;
+    /* Başlık rengi - Theme.php uyumlu */
+    --link-color: #1a73e8;
+    /* Bağlantı rengi */
+    --link-hover-color: #174ea6;
+    /* Bağlantı üzerine gelindiğindeki renk */
 
     /* ========= Arka Plan Renkleri ========= */
-    --body-bg-color: #f8f9fa;             /* Sayfa arka planı */
-    --content-bg-color: #ffffff;          /* İçerik arka planı */
-    --background-primary-color: #ffffff;  /* Ana arka plan rengi */
-    --background-secondary-color: #f8f9fa; /* İkincil arka plan rengi */
-    --background-light-color: #ffffff;    /* Açık arka plan rengi */
-    --background-dark-color: #e8eaed;     /* Koyu arka plan rengi */
+    --body-bg-color: #f8f9fa;
+    /* Sayfa arka planı */
+    --content-bg-color: #ffffff;
+    /* İçerik arka planı */
+    --background-primary-color: #ffffff;
+    /* Ana arka plan rengi */
+    --background-secondary-color: #f8f9fa;
+    /* İkincil arka plan rengi */
+    --background-light-color: #ffffff;
+    /* Açık arka plan rengi */
+    --background-dark-color: #e8eaed;
+    /* Koyu arka plan rengi */
 
     /* ========= Yazı Tipi ve Tipografi ========= */
     --font-family-primary: 'Roboto', 'Segoe UI', Arial, sans-serif;
@@ -46,20 +70,33 @@
     --font-weight-medium: 500;
     --font-weight-bold: 700;
     --line-height-base: 1.5;
-    --line-height-heading: 1.2;    /* ========= Sınır ve Kenarlıklar ========= */
-    --border-color: #dadce0;              /* Kenar rengi */
-    --border-light-color: #f1f3f4;        /* Açık kenar rengi */
-    --border-dark-color: #bdc1c6;         /* Koyu kenar rengi */
+    --line-height-heading: 1.2;
+    /* ========= Sınır ve Kenarlıklar ========= */
+    --border-color: #dadce0;
+    /* Kenar rengi */
+    --border-light-color: #f1f3f4;
+    /* Açık kenar rengi */
+    --border-dark-color: #bdc1c6;
+    /* Koyu kenar rengi */
     --border-base: solid 1px #dadce0;
-    --border-width: 1px;                  /* Theme.php uyumlu */
-    --border-style: solid;                /* Theme.php uyumlu */
-    --border-radius-base: 8px;            /* Temel köşe yuvarlaklığı */
-    --border-radius-sm: 4px;              /* Küçük köşe yuvarlaklığı */
-    --border-radius-lg: 16px;             /* Büyük köşe yuvarlaklığı */
-    --border-radius-pill: 500px;          /* Pill buton için yuvarlaklık */
-    --card-border-radius: 12px;           /* Theme.php uyumlu - Kart köşe yuvarlaklığı */
-    --input-border-radius: 4px;           /* Theme.php uyumlu - Input köşe yuvarlaklığı */
-    --btn-border-radius: 6px;          /* Theme.php uyumlu - Buton köşe yuvarlaklığı */
+    --border-width: 1px;
+    /* Theme.php uyumlu */
+    --border-style: solid;
+    /* Theme.php uyumlu */
+    --border-radius-base: 8px;
+    /* Temel köşe yuvarlaklığı */
+    --border-radius-sm: 4px;
+    /* Küçük köşe yuvarlaklığı */
+    --border-radius-lg: 16px;
+    /* Büyük köşe yuvarlaklığı */
+    --border-radius-pill: 500px;
+    /* Pill buton için yuvarlaklık */
+    --card-border-radius: 12px;
+    /* Theme.php uyumlu - Kart köşe yuvarlaklığı */
+    --input-border-radius: 4px;
+    /* Theme.php uyumlu - Input köşe yuvarlaklığı */
+    --btn-border-radius: 6px;
+    /* Theme.php uyumlu - Buton köşe yuvarlaklığı */
 
     /* ========= Gölge ve Derinlik ========= */
     --box-shadow-base: 0 2px 10px rgba(0, 0, 0, 0.075);
@@ -91,7 +128,7 @@
     --header-mobile-border-color: var(--header-border-color);
     --header-mobile-padding: var(--header-padding);
     --header-mobile-logo-width: 100px;
-    
+
     /* ========= Üst İletişim & Sosyal Medya ========= */
     --top-contact-and-social-bg-color: var(--background-secondary-color);
     --top-contact-and-social-link-color: var(--text-secondary-color);
@@ -105,14 +142,14 @@
     --top-contact-and-social-icon-color-mobile: var(--top-contact-and-social-icon-color);
     --top-contact-and-social-icon-hover-color-mobile: var(--top-contact-and-social-icon-hover-color);
     --top-contact-and-social-container-mobile-margin-top: 80px;
-    
+
     /* ========= Alışveriş İkon Renkleri ========= */
     --shop-menu-container-icon-color-search: var(--text-primary-color);
     --shop-menu-container-icon-color-member: var(--text-primary-color);
     --shop-menu-container-icon-color-favorites: var(--text-primary-color);
     --shop-menu-container-icon-color-basket: var(--text-primary-color);
     --shop-menu-container-icon-hover-color: var(--primary-color);
-    
+
     /* ========= Logo Margin Değişkenleri ========= */
     --header-logo-margin-top: 0px;
     --header-logo-margin-right: 0px;
@@ -121,7 +158,8 @@
     --header-mobile-logo-margin-top: 0px;
     --header-mobile-logo-margin-right: 0px;
     --header-mobile-logo-margin-bottom: 0px;
-    --header-mobile-logo-margin-left: 0px;    /* ========= Ana Menü Stilleri ========= */
+    --header-mobile-logo-margin-left: 0px;
+    /* ========= Ana Menü Stilleri ========= */
     --main-menu-bg-color: var(--content-bg-color);
     --main-menu-link-bg-color: var(--content-bg-color);
     --main-menu-link-hover-bg-color: var(--background-light-color);
@@ -134,7 +172,7 @@
     --main-menu-ul-submenu-link-hover-bg-color: var(--background-light-color);
     --font-size-main-menu: var(--font-size-normal);
     --font-size-main-submenu: var(--font-size-normal);
-    
+
     /* ========= Desktop Menü Değişkenleri (Theme.php uyumlu) ========= */
     --menu-bg-color: var(--main-menu-bg-color);
     --menu-background-color: var(--main-menu-bg-color);
@@ -154,8 +192,8 @@
     --submenu-hover-bg-color: var(--main-menu-ul-submenu-link-hover-bg-color);
     --submenu-font-size: var(--font-size-main-submenu);
     --submenu-border-color: var(--border-color);
-    --submenu-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    
+    --submenu-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
     /* ========= Mobile Menü Değişkenleri ========= */
     --mobile-menu-bg-color: var(--content-bg-color);
     --mobile-menu-background-color: var(--content-bg-color);
@@ -169,13 +207,14 @@
     --mobile-menu-padding: 15px;
     --mobile-toggle-color: var(--text-primary-color);
     --mobile-toggle-size: 24px;
-    --mobile-overlay-color: rgba(0,0,0,0.5);
+    --mobile-overlay-color: rgba(0, 0, 0, 0.5);
     --hamburger-icon-color: var(--text-primary-color);
-    --mobile-menu-divider-color: var(--border-light-color);    --mobile-submenu-bg-color: var(--background-secondary-color);
+    --mobile-menu-divider-color: var(--border-light-color);
+    --mobile-submenu-bg-color: var(--background-secondary-color);
     --mobile-submenu-text-color: var(--text-primary-color);
     --mobile-submenu-hover-color: var(--primary-color);
     --mobile-submenu-hover-bg-color: var(--background-light-color);
-    
+
     /* ========= Eksik Desktop Menu Variables ========= */
     --main-menu-text-color: var(--text-primary-color);
     --main-menu-hover-text-color: var(--primary-color);
@@ -185,7 +224,7 @@
     --main-menu-font-weight: var(--font-weight-regular);
     --main-menu-padding: var(--spacing-sm) var(--spacing-md);
     --main-menu-border-color: var(--border-color);
-    
+
     /* ========= Eksik Submenu Variables ========= */
     --main-submenu-bg-color: var(--content-bg-color);
     --main-submenu-text-color: var(--text-primary-color);
@@ -196,7 +235,7 @@
     --main-submenu-font-weight: var(--font-weight-regular);
     --main-submenu-padding: var(--spacing-sm) var(--spacing-md);
     --main-submenu-border-color: var(--border-color);
-    
+
     /* ========= Eksik Mobile Variables ========= */
     --mobile-menu-hover-text-color: var(--primary-color);
     --mobile-menu-active-text-color: var(--primary-color);
@@ -209,7 +248,7 @@
     --mobile-submenu-font-weight: var(--font-weight-regular);
     --mobile-submenu-padding: var(--spacing-xs) var(--spacing-lg);
     --mobile-submenu-border-color: var(--border-color);
-    
+
     /* ========= Dropdown Menü Değişkenleri ========= */
     --dropdown-bg-color: var(--content-bg-color);
     --dropdown-text-color: var(--text-primary-color);
@@ -220,7 +259,7 @@
     --dropdown-border-radius: var(--border-radius-base);
 
 
-    
+
     /* ========= Buton Detay Stilleri (Theme.php uyumlu) ========= */
     --btn-primary-bg-color: var(--primary-color);
     --btn-primary-text-color: var(--text-light-color);
@@ -248,13 +287,14 @@
     --form-placeholder-color: var(--text-muted-color);
     --form-required-color: var(--danger-color);
     --form-error-color: var(--danger-color);
-    --form-success-color: var(--success-color);    /* ========= Ürün Kutusu Stilleri ========= */
+    --form-success-color: var(--success-color);
+    /* ========= Ürün Kutusu Stilleri ========= */
 
     --homepage-product-box-width: 18%;
     --category-product-box-width: 23%;
     --search-product-box-width: 23%;
     --page-product-box-width: 23%;
-    
+
     /* ========= Ürün Kutusu Detay Stilleri (Theme.php uyumlu) ========= */
     --product-box-background-color: var(--content-bg-color);
     --product-box-border-color: var(--border-light-color);
@@ -275,11 +315,11 @@
     --top-banner-p-font-size: var(--font-size-normal);
 
     /* ========= Alert ve Bildirimler ========= */
-    --alert-success-bg: #d4edda;
-    --alert-success-text: #155724;
+    --success-color: #d4edda;
+    --success-color: #155724;
     --alert-warning-bg: #fff3cd;
     --alert-warning-text: #856404;
-    --alert-danger-bg: #f8d7da;
+    --danger-color: #f8d7da;
     --alert-danger-text: #721c24;
     --alert-info-bg: #d1ecf1;
     --alert-info-text: #0c5460;
@@ -294,13 +334,14 @@
 
     /* ========= Geçiş ve Animasyon ========= */
     --transition-speed: 0.3s;
-    --transition-timing: ease;    /* ========= Responsive Breakpoint'ler ========= */
+    --transition-timing: ease;
+    /* ========= Responsive Breakpoint'ler ========= */
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
     --breakpoint-xxl: 1400px;
-    
+
     /* ========= Responsive Değişkenler (Theme.php uyumlu) ========= */
     --mobile-breakpoint: 576px;
     --tablet-breakpoint: 768px;
@@ -316,127 +357,209 @@
 /* Koyu Tema */
 [data-theme="dark"] {
     /* ========= Temel Renkler ========= */
-    --primary-color: #8ab4f8;            /* Ana renk - Koyu tema için daha açık mavi */
-    --primary-light-color: #aecbfa;      /* Ana rengin açık tonu */
-    --primary-dark-color: #669df6;       /* Ana rengin koyu tonu */
-    --accent-color: #fdd663;             /* Vurgu rengi - Sarı */
-    --success-color: #81c995;            /* Başarı rengi - Yeşil */
-    --danger-color: #f28b82;             /* Tehlike rengi - Kırmızı */
+    --primary-color: #8ab4f8;
+    /* Ana renk - Koyu tema için daha açık mavi */
+    --primary-light-color: #aecbfa;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #669df6;
+    /* Ana rengin koyu tonu */
+    --accent-color: #fdd663;
+    /* Vurgu rengi - Sarı */
+    --success-color: #81c995;
+    /* Başarı rengi - Yeşil */
+    --danger-color: #f28b82;
+    /* Tehlike rengi - Kırmızı */
 
     /* ========= Metin Renkleri ========= */
-    --text-primary-color: #e8eaed;          /* Ana metin rengi */
-    --text-primary-color: #e8eaed;       /* Ana metin rengi */
-    --text-secondary-color: #9aa0a6;     /* İkincil metin rengi */
-    --text-muted-color: #80868b;         /* Soluk metin rengi */
-    --text-light-color: #e8eaed;         /* Açık zemin üzerindeki metin */
-    --text-dark-color: #202124;          /* Koyu zemin üzerindeki metin */
-    --link-color: #8ab4f8;               /* Bağlantı rengi */
-    --link-hover-color: #aecbfa;         /* Bağlantı üzerine gelindiğindeki renk */
+    --text-primary-color: #e8eaed;
+    /* Ana metin rengi */
+    --text-primary-color: #e8eaed;
+    /* Ana metin rengi */
+    --text-secondary-color: #9aa0a6;
+    /* İkincil metin rengi */
+    --text-muted-color: #80868b;
+    /* Soluk metin rengi */
+    --text-light-color: #e8eaed;
+    /* Açık zemin üzerindeki metin */
+    --text-dark-color: #202124;
+    /* Koyu zemin üzerindeki metin */
+    --link-color: #8ab4f8;
+    /* Bağlantı rengi */
+    --link-hover-color: #aecbfa;
+    /* Bağlantı üzerine gelindiğindeki renk */
 
     /* ========= Arka Plan Renkleri ========= */
-    --body-bg-color: #202124;            /* Sayfa arka planı */
-    --content-bg-color: #292a2d;         /* İçerik arka planı */
-    --background-primary-color: #292a2d; /* Ana arka plan rengi */
-    --background-secondary-color: #202124; /* İkincil arka plan rengi */
-    --background-light-color: #3c4043;   /* Açık arka plan rengi */
-    --background-dark-color: #1d1d1f;    /* Koyu arka plan rengi */
+    --body-bg-color: #202124;
+    /* Sayfa arka planı */
+    --content-bg-color: #292a2d;
+    /* İçerik arka planı */
+    --background-primary-color: #292a2d;
+    /* Ana arka plan rengi */
+    --background-secondary-color: #202124;
+    /* İkincil arka plan rengi */
+    --background-light-color: #3c4043;
+    /* Açık arka plan rengi */
+    --background-dark-color: #1d1d1f;
+    /* Koyu arka plan rengi */
 
     /* ========= Sınır ve Kenarlıklar ========= */
-    --border-color: #5f6368;             /* Kenar rengi */
-    --border-light-color: #3c4043;       /* Açık kenar rengi */
-    --border-dark-color: #9aa0a6;        /* Koyu kenar rengi */
+    --border-color: #5f6368;
+    /* Kenar rengi */
+    --border-light-color: #3c4043;
+    /* Açık kenar rengi */
+    --border-dark-color: #9aa0a6;
+    /* Koyu kenar rengi */
     --border-base: solid 1px #5f6368;
 
     /* ========= Form Elemanları ========= */
-    --input-bg-color: #303134;           /* Form alanı arka planı */
-    --input-color: #e8eaed;              /* Form alanı metin rengi */
-    --form-placeholder-color: #9aa0a6;   /* Form alanı placeholder rengi */
+    --input-bg-color: #303134;
+    /* Form alanı arka planı */
+    --input-color: #e8eaed;
+    /* Form alanı metin rengi */
+    --form-placeholder-color: #9aa0a6;
+    /* Form alanı placeholder rengi */
 }
 
 /* Mavi-Turkuaz Tema */
 [data-theme="blue-turquoise"] {
-    --primary-color: #0288d1;            /* Ana renk - Mavi */
-    --primary-light-color: #5eb8ff;      /* Ana rengin açık tonu */
-    --primary-dark-color: #005b9f;       /* Ana rengin koyu tonu */
-    --accent-color: #26a69a;             /* Vurgu rengi - Turkuaz */
-    --success-color: #2e7d32;            /* Başarı rengi */
-    --body-bg-color: #f5f5f5;            /* Sayfa arka planı */
-    --content-bg-color: #ffffff;         /* İçerik arka planı */
-    --text-primary-color: #212121;          /* Ana metin rengi */
-    --border-color: #e0e0e0;             /* Kenar rengi */
+    --primary-color: #0288d1;
+    /* Ana renk - Mavi */
+    --primary-light-color: #5eb8ff;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #005b9f;
+    /* Ana rengin koyu tonu */
+    --accent-color: #26a69a;
+    /* Vurgu rengi - Turkuaz */
+    --success-color: #2e7d32;
+    /* Başarı rengi */
+    --body-bg-color: #f5f5f5;
+    /* Sayfa arka planı */
+    --content-bg-color: #ffffff;
+    /* İçerik arka planı */
+    --text-primary-color: #212121;
+    /* Ana metin rengi */
+    --border-color: #e0e0e0;
+    /* Kenar rengi */
 }
 
 /* Yeşil-Doğal Tema */
 [data-theme="green-nature"] {
-    --primary-color: #43a047;            /* Ana renk - Yeşil */
-    --primary-light-color: #76d275;      /* Ana rengin açık tonu */
-    --primary-dark-color: #00701a;       /* Ana rengin koyu tonu */
-    --accent-color: #ffb300;             /* Vurgu rengi - Amber */
-    --success-color: #1b5e20;            /* Başarı rengi */
-    --body-bg-color: #f1f8e9;            /* Sayfa arka planı */
-    --content-bg-color: #ffffff;         /* İçerik arka planı */
-    --text-primary-color: #33691e;          /* Ana metin rengi */
-    --border-color: #c5e1a5;             /* Kenar rengi */
+    --primary-color: #43a047;
+    /* Ana renk - Yeşil */
+    --primary-light-color: #76d275;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #00701a;
+    /* Ana rengin koyu tonu */
+    --accent-color: #ffb300;
+    /* Vurgu rengi - Amber */
+    --success-color: #1b5e20;
+    /* Başarı rengi */
+    --body-bg-color: #f1f8e9;
+    /* Sayfa arka planı */
+    --content-bg-color: #ffffff;
+    /* İçerik arka planı */
+    --text-primary-color: #33691e;
+    /* Ana metin rengi */
+    --border-color: #c5e1a5;
+    /* Kenar rengi */
 }
 
 /* Sıcak Turuncu Tema */
 [data-theme="warm-orange"] {
-    --primary-color: #f57c00;            /* Ana renk - Turuncu */
-    --primary-light-color: #ffad42;      /* Ana rengin açık tonu */
-    --primary-dark-color: #bb4d00;       /* Ana rengin koyu tonu */
-    --accent-color: #7e57c2;             /* Vurgu rengi - Mor */
-    --success-color: #2e7d32;            /* Başarı rengi */
-    --body-bg-color: #fff3e0;            /* Sayfa arka planı */
-    --content-bg-color: #ffffff;         /* İçerik arka planı */
-    --text-primary-color: #5d4037;          /* Ana metin rengi */
-    --border-color: #ffcc80;             /* Kenar rengi */
+    --primary-color: #f57c00;
+    /* Ana renk - Turuncu */
+    --primary-light-color: #ffad42;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #bb4d00;
+    /* Ana rengin koyu tonu */
+    --accent-color: #7e57c2;
+    /* Vurgu rengi - Mor */
+    --success-color: #2e7d32;
+    /* Başarı rengi */
+    --body-bg-color: #fff3e0;
+    /* Sayfa arka planı */
+    --content-bg-color: #ffffff;
+    /* İçerik arka planı */
+    --text-primary-color: #5d4037;
+    /* Ana metin rengi */
+    --border-color: #ffcc80;
+    /* Kenar rengi */
 }
 
 /* Mor-Pembe Tema */
 [data-theme="purple-pink"] {
-    --primary-color: #7b1fa2;            /* Ana renk - Mor */
-    --primary-light-color: #ae52d4;      /* Ana rengin açık tonu */
-    --primary-dark-color: #4a0072;       /* Ana rengin koyu tonu */
-    --accent-color: #ec407a;             /* Vurgu rengi - Pembe */
-    --success-color: #388e3c;            /* Başarı rengi */
-    --body-bg-color: #f3e5f5;            /* Sayfa arka planı */
-    --content-bg-color: #ffffff;         /* İçerik arka planı */
-    --text-primary-color: #4a148c;          /* Ana metin rengi */
-    --border-color: #ce93d8;             /* Kenar rengi */
+    --primary-color: #7b1fa2;
+    /* Ana renk - Mor */
+    --primary-light-color: #ae52d4;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #4a0072;
+    /* Ana rengin koyu tonu */
+    --accent-color: #ec407a;
+    /* Vurgu rengi - Pembe */
+    --success-color: #388e3c;
+    /* Başarı rengi */
+    --body-bg-color: #f3e5f5;
+    /* Sayfa arka planı */
+    --content-bg-color: #ffffff;
+    /* İçerik arka planı */
+    --text-primary-color: #4a148c;
+    /* Ana metin rengi */
+    --border-color: #ce93d8;
+    /* Kenar rengi */
 }
 
 /* Pastel Tema */
 [data-theme="pastel"] {
-    --primary-color: #81c784;            /* Ana renk - Pastel Yeşil */
-    --primary-light-color: #b2fab4;      /* Ana rengin açık tonu */
-    --primary-dark-color: #519657;       /* Ana rengin koyu tonu */
-    --accent-color: #ffcc80;             /* Vurgu rengi - Pastel Turuncu */
-    --success-color: #66bb6a;            /* Başarı rengi */
-    --body-bg-color: #e8f5e9;            /* Sayfa arka planı */
-    --content-bg-color: #ffffff;         /* İçerik arka planı */
-    --text-primary-color: #607d8b;          /* Ana metin rengi - Mavi Gri */
-    --border-color: #b2dfdb;             /* Kenar rengi */
+    --primary-color: #81c784;
+    /* Ana renk - Pastel Yeşil */
+    --primary-light-color: #b2fab4;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #519657;
+    /* Ana rengin koyu tonu */
+    --accent-color: #ffcc80;
+    /* Vurgu rengi - Pastel Turuncu */
+    --success-color: #66bb6a;
+    /* Başarı rengi */
+    --body-bg-color: #e8f5e9;
+    /* Sayfa arka planı */
+    --content-bg-color: #ffffff;
+    /* İçerik arka planı */
+    --text-primary-color: #607d8b;
+    /* Ana metin rengi - Mavi Gri */
+    --border-color: #b2dfdb;
+    /* Kenar rengi */
 }
 
 /* Kurumsal Tema */
 [data-theme="corporate"] {
-    --primary-color: #1565c0;            /* Ana renk - Koyu Mavi */
-    --primary-light-color: #5e92f3;      /* Ana rengin açık tonu */
-    --primary-dark-color: #003c8f;       /* Ana rengin koyu tonu */
-    --accent-color: #546e7a;             /* Vurgu rengi - Mavi Gri */
-    --success-color: #2e7d32;            /* Başarı rengi */
-    --body-bg-color: #eceff1;            /* Sayfa arka planı */
-    --content-bg-color: #ffffff;         /* İçerik arka planı */
-    --text-primary-color: #263238;          /* Ana metin rengi */
-    --border-color: #cfd8dc;             /* Kenar rengi */
+    --primary-color: #1565c0;
+    /* Ana renk - Koyu Mavi */
+    --primary-light-color: #5e92f3;
+    /* Ana rengin açık tonu */
+    --primary-dark-color: #003c8f;
+    /* Ana rengin koyu tonu */
+    --accent-color: #546e7a;
+    /* Vurgu rengi - Mavi Gri */
+    --success-color: #2e7d32;
+    /* Başarı rengi */
+    --body-bg-color: #eceff1;
+    /* Sayfa arka planı */
+    --content-bg-color: #ffffff;
+    /* İçerik arka planı */
+    --text-primary-color: #263238;
+    /* Ana metin rengi */
+    --border-color: #cfd8dc;
+    /* Kenar rengi */
 }
 
 /* Tema Geçiş Efekti */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     transition: background-color var(--transition-speed) var(--transition-timing),
-                color var(--transition-speed) var(--transition-timing),
-                border-color var(--transition-speed) var(--transition-timing),
-                box-shadow var(--transition-speed) var(--transition-timing);
+        color var(--transition-speed) var(--transition-timing),
+        border-color var(--transition-speed) var(--transition-timing),
+        box-shadow var(--transition-speed) var(--transition-timing);
 }
 
 /* Tema Değiştirici için Örnek CSS */

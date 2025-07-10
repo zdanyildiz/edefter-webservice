@@ -37,10 +37,7 @@
     text-align: end;
 }
 
-.page-box-link a {
 
-
-}
 .page-box button{
     background-color: var(--add-to-cart-bg-color);
     color: var(--add-to-cart-text-color);

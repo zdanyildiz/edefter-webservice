@@ -722,8 +722,8 @@ iframe.youtubevideo {
 .product-details div.product-campaign {
     width: 96%;
     padding: 20px;
-    background: var(--alert-success-bg);
-    color: var(--alert-success-text);
+    background: var(--success-color);
+    color: var(--success-color);
     box-shadow: var(--box-shadow-base);
     margin: 0 2% 15px 2%;
 }
@@ -882,10 +882,12 @@ iframe.youtubevideo {
     .product-box .product-image-container {
         height: 180px;
     }
-.product-box {
+
+    .product-box {
         width: 48%;
 
     }
+
     .product-images {
         width: 100%;
         padding: var(--spacing-md);
@@ -896,7 +898,7 @@ iframe.youtubevideo {
         height: auto;
         box-shadow: var(--box-shadow-sm);
         border-radius: var(--border-radius-base);
-        }
+    }
 
     .product-images .product-images-thumbs {
         width: 100%;

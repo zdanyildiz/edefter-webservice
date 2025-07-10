@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Dosyaları Karşılaştırma Raporu</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { background: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .stat-card { background: #e9ecef; padding: 15px; border-radius: 5px; text-align: center; }
+        .stat-card h3 { margin: 0 0 10px 0; color: #495057; }
+        .stat-card .number { font-size: 24px; font-weight: bold; color: #007bff; }
+        .section { margin-bottom: 30px; }
+        .section h2 { color: #495057; border-bottom: 2px solid #dee2e6; padding-bottom: 10px; }
+        .variable { background: #f8f9fa; padding: 10px; margin: 5px 0; border-left: 3px solid #007bff; }
+        .variable-name { font-weight: bold; color: #495057; }
+        .variable-value { color: #6c757d; margin-left: 20px; }
+        .diff-container { display: flex; gap: 20px; }
+        .diff-item { flex: 1; background: #fff3cd; padding: 10px; border-radius: 5px; }
+        .diff-item.index { border-left: 3px solid #dc3545; }
+        .diff-item.index1 { border-left: 3px solid #28a745; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CSS Dosyaları Karşılaştırma Raporu</h1>
+        <p><strong>Tarih:</strong> 2025-07-10 08:14:12</p>
+        <p><strong>Dosya 1:</strong> index.css</p>
+        <p><strong>Dosya 2:</strong> index-1.css</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>index.css</h3>
+            <div class="number">237</div>
+            <small>Toplam Değişken</small>
+        </div>
+        <div class="stat-card">
+            <h3>index-1.css</h3>
+            <div class="number">196</div>
+            <small>Toplam Değişken</small>
+        </div>
+        <div class="stat-card">
+            <h3>Ortak Değişken</h3>
+            <div class="number">191</div>
+            <small>Her iki dosyada da var</small>
+        </div>
+        <div class="stat-card">
+            <h3>Benzerlik</h3>
+            <div class="number">%100</div>
+            <small>Benzerlik Oranı</small>
+        </div>
+    </div><div class="section">
+                <h2>Sadece index.css'de Olan Değişkenler (46)</h2><div class="variable">
+                    <div class="variable-name">--font-family-primary</div>
+                    <div class="variable-value">&#039;Roboto&#039;, &#039;Segoe UI&#039;, Arial, sans-serif</div>
+                </div><div class="variable">
+                    <div class="variable-name">--font-family-secondary</div>
+                    <div class="variable-value">&#039;Open Sans&#039;, &#039;Helvetica Neue&#039;, sans-serif</div>
+                </div><div class="variable">
+                    <div class="variable-name">--font-weight-light</div>
+                    <div class="variable-value">300</div>
+                </div><div class="variable">
+                    <div class="variable-name">--font-weight-regular</div>
+                    <div class="variable-value">400</div>
+                </div><div class="variable">
+                    <div class="variable-name">--font-weight-medium</div>
+                    <div class="variable-value">500</div>
+                </div><div class="variable">
+                    <div class="variable-name">--font-weight-bold</div>
+                    <div class="variable-value">700</div>
+                </div><div class="variable">
+                    <div class="variable-name">--line-height-base</div>
+                    <div class="variable-value">1.5</div>
+                </div><div class="variable">
+                    <div class="variable-name">--line-height-heading</div>
+                    <div class="variable-value">1.2</div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-banner-bg-color</div>
+                    <div class="variable-value">var(--primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-banner-h1-color</div>
+                    <div class="variable-value">var(--content-bg-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-banner-p-color</div>
+                    <div class="variable-value">var(--content-bg-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-banner-h1-font-size</div>
+                    <div class="variable-value">var(--font-size-large)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-banner-p-font-size</div>
+                    <div class="variable-value">var(--font-size-normal)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--middle-content-banner-width</div>
+                    <div class="variable-value">50%</div>
+                </div><div class="variable">
+                    <div class="variable-name">--bottom-banner-width</div>
+                    <div class="variable-value">100%</div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-color</div>
+                    <div class="variable-value">var(--text-primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-focus-color</div>
+                    <div class="variable-value">var(--text-primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-border</div>
+                    <div class="variable-value">1px solid var(--accent-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-focus-border</div>
+                    <div class="variable-value">1px solid var(--primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--select-bg-color</div>
+                    <div class="variable-value">var(--secondary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--select-text-color</div>
+                    <div class="variable-value">var(--text-primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--select-focus-color</div>
+                    <div class="variable-value">var(--text-primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--overlay-bg-color</div>
+                    <div class="variable-value">rgba(0, 0, 0, 0.5)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--modal-bg-color</div>
+                    <div class="variable-value">var(--content-bg-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--modal-text-color</div>
+                    <div class="variable-value">var(--text-primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--tooltip-bg-color</div>
+                    <div class="variable-value">#333333</div>
+                </div><div class="variable">
+                    <div class="variable-name">--tooltip-text-color</div>
+                    <div class="variable-value">#ffffff</div>
+                </div><div class="variable">
+                    <div class="variable-name">--pagination-bg-color</div>
+                    <div class="variable-value">var(--primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--pagination-active-bg-color</div>
+                    <div class="variable-value">var(--secondary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--pagination-text-color</div>
+                    <div class="variable-value">var(--text-primary-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--pagination-active-text-color</div>
+                    <div class="variable-value">var(--accent-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--alert-success-bg</div>
+                    <div class="variable-value">#d4edda</div>
+                </div><div class="variable">
+                    <div class="variable-name">--alert-success-text</div>
+                    <div class="variable-value">#155724</div>
+                </div><div class="variable">
+                    <div class="variable-name">--alert-warning-bg</div>
+                    <div class="variable-value">#fff3cd</div>
+                </div><div class="variable">
+                    <div class="variable-name">--alert-warning-text</div>
+                    <div class="variable-value">#856404</div>
+                </div><div class="variable">
+                    <div class="variable-name">--alert-danger-bg</div>
+                    <div class="variable-value">#f8d7da</div>
+                </div><div class="variable">
+                    <div class="variable-name">--alert-danger-text</div>
+                    <div class="variable-value">#721c24</div>
+                </div><div class="variable">
+                    <div class="variable-name">--alert-info-bg</div>
+                    <div class="variable-value">#d1ecf1</div>
+                </div><div class="variable">
+                    <div class="variable-name">--alert-info-text</div>
+                    <div class="variable-value">#0c5460</div>
+                </div><div class="variable">
+                    <div class="variable-name">--footer-menu-bg-color</div>
+                    <div class="variable-value">var(--content-bg-color)</div>
+                </div><div class="variable">
+                    <div class="variable-name">--footer-logo-width</div>
+                    <div class="variable-value">400px</div>
+                </div><div class="variable">
+                    <div class="variable-name">--footer-logo-height</div>
+                    <div class="variable-value">400px</div>
+                </div><div class="variable">
+                    <div class="variable-name">--transition-speed</div>
+                    <div class="variable-value">0.3s</div>
+                </div><div class="variable">
+                    <div class="variable-name">--transition-timing</div>
+                    <div class="variable-value">ease</div>
+                </div><div class="variable">
+                    <div class="variable-name">--breakpoint-sm</div>
+                    <div class="variable-value">576px</div>
+                </div><div class="variable">
+                    <div class="variable-name">--breakpoint-xxl</div>
+                    <div class="variable-value">1400px</div>
+                </div></div><div class="section">
+                <h2>Sadece index-1.css'de Olan Değişkenler (5)</h2><div class="variable">
+                    <div class="variable-name">--body-text-color</div>
+                    <div class="variable-value">#212529</div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-border-radius-1</div>
+                    <div class="variable-value">5px</div>
+                </div><div class="variable">
+                    <div class="variable-name">--btn-border-radius</div>
+                    <div class="variable-value">5px</div>
+                </div><div class="variable">
+                    <div class="variable-name">--product-image-aspect-ratio</div>
+                    <div class="variable-value">1/1</div>
+                </div><div class="variable">
+                    <div class="variable-name">--enable-touch-swipe</div>
+                    <div class="variable-value">on</div>
+                </div></div><div class="section">
+                <h2>Farklı Değerlere Sahip Değişkenler (92)</h2><div class="variable">
+                    <div class="variable-name">--primary-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#1d4ed8
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--primary-light-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#ff9f5e
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#6ea8fe
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--primary-dark-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#cc5a1e
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0a58ca
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--secondary-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>rgba(122,122,122,0.1)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#6c757d
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--secondary-light-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>rgba(122,122,122,0.05)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#e9ecef
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--secondary-dark-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>rgba(122,122,122,0.15)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#495057
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--accent-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#0066ff
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--success-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#28a745
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#198754
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--info-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#17a2b8
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0dcaf0
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--text-primary-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#000000
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--text-muted-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#999999
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#869ab8
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--link-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--link-hover-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--accent-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0a58ca
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--heading-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#1a1a1a
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0a2540
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--body-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#efefef
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#f8f9fa
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--background-secondary-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#efefef
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#f8f9fa
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--background-light-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#f8f9fa
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#ffffff
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--font-size-large</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>20px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>18px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--font-size-xlarge</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>24px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>22px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--font-size-xxlarge</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>32px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>26px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-container-margin-top</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>0
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-container-mobile-margin-top</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>85px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>95px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--content-bg-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#f8f9fa
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-link-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#6c757d
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-link-hover-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-icon-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#6c757d
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-icon-hover-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-bg-color-mobile</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--content-bg-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#ffffff
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-link-color-mobile</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--content-bg-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#6c757d
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-link-hover-color-mobile</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--accent-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-icon-color-mobile</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#6c757d
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--top-contact-and-social-icon-hover-color-mobile</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--accent-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--header-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--content-bg-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#ffffff
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--header-min-height</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>80px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>75px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--header-mobile-min-height</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>80px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>75px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--header-logo-width</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>231px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>180px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--header-logo-mobile-width</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>150px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>140px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--header-border-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#e9ecef
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#dee2e6
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--header-mobile-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--content-bg-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#ffffff
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--header-mobile-border-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#e9ecef
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#dee2e6
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-icon-color-search</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-icon-color-member</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-icon-color-favorites</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-icon-color-basket</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-icon-hover-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--mobile-action-icon-gap</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>12px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>12
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--mobile-action-icon-phone-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#28a745
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#198754
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--mobile-action-icon-basket-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-mobile-icon-color-search</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-mobile-icon-color-member</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-mobile-icon-color-favorites</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--shop-menu-container-mobile-icon-color-basket</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>var(--text-primary-color)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--menu-text-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#333333
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#495057
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--menu-hover-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#000000
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--menu-active-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--menu-active-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>rgba(66,133,244,0.1)
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#000000
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--submenu-text-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#333333
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#495057
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--submenu-hover-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#000000
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--submenu-border-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#e9ecef
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#dee2e6
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--submenu-width</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>200px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>220px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--mobile-menu-text-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#333333
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--mobile-menu-hover-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--mobile-menu-divider-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#e9ecef
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#dee2e6
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--hamburger-icon-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#333333
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--product-box-border-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#e9ecef
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#dee2e6
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--product-box-hover-border-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--product-box-border-radius</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>8px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>5px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--product-title-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#212529
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0a2540
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--product-discount-badge-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#dc3545
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#198754
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--add-to-cart-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--add-to-cart-hover-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#3367d6
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0a58ca
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-border-radius</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>4px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>5px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-focus-border-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-text-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#495057
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#212529
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--form-success-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#28a745
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#198754
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--btn-primary-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--btn-primary-hover-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#3367d6
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0a58ca
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--btn-primary-border-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--btn-secondary-hover-bg-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#5a6268
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#5c636a
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--btn-outline-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#4285f4
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0d6efd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--input-height</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>38px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>40px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--btn-padding-y</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>12px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>10px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--btn-padding-x</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>24px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>20px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--footer-background-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#343a40
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#0a2540
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--footer-text-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#ffffff
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#adb5bd
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--footer-link-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#adb5bd
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#ffffff
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--footer-link-hover-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#ffffff
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#6ea8fe
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--copyright-background-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#212529
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#051321
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--copyright-text-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#6c757d
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#869ab8
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--copyright-border-top-color</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>#495057
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>#213d5b
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--desktop-max-width</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>1400px
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>1200px
+                        </div>
+                    </div>
+                </div><div class="variable">
+                    <div class="variable-name">--mobile-line-height</div>
+                    <div class="diff-container">
+                        <div class="diff-item index">
+                            <strong>index.css:</strong><br>1.5
+                        </div>
+                        <div class="diff-item index1">
+                            <strong>index-1.css:</strong><br>1.5px
+                        </div>
+                    </div>
+                </div></div></body></html>

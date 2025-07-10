@@ -145,7 +145,7 @@
 .product-image-container:hover .product-image.none {
     opacity: 1; /* Mouse üzerine gelindiğinde ikinci resim görünür olur */
 }
-@media (max-width: var(--tablet-breakpoint)) {
+@media (max-width: 962px) {
     .favorite-product-container .product-box{
         width: 48%;height: 310px;
     }

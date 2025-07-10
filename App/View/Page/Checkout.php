@@ -261,7 +261,7 @@ print_r($siteConfig);*/
     </div>
 </div>
 <div class="address-form-modal">
-    <span class="close-address-form-modal">&times;</span>
+    <span class="close-address-form-modal btn">&times;</span>
     <div class="address-form-container">
         <h1><?=_form_adres_baslik_yazi?></h1>
 
