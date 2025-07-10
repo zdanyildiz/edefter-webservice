@@ -128,7 +128,10 @@ class BannerManager
         if (!empty($result['banners'])) {
             $result['groupId'] = $result['banners'][0]['group_info']['id'] ?? null;
         }
-        $result['groupId'] = null;
+        else{
+            $result['groupId'] = null;
+        }
+        
         return $result;
     }
 

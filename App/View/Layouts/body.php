@@ -191,9 +191,9 @@ if($session->getSession("mainPage")!=[]){
 
 $bannerManager = BannerManager::getInstance();
 $popupBannerResults = $bannerManager->getPopupBanners($bannerPageID, $bannerCategoryID);
-//echo '<pre>';print_r($popupBannerResults);
+//echo '<pre>';print_r($popupBannerResults);echo '</pre>';
 if(isset($popupBannerResults['groupId']) && !empty($popupBannerResults['groupId'])){
-
+//die("bgid:".$popupBannerResults['groupId']);
     $popupBannerGroupId = $popupBannerResults['groupId'];
     $popupBannerCookies = $session->getCookie("popupBanner-".$popupBannerGroupId);
 
