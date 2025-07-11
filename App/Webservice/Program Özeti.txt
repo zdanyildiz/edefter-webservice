@@ -1,0 +1,79 @@
+Global Pozitif E-Defter Görüntüleyici: Kapsamlı Özet
+
+1. Programın Genel Amacı ve Hedef Kitlesi
+
+Global Pozitif E-Defter Görüntüleyici, Türkiye'deki mali müşavirler ve muhasebe profesyonelleri için geliştirilmiş bir Windows Forms masaüstü uygulamasıdır. Temel amacı, Gelir İdaresi Başkanlığı'nın (GİB) standartlarına uygun olarak oluşturulmuş e-Defter XML dosyalarını (berat, yevmiye, kebir, defter raporu) ilgili XSLT şablonları ile dönüştürerek, GİB'in talep ettiği formatta ve kolayca okunabilir bir HTML arayüzünde görüntülemektir.
+
+2. Windows Üzerindeki İşleyişi ve Mimarisi
+
+Uygulama, son kullanıcı dostu ve güvenli bir deneyim sunmak üzere tasarlanmıştır.
+
+
+
+Kurulum ve Sistem Entegrasyonu:
+
+Uygulama, yönetici hakları gerektirmeyen, kullanıcı bazlı bir kurulum stratejisi izler (PrivilegesRequired=lowest) ve AppData klasörüne kurulur.
+
+Kurulum sırasında .xml dosya uzantısını otomatik olarak kendisiyle ilişkilendirir, böylece kullanıcılar e-defter dosyalarına çift tıklayarak doğrudan programda açabilirler.
+
+Çalışması için gerekli olan .NET 6.0 Desktop Runtime'ı, eğer sistemde yüklü değilse, kurulum sihirbazı otomatik olarak indirip kurar.
+
+Çalışma Anı ve Tek Örnek Kontrolü:
+
+Program, Mutex kullanarak aynı anda yalnızca tek bir kopyasının çalışmasını garanti eder. Eğer uygulama zaten açıkken yeni bir XML dosyası açılmak istenirse, yeni bir kopya oluşturmak yerine dosya yolunu mevcut pencereye gönderir.
+
+XML Görüntüleme İşlemi:
+
+Kullanıcılar "Dosya -> Aç" menüsü, sürükle-bırak veya dosyaya çift tıklama yoluyla XML dosyalarını yükleyebilir.
+
+Yüklenen her dosya, XmlProcessor.cs modülü tarafından işlenir. Bu modül, XML içindeki xml-stylesheet direktifini okuyarak hangi XSLT şablonunun (yevmiye.xslt, berat.xslt vb.) gerektiğini tespit eder.
+
+Gerekli XSLT şablonu yerel Resources klasöründe yoksa, güncelliği sağlamak adına otomatik olarak https://e-defter.globalpozitif.com.tr adresinden indirilir ve kaydedilir.
+
+XML ve XSLT birleştirilerek oluşturulan HTML içerik, modern bir WebView2 kontrolü içerisinde sekmeli bir yapıda kullanıcıya sunulur.
+
+3. Web Servis Entegrasyonu ve Kimlik Doğrulama
+
+Uygulama, hem çevrimiçi hem de çevrimdışı çalışabilen hibrit bir model kullanır.
+
+
+
+Kullanıcı Doğrulama ve Oturum Yönetimi:
+
+Kullanıcılar, e-posta ve şifreleriyle sisteme giriş yaparlar. Bu kimlik bilgileri, https://e-defter.globalpozitif.com.tr adresindeki bir web servisi üzerinden bilgisayar kimliği (computerId) ile birlikte doğrulanır.
+
+Başarılı girişin ardından, sunucudan gelen expireTime ve keyCode ile birlikte kimlik bilgileri kullanıcının bilgisayarında AppData\Local\GlobalPozitifXMLViewer klasöründe şifrelenerek (encrypted_credentials.txt) saklanır. Bu, internet bağlantısı olmadığında da programın kullanılabilmesini sağlar.
+
+Oturum süresi dolduğunda veya hesaba başka bir cihazdan giriş yapıldığında, kullanıcıdan tekrar kimlik doğrulaması istenir.
+
+4. Yardımcı Araçlar ve Katma Değerli Hizmetler
+
+Program, sadece bir görüntüleyiciden ibaret değildir; iki güçlü yardımcı araç içerir:
+
+
+
+GİB E-İmza Ortam Kontrol Aracı (GibCheckerForm.cs):
+
+Bu araç, kullanıcının bilgisayarını GİB e-imza uygulamaları için analiz eder.
+
+Java, AKİS akıllı kart sürücüsü kurulumlarını ve .jnlp dosyalarının javaws.exe ile doğru ilişkilendirilip ilişkilendirilmediğini kontrol eder.
+
+Kullanıcıya sisteminin uyumluluğu hakkında net bir rapor sunar.
+
+Yapay Zeka Destekli Teknik Asistan (Chatbot):
+
+Güvenli Mimari: API anahtarları gibi hassas bilgiler kullanıcı bilgisayarında tutulmaz. Tüm yapay zeka işlemleri, web servis üzerinden yürütülür.
+
+İletişim Protokolü: ChatbotService.cs sınıfı, http://l.edefter/?/webservice/chatbot/post/ altındaki status, consent ve message endpoint'leri ile iletişim kurar.
+
+Otomatik Bilgi Gönderimi: Sohbet başladığında, uygulama kullanıcının e-postası ve bilgisayar kimliği ile birlikte detaylı sistem bilgilerini (işletim sistemi, mimari, Java/AKİS/JNLP durumu) otomatik olarak web servise gönderir. Bu, asistanın "Java sürümünüz nedir?" gibi gereksiz sorular sormadan, doğrudan kişiselleştirilmiş ve doğru çözümler sunmasını sağlar.
+
+KVKK Uyumu: Chatbot hizmeti kullanılmadan önce, kullanıcıdan 6698 sayılı Kişisel Verilerin Korunması Kanunu'na uygun bir açık rıza onayı alınır. Onay verilmeden hizmet aktifleşmez ve onay bilgisi /consent endpoint'ine gönderilir.
+
+Demo Modu: Web servisine ulaşılamadığı durumlarda, chatbot çevrimdışı çalışarak Java, AKİS ve JNLP sorunları için önceden tanımlanmış, doğrulanmış çözüm senaryolarını kullanıcıya sunar. Bu, internet bağlantısı olmadığında bile kullanıcının temel destek alabilmesini sağlar.
+
+Akıllı Hata Yönetimi: HTTP veya JSON kaynaklı karmaşık hata mesajlarını otomatik olarak analiz edip, kullanıcı dostu Türkçe açıklamalara dönüştürür.
+
+5. Loglama ve Hata Takibi
+
+Logger.cs sınıfı, uygulama genelindeki tüm önemli olayları, hataları ve API yanıtlarını hem ana formdaki bir metin kutusuna hem de AppData içerisindeki log.txt dosyasına yazar. Log dosyası 5MB'ı aştığında otomatik olarak arşivlenir (log rotasyonu). Bu yapı, sorunların uzaktan teşhis edilmesini ve giderilmesini kolaylaştırır.

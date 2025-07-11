@@ -62,16 +62,174 @@ if ($action == "checkLastOrderByEmailAndPassword"){
         $message ='E-posta veya şifre hatalı';
         returnAndExit($status,$message);
     }
+
     $memberResult=$memberResult[0];
+    $isMemberActive = $memberResult["uyeaktif"];
+    if($isMemberActive == 0){
+        $status = 'error';
+        $message ='Üyeliğiniz aktif değil, lütfen e-posta doğrulaması yapın veya https://e-defter.globalpozitif.com.tr adresinden destek alın';
+        returnAndExit($status,$message);
+    }
 
     $memberID = $memberResult["uyeid"];
 
     $lastOrder = $member->getMemberLastOrder($memberID);
 
     if(!$lastOrder){
-        $status = 'error';
-        $message ='Bu hesaba ait sipariş bulunamadı';
-        returnAndExit($status,$message);
+        // Sipariş bulunamadı, deneme modu kontrol et
+        $trialUser = $user->checkTrialUser($memberID);
+        
+        if (!$trialUser) {
+            // Deneme kaydı yok, yeni deneme başlat
+            $addTrialResult = $user->addTrialUser($memberID, 30); // 30 günlük deneme
+            if (!$addTrialResult) {
+                $status = 'error';
+                $message = 'Deneme süresi başlatılamadı, lütfen tekrar deneyin';
+                returnAndExit($status, $message);
+            }
+            
+            // Yeni deneme kullanıcısı için session kontrolleri
+            $userSessionLog = $user->checkSessionAttemptByUserID($memberID);
+            if($userSessionLog){
+                $userSessionCount = count($userSessionLog);
+                if($userSessionCount >= 3){
+                    $status = 'error';
+                    $message ='Bu hesap birden çok cihazda kullanılıyor. \nGiriş yapamazsınız. \nKayıtlı adresinizden info@globalpozitif.com.tr ile iletişime geçin';
+                    returnAndExit($status,$message);
+                }
+            }
+
+            // Kullanıcı session kontrolleri
+            $checkUser = $user->checkUserByUserId($memberID);
+            $userSession = $user->checkUsers($memberID, $computerID);
+
+            if($checkUser && !$userSession){
+                $updateResult = $user->updateComputerId($memberID,$computerID);
+                if(!$updateResult){
+                    $status = 'error';
+                    $message ='Bir hata oluştu, daha sonra tekrar deneyin';
+                    returnAndExit($status,$message);
+                }
+
+                $checkLogUser = $user->checkSessionAttempt($memberID,$computerID);
+                if(!$checkLogUser){
+                    $addLogResult = $user->logSessionAttempt($memberID,$computerID);
+                    if(!$addLogResult){
+                        $status = 'error';
+                        $message ='Bir hata oluştu, daha sonra tekrar deneyin';
+                        returnAndExit($status,$message);
+                    }
+                }
+                
+                $status = 'error';
+                $message ='Bu hesap başka bir cihazda kullanılıyor. Lütfen tekrar giriş yapın.';
+                returnAndExit($status,$message);
+            }
+            elseif (!$checkUser && !$userSession) {
+                $addUserResult = $user->addUsers($memberID, $computerID);
+                if (!$addUserResult) {
+                    $status = 'error';
+                    $message = 'Bir hata oluştu, daha sonra tekrar deneyin';
+                    returnAndExit($status, $message);
+                }
+
+                $checkLogUser = $user->checkSessionAttempt($memberID,$computerID);
+                if(!$checkLogUser) {
+                    $addLogResult = $user->logSessionAttempt($memberID, $computerID);
+                    if (!$addLogResult) {
+                        $status = 'error';
+                        $message = 'Bir hata oluştu, daha sonra tekrar deneyin';
+                        returnAndExit($status, $message);
+                    }
+                }
+            }
+            
+            // Deneme süresi başarıyla başlatıldı
+            $trialEndDate = date('Y-m-d H:i:s', strtotime('+30 days'));
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Deneme süresi başlatıldı (30 gün)',
+                'expireTime' => $trialEndDate,
+                'keyCode' => $config->key,
+                'isTrial' => true
+            ]);
+            exit;
+        } else {
+            // Deneme kaydı var, süre kontrolü yap
+            $trialUser = $trialUser[0];
+            $isExpired = $user->isTrialExpired($memberID);
+            
+            if ($isExpired) {
+                $status = 'error';
+                $message = 'Deneme süreniz sona ermiştir. Lütfen https://e-defter.globalpozitif.com.tr adresinden satın alın';
+                returnAndExit($status, $message);
+            }
+            
+            // Deneme süresi aktif, session kontrolleri
+            $userSessionLog = $user->checkSessionAttemptByUserID($memberID);
+            if($userSessionLog){
+                $userSessionCount = count($userSessionLog);
+                if($userSessionCount >= 3){
+                    $status = 'error';
+                    $message ='Bu hesap birden çok cihazda kullanılıyor. \nGiriş yapamazsınız. \nKayıtlı adresinizden info@globalpozitif.com.tr ile iletişime geçin';
+                    returnAndExit($status,$message);
+                }
+            }
+
+            $checkUser = $user->checkUserByUserId($memberID);
+            $userSession = $user->checkUsers($memberID, $computerID);
+
+            if($checkUser && !$userSession){
+                $updateResult = $user->updateComputerId($memberID,$computerID);
+                if(!$updateResult){
+                    $status = 'error';
+                    $message ='Bir hata oluştu, daha sonra tekrar deneyin';
+                    returnAndExit($status,$message);
+                }
+
+                $checkLogUser = $user->checkSessionAttempt($memberID,$computerID);
+                if(!$checkLogUser){
+                    $addLogResult = $user->logSessionAttempt($memberID,$computerID);
+                    if(!$addLogResult){
+                        $status = 'error';
+                        $message ='Bir hata oluştu, daha sonra tekrar deneyin';
+                        returnAndExit($status,$message);
+                    }
+                }
+                
+                $status = 'error';
+                $message ='Bu hesap başka bir cihazda kullanılıyor. Lütfen tekrar giriş yapın.';
+                returnAndExit($status,$message);
+            }
+            elseif (!$checkUser && !$userSession) {
+                $addUserResult = $user->addUsers($memberID, $computerID);
+                if (!$addUserResult) {
+                    $status = 'error';
+                    $message = 'Bir hata oluştu, daha sonra tekrar deneyin';
+                    returnAndExit($status, $message);
+                }
+
+                $checkLogUser = $user->checkSessionAttempt($memberID,$computerID);
+                if(!$checkLogUser) {
+                    $addLogResult = $user->logSessionAttempt($memberID, $computerID);
+                    if (!$addLogResult) {
+                        $status = 'error';
+                        $message = 'Bir hata oluştu, daha sonra tekrar deneyin';
+                        returnAndExit($status, $message);
+                    }
+                }
+            }
+            
+            // Deneme süresi devam ediyor
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Deneme süresi devam ediyor',
+                'expireTime' => $trialUser['trial_end_date'],
+                'keyCode' => $config->key,
+                'isTrial' => true
+            ]);
+            exit;
+        }
     }
 
     $lastOrder = $lastOrder[0];

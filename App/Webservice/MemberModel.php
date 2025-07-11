@@ -4,10 +4,11 @@ class MemberModel
 {
     private $db;
 
-    public function __construct(Database $db) {
+    public function __construct($db) {
         $this->db = $db;
         $this->createTable();
         $this->createLogTable();
+        $this->createTrialUsersTable();
     }
 
     public function createTable() {
@@ -32,6 +33,23 @@ class MemberModel
                 computer_id VARCHAR(255) NOT NULL,
                 attempt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES uye(uyeid)
+            )
+        ";
+        return $this->db->createTable($query);
+    }
+
+    public function createTrialUsersTable() {
+        $query = "
+            CREATE TABLE IF NOT EXISTS trial_users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                member_id INT NOT NULL,
+                trial_start_date DATETIME NOT NULL,
+                trial_end_date DATETIME NOT NULL,
+                is_active BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                UNIQUE KEY unique_member_id (member_id),
+                FOREIGN KEY (member_id) REFERENCES uye(uyeid)
             )
         ";
         return $this->db->createTable($query);
@@ -101,5 +119,53 @@ class MemberModel
         $query = "
             SELECT * FROM user_sessions_log WHERE user_id = :userID";
         return $this->db->select($query, ['userID' => $userID]);
+    }
+
+    // Deneme kullanıcısı kontrolü
+    public function checkTrialUser($memberID) {
+        $query = "
+            SELECT * FROM trial_users WHERE member_id = :memberID AND is_active = 1
+        ";
+        return $this->db->select($query, ['memberID' => $memberID]);
+    }
+
+    // Deneme kullanıcısı ekleme
+    public function addTrialUser($memberID, $trialDays = 30) {
+        $trialStartDate = date('Y-m-d H:i:s');
+        $trialEndDate = date('Y-m-d H:i:s', strtotime("+{$trialDays} days"));
+        
+        $query = "
+            INSERT INTO trial_users (member_id, trial_start_date, trial_end_date, is_active)
+            VALUES (:memberID, :trialStartDate, :trialEndDate, 1)
+        ";
+        return $this->db->insert($query, [
+            'memberID' => $memberID,
+            'trialStartDate' => $trialStartDate,
+            'trialEndDate' => $trialEndDate
+        ]);
+    }
+
+    // Deneme süresi kontrolü
+    public function isTrialExpired($memberID) {
+        $query = "
+            SELECT trial_end_date FROM trial_users 
+            WHERE member_id = :memberID AND is_active = 1
+        ";
+        $result = $this->db->select($query, ['memberID' => $memberID]);
+        
+        if (!$result) {
+            return true; // Deneme kaydı yoksa süresi dolmuş kabul et
+        }
+        
+        $trialEndDate = $result[0]['trial_end_date'];
+        return strtotime($trialEndDate) < time();
+    }
+
+    // Deneme kullanıcısını deaktif etme
+    public function deactivateTrialUser($memberID) {
+        $query = "
+            UPDATE trial_users SET is_active = 0 WHERE member_id = :memberID
+        ";
+        return $this->db->update($query, ['memberID' => $memberID]);
     }
 }
