@@ -79,6 +79,8 @@ if ($action == "saveDesign" || $action == "savePreviewDesign"){
     $requestData['spacing-xl'] =  "32";
     $requestData['spacing-xxl'] =  "48";
 
+    $requestData['alert-danger-text'] =  "#ffffff";
+
     unset($requestData["action"]);
     unset($requestData["languageID"]);
     // JSON'a dönüştürme

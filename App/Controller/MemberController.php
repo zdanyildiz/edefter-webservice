@@ -335,10 +335,125 @@ if ($action == "register")
         exit();
     }
 
-    echo json_encode([
-        'status' => 'success',
-        'message' => _uye_ol_eposta_gonderim_basarili
-    ]);
+    // Sistem yöneticisine yeni üye kaydı bildirimi gönder
+    $adminEmailSubject = "Yeni Üye Kaydı - " . $requestData['name'] . " " . $requestData['surname'];
+    
+    $adminEmailTemplate = file_get_contents(Helpers.'mail-template/newMemberAdmin.php');
+    if(!$adminEmailTemplate) {
+        // Eğer özel template yoksa basit bir template oluştur
+        $adminEmailTemplate = "
+        <h2>Yeni Üye Kaydı</h2>
+        <p>Sisteme yeni bir üye kaydı yapıldı:</p>
+        <ul>
+            <li><strong>Ad Soyad:</strong> [member-name]</li>
+            <li><strong>E-posta:</strong> [member-email]</li>
+            <li><strong>Telefon:</strong> [member-phone]</li>
+            <li><strong>Kayıt Tarihi:</strong> [registration-date]</li>
+        </ul>
+        <p>Üye bilgilerini admin panelinden kontrol edebilirsiniz.</p>
+        ";
+    }
+    
+    $adminEmailTemplate = str_replace("[member-name]", $requestData['name'] . " " . $requestData['surname'], $adminEmailTemplate);
+    $adminEmailTemplate = str_replace("[member-email]", $requestData['email'], $adminEmailTemplate);
+    $adminEmailTemplate = str_replace("[member-phone]", $requestData['phone'], $adminEmailTemplate);
+    $adminEmailTemplate = str_replace("[registration-date]", date("d.m.Y H:i"), $adminEmailTemplate);
+    $adminEmailTemplate = str_replace("[company-name]", $companyName, $adminEmailTemplate);
+    
+    // Sistem yöneticisine e-posta gönder (başarısız olsa bile ana işlem devam etsin)
+    try {
+        $emailSender->sendEmail($companyEmail, $companyName, $adminEmailSubject, $adminEmailTemplate);
+    } catch (Exception $e) {
+        // Admin e-posta hatası log'a kaydedilir ama ana işlem durdurulamaz
+        error_log("Admin bildirim e-postası gönderilemedi: " . $e->getMessage());
+    }
+
+    // Başarılı üyelik sonrası otomatik login yap
+    $loginResult = $member->login($email, $password);
+    
+    if($loginResult){
+        $memberData = $loginResult[0];
+        $memberDataConvert = [
+            'memberStatus' => true,
+            'memberIdentificationNumber'=> (!empty($memberData['uyetcno'])) ? $helper->decrypt($memberData['uyetcno'], $config->key) : "",
+            'memberID' => $memberData['uyeid'],
+            'memberUniqID' => $memberData['benzersizid'],
+            'memberCreateDate' => $memberData['uyeolusturmatarih'],
+            'memberUpdateDate' => $memberData['uyeguncellemetarih'],
+            'memberType' => $memberData['uyetip'],
+            'memberTitle' => $memberData['memberTitle'],
+            'memberFirstName' => (!empty($memberData['uyead'])) ? $helper->decrypt($memberData['uyead'], $config->key) : "" ,
+            'memberLastName' => (!empty($memberData['uyesoyad'])) ?$helper->decrypt($memberData['uyesoyad'], $config->key) : "",
+            'memberEmail' => (!empty($memberData['uyeeposta'])) ? $helper->decrypt($memberData['uyeeposta'], $config->key) :"",
+            'memberPhone' => ($memberData['uyetelefon']) ? $helper->decrypt($memberData['uyetelefon'], $config->key) : "",
+            'memberDescription' => $memberData['uyeaciklama'],
+            'memberInvoiceName' => (!empty($memberData['uyefaturaad'])) ? $helper->decrypt($memberData['uyefaturaad'], $config->key) : "",
+            'memberInvoiceTaxOffice' => (!empty($memberData['uyefaturavergidairesi'])) ? $helper->decrypt($memberData['uyefaturavergidairesi'], $config->key) : "",
+            'memberInvoiceTaxNumber' => (!empty($memberData['uyefaturavergino'])) ? $helper->decrypt($memberData['uyefaturavergino'], $config->key) : "",
+            'memberActive' => $memberData['uyeaktif']
+        ];
+
+        $visitor = $casper->getVisitor();
+        
+        // oturumdaki ziyaretçi bilgileri alınır
+        $visitorUniqID = $visitor['visitorUniqID'];
+        
+        // oturumdaki ziyaretçi benzersizid'si ile üye benzersizid'si eşleştirilir
+        $visitor['visitorUniqID'] = $memberData['benzersizid'];
+        
+        // oturumdaki ziyaretçi bilgileri güncellenir
+        $visitor['visitorIsMember'] = $memberDataConvert;
+        
+        // sepetteki ziyaretçi benzersizid ile üye benzersizid'si eşleştirilir
+        $config->includeClass('Cart');
+        $cart = new Cart($db, $helper, $session, $config);
+        $cart->updateCartFromVisitorUniqIDtoMemberUniqID($visitorUniqID, $memberData['benzersizid']);
+        
+        // üyenin sepet bilgileri alınır
+        $cartInfo = $cart->getCart($memberData['benzersizid']);
+        
+        // üyenin sepet bilgileri oturuma kaydedilir
+        $visitor['visitorCart'] = $cartInfo;
+        
+        // oturumdan aldığımız ziyaretçi bilgilerini güncelle
+        $visitor['visitorEntryTime'] = date("Y-m-d H:i:s");
+        $visitor['visitorRemember'] = false; // Yeni üye olduğu için remember false
+        
+        $casper->setVisitor($visitor);
+        $session->updateSession('casper', $casper);
+        
+        $cookieVisitor = $visitor;
+        
+        unset($cookieVisitor['visitorCart']);
+        unset($cookieVisitor['visitorIsMember']['memberIdentificationNumber']);
+        unset($cookieVisitor['visitorIsMember']['memberUniqID']);
+        unset($cookieVisitor['visitorIsMember']['memberCreateDate']);
+        unset($cookieVisitor['visitorIsMember']['memberUpdateDate']);
+        unset($cookieVisitor['visitorIsMember']['memberName']);
+        unset($cookieVisitor['visitorIsMember']['memberFirstName']);
+        unset($cookieVisitor['visitorIsMember']['memberLastName']);
+        unset($cookieVisitor['visitorIsMember']['memberDescription']);
+        unset($cookieVisitor['visitorIsMember']['memberInvoiceName']);
+        unset($cookieVisitor['visitorIsMember']['memberInvoiceTaxOffice']);
+        unset($cookieVisitor['visitorIsMember']['memberInvoiceTaxNumber']);
+        unset($cookieVisitor['visitorIsMember']['memberActive']);
+        
+        $session->addCookie('visitor', $cookieVisitor, 12);
+        
+        // Başarılı üyelik ve otomatik login
+        echo json_encode([
+            'status' => 'success',
+            'message' => _uye_ol_eposta_gonderim_basarili . ' Otomatik giriş yapıldı.',
+            'autoLogin' => true,
+            'redirectUrl' => '/' // Ana sayfaya yönlendirme
+        ]);
+    } else {
+        // Login başarısız olursa sadece üyelik başarılı mesajı ver
+        echo json_encode([
+            'status' => 'success',
+            'message' => _uye_ol_eposta_gonderim_basarili
+        ]);
+    }
     exit();
 }
 elseif ($action == "login") {
@@ -433,9 +548,9 @@ elseif ($action == "login") {
             'memberEmail' => (!empty($memberData['uyeeposta'])) ? $helper->decrypt($memberData['uyeeposta'], $config->key) :"",
             'memberPhone' => ($memberData['uyetelefon']) ? $helper->decrypt($memberData['uyetelefon'], $config->key) : "",
             'memberDescription' => $memberData['uyeaciklama'],
-            'memberInvoiceName' => $helper->decrypt($memberData['uyefaturaad'], $config->key),
-            'memberInvoiceTaxOffice' => $helper->decrypt($memberData['uyefaturavergidairesi'], $config->key),
-            'memberInvoiceTaxNumber' => $helper->decrypt($memberData['uyefaturavergino'], $config->key),
+            'memberInvoiceName' => (!empty($memberData['uyefaturaad'])) ? $helper->decrypt($memberData['uyefaturaad'], $config->key) : "",
+            'memberInvoiceTaxOffice' => (!empty($memberData['uyefaturavergidairesi'])) ? $helper->decrypt($memberData['uyefaturavergidairesi'], $config->key) : "",
+            'memberInvoiceTaxNumber' => (!empty($memberData['uyefaturavergino'])) ? $helper->decrypt($memberData['uyefaturavergino'], $config->key) : "",
             'memberActive' => $memberData['uyeaktif']
         ];
 
@@ -915,7 +1030,7 @@ elseif ($action == "updateMember") {
 
         $visitor['visitorIsMember'] = [
             'memberStatus' => true,
-            'memberIdentificationNumber'=> $helper->decrypt($memberData['uyetcno'], $config->key),
+            'memberIdentificationNumber' => $helper->decrypt($memberData['uyetcno'], $config->key),
             'memberID' => $memberData['uyeid'],
             'memberUniqID' => $memberData['benzersizid'],
             'memberCreateDate' => $memberData['uyeolusturmatarih'],
@@ -1338,7 +1453,7 @@ elseif ($action == "getAddressByID"){
     $visitor['visitorIsMember']['memberAddress'] = $address;
     $visitor['visitorIsMember']['countries'] = $location->getAllCountries();
     $casper->setVisitor($visitor);
-    $session->updateSession('casper', $casper);
+    $session->updateSession('casper', $session);
     header("Location: " . $memberLink."?updateAddress"); exit();
 }
 elseif ($action == "deleteAddress"){
