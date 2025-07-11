@@ -1,14 +1,14 @@
 var languageCode = document.documentElement.lang;
-document.querySelector('#remind-password').addEventListener('click', function() {
-        document.querySelector('.remind-password-form-modal').classList.add('active');
-    }
+document.querySelector('#remind-password').addEventListener('click', function () {
+    document.querySelector('.remind-password-form-modal').classList.add('active');
+}
 );
-document.querySelector('.close-remind-password-form-modal').addEventListener('click', function() {
-        document.querySelector('.remind-password-form-modal').classList.remove('active');
-    }
+document.querySelector('.close-remind-password-form-modal').addEventListener('click', function () {
+    document.querySelector('.remind-password-form-modal').classList.remove('active');
+}
 );
 
-function resetTurnstile(){
+function resetTurnstile() {
     // --- TURNSTILE RESETLEME KISMI ---
     // Kullanıcı sayfada kalıyorsa ve tekrar deneme ihtimali varsa Turnstile'ı resetle.
     const turnstileContainerElement = document.getElementById('turnstile-container');
@@ -28,7 +28,7 @@ function resetTurnstile(){
 }
 
 //#remindPasswordForm formunu submit edildiğinde form alanlarını kontrol edelim.
-document.querySelector('#remindPasswordForm').addEventListener('submit', function(event) {
+document.querySelector('#remindPasswordForm').addEventListener('submit', function (event) {
     event.preventDefault();
     var form = document.querySelector('#remindPasswordForm');
     var action = form.querySelector('input[name="action"]').value;
@@ -61,7 +61,7 @@ document.querySelector('#remindPasswordForm').addEventListener('submit', functio
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // Başlığı ayarlıyoruz
     xhr.send(sendForm);
 
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             console.log(xhr.responseText);
             response = JSON.parse(xhr.responseText);
@@ -81,7 +81,7 @@ document.querySelector('#remindPasswordForm').addEventListener('submit', functio
     };
 });
 
-document.querySelector('#memberReqisterForm').addEventListener('submit', function(event) {
+document.querySelector('#memberReqisterForm').addEventListener('submit', function (event) {
     event.preventDefault();
     var form = document.querySelector('#memberReqisterForm');
     var websites = form.querySelector("#websites-memberReqisterForm").value;
@@ -148,7 +148,7 @@ document.querySelector('#memberReqisterForm').addEventListener('submit', functio
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // Başlığı ayarlıyoruz
     xhr.send(sendForm);
 
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             console.log(xhr.responseText);
             response = JSON.parse(xhr.responseText);
@@ -156,6 +156,14 @@ document.querySelector('#memberReqisterForm').addEventListener('submit', functio
             $message = response.message;
 
             showPopup($status, $message);
+
+            // Otomatik login durumunda ana sayfaya yönlendir
+            if ($status === 'success' && response.autoLogin === true) {
+                // 2 saniye sonra ana sayfaya yönlendir
+                setTimeout(function () {
+                    window.location.href = response.redirectUrl || '/';
+                }, 2000);
+            }
 
         } else {
             //alert('Bir hata oluştu. Lütfen tekrar deneyin');
@@ -166,7 +174,7 @@ document.querySelector('#memberReqisterForm').addEventListener('submit', functio
     };
 });
 
-document.querySelector("#memberLoginForm").addEventListener('submit', function(event) {
+document.querySelector("#memberLoginForm").addEventListener('submit', function (event) {
     event.preventDefault();
     let form = document.querySelector('#memberLoginForm');
     var websites = form.querySelector("#websites-memberLoginForm").value;
@@ -193,7 +201,7 @@ document.querySelector("#memberLoginForm").addEventListener('submit', function(e
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // Başlığı ayarlıyoruz
     xhr.send(sendForm);
 
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             console.log(xhr.responseText);
             response = JSON.parse(xhr.responseText);
@@ -252,21 +260,21 @@ function validatePhoneNumber(phoneNumber) {
 }
 
 //en az 8 en fazla 20 haneli olmalı, n az bir büyük bir de küçük harf olmalı
-function validatePassword(password){
-    if(password.length < 8){
+function validatePassword(password) {
+    if (password.length < 8) {
         return false;
     }
-    if(password.length > 20){
+    if (password.length > 20) {
         return false;
     }
-    if(!/[a-z]/.test(password)){
+    if (!/[a-z]/.test(password)) {
         return false;
     }
-    if(!/[A-Z]/.test(password)){
+    if (!/[A-Z]/.test(password)) {
         return false;
     }
     //if(!/[0-9]/.test(password)){
-        // return false;
+    // return false;
     //}
     return true;
 }

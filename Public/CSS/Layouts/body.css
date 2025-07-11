@@ -155,7 +155,7 @@ main {
     color: var(--form-label-color);
 }
 
-.btn{
+.btn,a.btn{
     display: inline-block;
     padding: var(--btn-padding-y) var(--btn-padding-x);
     border-radius: var(--btn-border-radius);
@@ -167,7 +167,10 @@ main {
     cursor: pointer;
     transition: background-color var(--transition-speed), color var(--transition-speed);
 }
-
+.btn:hover,a.btn:hover{
+    background-color: var(--btn-primary-hover-bg-color);
+    color: var(--btn-primary-text-color);
+}
 @media screen and (max-width:1024px){
     .language-select{display:none}
 }
