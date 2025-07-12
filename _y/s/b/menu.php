@@ -510,6 +510,18 @@ $languages = $languageModel->getLanguages();
 
             <!-- /Genel Ayarlar -->
 
+            <!-- Raporlama -->
+            <li class="gui-folder">
+                <a>
+                    <div class="gui-icon"><i class="md md-trending-up"></i></div>
+                    <span class="title">RAPORLAMA</span>
+                </a>
+                <ul>
+                    <li><a href="/_y/s/s/Reports/index.php" id="reportsphp"><span class="title">Analitik Raporlar</span></a></li>
+                </ul>
+            </li>
+            <!-- /Raporlama -->
+
             <!-- İşlemler -- >
 
             <li class="gui-folder">

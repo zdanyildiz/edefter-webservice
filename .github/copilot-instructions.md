@@ -100,7 +100,7 @@ if ($db->columnExists('tablename', 'columnname')) {
 ## 🗄️ Veritabanı Yönetimi
 
 ### Migration Sistemi (Phinx)
-**⚠️ KRİTİK**: Asla `database.sql` direkt düzenleme yapmayın!
+**⚠️ KRİTİK**: Asla `database.sql` direkt düzenleme yapmayın! Tüm şema değişiklikleri migration ile yapılmalı ve `database.sql` dosyası aşağıdaki yöntemle güncellenmelidir.
 
 ```powershell
 # Migration oluştur
@@ -113,6 +113,16 @@ vendor\bin\phinx migrate -c App\Database\phinx.php
 vendor\bin\phinx status -c App\Database\phinx.php
 ```
 
+### database.sql Dosyasını Güncelleme Protokolü
+**Veritabanı şemasında bir değişiklik yapıldığında (migration sonrası) `database.sql` dosyasını güncelleyin:**
+
+```powershell
+# Güncel veritabanı şemasını database.sql dosyasına aktar
+php Tests\System\UpdateDatabaseSchema.php
+```
+
+**Açıklama:** Bu komut, `Tests/System/GetLocalDatabaseInfo.php` dosyasını kullanarak yerel veritabanı bağlantı bilgilerini alır ve PDO aracılığıyla belirli tabloların `CREATE TABLE` ifadelerini çekerek `App/Database/database.sql` dosyasına yazar. Bu işlem, `database.sql` dosyasının her zaman güncel şemayı yansıtmasını sağlar ve `mysqldump` bağımlılığını ortadan kaldırır.
+
 ### Tablo Kontrol Protokolü
 **Her model/controller/test geliştirmeden ÖNCE mutlaka tablo ve sütun kontrolü yapın:**
 
@@ -122,10 +132,10 @@ include_once 'Tests/index.php';
 // Tablo varlık kontrolü
 $db = TestDatabase::getInstance();
 if (!$db->tableExists('sayfa')) {
-    throw new Exception('Sayfa tablosu bulunamadı!');
+    throw new Exception('Tablo bulunamadı!');
 }
 
-// Sütun varlık kontrolü
+// Sütun varlık kontrolü  
 if (!$db->columnExists('sayfa', 'sayfaad')) {
     throw new Exception('sayfaad sütunu bulunamadı!');
 }
