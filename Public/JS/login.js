@@ -157,6 +157,17 @@ document.querySelector('#memberReqisterForm').addEventListener('submit', functio
 
             showPopup($status, $message);
 
+            if ($status === 'success') {
+                gtag('event', 'sign_up', {
+                    'method': 'E-posta', 
+                    
+                    'event_callback': function () {
+                        document.location.href = "/";
+                    },
+                    'event_timeout': 2000
+                });
+            }
+
             // Otomatik login durumunda ana sayfaya yönlendir
             if ($status === 'success' && response.autoLogin === true) {
                 // 2 saniye sonra ana sayfaya yönlendir
@@ -210,7 +221,17 @@ document.querySelector("#memberLoginForm").addEventListener('submit', function (
 
             showPopup($status, $message);
             if ($status === 'success') {
-                document.location.href = "/";
+                var redirectUser = function () {
+                    document.location.href = "/";
+                };
+
+                // Google Analytics'e 'login' olayını gönderiyoruz ve callback'i belirtiyoruz.
+                console.log('Login olayı GA4\'e gönderiliyor (callback ile)...');
+                gtag('event', 'login', {
+                    'method': 'E-posta',
+                    'event_callback': redirectUser, // Olay gönderildikten sonra bu fonksiyonu çalıştır.
+                    'event_timeout': 2000 // 2 saniye içinde olay gönderilemezse yine de yönlendir (güvenlik önlemi).
+                });
             }
 
         } else {

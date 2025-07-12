@@ -67,14 +67,14 @@
 }
 
 /* Banner Title Stilleri */
-.top-banner .banner-title {
+.top-banner .title {
   font-weight: 700;
   margin-bottom: 15px;
   line-height: 1.2;
   color: inherit;}
 
 /* Banner Content Stilleri */
-.top-banner .banner-content {
+.top-banner .content {
   line-height: 1.6;
   margin-bottom: 20px;
   opacity: 0.9;
@@ -143,8 +143,19 @@
         gap: 20px;
         text-align: center;
     }
-    .top-banner .banner-title {
-        font-size: clamp(1.3rem, 3.2vw, 2rem);
+    .top-banner .content-box{
+        width: 100%;
+        max-width: 100%;
+    }
+    .top-banner .title {
+        padding: 10px 0 0 0;
+        font-size:21px
+    }
+    .top-banner .content {
+        font-size:17px
+    }
+    .top-banner .banner-button {
+        margin-bottom:10px
     }
 }
 

@@ -12,7 +12,7 @@
   BannerController.php içinde $bannerTypeName = "tepe-banner" olarak üretilir.
 */
 .banner-type-tepe-banner {
-  margin: 10px auto 20px auto; /* Üst, sağ/sol auto, alt */
+  margin: 0 auto 10px auto; /* Üst, sağ/sol auto, alt */
   padding: 0;
   box-sizing: border-box;
 }

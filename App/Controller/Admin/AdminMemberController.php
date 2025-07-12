@@ -615,6 +615,62 @@ elseif($action == "updateMemberPassword"){
         }
     }
 }
+elseif($action == "deleteAddress"){
+    $addressID = $requestData["addressID"] ?? null;
+    $memberID = $requestData["memberID"] ?? null;
+    
+    if(empty($addressID)){
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Adres ID alanı boş olamaz'
+        ]);
+        exit();
+    }
+    
+    if(empty($memberID)){
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Üye ID alanı boş olamaz'
+        ]);
+        exit();
+    }
+    
+    // Adresin bu üyeye ait olup olmadığını kontrol et
+    $address = $adminMember->getAddressByID($memberID, $addressID);
+    if(empty($address)){
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Adres bulunamadı veya bu üyeye ait değil'
+        ]);
+        exit();
+    }
+    
+    $adminMember->beginTransaction();
+    
+    $addressInfo = [
+        'addressID' => $addressID,
+        'memberID' => $memberID
+    ];
+    
+    $deleteResult = $adminMember->deleteAddress($addressInfo);
+    
+    if($deleteResult > 0){
+        $adminMember->commit();
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Adres başarıyla silindi'
+        ]);
+        exit();
+    }
+    else{
+        $adminMember->rollback();
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Adres silinirken bir hata oluştu'
+        ]);
+        exit();
+    }
+}
 else {
     echo json_encode([
         'status' => 'error',

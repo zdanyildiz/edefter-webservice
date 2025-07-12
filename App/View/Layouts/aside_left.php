@@ -57,7 +57,7 @@ if ($memberStatus) {
                     <?=$memberPhone?>
                 </div>
                 <div class="user-info-item">
-                    <a href="/?/control/member/get/logout" class="btn btn-danger"><?=_sol_uyelik_cikis_yazi?></a>
+                    <a href="/?/control/member/get/logout" id="logoutLink" class="btn btn-danger"><?=_sol_uyelik_cikis_yazi?></a>
                 </div>
             </div>
         </div>

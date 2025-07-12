@@ -120,7 +120,60 @@ class AdminMember {
 
     public function deleteMember($memberID)
     {
-        $sql = "
+        // Önce üye bilgilerini al (benzersiz ID için)
+        $memberInfo = $this->getMemberInfo($memberID);
+        if(empty($memberInfo)){
+            return 0; // Üye bulunamadı
+        }
+        
+        $memberUniqID = $memberInfo['memberUniqID'];
+        
+        // 1. Üyenin tüm adreslerini sil (soft delete)
+        $addressDeleteSql = "
+            UPDATE 
+                uyeadres 
+            SET 
+                adressil = 1
+            WHERE 
+                uyeid = :uyeid AND adressil = 0
+        ";
+        $this->db->update($addressDeleteSql, ['uyeid' => $memberID]);
+        
+        // 2. Üyenin sepetini sil (soft delete)
+        $cartDeleteSql = "
+            UPDATE 
+                uyesepet 
+            SET 
+                sepetsil = 1
+            WHERE 
+                uyebenzersiz = :uyebenzersiz AND sepetsil = 0
+        ";
+        $this->db->update($cartDeleteSql, ['uyebenzersiz' => $memberUniqID]);
+        
+        // 3. Üyenin yorumlarını sil (soft delete)
+        $commentDeleteSql = "
+            UPDATE 
+                yorum 
+            SET 
+                yorumsil = 0
+            WHERE 
+                uyeid = :uyeid AND yorumsil = 1
+        ";
+        $this->db->update($commentDeleteSql, ['uyeid' => $memberID]);
+        
+        // 4. Üyenin soru/mesajlarını sil (soft delete)
+        $messageDeleteSql = "
+            UPDATE 
+                sorusor 
+            SET 
+                mesajsil = 0
+            WHERE 
+                uyeid = :uyeid AND mesajsil = 1
+        ";
+        $this->db->update($messageDeleteSql, ['uyeid' => $memberID]);
+        
+        // 5. Son olarak üyeyi sil (soft delete) - siparişler silinmez, gizlenir
+        $memberDeleteSql = "
             UPDATE 
                 uye 
             SET 
@@ -128,8 +181,7 @@ class AdminMember {
             WHERE 
                 uyeid = :uyeid
         ";
-        return $this->db->update($sql, ['uyeid' => $memberID]);
-
+        return $this->db->update($memberDeleteSql, ['uyeid' => $memberID]);
     }
     public function updateMemberNameAndSurname($memberID,$memberName,$memberSurname){
         $sql = "

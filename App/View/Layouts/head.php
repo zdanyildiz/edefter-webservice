@@ -135,5 +135,14 @@ foreach ($bodySiteSettings as $siteSetting) {
 
     $adConversionCode = $siteConfig['adConversionCode'][0] ?? "";
     echo isset($adConversionCode['ad_conversion_code_head']) ? html_entity_decode($adConversionCode['ad_conversion_code_head']) : "";
+    
+    // Platform Tracking Sistemini Ekle
+    $documentRoot = $_SERVER['DOCUMENT_ROOT'];
+    include_once $documentRoot . '/App/Helpers/PlatformTrackingManager.php';
+    $platformTrackingManager = new PlatformTrackingManager($db, $config);
+    $platformHeadCodes = $platformTrackingManager->generateHeadCodes($languageID);
+    if (!empty($platformHeadCodes)) {
+        echo $platformHeadCodes;
+    }
     ?>
 </head>

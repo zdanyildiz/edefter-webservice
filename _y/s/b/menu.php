@@ -408,28 +408,33 @@ $languages = $languageModel->getLanguages();
                         </a>
                         <ul>
                             <li>
+                                <a href="/_y/s/s/ekkodlar/PlatformTracking.php" id="platformTrackingphp" >
+                                    <span class="title">🚀 Platform Tracking Yönetimi</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="/_y/s/s/ekkodlar/AddTagManager.php" id="addTagManagerphp" >
-                                    <span class="title">Google Tag Manager</span>
+                                    <span class="title">Google Tag Manager (Eski)</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="/_y/s/s/ekkodlar/AdConversionCode.php" id="adConversionCodephp" >
-                                    <span class="title">Reklam Dönüşüm Kodu</span>
+                                    <span class="title">Reklam Dönüşüm Kodu (Eski)</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="/_y/s/s/ekkodlar/SalesConversionCode.php" id="salesConversionCodephp" >
-                                    <span class="title">Satış Dönüşüm Kodu</span>
+                                    <span class="title">Satış Dönüşüm Kodu (Eski)</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="/_y/s/s/ekkodlar/CartConversionCode.php" id="cartConversionCodephp" >
-                                    <span class="title">Sepet Dönüşüm Kodu</span>
+                                    <span class="title">Sepet Dönüşüm Kodu (Eski)</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="/_y/s/s/ekkodlar/AnalysisCode.php" id="analysisCodephp" >
-                                    <span class="title">Ziyaretçi Analiz Kodu</span>
+                                    <span class="title">Ziyaretçi Analiz Kodu (Eski)</span>
                                 </a>
                             </li>
                         </ul>
