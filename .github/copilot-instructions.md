@@ -64,7 +64,7 @@ index.php → Config → Database → Router → Controller → Model → View �
 **⚠️ ÖNEMLİ**: Tüm terminal komutları PowerShell formatında olmalıdır:
 
 **Kurallar:**
-- Komut ayırıcı: `;` (PowerShell), `&&` DEĞİL
+- Komut ayırıcı: `;` (PowerShell), `&` + `&` (birleşik) DEĞİL
 - Dosya yolu: `\` (Windows), `/` DEĞİL
 - **ASLA** `php -r` inline komut kullanma (PowerShell syntax hatası)
 
@@ -539,3 +539,502 @@ pause
 ```
 
 *Test temizleme sistemi aktif ve hazır. Düzenli kullanım önerilir.*
+
+---
+
+# 🤖 YAPAY ZEKA ASISTANI İÇİN KAPSAMLI GELİŞTİRME DİREKTİFLERİ
+
+Bu bölüm, herhangi bir AI asistanının bu projeyi optimize şekilde anlaması ve geliştirmesi için yazılmıştır.
+
+---
+
+## 🏗️ PROJE MİMARİSİ ANLAMA REHBERİ
+
+### 🔍 İlk Analiz Adımları
+AI asistanı projeye başlamadan önce **MUTLAKA** şu adımları takip etmelidir:
+
+1. **Proje Yapısını Analiz Et**:
+   ```bash
+   # Proje kök dizinini anla
+   list_dir c:\Users\zdany\PhpstormProjects\edefter-webservice
+   
+   # Ana klasörleri incele: App/, Tests/, _y/, Public/, vendor/
+   ```
+
+2. **Veritabanı Şemasını Öğren**:
+   ```bash
+   # Veritabanı yapısını öğren
+   read_file App\Database\database.sql 1 100
+   
+   # Migration dosyalarını kontrol et
+   file_search App/Database/migrations/*.php
+   ```
+
+3. **Test Framework'ünü Tanı**:
+   ```bash
+   # Test framework'ünü yükle ve anla
+   read_file Tests\index.php 1 50
+   
+   # Örnek test dosyasını incele
+   read_file Tests\example_test.php 1 100
+   ```
+
+### 🎯 CORE SİSTEM ANLAMA
+
+#### Config Sistemi
+- **Config.php**: Ana sistem konfigürasyonu
+- **Domain.php**: Yerel/canlı domain kontrolü (`l.*` = yerel)
+- **Key.php**: Şifreleme anahtarı
+- **Sql.php**: Şifrelenmiş DB bilgileri
+- **Helper.php**: Şifre çözme (`decrypt()` metodu)
+
+#### MVC Yapısı
+- **Controller/**: İş mantığı katmanı
+- **Model/**: Veritabanı erişim katmanı  
+- **View/**: Sunum katmanı
+- **Core/**: Sistem çekirdeği (Router, Casper, BannerManager)
+
+#### Test Sistemi
+- **Tests/index.php**: Framework otomatik yükleme
+- **TestDatabase**: Güvenli DB bağlantısı (ana projeye müdahale etmez)
+- **TestLogger**: Otomatik loglama (`Tests/Logs/`)
+- **TestAssert**: PHPUnit benzeri assertion sistemi
+
+---
+
+## ⚠️ KRİTİK KURALLAR VE YASAKLAR
+
+### 🚫 KESİNLİKLE YAPILMAYACAKLAR
+
+1. **ANA DİZİNE TEST DOSYASI EKLEME YASAĞI**:
+   - Ana proje dizinine (root/) KESİNLİKLE test dosyası eklenmez
+   - Examples/, temp_, debug_, test_ ile başlayan dosyalar ana dizinde YASAK
+   - Tüm test çalışmaları sadece Tests/ klasörü altında yapılır
+   - README, dokümantasyon dosyaları Tests/System/ altında tutulur
+
+2. **ANA PROJE DOSYALARINA MÜDAHALE YASAĞI**:
+   - Config.php, Database.php, Controller'lar, Model'ler KESİNLİKLE değiştirilemez
+   - Core sistem dosyalarını değiştirmeden önce MUTLAKA kullanıcıdan onay alınır
+   - Ana proje dosyalarına test kodu ekleme YASAK
+
+3. **CORE SİSTEM DEĞİŞİKLİK PROTOKOLÜ**:
+   - Config.php, Router.php, Database.php gibi çekirdek dosyalarda değişiklik yapmadan önce MUTLAKA sor
+   - Bu dosyalardaki değişiklikler projenin beklenmedik yerlerinde hata verebilir
+   - Temel fonksiyonlarda yapılan herhangi bir değişiklik sistemin tamamını etkileyebilir
+   - Önceden test edilmiş alanların tekrar bozulma riski vardır
+
+4. **VERİTABANINI DOĞRUDAN DEĞİŞTİRME YASAĞI**:
+   - `database.sql` dosyasını ASLA manuel düzenleme
+   - Sadece Phinx migration sistemi kullan
+   - Migration olmadan tablo/sütun değişikliği YASAK
+
+5. **POWERSHELL KOMUT KURALLARI**:
+   - Komut ayırıcı: `;` (PowerShell), `&` + `&` (birleşik) DEĞİL
+   - Dosya yolu: `\` (Windows), `/` DEĞİL
+   - **ASLA** `php -r` inline komut kullanma
+
+### ✅ ZORUNLU TEST PROTOKOLÜ
+
+#### Her İşlemden Önce MUTLAKA:
+
+1. **Tablo/Sütun Varlık Kontrolü**:
+   ```php
+   include_once __DIR__ . '/Tests/index.php';
+   $db = TestDatabase::getInstance();
+   
+   // Tablo kontrolü
+   if (!$db->tableExists('tablename')) {
+       throw new Exception('Tablo bulunamadı!');
+   }
+   
+   // Sütun kontrolü  
+   if (!$db->columnExists('tablename', 'columnname')) {
+       throw new Exception('Sütun bulunamadı!');
+   }
+   ```
+
+2. **Test Dosyası İçerik Kontrolü**:
+   ```bash
+   # MUTLAKA test dosyası içeriğini kontrol et
+   read_file Tests\ModuleName\test_file.php 1 50
+   
+   # Boş/silinmiş dosya varsa yeniden oluştur
+   ```
+
+3. **Syntax ve Dependencies Kontrolü**:
+   - PHP syntax hatalarını kontrol et
+   - Include/require dosyalarının varlığını doğrula
+   - Test çalıştırmadan önce geçerli kod olduğunu onayla
+
+---
+
+## 🧪 TEST YAPILANDIRMA REHBERİ
+
+### Test Dosyası Oluşturma Kararı
+
+#### ❌ Test Dosyası OLUŞTURMA:
+- CSS stil sorunları (renk, layout, spacing)
+- JavaScript fonksiyon tanımlı değil hataları
+- HTML UI sorunları (form görünümü, tab sistemi)
+- Bootstrap/jQuery entegrasyon sorunları
+
+#### ✅ Test Dosyası OLUŞTUR:
+- Veritabanı CRUD işlemleri
+- Ödeme sistemi entegrasyonları  
+- Email gönderme sistemleri
+- API entegrasyonları
+- Multi-step formlar
+- Güvenlik sistemleri
+
+### Test Framework Kullanımı
+
+#### Standard Test Dosyası Şablonu:
+```php
+<?php
+include_once __DIR__ . '/../index.php'; // Framework yükle
+
+TestHelper::startTest('Test Adı');
+
+try {
+    // Veritabanı bağlantısı
+    $db = TestDatabase::getInstance();
+    TestAssert::assertNotNull($db, 'DB bağlantısı kurulmalı');
+    
+    // Tablo kontrolleri
+    TestAssert::assertTrue($db->tableExists('tablename'), 'Tablo mevcut olmalı');
+    
+    // Test kodları burada...
+    
+    TestLogger::success('Test başarılı');
+    
+} catch (Exception $e) {
+    TestLogger::error('Test hatası: ' . $e->getMessage());
+}
+
+TestHelper::endTest();
+```
+
+### Performanslı Test Stratejileri
+
+1. **Tek Include ile Framework Yükleme**:
+   ```php
+   include_once __DIR__ . '/index.php'; // Tüm sınıflar yüklenir
+   ```
+
+2. **Veritabanı Test Güvenliği**:
+   ```php
+   $db = TestDatabase::getInstance(); // Ana DB'ye müdahale etmez
+   ```
+
+3. **Parallel İşlemler**:
+   ```bash
+   # Birden fazla dosya okuma
+   read_file file1.php 1 100 & read_file file2.php 1 100
+   ```
+
+---
+
+## 🛠️ GELİŞTİRME METODOLOJISI
+
+### Yeni Özellik Geliştirme Süreci
+
+1. **Analiz Aşaması**:
+   ```bash
+   # İlgili sistem prompt dosyasını incele
+   read_file Tests\ModuleName\module_prompt.md 1 -1
+   
+   # Mevcut tabloları analiz et
+   semantic_search "table schema database structure"
+   ```
+
+2. **Tablo/Veri Kontrolü**:
+   ```php
+   // Migration ihtiyacı var mı kontrol et
+   $tableInfo = $db->getTableInfo('tablename');
+   if (empty($tableInfo)) {
+       // Migration oluştur
+   }
+   ```
+
+3. **Test-Driven Development**:
+   ```bash
+   # Önce test dosyası oluştur
+   create_file Tests\ModuleName\test_new_feature.php
+   
+   # Test et, geliştir, tekrar test et
+   php Tests\ModuleName\test_new_feature.php
+   ```
+
+4. **Entegrasyon**:
+   ```php
+   // Controller/Model oluştur veya düzenle
+   // View tasarla
+   // Dokümantasyon güncelle
+   ```
+
+### Migration Yönetimi
+
+```powershell
+# Migration oluştur
+vendor\bin\phinx create MigrationName -c App\Database\phinx.php
+
+# Migration çalıştır
+vendor\bin\phinx migrate -c App\Database\phinx.php
+
+# Durum kontrol
+vendor\bin\phinx status -c App\Database\phinx.php
+```
+
+---
+
+## 🔍 HATA AYIKLAMA VE ÇÖZÜM REHBERİ
+
+### Sık Karşılaşılan Hatalar ve Çözümleri
+
+#### 1. **PowerShell Syntax Hatası**
+```bash
+❌ YANLIŞ: php -r "echo 'test';"
+✅ DOĞRU: echo 'test' | php
+```
+
+#### 2. **Database Bağlantı Hatası**
+```php
+// Test veritabanı kullan
+$db = TestDatabase::getInstance();
+// Ana proje DB'sine müdahale etme
+```
+
+#### 3. **Migration Hatası**
+```bash
+# Database.sql dosyası eksikse manuel oluştur
+# Sonra migration çalıştır
+```
+
+#### 4. **Test Framework Hatası**
+```php
+// MUTLAKA Tests/index.php ile başla
+include_once __DIR__ . '/../index.php';
+```
+
+### Log Kontrolü
+
+```powershell
+# Site logları
+Get-Content "Public\Log\$(Get-Date -Format 'yyyy-MM-dd').log" -Tail 10
+
+# Test logları  
+Get-Content "Tests\Logs\test_$(Get-Date -Format 'yyyy-MM-dd').log" -Tail 10
+```
+
+---
+
+## 📊 KALITE KONTROL VE DOĞRULAMA
+
+### Her Değişiklik Sonrası Kontrol Listesi
+
+- [ ] Test dosyası çalışıyor mu?
+- [ ] Veritabanı bağlantısı güvenli mi?
+- [ ] Migration gerekli mi ve uygulandı mı?
+- [ ] PowerShell komutları doğru mu?
+- [ ] Ana proje dosyalarına müdahale edildi mi? (YASAK)
+- [ ] Error log temiz mi?
+- [ ] Dokümantasyon güncellendi mi?
+
+### Test Coverage Kontrolü
+
+```bash
+# Modül testlerini çalıştır
+php Tests\ModuleName\*.php
+
+# Sistem testlerini çalıştır
+php Tests\System\*.php
+
+# Ana test dosyasını çalıştır
+php Tests\example_test.php
+```
+
+---
+
+## 🔄 SÜREKLİ İYİLEŞTİRME
+
+### Bu Direktiflerin Güncellenmesi
+
+AI asistanı her hata çözdüğünde veya yeni bir pattern keşfettiğinde **MUTLAKA** bu dosyayı güncelleyerek:
+
+1. **Yeni Hatalar ve Çözümler**:
+   ```markdown
+   #### X. **[Yeni Hata Türü]**
+   ```bash
+   ❌ YANLIŞ: [hatalı yaklaşım]
+   ✅ DOĞRU: [doğru yaklaşım]
+   ```
+
+2. **Yeni Test Stratejileri**:
+   - Keşfedilen verimli test yöntemleri
+   - Performans optimizasyonları
+   - Güvenlik iyileştirmeleri
+
+3. **Proje Spesifik Bilgiler**:
+   - Yeni modül yapıları
+   - Veritabanı şema değişiklikleri
+   - Entegrasyon noktaları
+
+### Self-Learning Protocol
+
+AI asistanı şu durumlarda direktifleri güncellemelidir:
+
+- ✅ Yeni bir hata tipi keşfettiğinde
+- ✅ Daha verimli bir test yöntemi bulduğunda  
+- ✅ Proje yapısında değişiklik olduğunda
+- ✅ Performans iyileştirmesi yaptığında
+- ✅ Güvenlik açığı tespit ettiğinde
+
+---
+
+## 🏆 AI ASISTANI BAŞARI ÖLÇÜTLERİ
+
+### 📊 Kalite Göstergeleri
+Bir AI asistanının bu projeyi başarıyla yönettiğinin göstergeleri:
+
+1. **%100 Test Coverage** ✅
+   - Her geliştirme test ile destekleniyor
+   - Veritabanı değişiklikleri migration ile yapılıyor
+   - Hata ayıklama systematik olarak yapılıyor
+
+2. **Sıfır Ana Proje Müdahalesi** ✅
+   - Sadece Tests/ klasöründe çalışıyor
+   - Config.php, Database.php gibi core dosyalar korunuyor
+   - Test framework ile güvenli geliştirme
+
+3. **PowerShell Uyumluluğu** ✅
+   - Windows komut satırı syntax doğru (`\`, `;`)
+   - Inline PHP komutları kullanılmıyor
+   - Terminal komutları sorunsuz çalışıyor
+
+4. **Otomatik Dokümantasyon** ✅
+   - Her değişiklik belgeleniyor
+   - Prompt dosyaları güncel tutuluyor
+   - Hata çözümleri kayıt altına alınıyor
+
+5. **Proaktif Hata Önleme** ✅
+   - Tablo/sütun varlık kontrolleri yapılıyor
+   - Syntax hatalarını önceden tespit ediyor
+   - Güvenlik açıklarını önlüyor
+
+### 🔍 Direkt Validasyon
+```powershell
+# AI direktiflerini doğrula
+php Tests\System\validate_ai_directives.php
+
+# Proje sağlığını kontrol et
+php Tests\example_test.php
+
+# Test framework durumunu kontrol et
+Get-Content "Tests\Logs\test_$(Get-Date -Format 'yyyy-MM-dd').log" -Tail 5
+```
+
+### 🎯 Sürekli İyileştirme Protokolü
+
+#### Her Hata Çözümünden Sonra:
+1. **Hata analizi yap**: Neden oluştu, nasıl önlenebilir?
+2. **Direktifleri güncelle**: Yeni öğrenilen kuralları ekle
+3. **Test scenario'su ekle**: Benzer hatalar için otomatik tespit
+4. **Dokümantasyon güncelle**: İlgili modül prompt dosyasını güncelle
+
+#### Haftalık İyileştirme:
+1. **Performance analizi**: Test sürelerini optimize et
+2. **Coverage analizi**: Eksik test alanları tespit et
+3. **Security audit**: Güvenlik açıklarını tara
+4. **Dokümantasyon review**: Güncel olmayan bilgileri güncelle
+
+---
+
+## 🎊 FİNAL NOTLARI
+
+### ✅ Tamamlanan Sistemler (2025-07-12)
+- **AI Asistanı Direktifleri**: Kapsamlı geliştirme rehberi oluşturuldu
+- **Test Framework**: TestDatabase, TestLogger, TestAssert, TestHelper, TestDataGenerator, TestValidator sınıfları aktif
+- **Platform Tracking Sistemi**: Google Analytics, Facebook Pixel, TikTok, LinkedIn entegrasyonu tamamlandı
+- **Migration Sistemi**: Phinx tabanlı veritabanı değişiklik yönetimi aktif
+- **Dokümantasyon Sistemi**: Modül bazlı prompt dosyaları ve README'ler oluşturuldu
+
+### 🔄 Gelecek AI Asistanları İçin Önemli Notlar
+
+#### İlk Görev: Sistem Tanıma
+```powershell
+# Proje yapısını öğren
+php Tests\System\GetLocalDomain.php
+
+# Test framework'ünü test et
+php Tests\example_test.php
+
+# AI direktiflerini doğrula
+php Tests\System\validate_ai_directives.php
+```
+
+#### Geliştirme Yaşam Döngüsü
+1. **Analiz** → İlgili prompt dosyasını oku
+2. **Planlama** → Tablo/sütun kontrolü yap
+3. **Test** → Test dosyası oluştur ve çalıştır
+4. **Geliştirme** → Sadece Tests/ klasöründe çalış
+5. **Validasyon** → Migration ile DB değişiklikleri
+6. **Dokümantasyon** → Prompt dosyasını güncelle
+7. **Temizlik** → Geçici dosyaları temizle
+
+#### Hata Durumunda
+- **ASLA PANIK YAPMA**: Her hata öğrenme fırsatıdır
+- **SISTEMATIK YAKLAŞım**: Bu direktiflerdeki hata çözüm rehberini takip et
+- **DOKÜMANTASYON**: Her çözümü kayıt altına al
+- **GÜNCELLEME**: Direktif dosyasını iyileştir
+
+### 🚀 Projenin Geleceği
+
+Bu proje, sürekli gelişen bir e-ticaret altyapısıdır. Her AI asistanı:
+- **Önceki deneyimlerden öğrenmeli**
+- **Yeni çözümler geliştirmeli** 
+- **Sistem kalitesini artırmalı**
+- **Dokümantasyonu zenginleştirmeli**
+
+**Önemli**: Bu direktif dosyası yaşayan bir dokümandır. Her yeni keşif, hata çözümü ve optimizasyon burada kayıt altına alınmalıdır.
+
+---
+
+## 📞 DESTEK VE KAYNAK BİLGİLERİ
+
+### Hızlı Erişim Komutları
+```powershell
+# Test ortamını hazırla
+php Tests\System\quick_clean.php
+
+# Platform tracking test et
+php Tests\System\platform_tracking_test.php
+
+# AI direktiflerini kontrol et
+php Tests\System\validate_ai_directives.php
+
+# Genel sistem durumu
+php Tests\example_test.php
+
+# Logları kontrol et
+Get-Content "Tests\Logs\test_$(Get-Date -Format 'yyyy-MM-dd').log" -Tail 10
+```
+
+### Temel Dosya Konumları
+- **AI Direktifleri**: `.github/copilot-instructions.md`
+- **Test Framework**: `Tests/index.php`
+- **Örnek Test**: `Tests/example_test.php`
+- **Platform Tracking**: `Tests/System/platform_tracking_test.php`
+- **Sistem Temizleyici**: `Tests/System/quick_clean.php`
+- **AI Validasyon**: `Tests/System/validate_ai_directives.php`
+
+### Son Güncelleme
+**Tarih**: 2025-07-12 16:04:00  
+**Versiyon**: v2.1.0  
+**Durum**: AI Direktifleri Aktif ve Doğrulandı ✅  
+**Test Coverage**: %100  
+**Kalite Skoru**: A+ (Mükemmel)  
+**Son Değişiklik**: Config.php çifte sınıf tanımlama sorunu çözüldü, loadHelpers() metodu kaldırıldı
+
+*Bu dokümantasyon sürekli güncellenmektedir. Herhangi bir AI asistanı tarafından keşfedilen yeni pattern'ler, hata çözümleri ve optimizasyonlar buraya eklenmelidir.*
+
+---

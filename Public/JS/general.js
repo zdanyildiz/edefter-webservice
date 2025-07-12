@@ -54,11 +54,11 @@ if(document.querySelector('.close-search')){
     });
 }
 
-
 function removeTrailingZeros(value) {
     console.log('removeTrailingZeros value: ' + value);
     return value.toString().replace(/\.?0+$/, '');
 }
+
 function showPopup(type, message) {
     //mesaj url ile gönderilirken bozulmasın
     message = encodeURIComponent(message);
@@ -72,4 +72,34 @@ function showPopup(type, message) {
             document.body.insertAdjacentHTML("beforeend", xhr.responseText);
         }
     };
+}
+
+const logoutBtn = document.querySelector('#logoutLink');
+
+// Eğer sayfada çıkış butonu varsa (kullanıcı giriş yapmışsa)
+if (logoutBtn) {
+    
+    logoutBtn.addEventListener('click', function(event) {
+        
+        // Linkin varsayılan yönlendirme davranışını hemen engelliyoruz.
+        event.preventDefault(); 
+        
+        // Yönlendirilecek adresi linkin href'inden alıyoruz.
+        const logoutUrl = this.href;
+
+        // Yönlendirme fonksiyonunu tanımlıyoruz.
+        const performLogout = function() {
+            // Eğer bir URL varsa oraya yönlendir, yoksa ana sayfaya git.
+            document.location.href = logoutUrl || '/'; 
+        };
+
+        // Google'a 'logout' olayını gönderiyoruz.
+        console.log('Logout olayı GA4\'e gönderiliyor...');
+        gtag('event', 'logout', {
+            // Olay gönderildikten sonra performLogout fonksiyonunu çalıştır.
+            'event_callback': performLogout,
+            // 2 saniye içinde olay gönderilemezse yine de çıkış yap.
+            'event_timeout': 2000 
+        });
+    });
 }

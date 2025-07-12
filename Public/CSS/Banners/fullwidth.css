@@ -67,7 +67,7 @@
 
 /* Responsive tasarım - Tablet */
 @media (max-width: 992px) {
-    .banner-type-slider.fullwidth .slider-container {
+    /*.banner-type-slider.fullwidth .slider-container {
         min-height: 50vh;
     }
     .banner-type-slider.fullwidth .banner-item {
@@ -76,12 +76,12 @@
 
     .banner-type-slider.fullwidth .content-box {
         max-width: 70%;
-    }
+    }*/
 }
 
 /* Responsive tasarım - Mobil */
 @media (max-width: 768px) {
-    .banner-type-slider.fullwidth .slider-container {
+    /*.banner-type-slider.fullwidth .slider-container {
         min-height: 40vh;
     }
     .banner-type-slider.fullwidth .banner-item {
@@ -90,5 +90,9 @@
 
     .banner-type-slider.fullwidth .content-box {
         max-width: 80%;
+    }*/
+    .banner-type-slider.fullwidth .content-box {
+    
+        max-width: 100%
     }
 }

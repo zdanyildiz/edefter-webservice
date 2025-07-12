@@ -43,6 +43,10 @@ $adConversionCodeModel = new AdminAdConversionCode($db);
 include_once MODEL . 'Admin/AdminTagManager.php';
 $tagManagerModel = new AdminTagManager($db);
 
+// Platform Tracking Manager'ı yükle
+include_once ROOT . '/App/Helpers/PlatformTrackingManager.php';
+$platformTrackingManager = new PlatformTrackingManager($db, $config);
+
 if($action == "getSalesConversionCode") {
 
     $languageID = $requestData['languageID'] ?? 1;
@@ -590,6 +594,163 @@ elseif ($action == "deleteTagManager") {
             'message' => 'Silme işlemi sırasında bir hata oluştu'
         ]);
     }
+}
+// Platform Tracking işlemleri
+elseif ($action == "savePlatformTracking") {
+    $platform = $requestData['platform'] ?? '';
+    $config = $requestData['config'] ?? [];
+    $status = intval($requestData['status'] ?? 0);
+    $languageID = intval($requestData['languageID'] ?? 1);
+    
+    // Debug log
+    error_log("PlatformTracking Save Debug - Platform: $platform, Status: $status, LanguageID: $languageID");
+    error_log("PlatformTracking Save Debug - Config: " . json_encode($config));
+    
+    if (empty($platform)) {
+        error_log("PlatformTracking Error: Platform boş");
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Platform seçilmedi'
+        ]);
+        exit();
+    }
+    
+    // Platform konfigürasyonunu ve statusu kaydet
+    $result = $platformTrackingManager->savePlatformConfig($platform, $config, $languageID, $status);
+    
+    if ($result) {
+        error_log("PlatformTracking Success: $platform kaydedildi");
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Platform ayarları kaydedildi'
+        ]);
+    } else {
+        error_log("PlatformTracking Error: $platform kaydedilemedi");
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Platform ayarları kaydedilemedi'
+        ]);
+    }
+    exit();
+}
+
+elseif ($action == "saveAllPlatforms") {
+    $platforms = json_decode($requestData['platforms'] ?? '{}', true);
+    $languageID = intval($requestData['languageID'] ?? 1);
+    
+    // Debug log
+    error_log("SaveAllPlatforms Debug - LanguageID: $languageID");
+    error_log("SaveAllPlatforms Debug - Platforms: " . json_encode($platforms));
+    
+    if (empty($platforms)) {
+        error_log("SaveAllPlatforms Error: Platform verisi boş");
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Platform verisi bulunamadı'
+        ]);
+        exit();
+    }
+    
+    $successCount = 0;
+    $totalCount = count($platforms);
+    $errors = [];
+    
+    foreach ($platforms as $platform => $data) {
+        $config = $data['config'] ?? [];
+        $status = intval($data['status'] ?? 0);
+        
+        error_log("SaveAllPlatforms - Processing: $platform, Status: $status");
+        
+        if ($platformTrackingManager->savePlatformConfig($platform, $config, $languageID, $status)) {
+            $successCount++;
+            error_log("SaveAllPlatforms - Success: $platform");
+        } else {
+            $errors[] = $platform;
+            error_log("SaveAllPlatforms - Failed: $platform");
+        }
+    }
+    
+    error_log("SaveAllPlatforms Result - Success: $successCount/$totalCount, Errors: " . implode(', ', $errors));
+    
+    if ($successCount === $totalCount) {
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Tüm platform ayarları kaydedildi'
+        ]);
+    } else {
+        echo json_encode([
+            'status' => 'partial',
+            'message' => $successCount . '/' . $totalCount . ' platform kaydedildi',
+            'errors' => $errors
+        ]);
+    }
+    exit();
+}
+
+elseif ($action == "previewPlatformTracking") {
+    $platform = $requestData['platform'] ?? '';
+    $config = $requestData['config'] ?? [];
+    $languageID = intval($requestData['languageID'] ?? 1);
+    
+    if (empty($platform)) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Platform seçilmedi'
+        ]);
+        exit();
+    }
+    
+    // Geçici olarak konfigürasyonu kaydet ve kodu oluştur
+    $tempResult = $platformTrackingManager->savePlatformConfig($platform, $config, $languageID);
+    
+    if ($tempResult) {
+        $code = $platformTrackingManager->generateHeadCodes($languageID);
+        echo json_encode([
+            'status' => 'success',
+            'code' => $code
+        ]);
+    } else {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Önizleme oluşturulamadı'
+        ]);
+    }
+    exit();
+}
+
+elseif ($action == "previewAllPlatforms") {
+    $languageID = intval($requestData['languageID'] ?? 1);
+    
+    $headCodes = $platformTrackingManager->generateHeadCodes($languageID);
+    
+    echo json_encode([
+        'status' => 'success',
+        'code' => $headCodes
+    ]);
+    exit();
+}
+
+elseif ($action == "generateConversionCode") {
+    $platform = $requestData['platform'] ?? '';
+    $eventType = $requestData['eventType'] ?? 'purchase';
+    $eventData = $requestData['eventData'] ?? [];
+    $languageID = intval($requestData['languageID'] ?? 1);
+    
+    if (empty($platform)) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Platform seçilmedi'
+        ]);
+        exit();
+    }
+    
+    $conversionCode = $platformTrackingManager->generateConversionCode($platform, $eventType, $eventData, $languageID);
+    
+    echo json_encode([
+        'status' => 'success',
+        'code' => $conversionCode
+    ]);
+    exit();
 }
 else {
     echo json_encode([

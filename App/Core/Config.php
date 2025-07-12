@@ -29,6 +29,8 @@ class Config {
 
     public Json $Json;
 
+    public $HeadTrackingInjector;
+
     public function __construct() {
 
         $this->setServer();
@@ -339,6 +341,21 @@ class Config {
 
             ini_set('display_errors', 0);
         }
+    }
+    
+    /**
+     * Head Tracking Injector'ı yükle ve döndür
+     * 
+     * @param object $database Veritabanı bağlantısı
+     * @return object HeadTrackingInjector instance
+     */
+    public function getHeadTrackingInjector($database) {
+        if (!isset($this->HeadTrackingInjector)) {
+            include_once ROOT . '/App/Helpers/HeadTrackingInjector.php';
+            $this->HeadTrackingInjector = new HeadTrackingInjector($database, $this);
+        }
+        
+        return $this->HeadTrackingInjector;
     }
 
     /**

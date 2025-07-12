@@ -837,13 +837,24 @@ foreach ($siteHeaderSettings as $siteSetting) {
 $adConversionCode = $siteConfig['adConversionCode'][0] ?? "";
 echo isset($adConversionCode['ad_conversion_code_content']) ? html_entity_decode($adConversionCode['ad_conversion_code_content']) : "";
 
+// Platform Tracking Conversion Codes
+$documentRoot = $_SERVER['DOCUMENT_ROOT'];
+include_once $documentRoot . '/App/Helpers/PlatformTrackingManager.php';
+$platformTrackingManager = new PlatformTrackingManager($db, $config);
+$platformConversionCodes = $platformTrackingManager->generateConversionCodes($languageID);
+if (!empty($platformConversionCodes)) {
+    echo $platformConversionCodes;
+}
+
 $gTagBasket = $session->getSession('gTagBasket') ?? [];
 
 if(isset($gTagBasket['currency'])){
+    echo 'currency var';
     $cartConversionCode = $siteConfig['cartConversionCode'][0] ?? "";
     $cartConversionCode = isset($cartConversionCode['cart_conversion_code']) ? html_entity_decode($cartConversionCode['cart_conversion_code']) : "";
 
     if(!empty($cartConversionCode)){
+        
         $currency = $gTagBasket['currency'];
         $value = $gTagBasket['value'];
         $items_json = json_encode($gTagBasket['items']); // JSON formatına çevir
