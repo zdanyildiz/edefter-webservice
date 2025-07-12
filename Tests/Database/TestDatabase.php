@@ -188,4 +188,19 @@ class TestDatabase extends PDO {
     public function getConnection() {
         return $this;
     }
+
+    /**
+     * Belirli bir tablonun CREATE TABLE ifadesini döndürür.
+     */
+    public function getCreateTableStatement($tableName): ?string
+    {
+        try {
+            $stmt = $this->query("SHOW CREATE TABLE `{$tableName}`");
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['Create Table'] ?? null;
+        } catch (Exception $e) {
+            error_log("CREATE TABLE ifadesi alınamadı for {$tableName}: " . $e->getMessage());
+            return null;
+        }
+    }
 }

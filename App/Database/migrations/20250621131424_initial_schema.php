@@ -15,7 +15,7 @@ final class InitialSchema extends AbstractMigration
      */
     public function change(): void
     {
-        $sqlFile = __DIR__ . '/../../App/Database/database.sql';
+        $sqlFile = __DIR__ . '/../database.sql';
 
         if (!file_exists($sqlFile)) {
             throw new \RuntimeException('database.sql dosyası bulunamadı: ' . $sqlFile);
