@@ -291,7 +291,10 @@ function generateBannerBox($generateBannerData)
                         <div class="card-head-sm">
                             <div class="col-md-6">
                                 <header>Banner Görünümü</header>
-                                <p class="text-sm">Boş bırakılan değerler dikkate alınmaz. Banner varsayılan ayarlarla görünür.</p>
+                                <label for="showBannerCustomizationBody-{$n}" class="text-sm">
+                                    <input type="checkbox" id="showBannerCustomizationBody-{$n}" name="showBannerCustomizationBody[]" value="0">
+                                    <span>Boş bırakılan değerler dikkate alınmaz. Banner varsayılan ayarlarla görünür.</span>
+                                </label>
                             </div>
                             <div class="col-md-6">
                                 <header>Buton Görünümü</header>
@@ -302,7 +305,7 @@ function generateBannerBox($generateBannerData)
                             </div>
                         </div>
                         <div class="row"></div>
-                        <div class="card-body">
+                        <div class="card-body hidden" id="bannerCustomizationBody-{$n}">
                             <div class="col-md-6">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -867,21 +870,21 @@ function generateBannerBox($generateBannerData)
                                                 $bannerButtonTextSize = $bannerStyle["button_size"];
                                             }
                                             else{
-                                                $bannerHeightSize = 120;
-                                                $bannerBgColor = "rgba(255,243,0,1)";
-                                                $bannerContentBoxBgColor = "rgba(255,255,255,1)";
-                                                $bannerTitleColor = "rgba(0,0,0,1)";
-                                                $bannerTitleFontSize = 24;
-                                                $bannerContentColor = "rgba(0,0,0,1)";
-                                                $bannerContentFontSize = 18;
+                                                $bannerHeightSize = "";
+                                                $bannerBgColor = "";
+                                                $bannerContentBoxBgColor = "";
+                                                $bannerTitleColor = "";
+                                                $bannerTitleFontSize = "";
+                                                $bannerContentColor = "";
+                                                $bannerContentFontSize = "";
                                                 $bannerShowButton = 1;
                                                 $bannerButtonTitle = "Detaylar";
                                                 $bannerButtonLocation = 0;
-                                                $bannerButtonBgColor = "rgba(0,0,0,1)";
-                                                $bannerButtonTextColor = "rgba(255,255,255,1)";
-                                                $bannerButtonHoverBackground = "gba(255,255,255,1)";
-                                                $bannerButtonHoverTextColor = "rgba(255,255,255,1)";
-                                                $bannerButtonTextSize = 18;
+                                                $bannerButtonBgColor = "";
+                                                $bannerButtonTextColor = "";
+                                                $bannerButtonHoverBackground = "";
+                                                $bannerButtonHoverTextColor = "";
+                                                $bannerButtonTextSize = "";
                                             }
 
                                             $generateBannerData = [
@@ -1263,7 +1266,13 @@ function generateBannerBox($generateBannerData)
                         <div class="card-head-sm">
                             <div class="col-md-6">
                                 <header>Banner Görünümü</header>
-                                <p class="text-sm">Boş bırakılan değerler dikkate alınmaz. Banner varsayılan ayarlarla görünür.</p>
+                                <div class="col-md-6">
+                                <header>Banner Görünümü</header>
+                                <label for="showBannerCustomizationBody-[n]" class="text-sm">
+                                    <input type="checkbox" id="showBannerCustomizationBody-[n]" name="showBannerCustomizationBody[]" value="0">
+                                    <span>Boş bırakılan değerler dikkate alınmaz. Banner varsayılan ayarlarla görünür.</span>
+                                </label>
+                            </div>
                             </div>
                             <div class="col-md-6">
                                 <header>Buton Görünümü</header>
@@ -1274,14 +1283,14 @@ function generateBannerBox($generateBannerData)
                             </div>
                         </div>
                         <div class="row"></div>
-                        <div class="card-body">
+                        <div class="card-body hidden" id="bannerCustomizationBody-[n]">
                             <div class="col-md-6">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <div id="bannerBgColorContainer-[n]" class="input-group colorpicker-component bannerBgColorContainer" data-color-format="rgba" data-color="rgba(255,243,0,1)">
+                                        <div id="bannerBgColorContainer-[n]" class="input-group colorpicker-component bannerBgColorContainer" data-color-format="rgba" data-color="">
                                             <div class="input-group-content">
                                                 <label for="bannerBgColor-[n]" class="control-label">Banner Arkaplan Rengi</label>
-                                                <input type="text" class="form-control" id="bannerBgColor-[n]" name="bannerBgColor[]" value="rgba(255,243,0,1)">
+                                                <input type="text" class="form-control" id="bannerBgColor-[n]" name="bannerBgColor[]" value="">
                                             </div>
                                             <div class="input-group-addon"><i style="border:solid 1px #000;"></i></div>
                                         </div>
@@ -1289,10 +1298,10 @@ function generateBannerBox($generateBannerData)
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <div id="bannerContentBoxBgColorContainer-[n]" class="input-group colorpicker-component bannerContentBoxBgColorContainer" data-color-format="rgba" data-color="rgba(255,255,255,1)">
+                                        <div id="bannerContentBoxBgColorContainer-[n]" class="input-group colorpicker-component bannerContentBoxBgColorContainer" data-color-format="rgba" data-color="">
                                             <div class="input-group-content">
                                                 <label for="bannerContentBoxBgColor-[n]" class="control-label">Yazılar Arkaplan Rengi</label>
-                                                <input type="text" class="form-control" id="bannerContentBoxBgColor-[n]" name="bannerContentBoxBgColor[]" value="rgba(255,255,255,1)">
+                                                <input type="text" class="form-control" id="bannerContentBoxBgColor-[n]" name="bannerContentBoxBgColor[]" value="">
                                             </div>
                                             <div class="input-group-addon"><i style="border:solid 1px #000;"></i></div>
                                         </div>
@@ -1300,10 +1309,10 @@ function generateBannerBox($generateBannerData)
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <div id="bannerTitleColorContainer-[n]" class="input-group colorpicker-component bannerTitleColorContainer" data-color-format="rgba" data-color="rgba(0,0,0,1)">
+                                        <div id="bannerTitleColorContainer-[n]" class="input-group colorpicker-component bannerTitleColorContainer" data-color-format="rgba" data-color="">
                                             <div class="input-group-content">
                                                 <label for="titleFontColor-[n]" class="control-label">Başlık Yazı Rengi</label>
-                                                <input type="text" class="form-control" id="titleFontColor-[n]" name="titleFontColor[]" value="rgba(0,0,0,1)">
+                                                <input type="text" class="form-control" id="titleFontColor-[n]" name="titleFontColor[]" value="">
                                             </div>
                                             <div class="input-group-addon"><i style="border:solid 1px #000;"></i></div>
                                         </div>
@@ -1311,10 +1320,10 @@ function generateBannerBox($generateBannerData)
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <div id="bannerContentColorContainer-[n]" class="input-group colorpicker-component bannerContentColorContainer" data-color-format="rgba" data-color="rgba(0,0,0,1)">
+                                        <div id="bannerContentColorContainer-[n]" class="input-group colorpicker-component bannerContentColorContainer" data-color-format="rgba" data-color="">
                                             <div class="input-group-content">
                                                 <label for="bannerContentFontColor-[n]" class="control-label">İçerik Yazı Rengi</label>
-                                                <input type="text" class="form-control" id="bannerContentFontColor-[n]" name="bannerContentFontColor[]" value="rgba(0,0,0,1)">
+                                                <input type="text" class="form-control" id="bannerContentFontColor-[n]" name="bannerContentFontColor[]" value="">
                                             </div>
                                             <div class="input-group-addon"><i style="border:solid 1px #000;"></i></div>
                                         </div>
@@ -1322,19 +1331,19 @@ function generateBannerBox($generateBannerData)
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="number" class="form-control" id="titleFontSize-[n]" name="titleFontSize[]" value="24">
+                                        <input type="number" class="form-control" id="titleFontSize-[n]" name="titleFontSize[]" value="">
                                         <span class="text-sm" for="titleFontSize">Başlık Yazı Boyutu</span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="number" class="form-control" id="bannerContentFontSize-[n]" name="bannerContentFontSize[]" value="18">
+                                        <input type="number" class="form-control" id="bannerContentFontSize-[n]" name="bannerContentFontSize[]" value="">
                                         <span for="contentFontSize">İçerik Yazı Boyutu</span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="number" class="form-control" id="bannerHeightSize-[n]" name="bannerHeightSize[]" value="120">
+                                        <input type="number" class="form-control" id="bannerHeightSize-[n]" name="bannerHeightSize[]" value="">
                                         <span for="contentFontSize">Banner Yüksekliği</span>
                                     </div>
                                 </div>
@@ -1344,10 +1353,10 @@ function generateBannerBox($generateBannerData)
                                 <div class="row" id="bannerButtonCustomizationContainer-[n]">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <div id="bannerButtonColorContainer-[n]" class="input-group colorpicker-component bannerButtonColorContainer" data-color-format="rgba" data-color="rgba(0,0,0,1)">
+                                            <div id="bannerButtonColorContainer-[n]" class="input-group colorpicker-component bannerButtonColorContainer" data-color-format="rgba" data-color="">
                                                 <div class="input-group-content">
                                                     <label for="bannerButtonColor-[n]" class="control-label">Buton Arkaplan Rengi</label>
-                                                    <input type="text" class="form-control" id="bannerButtonBgColor-[n]" name="bannerButtonBgColor[]" value="rgba(0,0,0,1)">
+                                                    <input type="text" class="form-control" id="bannerButtonBgColor-[n]" name="bannerButtonBgColor[]" value="">
                                                 </div>
                                                 <div class="input-group-addon"><i style="border:solid 1px #000;"></i></div>
                                             </div>
@@ -1355,10 +1364,10 @@ function generateBannerBox($generateBannerData)
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <div id="bannerButtonHoverColorContainer-[n]" class="input-group colorpicker-component bannerButtonHoverColorContainer" data-color-format="rgba" data-color="rgba(255,255,255,1)">
+                                            <div id="bannerButtonHoverColorContainer-[n]" class="input-group colorpicker-component bannerButtonHoverColorContainer" data-color-format="rgba" data-color="">
                                                 <div class="input-group-content">
                                                     <label for="bannerButtonHoverColor-[n]" class="control-label">Buton Arkaplan Değişim Rengi</label>
-                                                    <input type="text" class="form-control" id="bannerButtonHoverBgColor-[n]" name="bannerButtonHoverBgColor[]" value="rgba(255,255,255,1)">
+                                                    <input type="text" class="form-control" id="bannerButtonHoverBgColor-[n]" name="bannerButtonHoverBgColor[]" value="">
                                                 </div>
                                                 <div class="input-group-addon"><i style="border:solid 1px #000;"></i></div>
                                             </div>
@@ -1366,10 +1375,10 @@ function generateBannerBox($generateBannerData)
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <div id="bannerButtonTextColorContainer-[n]" class="input-group colorpicker-component bannerButtonTextColorContainer" data-color-format="rgba" data-color="rgba(255,255,255,1)">
+                                            <div id="bannerButtonTextColorContainer-[n]" class="input-group colorpicker-component bannerButtonTextColorContainer" data-color-format="rgba" data-color="">
                                                 <div class="input-group-content">
                                                     <label for="bannerButtonTextColor-[n]" class="control-label">Buton Yazı Rengi</label>
-                                                    <input type="text" class="form-control" id="bannerButtonTextColor-[n]" name="bannerButtonTextColor[]" value="rgba(255,255,255,1)">
+                                                    <input type="text" class="form-control" id="bannerButtonTextColor-[n]" name="bannerButtonTextColor[]" value="">
                                                 </div>
                                                 <div class="input-group-addon"><i style="border:solid 1px #000;"></i></div>
                                             </div>
@@ -1377,10 +1386,10 @@ function generateBannerBox($generateBannerData)
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <div id="bannerButtonTextHoverColorContainer-[n]" class="input-group colorpicker-component bannerButtonTextHoverColorContainer" data-color-format="rgba" data-color="rgba(0,0,0,1)">
+                                            <div id="bannerButtonTextHoverColorContainer-[n]" class="input-group colorpicker-component bannerButtonTextHoverColorContainer" data-color-format="rgba" data-color="">
                                                 <div class="input-group-content">
                                                     <label for="bannerButtonTextColor-[n]" class="control-label">Buton Yazı Değişim Rengi</label>
-                                                    <input type="text" class="form-control" id="bannerButtonTextHoverColor-[n]" name="bannerButtonTextHoverColor[]" value="rgba(0,0,0,1)">
+                                                    <input type="text" class="form-control" id="bannerButtonTextHoverColor-[n]" name="bannerButtonTextHoverColor[]" value="">
                                                 </div>
                                                 <div class="input-group-addon"><i style="border:solid 1px #000;"></i></div>
                                             </div>
@@ -1390,7 +1399,7 @@ function generateBannerBox($generateBannerData)
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="bannerButtonTextSize">Buton Yazı Boyutu</label>
-                                            <input type="number" class="form-control" id="bannerButtonTextSize-[n]" name="bannerButtonTextSize[]" value="18">
+                                            <input type="number" class="form-control" id="bannerButtonTextSize-[n]" name="bannerButtonTextSize[]" value="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -2802,6 +2811,14 @@ function generateBannerBox($generateBannerData)
                     minHeight: 200
                 });
 
+                $(document).on("change", "#showBannerCustomizationBody-" + bannerCount, function() {
+                    if ($(this).is(":checked")) {
+                        $("#bannerCustomizationBody-" + bannerCount).removeClass("hidden");
+                    } else {
+                        $("#bannerCustomizationBody-" + bannerCount).addClass("hidden");
+                    }
+                });
+
 
                 // MutationObserver'ı başlatma (Bu kısım değişmedi)
                 // ID'yi kullanarak doğru elemanı seçtiğinizden emin olun
@@ -2838,6 +2855,7 @@ function generateBannerBox($generateBannerData)
                 }
             }
 
+            $("#header-tab").click();
         });
 
         <?php

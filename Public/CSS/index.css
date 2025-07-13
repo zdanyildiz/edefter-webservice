@@ -43,7 +43,7 @@
     /* Başlık Rengi */
 
     /* ========= Arka Plan Renkleri ========= */
-    --body-bg-color: #efefef;
+    --body-bg-color: #f8f9fa;
     /* Sayfa arka planı */
     --content-bg-color: #ffffff;
     /* İçerik arka planı */
@@ -57,9 +57,8 @@
     /* Koyu arka plan rengi */
 
 
-
     --font-size-small: 12px;
-    --font-size-normal: 14px;
+    --font-size-normal: 16px;
     --font-size-large: 20px;
     --font-size-xlarge: 24px;
     --font-size-xxlarge: 32px;
@@ -67,8 +66,8 @@
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-bold: 700;
-    --line-height-base: 1.5;
-    --line-height-heading: 1.2;
+    --line-height-base: 30px;
+    --line-height-heading: 40;
 
     /* ========= Sınır ve Kenarlıklar ========= */
     --border-color: #dee2e6;
@@ -114,7 +113,7 @@
     /* ========= Üst İletişim ve Sosyal Medya Alanı ========= */
     --top-contact-and-social-container-margin-top: 0;
     --top-contact-and-social-container-mobile-margin-top: 85px;
-    --top-contact-and-social-bg-color: var(--content-bg-color);
+    --top-contact-and-social-bg-color: var(--body-bg-color);
     --top-contact-and-social-link-color: var(--text-primary-color);
     --top-contact-and-social-link-hover-color: var(--primary-color);
     --top-contact-and-social-icon-color: var(--text-primary-color);
@@ -167,7 +166,7 @@
     --shop-menu-container-mobile-icon-color-basket: var(--text-primary-color);
 
     /* ========= Ana Menü Stilleri ========= */
-    --menu-background-color: #ffffff;
+    --menu-background-color: var(--content-bg-color);
     --menu-text-color: #333333;
     --menu-hover-color: #4285f4;
     --menu-hover-bg-color: #f8f9fa;
@@ -288,7 +287,7 @@
     --desktop-max-width: 1400px;
     --mobile-base-font-size: 14px;
     --mobile-h1-font-size: 24px;
-    --mobile-line-height: 1.5;
+    --mobile-line-height: 25px;
     --mobile-section-margin: 20px;
     --mobile-card-margin: 10px;
     --mobile-button-height: 44px;
@@ -297,7 +296,7 @@
     --breakpoint-sm: 576px;
     --mobile-breakpoint: 768px;
     --tablet-breakpoint: 992px;
-    --desktop-breakpoint: 1200px;
+    --desktop-breakpoint: 1400px;
     --breakpoint-xxl: 1400px;
 }
 

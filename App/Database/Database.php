@@ -123,8 +123,8 @@ class Database
         try {
             return $this->pdo->prepare($query);
         } catch (PDOException $e) {
-            //return 'Prepare Error: ' . $e->getMessage();
             Log::write("Database error: {$e->getMessage()}", "error");
+            return false;
         }
     }
 

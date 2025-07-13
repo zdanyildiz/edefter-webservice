@@ -106,6 +106,10 @@ class PlatformTrackingManager {
             // Status koşulunu kaldırıyoruz çünkü mevcut kaydı bulmak için kullanılıyor
             $sql = "SELECT * FROM platform_tracking WHERE platform = :platform AND language_id = :languageID";
             $stmt = $this->db->prepare($sql);
+            if ($stmt === false) {
+                error_log('PlatformTrackingManager getPlatformConfig Error: Failed to prepare statement for platform: ' . $platform);
+                return false;
+            }
             $stmt->bindParam(':platform', $platform);
             $stmt->bindParam(':languageID', $languageID);
             $stmt->execute();

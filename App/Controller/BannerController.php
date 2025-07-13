@@ -233,13 +233,13 @@ class BannerController
                 // Genişlik ayarları (değişken veri)
                 if ($bannerGroupFullSize != 1 || $bannerFullSize != 1) {
                     $css .= ".banner-group-{$bannerGroupId} {\n";
-                    $css .= ($bannerGroupFullSize == 1) ? "  width: 100%;\n" : "  width: var(--content-max-width);\n";
-                    $css .= ($bannerGroupFullSize == 1) ? "  max-width: 100%;\n" : "  max-width: var(--content-max-width);\n";
+                    $css .= ($bannerGroupFullSize == 1) ? "  width: 100%;\n" : "  width: var(--desktop-breakpoint);\n";
+                    $css .= ($bannerGroupFullSize == 1) ? "  max-width: 100%;\n" : "  max-width: var(--desktop-breakpoint);\n";
                     $css .= "}\n\n";
 
                     $css .= ".banner-group-{$bannerGroupId} .banner-container {\n";
-                    $css .= ($bannerFullSize == 1) ? "  width: 100%;\n" : "  width: var(--content-max-width);\n";
-                    $css .= ($bannerFullSize == 1) ? "  max-width: 100%;\n" : "  max-width: var(--content-max-width);\n";
+                    $css .= ($bannerFullSize == 1) ? "  width: 100%;\n" : "  width: var(--desktop-breakpoint);\n";
+                    $css .= ($bannerFullSize == 1) ? "  max-width: 100%;\n" : "  max-width: var(--desktop-breakpoint);\n";
                     $css .= "}\n\n";
                 }
 
@@ -271,42 +271,48 @@ class BannerController
                 //Log::write("Banner_id: $bannerItemId - Style Debug: " . json_encode($style));
                 //Log::write("Banner_id: $bannerItemId - ShowButton type: " . gettype($style['show_button']) . " value: " . var_export($style['show_button'], true));
 
-                $css .= ".banner-{$bannerItemId} {\n";
-                if(!empty($style['banner_height_size'])){
-                    // Banner tipine göre yükseklik birimini ayarla
-                    if ($bannerType ==12) { // Tepe Banner için px kullan
-                        $css .= "  height: {$style['banner_height_size']}vh;\n";
+                if(!empty($style['banner_height_size']) || !empty($style['background_color'])){
+                    $css .= ".banner-{$bannerItemId} {\n";
+                    if(!empty($style['banner_height_size'])){
+                        // Banner tipine göre yükseklik birimini ayarla
+                        if ($bannerType ==12) {
+                            $css .= "  height: {$style['banner_height_size']}vh;\n";
+                        }
+                        elseif ($bannerType == 2) { // Tepe Banner için px kullan
+                            $css .= "  height: {$style['banner_height_size']}px;\n";
+                        }
+                        else {
+                            $css .= "  min-height: {$style['banner_height_size']}px;\n";
+                        }
                     }
-                    elseif ($bannerType == 2) { // Tepe Banner için px kullan
-                        $css .= "  height: {$style['banner_height_size']}px;\n";
+
+                    if(!empty($style['background_color'])){
+                        $css .= "  background-color: {$style['background_color']};\n";
                     }
-                    else {
-                        $css .= "  min-height: {$style['banner_height_size']}px;\n";
-                    }
+
+                    $css .= "}\n\n";
                 }
 
-                if(!empty($style['background_color'])){
-                    $css .= "  background-color: {$style['background_color']};\n";
-                }
-
-                $css .= "}\n\n";
-
-                $css .= ".banner-{$bannerItemId} .content-box {\n";
+                
                 if(!empty($style['content_box_bg_color'])){
+                    $css .= ".banner-{$bannerItemId} .content-box {\n";
                     $css .= "  background-color: {$style['content_box_bg_color']};\n";
+                    $css .= "}\n\n";
                 }
 
-                $css .= "}\n\n";
+                if(!empty($style['title_color']) || !empty($style['title_size'])){
+                    $css .= ".banner-{$bannerItemId} .title,.banner-type-{$bannerTypeName}.{$styleClass} .banner-item.banner-{$bannerItemId} h2.title{\n";
+                    $css .= !empty($style['title_color']) ? "  color: {$style['title_color']};\n" : "";
+                    $css .= !empty($style['title_size']) ? "  font-size: {$style['title_size']}px;\n" : "";
+                    $css .= "}\n\n";
+                }
 
-                $css .= ".banner-{$bannerItemId} .title,.banner-type-{$bannerTypeName}.{$styleClass} .banner-item.banner-{$bannerItemId} h2.title{\n";
-                $css .= !empty($style['title_color']) ? "  color: {$style['title_color']};\n" : "";
-                $css .= !empty($style['title_size']) ? "  font-size: {$style['title_size']}px;\n" : "";
-                $css .= "}\n\n";
-
-                $css .= !empty($style['content_color']) ? ".banner-{$bannerItemId} .content {\n" : "";
-                $css .= !empty($style['content_color']) ? "  color: {$style['content_color']};\n" : "";
-                $css .= !empty($style['content_size']) ? "  font-size: {$style['content_size']}px;\n" : "";
-                $css .= "}\n\n";
+                if (!empty($style['content_color']) || !empty($style['content_size'])) {
+                    $css .= ".banner-{$bannerItemId} .content {\n";
+                    $css .= "  color: {$style['content_color']};\n";
+                    $css .= "  font-size: {$style['content_size']}px;\n";
+                    $css .= "}\n\n";
+                }
 
                 // Debug: CSS oluşturma sırasında show_button kontrolü
                 //Log::write("CSS Debug - Banner_id: $bannerItemId - show_button value: " . var_export($style['show_button'], true));

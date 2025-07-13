@@ -2,29 +2,12 @@
    SLİDER BANNER MODERN CSS - STATIK VERSİYON
    ============================================ */
 
-/* CSS Custom Properties (Varsayılan Değerler) */
-:root {
-    --slider-primary-color: #007bff;
-    --slider-secondary-color: #6c757d;
-    --slider-text-color: #333333;
-    --slider-bg-color: #ffffff;
-    --slider-border-radius: 8px;
-    --slider-animation-duration: 0.8s;
-    --slider-height: 500px;
-    --slider-opacity: 0.9;
-    --mobile-breakpoint: 768px;
-    --tablet-breakpoint: 1024px;
-}
-
-
 /* Banner genel stilleri - DİNAMİK SELECTORS */
 .banner-type-slider
  {
     position: relative;
-    min-height: var(--slider-height);
     overflow: hidden;
-    border-radius: var(--slider-border-radius);
-    background: var(--slider-bg-color);
+    
 }
 
 /* Slider container - DİNAMİK SELECTORS */
@@ -33,19 +16,20 @@
     width: 100%;
     height: 100%;
     display: block;
-    transition: all var(--slider-animation-duration) ease;
+    min-height: 400px; /* Minimum yükseklik */
 }
 
 /* Banner item - Modern Grid Layout */
 .banner-type-slider .banner-item {
     width: 100%;
     height: 100%;
+    min-height: 400px; /* Minimum yükseklik */
     position: absolute;
     left: 0;
     top: 0;
     opacity: 0;
-    transition: opacity var(--slider-animation-duration) ease-in-out,
-                transform var(--slider-animation-duration) ease-in-out;
+    transition: opacity 1.5s ease-in-out,
+                transform 1.5s ease-in-out;
     transform: scale(0.95);
     display: grid;
     place-items: center;
@@ -62,26 +46,26 @@
 /* Zoom animasyonunu kontrol etme sınıfları */
 .banner-type-slider .banner-item.no-zoom {
     transform: scale(1);
-    transition: opacity var(--slider-animation-duration) ease-in-out;
+    transition: opacity 1.5s ease-in-out;
 }
 
 .banner-type-slider .banner-item.with-zoom {
-    transition: opacity var(--slider-animation-duration) ease-in-out, 
-                transform var(--slider-animation-duration) ease-in-out;
+    transition: opacity 1.5s ease-in-out, 
+                transform 1.5s ease-in-out;
 }
 
 /* Animasyonlar için ek sınıflar */
 .banner-type-slider .banner-item.active.slide-next.with-zoom {
-    animation: zoomEffectIn var(--slider-animation-duration) ease-in-out forwards;
+    animation: zoomEffectIn 1.5s ease-in-out forwards;
 }
 
 .banner-type-slider .banner-item.active.slide-prev.with-zoom {
-    animation: zoomEffectIn var(--slider-animation-duration) ease-in-out forwards;
+    animation: zoomEffectIn 1.5s ease-in-out forwards;
 }
 
 .banner-type-slider .banner-item.active.slide-next.no-zoom,
 .banner-type-slider .banner-item.active.slide-prev.no-zoom {
-    animation: simpleOpacity var(--slider-animation-duration) ease-in-out forwards;
+    animation: simpleOpacity 1.5s ease-in-out forwards;
 }
 
 /* Görüntü stilleri - Modern object-fit */
@@ -91,6 +75,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    min-height: 400px; /* Minimum yükseklik */
     overflow: hidden;
     z-index: 1;
 }
@@ -98,6 +83,7 @@
 .banner-type-slider .banner-image img {
     width: 100%;
     height: 100%;
+    min-height: 400px; /* Minimum yükseklik */
     object-fit: cover;
     object-position: center;
     display: block;
@@ -155,12 +141,14 @@
 .banner-type-slider .title {
     margin: 0 0 15px 0;
     font-weight: 700;
-    line-height: 1.2;
+    color: var(--heading-color);
+    font-size: var(--font-size-xxlarge);
 }
 
 .banner-type-slider .content {
     margin-bottom: 15px;
-    line-height: 1.5;
+    color: var(--text-primary-color);
+    font-size: var(--font-size-large);
 }
 
 /* Düğme stilleri */

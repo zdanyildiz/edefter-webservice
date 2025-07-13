@@ -333,7 +333,7 @@ if(empty($cookieConsent)){
 
                     <div class="button-container">
                         <button id="cookie-consent-popup-modal-close" class="cookie-consent-popup-modal-close btn"><?=_body_cerez_ayar_button_kapat?></button>
-                        <button id="cookie-consent-popup-modal-accept" class="btn><?=_body_cerez_ayar_button_kaydet?></button>
+                        <button id="cookie-consent-popup-modal-accept" class="btn"><?=_body_cerez_ayar_button_kaydet?></button>
                     </div>
                 </div>
 

@@ -62,14 +62,14 @@
 }
 
 /* Banner Title Stilleri */
-.bottom-banner .title {
+.bottom-banner .banner-title {
   font-weight: 700;
   margin-bottom: 15px;
   line-height: 1.2;
   color: inherit;}
 
 /* Banner Content Stilleri */
-.bottom-banner .content {
+.bottom-banner .banner-content {
   line-height: 1.6;
   margin-bottom: 20px;
   opacity: 0.9;
@@ -144,7 +144,7 @@
         gap: 20px;
         text-align: center;
     }
-    .bottom-banner .title {
+    .bottom-banner .banner-title {
         font-size: clamp(1.3rem, 3.2vw, 2rem);
     }
 }
