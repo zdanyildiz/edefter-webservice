@@ -173,34 +173,55 @@ class Config {
         if (!defined("JS")) define("JS", PUBL . "JS" . $directorySeparator);
         if (!defined("CSS")) define("CSS", PUBL . "CSS" . $directorySeparator);
 
+        // EnvHelper'ı yükle
+        include_once Helpers.'EnvHelper.php';
         
-        if(file_exists(CONF . 'Domain.php')===false || file_exists(CONF . 'Key.php')===false || file_exists(CONF . 'Sql.php')===false)
+        // .env dosyası kontrolü
+        if(!EnvHelper::exists())
         {
             // CLI modunda setup'a yönlendirme yapmayız
             if (php_sapi_name() !== 'cli') {
                 header("Location: /Setup/index.php");
                 exit;
             } else {
-                echo "⚠️ Config dosyaları eksik: Domain.php, Key.php, Sql.php\n";
+                echo "⚠️ .env dosyası bulunamadı\n";
                 echo "Setup klasöründeki index.php dosyasını çalıştırın.\n";
                 exit(1);
             }
         }
         
-        /** @var array $domain */
-        include_once CONF . 'Domain.php';
+        // Env dosyasını yükle
+        EnvHelper::load();
         
-        // Domain array'inin varlığını kontrol et
-        if (!isset($domain) || !is_array($domain)) {
-            Log::write("domain: ". json_encode($domain), "error");
-            throw new Exception("Domain yapılandırması geçersiz: \$domain array'i bulunamadı veya geçersiz.");
+        // Gerekli değerleri kontrol et
+        $required = ['APP_KEY', 'APP_DOMAIN', 'APP_DOMAINS', 'DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'];
+        $missing = EnvHelper::checkRequired($required);
+        
+        if (!empty($missing)) {
+            if (php_sapi_name() !== 'cli') {
+                header("Location: /Setup/index.php");
+                exit;
+            } else {
+                echo "⚠️ .env dosyasında eksik değerler: " . implode(', ', $missing) . "\n";
+                exit(1);
+            }
         }
         
-        $this->domain = $domain;
-
-        /** @var string $key */
-        include_once CONF . 'Key.php';
-        $this->key = $key;
+        // Domain bilgilerini env'den al
+        $domains = EnvHelper::get('APP_DOMAINS', '');
+        $this->domain = explode(',', $domains);
+        
+        // Domain array'inin varlığını kontrol et
+        if (empty($this->domain)) {
+            throw new Exception("Domain yapılandırması geçersiz: APP_DOMAINS değeri bulunamadı.");
+        }
+        
+        // Key bilgisini env'den al
+        $this->key = EnvHelper::get('APP_KEY', '');
+        
+        if (empty($this->key)) {
+            throw new Exception("Güvenlik anahtarı bulunamadı: APP_KEY değeri eksik.");
+        }
 
         include_once CORE.'Log.php';
         include_once CORE.'Casper.php';
@@ -269,22 +290,11 @@ class Config {
             $this->localhost = true;
             $this->http = "http://";
 
-            /**
-             * @var string $dbServerName
-             * @var string $dbUsername
-             * @var string $dbPassword
-             * @var string $dbName
-             * @var string $dbLocalServerName
-             * @var string $dbLocalUsername
-             * @var string $dbLocalPassword
-             * @var string $dbLocalName
-             */
-            include_once CONF . 'Sql.php';
-
-            $this->dbServerName = $this->Helper->decrypt($dbLocalServerName, $this->key);
-            $this->dbUsername = $this->Helper->decrypt($dbLocalUsername, $this->key);
-            $this->dbPassword = $this->Helper->decrypt($dbLocalPassword, $this->key);
-            $this->dbName = $this->Helper->decrypt($dbLocalName, $this->key);
+            // Local veritabanı bilgilerini env'den al
+            $this->dbServerName = EnvHelper::get('DB_LOCAL_HOST', 'localhost');
+            $this->dbUsername = EnvHelper::get('DB_LOCAL_USERNAME', 'root');
+            $this->dbPassword = EnvHelper::get('DB_LOCAL_PASSWORD', '');
+            $this->dbName = EnvHelper::get('DB_LOCAL_DATABASE', '');
 
 
             $this->cookieSecure=false;
@@ -300,27 +310,15 @@ class Config {
             die("Domain'e izin verilmiyor ($serverName)");
         }
 
-        /**
-         * @var string $dbServerName
-         * @var string $dbUsername
-         * @var string $dbPassword
-         * @var string $dbName
-         * @var string $dbLocalServerName
-         * @var string $dbLocalUsername
-         * @var string $dbLocalPassword
-         * @var string $dbLocalName
-         */
-        include_once CONF . 'Sql.php';
-
         if (str_starts_with($serverName, 'l.')) {
             $this->localhost = true;
             $this->http = "http://";
 
-            $this->dbServerName = $this->Helper->decrypt($dbLocalServerName, $this->key);
-            $this->dbUsername = $this->Helper->decrypt($dbLocalUsername, $this->key);
-            $this->dbPassword = $this->Helper->decrypt($dbLocalPassword, $this->key);
-            $this->dbName = $this->Helper->decrypt($dbLocalName, $this->key);
-
+            // Local veritabanı bilgilerini env'den al
+            $this->dbServerName = EnvHelper::get('DB_LOCAL_HOST', 'localhost');
+            $this->dbUsername = EnvHelper::get('DB_LOCAL_USERNAME', 'root');
+            $this->dbPassword = EnvHelper::get('DB_LOCAL_PASSWORD', '');
+            $this->dbName = EnvHelper::get('DB_LOCAL_DATABASE', '');
 
             $this->cookieSecure=false;
             $this->cookieHttpOnly='';
@@ -330,10 +328,11 @@ class Config {
             $this->localhost = false;
             $this->http = "https://";
 
-            $this->dbServerName = $this->Helper->decrypt($dbServerName, $this->key);
-            $this->dbUsername = $this->Helper->decrypt($dbUsername, $this->key);
-            $this->dbPassword = $this->Helper->decrypt($dbPassword, $this->key);
-            $this->dbName = $this->Helper->decrypt($dbName, $this->key);
+            // Production veritabanı bilgilerini env'den al
+            $this->dbServerName = EnvHelper::get('DB_HOST', 'localhost');
+            $this->dbUsername = EnvHelper::get('DB_USERNAME', '');
+            $this->dbPassword = EnvHelper::get('DB_PASSWORD', '');
+            $this->dbName = EnvHelper::get('DB_DATABASE', '');
 
             $this->cookieSecure=true;
             $this->cookieHttpOnly=true;

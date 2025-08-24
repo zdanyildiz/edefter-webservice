@@ -122,27 +122,43 @@ foreach ($bodySiteSettings as $siteSetting) {
         $session->updateSession("casper",$casper);
     ?>
     <?php
-
-    $tagManager = $siteConfig['tagManager'][0] ?? "";
-    echo isset($tagManager['tag_manager_head']) ? html_entity_decode($tagManager['tag_manager_head']) : "";
-
-    $analysisCodes = $siteConfig['analysisCodes'][0] ?? "";
-
-    $visitor = $casper->getVisitor();
-    $visitorUniqID=$visitor['visitorUniqID'] ?? $helper->generateUniqID();
-
-    echo isset($analysisCodes['analiz']) ? html_entity_decode(str_replace("[USER_ID]",$visitorUniqID,$analysisCodes['analiz'])) : "";
-
-    $adConversionCode = $siteConfig['adConversionCode'][0] ?? "";
-    echo isset($adConversionCode['ad_conversion_code_head']) ? html_entity_decode($adConversionCode['ad_conversion_code_head']) : "";
+    require_once Helpers . 'PlatformTrackingManager.php';
+    PlatformTrackingManager::setDb($db);
     
-    // Platform Tracking Sistemini Ekle
-    $documentRoot = $_SERVER['DOCUMENT_ROOT'];
-    include_once $documentRoot . '/App/Helpers/PlatformTrackingManager.php';
-    $platformTrackingManager = new PlatformTrackingManager($db, $config);
-    $platformHeadCodes = $platformTrackingManager->generateHeadCodes($languageID);
-    if (!empty($platformHeadCodes)) {
-        echo $platformHeadCodes;
+    // Kullanıcı kimliği yönetimi
+    $analyticsUserId = $session->getSession('analytics_user_id');
+    $casper = $session->getCasper();
+    $visitor = $casper->getVisitor();
+    $memberStatus = $visitor['visitorIsMember']['memberStatus'] ?? false;
+    
+    // User ID mantığı:
+    // - İlk ziyaret (giriş yapılmamış): user_id hiç gönderme
+    // - Login olmuş: memberUniqID gönder  
+    // - Logout olmuş: null gönder
+    
+    $gaId = PlatformTrackingManager::getGoogleAnalyticsId($languageID);
+    if ($gaId) {
+        echo '<script async src="https://www.googletagmanager.com/gtag/js?id=' . $gaId . '"></script>' . "\n";
+        echo '<script>' . "\n";
+        echo '  window.dataLayer = window.dataLayer || [];' . "\n";
+        echo '  function gtag(){dataLayer.push(arguments);}' . "\n";
+        echo '  gtag(\'js\', new Date());' . "\n";
+        echo '  gtag(\'config\', \'' . $gaId . '\');' . "\n";
+        
+        // User ID kontrolü
+        if ($memberStatus && $analyticsUserId && $analyticsUserId !== "null") {
+            // Login olmuş kullanıcı - memberUniqID gönder
+            echo '  gtag(\'set\', \'user_properties\', {\'user_id\': \'' . $analyticsUserId . '\'});';
+        } elseif (isset($_SESSION['analytics_user_id']) && $analyticsUserId === "null") {
+            // Logout olmuş kullanıcı - null gönder
+            echo '  gtag(\'set\', \'user_properties\', {\'user_id\': null});';
+        }
+        // İlk ziyaret: user_id hiç gönderilmez
+        
+        echo '</script>' . "\n";
     }
+    
+    // Diğer platform script'lerini ekle (GA hariç)
+    echo PlatformTrackingManager::getHeadScripts($languageID);
     ?>
 </head>

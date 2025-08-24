@@ -412,31 +412,8 @@ $languages = $languageModel->getLanguages();
                                     <span class="title">🚀 Platform Tracking Yönetimi</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/_y/s/s/ekkodlar/AddTagManager.php" id="addTagManagerphp" >
-                                    <span class="title">Google Tag Manager (Eski)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/_y/s/s/ekkodlar/AdConversionCode.php" id="adConversionCodephp" >
-                                    <span class="title">Reklam Dönüşüm Kodu (Eski)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/_y/s/s/ekkodlar/SalesConversionCode.php" id="salesConversionCodephp" >
-                                    <span class="title">Satış Dönüşüm Kodu (Eski)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/_y/s/s/ekkodlar/CartConversionCode.php" id="cartConversionCodephp" >
-                                    <span class="title">Sepet Dönüşüm Kodu (Eski)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/_y/s/s/ekkodlar/AnalysisCode.php" id="analysisCodephp" >
-                                    <span class="title">Ziyaretçi Analiz Kodu (Eski)</span>
-                                </a>
-                            </li>
+                        
+                            
                         </ul>
                     </li>
                     <li class="gui-folder">
@@ -517,7 +494,8 @@ $languages = $languageModel->getLanguages();
                     <span class="title">RAPORLAMA</span>
                 </a>
                 <ul>
-                    <li><a href="/_y/s/s/Reports/index.php" id="reportsphp"><span class="title">Analitik Raporlar</span></a></li>
+                    <li><a href="/_y/s/s/Reports/AnalyticsReports.php" id="analyticsreportsphp"><span class="title">Analitik Raporları</span></a></li>
+                    <li><a href="/_y/s/s/Reports/AdsReports.php" id="adsreportsphp"><span class="title">Reklam Raporları</span></a></li>
                 </ul>
             </li>
             <!-- /Raporlama -->

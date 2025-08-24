@@ -342,5 +342,144 @@ foreach ($pendingPages as $mapping) {
     }
 }
 
+// --- Bekleyen Ürün Çevirilerini İşle ---
+include_once MODEL."Admin/AdminProduct.php";
+$adminProduct = new AdminProduct($db, $config);
+
+$pendingProducts = $adminLanguage->getPendingProductTranslations(5);
+$processedProductsCount = 0;
+
+foreach ($pendingProducts as $mapping) {
+    $mappingId = $mapping['id'];
+    $originalProductId = $mapping['original_product_id'];
+    $translatedProductId = $mapping['translated_product_id'];
+    $languageId = $mapping['dilid'];
+    $languageCode = $mapping['language_code'];
+    $languageName = $mapping['language_name'];
+    
+    Log::adminWrite("Ürün çeviri işlemi başlatıldı. Eşleme ID: {$mappingId}, Orijinal Ürün ID: {$originalProductId}, Çevrilmiş Ürün ID: {$translatedProductId}, Dil: {$languageName}", "info", "cron");
+    
+    $db->beginTransaction("ProductTranslation-{$mappingId}");
+    
+    try {
+        // Orijinal ürün bilgilerini al
+        $originalProduct = $adminProduct->getProductForTranslation($originalProductId);
+        
+        if (!$originalProduct) {
+            throw new Exception("Orijinal ürün bulunamadı. Ürün ID: {$originalProductId}");
+        }
+        
+        // 1. Ürün adını çevir
+        $translatedName = getTranslatedValue($adminChatCompletion, $originalProduct['sayfaad'], $languageName);
+        
+        // 2. Ürün açıklamasını çevir (HTML içerik)
+        $translatedDescription = null;
+        if (!empty($originalProduct['urunaciklama'])) {
+            $translatedDescription = getTranslatedValue($adminChatCompletion, $originalProduct['urunaciklama'], $languageName, true);
+        }
+        
+        // 3. Alt başlığı çevir
+        $translatedSubtitle = null;
+        if (!empty($originalProduct['urunaltbaslik'])) {
+            $translatedSubtitle = getTranslatedValue($adminChatCompletion, $originalProduct['urunaltbaslik'], $languageName);
+        }
+        
+        // 4. SEO bilgilerini çevir
+        $translatedSeoTitle = null;
+        $translatedSeoDescription = null;
+        if (!empty($originalProduct['seoTitle'])) {
+            $translatedSeoTitle = getTranslatedValue($adminChatCompletion, $originalProduct['seoTitle'], $languageName);
+        }
+        if (!empty($originalProduct['seoDescription'])) {
+            $translatedSeoDescription = getTranslatedValue($adminChatCompletion, $originalProduct['seoDescription'], $languageName);
+        }
+        
+        // 5. Varyant JSON'larını yeniden oluştur (çeviri tablolarından)
+        $newVariantPropertiesJSON = null;
+        if (!empty($originalProduct['variantProperties'])) {
+            $newVariantPropertiesJSON = $adminProduct->buildVariantPropertiesJSON($originalProductId, $languageCode);
+            Log::adminWrite("Varyant özellikleri JSON'ı oluşturuldu. Dil: {$languageCode}", "info", "cron");
+        }
+        
+        // 6. Ürün özellikleri JSON'ını yeniden oluştur (çeviri tablolarından)
+        $newProductPropertiesJSON = null;
+        if (!empty($originalProduct['product_properties'])) {
+            $newProductPropertiesJSON = $adminProduct->buildProductPropertiesJSON($originalProductId, $languageCode);
+            Log::adminWrite("Ürün özellikleri JSON'ı oluşturuldu. Dil: {$languageCode}", "info", "cron");
+        }
+        
+        // 7. SEO link oluştur
+        $newProductSlug = '';
+        $fullSeoLink = '';
+        if ($translatedName) {
+            $newProductSlug = '/' . $helper->createAdvancedSeoLink($translatedName, $languageCode, $adminChatCompletion, $translatedProductId);
+            
+            // Kategori yolunu bul
+            $categoryPath = '';
+            $productCategoryIds = $adminPage->getPageCategoryID($translatedProductId);
+            if (!empty($productCategoryIds)) {
+                $productCategoryID = $productCategoryIds[0]['categoryID'];
+                $hierarchy = $adminCategory->getCategoryHierarchy($productCategoryID);
+                if ($hierarchy) {
+                    foreach ($hierarchy as $cat) {
+                        $categoryPath .= $cat['categoryLink'];
+                    }
+                }
+            }
+            $fullSeoLink = '/' . $languageCode . $categoryPath . $newProductSlug;
+            
+            Log::adminWrite("Ürün SEO linki oluşturuldu: {$fullSeoLink}", "info", "cron");
+        }
+        
+        // 8. Çevrilmiş ürünü güncelle
+        $updateData = [
+            'sayfaad' => $translatedName,
+            'urunaciklama' => $translatedDescription,
+            'urunaltbaslik' => $translatedSubtitle,
+            'variantProperties' => $newVariantPropertiesJSON,
+            'product_properties' => $newProductPropertiesJSON,
+            'seoTitle' => $translatedSeoTitle,
+            'seoDescription' => $translatedSeoDescription
+        ];
+        
+        $updateResult = $adminProduct->updateProductTranslations($translatedProductId, $updateData);
+        
+        if (!$updateResult) {
+            throw new Exception("Ürün güncellenemedi. Ürün ID: {$translatedProductId}");
+        }
+        
+        // 9. Sayfa tablosunda link güncelle
+        if ($newProductSlug) {
+            $adminPage->updatePageField($translatedProductId, 'sayfalink', $newProductSlug);
+        }
+        
+        // 10. variant_properties tablosunu güncelle (ARAMA İÇİN KRİTİK!)
+        if ($newVariantPropertiesJSON) {
+            $adminProduct->updateVariantPropertiesTable($translatedProductId, $languageCode);
+            Log::adminWrite("Variant properties tablosu güncellendi. Ürün ID: {$translatedProductId}", "info", "cron");
+        }
+        
+        // 11. Çeviri durumunu güncelle
+        $adminLanguage->updateProductTranslationStatus($mappingId, 'completed');
+        
+        $db->commit("ProductTranslation-{$mappingId}");
+        
+        Log::adminWrite("Ürün başarıyla çevrildi. Eşleme ID: {$mappingId}, Ürün ID: {$translatedProductId}", "info", "cron");
+        
+        $processedProductsCount++;
+        
+        if ($processedProductsCount >= 5) {
+            Log::adminWrite("5 ürün çevirisi tamamlandı, çıkılıyor.", "info", "cron");
+            exit();
+        }
+        
+    } catch (Exception $e) {
+        $db->rollback("ProductTranslation-{$mappingId}");
+        $errorMessage = $e->getMessage();
+        $adminLanguage->updateProductTranslationStatus($mappingId, 'failed', $errorMessage);
+        Log::adminWrite("Ürün çevrilemedi. Eşleme ID: {$mappingId}, Hata: {$errorMessage}", "error", "cron");
+    }
+}
+
 Log::adminWrite("ContentTranslator cron job'u bitti.", "info", "cron");
 ?>

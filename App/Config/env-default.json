@@ -1,0 +1,164 @@
+{
+    "defaults": {
+        "APP_ENV": "local",
+        "APP_DEBUG": "true",
+        "OPENAI_MODEL": "gpt-4o-mini",
+        "SMTP_HOST": "smtp.yandex.com",
+        "SMTP_PORT": "465",
+        "SMTP_SECURE": "ssl",
+        "REDIS_HOST": "127.0.0.1",
+        "REDIS_PORT": "6379",
+        "AWS_DEFAULT_REGION": "eu-west-1",
+        "COMPOSER_PHP_PATH": "/opt/plesk/php/8.3/bin/php",
+        "COMPOSER_PHAR_PATH": "/usr/local/psa/var/modules/composer/composer.phar",
+        "GIT_DEPLOYMENT_PATH": "/httpdocs",
+        "GIT_DEPLOYMENT_MODE": "auto"
+    },
+    "openai": {
+        "api_key": "",
+        "assistant_id": "",
+        "model": "gpt-4o-mini"
+    },
+    "email": {
+        "host": "smtp.yandex.com",
+        "username": "",
+        "password": "",
+        "smtp_secure": "ssl",
+        "port": 465,
+        "from_email": "",
+        "from_name": "E-Ticaret Sistemi"
+    },
+    "google_oauth": {
+        "client_id": "",
+        "client_secret": "",
+        "project_id": ""
+    },
+    "plesk": {
+        "server_url": "",
+        "primary_user": "admin",
+        "primary_password": "",
+        "alternative_credentials": [
+            {
+                "user": "root",
+                "password": "",
+                "name": "Root SSH"
+            },
+            {
+                "user": "admin",
+                "password": "",
+                "name": "Current"
+            }
+        ]
+    },
+    "ssh": {
+        "server_ip": "",
+        "username": "root",
+        "password": "",
+        "port": 22
+    },
+    "cloudflare": {
+        "api_key": "",
+        "email": "",
+        "account_id": "",
+        "zone_management_enabled": true
+    },
+    "git": {
+        "repository_url": "",
+        "deployment_path": "/httpdocs",
+        "deployment_mode": "auto",
+        "skip_ssl_verification": false
+    },
+    "composer": {
+        "php_path": "/opt/plesk/php/8.3/bin/php",
+        "composer_phar_path": "/usr/local/psa/var/modules/composer/composer.phar",
+        "default_command": "install",
+        "allow_superuser": true
+    },
+    "ftp": {
+        "server_ip": "",
+        "timeout": 30,
+        "passive_mode": true
+    },
+    "cache": {
+        "redis": {
+            "host": "127.0.0.1",
+            "port": 6379,
+            "password": "",
+            "database": 0
+        },
+        "memcached": {
+            "servers": [
+                {
+                    "host": "127.0.0.1",
+                    "port": 11211,
+                    "weight": 100
+                }
+            ]
+        }
+    },
+    "payment": {
+        "paypal_client_id": "",
+        "paypal_client_secret": "",
+        "paypal_sandbox": true,
+        "stripe_public_key": "",
+        "stripe_secret_key": "",
+        "stripe_webhook_secret": "",
+        "iyzico_api_key": "",
+        "iyzico_secret_key": "",
+        "iyzico_sandbox": true
+    },
+    "translation": {
+        "google_translate_key": "",
+        "deepl_api_key": ""
+    },
+    "aws": {
+        "access_key_id": "",
+        "secret_access_key": "",
+        "bucket": "",
+        "cloudfront_domain": ""
+    },
+    "analytics": {
+        "google_analytics_id": "",
+        "facebook_pixel_id": "",
+        "hotjar_id": "",
+        "google_tag_manager_id": ""
+    },
+    "security": {
+        "recaptcha_site_key": "",
+        "recaptcha_secret_key": "",
+        "turnstile_site_key": "",
+        "turnstile_secret_key": ""
+    },
+    "required_for_ai": [
+        "OPENAI_API_KEY",
+        "OPENAI_ASSISTANT_ID"
+    ],
+    "required_for_email": [
+        "SMTP_USERNAME",
+        "SMTP_PASSWORD",
+        "MAIL_FROM_ADDRESS"
+    ],
+    "required_for_google": [
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET"
+    ],
+    "required_for_cloudflare": [
+        "CLOUDFLARE_API_KEY",
+        "CLOUDFLARE_EMAIL",
+        "CLOUDFLARE_ACCOUNT_ID"
+    ],
+    "optional": [
+        "GOOGLE_TRANSLATE_API_KEY",
+        "DEEPL_API_KEY",
+        "PAYPAL_CLIENT_ID",
+        "STRIPE_PUBLIC_KEY",
+        "IYZICO_API_KEY"
+    ],
+    "setup_instructions": {
+        "openai": "OpenAI Dashboard'dan API anahtarı ve Assistant ID alın",
+        "email": "SMTP sağlayıcısından kullanıcı adı ve şifre alın",
+        "cloudflare": "Cloudflare Dashboard'dan API anahtarı ve Account ID alın",
+        "plesk": "Plesk sunucu bilgilerini ve erişim kimlik bilgilerini girin",
+        "payment": "Ödeme sağlayıcılarından API anahtarlarını alın"
+    }
+}

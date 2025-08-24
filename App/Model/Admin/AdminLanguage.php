@@ -627,6 +627,115 @@ class AdminLanguage
         return $this->db->select($sql,['languageId'=>$targetLangID,'sourcePageId'=>$sourcePageID]);
     }
 
+    // Ürün mapping fonksiyonları
+    public function addLanguageProductMapping($data)
+    {
+        $sql = "
+            INSERT INTO language_product_mapping (original_product_id, translated_product_id, dilid, translation_status, last_attempt_date)
+            VALUES (:originalProductID, :translatedProductID, :languageID, :translationStatus, NOW())
+        ";
+
+        $params = array(
+            'originalProductID' => $data['originalProductID'],
+            'translatedProductID' => $data['translatedProductID'] ?? null,
+            'languageID' => $data['languageID'],
+            'translationStatus' => $data['translationStatus'] ?? 'pending'
+        );
+
+        $result = $this->db->insert($sql, $params);
+
+        if ($result) {
+            return [
+                'status' => 'success',
+                'message' => 'Ürün çeviri kaydı eklendi',
+                'mappingID' => $result
+            ];
+        }
+
+        return [
+            'status' => 'error',
+            'message' => 'Ürün çeviri kaydı eklenemedi'
+        ];
+    }
+
+    public function getPendingProductTranslations($limit = 10)
+    {
+        $sql = "
+            SELECT 
+                lpm.*,
+                s_orig.sayfaad as original_title,
+                s_trans.sayfaad as translated_title,
+                d.dilad as language_name,
+                d.dilkisa as language_code,
+                uo.urunaciklama as original_description
+            FROM language_product_mapping lpm
+            LEFT JOIN sayfa s_orig ON lpm.original_product_id = s_orig.sayfaid
+            LEFT JOIN sayfa s_trans ON lpm.translated_product_id = s_trans.sayfaid
+            LEFT JOIN dil d ON lpm.dilid = d.dilid
+            LEFT JOIN urunozellikleri uo ON s_orig.sayfaid = uo.urunid
+            WHERE lpm.translation_status = 'pending' 
+            AND s_orig.sayfatip = 7
+            ORDER BY lpm.last_attempt_date ASC
+            LIMIT :limit
+        ";
+        return $this->db->select($sql, ['limit' => $limit]);
+    }
+
+    public function updateProductTranslationStatus($mappingId, $status, $errorMessage = null)
+    {
+        $sql = "
+            UPDATE language_product_mapping 
+            SET 
+                translation_status = :status,
+                last_attempt_date = :last_attempt_date,
+                error_message = :error_message
+            WHERE id = :id
+        ";
+        $params = [
+            'id' => $mappingId,
+            'status' => $status,
+            'last_attempt_date' => date('Y-m-d H:i:s'),
+            'error_message' => $errorMessage
+        ];
+        return $this->db->update($sql, $params);
+    }
+
+    public function getTargetProductID($targetLangId, $originalProductId)
+    {
+        $sql = "SELECT translated_product_id FROM language_product_mapping WHERE dilid = :languageId AND original_product_id = :sourceProductId";
+        $result = $this->db->select($sql, ['languageId' => $targetLangId, 'sourceProductId' => $originalProductId]);
+        
+        if (!empty($result) && isset($result[0]['translated_product_id'])) {
+            return $result[0]['translated_product_id'];
+        }
+        
+        return null;
+    }
+
+    public function getLanguageCode($languageId)
+    {
+        $sql = "SELECT dilkisa FROM dil WHERE dilid = :languageId";
+        $result = $this->db->select($sql, ['languageId' => $languageId]);
+        
+        if (!empty($result) && isset($result[0]['dilkisa'])) {
+            return $result[0]['dilkisa'];
+        }
+        
+        return null;
+    }
+
+    public function getLanguageName($languageId)
+    {
+        $sql = "SELECT dilad FROM dil WHERE dilid = :languageId";
+        $result = $this->db->select($sql, ['languageId' => $languageId]);
+        
+        if (!empty($result) && isset($result[0]['dilad'])) {
+            return $result[0]['dilad'];
+        }
+        
+        return null;
+    }
+
     //dile göre dilsabitlerini getirelim
     public function getLanguageConstants($constantGroup = null)
     {

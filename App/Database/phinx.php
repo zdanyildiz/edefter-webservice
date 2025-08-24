@@ -1,33 +1,49 @@
 <?php
 /**
- * Phinx Konfigürasyon Dosyası - Dinamik Veritabanı Bağlantısı
- * 
- * Bu dosya App/Database/PhinxDatabaseInfo.php sistemini kullanarak dinamik olarak
- * veritabanı bilgilerini alır ve farklı projelerde kullanılabilir hale getirir.
+ * Phinx Configuration File
+ *
+ * Bu dosya Phinx migration ve seed sisteminin konfigürasyon ayarlarını içerir.
+ * ENV dosyasından veritabanı bilgilerini okur ve ortam ayarlarını yapar.
  */
 
-// PhinxDatabaseInfo.php sistemini dahil et
-require_once __DIR__ . '/PhinxDatabaseInfo.php';
+// ENV helper'ı yükle
+$rootPath = dirname(dirname(__DIR__));
+require_once $rootPath . '/App/Helpers/EnvHelper.php';
 
-// Veritabanı bilgilerini dinamik olarak al
-$dbInfo = getPhinxDatabaseInfo();
+// ENV dosyası varsa yükle
+if (file_exists($rootPath . '/.env')) {
+    EnvHelper::load();
+}
 
 return [
     'paths' => [
-        'migrations' => '%%PHINX_CONFIG_DIR%%/migrations',
-        'seeds' => '%%PHINX_CONFIG_DIR%%/seeds'
+        'migrations' => $rootPath . '/App/Database/migrations',
+        'seeds' => $rootPath . '/App/Database/seeds'
     ],
     'environments' => [
         'default_migration_table' => 'phinxlog',
         'default_environment' => 'development',
         'development' => [
             'adapter' => 'mysql',
-            'host' => $dbInfo['serverName'],
-            'name' => $dbInfo['database'],
-            'user' => $dbInfo['username'],
-            'pass' => $dbInfo['password'],
+            'host' => EnvHelper::get('DB_LOCAL_HOST', 'localhost'),
+            'name' => EnvHelper::get('DB_LOCAL_DATABASE', 'test_db'),
+            'user' => EnvHelper::get('DB_LOCAL_USERNAME', 'root'),
+            'pass' => EnvHelper::get('DB_LOCAL_PASSWORD', ''),
             'port' => '3306',
             'charset' => 'utf8',
+            'table_prefix' => '',
+            'table_suffix' => '',
+        ],
+        'production' => [
+            'adapter' => 'mysql',
+            'host' => EnvHelper::get('DB_HOST', 'localhost'),
+            'name' => EnvHelper::get('DB_DATABASE', 'production_db'),
+            'user' => EnvHelper::get('DB_USERNAME', 'root'),
+            'pass' => EnvHelper::get('DB_PASSWORD', ''),
+            'port' => '3306',
+            'charset' => 'utf8',
+            'table_prefix' => '',
+            'table_suffix' => '',
         ]
     ],
     'version_order' => 'creation'

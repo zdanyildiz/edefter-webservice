@@ -421,7 +421,10 @@ if ($action == "register")
         
         $casper->setVisitor($visitor);
         $session->updateSession('casper', $casper);
-        
+
+        // Analitik için user_id'yi oturuma kaydet
+        $session->addSession('analytics_user_id', $memberData['benzersizid']);
+
         $cookieVisitor = $visitor;
         
         unset($cookieVisitor['visitorCart']);
@@ -589,6 +592,9 @@ elseif ($action == "login") {
         $casper->setVisitor($visitor);
         $session->updateSession('casper', $casper);
 
+        // Analitik için user_id'yi oturuma ekle
+        $session->addSession('analytics_user_id', $memberData['benzersizid']);
+
         $cookieVisitor = $visitor;
 
         unset($cookieVisitor['visitorCart']);
@@ -678,6 +684,9 @@ elseif ($action == "logout") {
 
     $casper->setVisitor($visitor);
     $session->updateSession('casper', $casper);
+
+    // Analitik için user_id'yi oturumdan kaldır
+    $session->addSession('analytics_user_id',"null");
 
     $visitorCookie = $session->getCookie('visitor');
     $visitorCookie['visitorIsMember'] = ['memberStatus' => false];

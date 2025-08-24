@@ -18,6 +18,9 @@ include_once CORE."AdminCasper.php";
 include_once MODEL."Admin/AdminSession.php";
 $adminSession = new AdminSession($config->key,3600,"/",$config->hostDomain,$config->cookieSecure,$config->cookieHttpOnly,$config->cookieSameSite);
 
+//requestData tanımlayalım. Formlardan gelen tüm get ve post verilerini alalım
+$requestData = array_merge($_GET, $_POST);
+
 $adminCasper = $adminSession->getAdminCasper();
 if (!$adminCasper instanceof AdminCasper) {
     echo "Admin is not here - Admin Index:20";exit();
@@ -33,8 +36,10 @@ if(!empty($action)){
 }
 
 $loginStatus = $adminCasper->isLoginStatus();
-if($loginStatus)$permissionToPass = true;
-if(!$loginStatus && !$permissionToPass){
+if($loginStatus) $permissionToPass = true; // Login yapılmışsa tüm işlemlere izin ver
+
+// Permission kontrolü önce yapılmalı
+if(!$permissionToPass && !$loginStatus){
     echo json_encode([
         'status' => 'error',
         'message' => 'Admin Login required'
@@ -46,10 +51,9 @@ $adminSession->updateSession("adminCasper",$adminCasper);
 
 $adminCasper = $adminSession->getAdminCasper();
 
-//requestData tanımlayalım. Formlardan gelen tüm get ve post verilerini ayrıca oturum üzerinde request data varsa alalım
-$requestData = $requestData ?? array_merge($_GET, $_POST);
-
+// Oturum üzerinde ek request data varsa ekleyelim
 if(isset($_SESSION['requestData'])){
     $requestData = array_merge($requestData, $_SESSION['requestData']);
     unset($_SESSION['requestData']);
 }
+define('ADMIN_GLOBAL_INCLUDED', true);

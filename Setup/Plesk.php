@@ -1,5 +1,14 @@
 <?php
 
+// Bu dosya KORUNMALI - PleskStep ve safe_reset tarafından kullanılıyor
+
+// Composer autoload'u dahil et
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+}
+
+use phpseclib3\Net\SSH2;
+
 class PleskAPI {
     private $serverUrl;
     private $username;
@@ -11,7 +20,7 @@ class PleskAPI {
         $this->password = $password;
     }
 
-    private function sendRequest($endpoint, $method = 'GET', $data = null) {
+    public function sendRequest($endpoint, $method = 'GET', $data = null) {
         $ch = curl_init();
 
         $url = $this->serverUrl . $endpoint;
@@ -46,7 +55,23 @@ class PleskAPI {
         $decodedResult = json_decode($result, true);
 
         if ($httpCode >= 400) {
-            Log::write("PleskAPI,API Error (HTTP $httpCode): " . $result. ", endpoint: $endpoint, data: ". json_encode($data), "error");
+            $errorDetails = [
+                'http_code' => $httpCode,
+                'endpoint' => $endpoint,
+                'method' => $method,
+                'response' => $result,
+                'request_data' => $data,
+                'server_url' => $this->serverUrl,
+                'username' => $this->username
+            ];
+            
+            Log::write("PleskAPI Error: " . json_encode($errorDetails), "error");
+            
+            // 401 özelinde daha spesifik mesaj
+            if ($httpCode === 401) {
+                throw new Exception("API Authentication Error (HTTP 401): Invalid credentials or insufficient permissions. Server: {$this->serverUrl}, User: {$this->username}");
+            }
+            
             throw new Exception("API Error (HTTP $httpCode): " . $result);
         }
 
@@ -145,6 +170,83 @@ class PleskAPI {
         return $this->sendRequest('/dbusers', 'POST', $data);
     }
 
+    public function deleteDomainById($domainId) {
+        try {
+            Log::write("PleskAPI->deleteDomainById: ID '{$domainId}' için silme işlemi başlatıldı.", "info");
+
+            // İlişkili kaynakları sil (veritabanları, alt domainler vb.)
+            $this->deleteAssociatedResources($domainId);
+
+            // Ana domaini ID ile sil
+            Log::write("Ana domain ID '{$domainId}' siliniyor...", "info");
+            $this->sendRequest('/domains/' . $domainId, 'DELETE');
+            
+            Log::write("PleskAPI->deleteDomainById: ID '{$domainId}' için tüm silme komutları başarıyla gönderildi.", "info");
+            return true;
+
+        } catch (Exception $e) {
+            if (strpos($e->getMessage(), '404 Not Found') !== false) {
+                Log::write("PleskAPI->deleteDomainById: Domain ID '{$domainId}' zaten mevcut değil (404).", "info");
+                return true; 
+            }
+            
+            Log::write("PleskAPI->deleteDomainById: ID '{$domainId}' silinirken bir hata oluştu: " . $e->getMessage(), "error");
+            return false;
+        }
+    }
+
+    public function deleteDomain($domainName) {
+        try {
+            Log::write("PleskAPI->deleteDomain: İsim '{$domainName}' ile silme işlemi başlatıldı.", "info");
+
+            // Domain adından ID'yi bul
+            $domainInfo = $this->getDomainInfo($domainName);
+            if (!$domainInfo || !isset($domainInfo['id'])) {
+                Log::write("PleskAPI->deleteDomain: Domain '{$domainName}' bulunamadı. Zaten silinmiş olabilir.", "info");
+                return true; // Domain yoksa, işlem başarılıdır.
+            }
+            $domainId = $domainInfo['id'];
+            Log::write("Domain '{$domainName}' için ID bulundu: {$domainId}", "info");
+
+            // ID ile silme fonksiyonunu çağır
+            return $this->deleteDomainById($domainId);
+
+        } catch (Exception $e) {
+            Log::write("PleskAPI->deleteDomain: '{$domainName}' işlenirken bir hata oluştu: " . $e->getMessage(), "error");
+            return false;
+        }
+    }
+
+    private function deleteAssociatedResources($domainId) {
+        Log::write("İlişkili kaynaklar siliniyor (Domain ID: {$domainId})...", "info");
+        
+        // İlişkili veritabanlarını sil
+        try {
+            $databases = $this->sendRequest('/databases?domain_id=' . $domainId, 'GET');
+            if (!empty($databases)) {
+                foreach ($databases as $db) {
+                    Log::write("İlişkili veritabanı '{$db['name']}' (ID: {$db['id']}) siliniyor...", "info");
+                    $this->sendRequest('/databases/' . $db['id'], 'DELETE');
+                }
+            }
+        } catch (Exception $e) {
+            Log::write("İlişkili veritabanları silinirken hata oluştu (yine de devam ediliyor): " . $e->getMessage(), "warning");
+        }
+
+        // İlişkili alt domainleri sil
+        try {
+            $subdomains = $this->sendRequest('/subdomains?domain_id=' . $domainId, 'GET');
+            if (!empty($subdomains)) {
+                foreach ($subdomains as $sub) {
+                    Log::write("İlişkili alt domain '{$sub['name']}' (ID: {$sub['id']}) siliniyor...", "info");
+                    $this->sendRequest('/subdomains/' . $sub['id'], 'DELETE');
+                }
+            }
+        } catch (Exception $e) {
+            Log::write("İlişkili alt domainler silinirken hata oluştu (yine de devam ediliyor): " . $e->getMessage(), "warning");
+        }
+    }
+
     public function getServerMetaInfo() {
         return $this->sendRequest('/server');
     }
@@ -192,23 +294,21 @@ class PleskAPI {
         return $this->sendRequest($endpoint, 'POST', $data);
     }
 
-    // SSH kullanarak git clone örneği
+    // SSH kullanarak git clone örneği (phpseclib kullanımı)
     function cloneRepositoryViaSSH($domain, $repositoryUrl, $sshUsername, $sshPassword) {
-        $connection = ssh2_connect('plesk.globalpozitif.com.tr', 22);
-        if (!$connection) throw new Exception("SSH connection failed");
-
-        if (!ssh2_auth_password($connection, $sshUsername, $sshPassword)) {
+        $ssh = new SSH2('plesk.globalpozitif.com.tr');
+        
+        if (!$ssh->login($sshUsername, $sshPassword)) {
             throw new Exception("SSH authentication failed");
         }
 
         $targetPath = "/var/www/vhosts/$domain/httpdocs";
         $command = "git clone $repositoryUrl $targetPath";
 
-        $stream = ssh2_exec($connection, $command);
-        if (!$stream) throw new Exception("Failed to execute command");
-
-        stream_set_blocking($stream, true);
-        $output = stream_get_contents($stream);
+        $output = $ssh->exec($command);
+        if ($output === false) {
+            throw new Exception("Failed to execute command");
+        }
 
         return $output;
     }
@@ -538,8 +638,7 @@ class GitDeployer {
             $systemUser = $this->sshHelper->getSystemUser($this->domain);
 
             // SSH bağlantısı için phpseclib kullan
-            require_once '../vendor/autoload.php';
-            $ssh = new \phpseclib3\Net\SSH2('plesk.globalpozitif.com.tr');
+            $ssh = new SSH2('plesk.globalpozitif.com.tr');
 
             if (!$ssh->login($systemUser['username'], 'your-system-user-password')) {
                 throw new Exception('SSH login failed');

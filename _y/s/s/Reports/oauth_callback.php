@@ -22,20 +22,20 @@
                     success: function(response) {
                         if (response.status === 'success') {
                             alert('Google hesabınız başarıyla bağlandı!');
-                            window.location.href = '/_y/s/s/Reports/index.php';
+                            window.location.href = '/_y/s/s/AnalyticsReports.php';
                         } else {
                             alert('Hata: ' + response.message);
-                            window.location.href = '/_y/s/s/Reports/index.php';
+                            window.location.href = '/_y/s/s/Reports/AnalyticsReports.php';
                         }
                     },
                     error: function() {
                         alert('Token alınırken bir hata oluştu.');
-                        window.location.href = '/_y/s/s/Reports/index.php';
+                        window.location.href = '/_y/s/s/Reports/AnalyticsReports.php';
                     }
                 });
             } else {
                 alert('Yetkilendirme kodu bulunamadı.');
-                window.location.href = '/_y/s/s/Reports/index.php';
+                window.location.href = '/_y/s/s/Reports/AnalyticsReports.php';
             }
         });
     </script>

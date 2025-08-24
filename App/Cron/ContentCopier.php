@@ -91,6 +91,12 @@ try {
     copyBanners($sourceLangId, $targetLangId, $adminLanguage, $adminBannerDisplayRulesModel, $adminBannerGroupModel, $adminBannerModel, $adminBannerStyleModel);
     Log::adminWrite("Adım 3: Banner kopyalama tamamlandı.", "info", "cron-copier");
 
+    // 4. ADIM: ÜRÜNLERİ KOPYALA
+    Log::adminWrite("Adım 4: Ürün kopyalama başlıyor.", "info", "cron-copier");
+    include_once MODEL . "Admin/AdminProduct.php";
+    $adminProduct = new AdminProduct($db, $config);
+    copyProducts($sourceLangId, $targetLangId, $models, $adminProduct);
+    Log::adminWrite("Adım 4: Ürün kopyalama tamamlandı.", "info", "cron-copier");
 
     // Gerçek modda bu satırlar aktif olacak:
     $db->commit("ContentCopier-Job#{$jobId}");
@@ -447,6 +453,124 @@ function copyBanners($sourceLangId, $targetLangId, $adminLanguage, $adminBannerD
                 throw new Exception("Banner'ın kendisi kopyalanamadı.");
             }
         }
+    }
+}
+
+/**
+ * Ürünleri kaynak dilden hedef dile kopyalar
+ */
+function copyProducts($sourceLangId, $targetLangId, $models, $adminProduct) {
+    try {
+        Log::adminWrite("Ürün kopyalama fonksiyonu başlatıldı. Kaynak Dil: {$sourceLangId}, Hedef Dil: {$targetLangId}", "info", "cron-copier");
+        
+        // Tüm ürünleri kategori bazlı al (sayfa.sayfatip = 7)
+        $sql = "
+            SELECT DISTINCT
+                s.sayfaid as productID,
+                s.benzersizid as productUniqID,
+                s.sayfaad as productName,
+                s.sayfaicerik as productContent,
+                s.sayfasira as productOrder,
+                s.sayfalink as productLink,
+                s.sayfaaktif as productActive,
+                slk.kategoriid as categoryID
+            FROM sayfa s
+            LEFT JOIN sayfalistekategori slk ON s.sayfaid = slk.sayfaid
+            WHERE s.sayfatip = 7 
+            AND s.sayfasil = 0 
+            AND s.dilid = :sourceLangId
+            ORDER BY s.sayfaid
+        ";
+        
+        $products = $models['category']->db->select($sql, ['sourceLangId' => $sourceLangId]);
+        
+        if (empty($products)) {
+            Log::adminWrite("Kaynak dilde ürün bulunamadı.", "info", "cron-copier");
+            return;
+        }
+        
+        Log::adminWrite("Toplam " . count($products) . " adet ürün bulundu, kopyalama başlıyor.", "info", "cron-copier");
+        
+        $successCount = 0;
+        $errorCount = 0;
+        
+        foreach ($products as $product) {
+            try {
+                $originalProductId = $product['productID'];
+                
+                // Ürünün tüm detaylarını al
+                $productFullData = $adminProduct->getProductForTranslation($originalProductId);
+                
+                if (!$productFullData) {
+                    Log::adminWrite("Ürün detayları alınamadı. Ürün ID: {$originalProductId}", "warning", "cron-copier");
+                    $errorCount++;
+                    continue;
+                }
+                
+                // Hedef kategorisini bul
+                $targetCategoryId = null;
+                if ($product['categoryID']) {
+                    $targetCategoryResult = $models['language']->getTargetCategoryID($targetLangId, $product['categoryID']);
+                    if (!empty($targetCategoryResult)) {
+                        $targetCategoryId = $targetCategoryResult[0]['translated_category_id'];
+                        Log::adminWrite("Hedef kategori bulundu. Orijinal: {$product['categoryID']}, Hedef: {$targetCategoryId}", "info", "cron-copier");
+                    } else {
+                        Log::adminWrite("Hedef kategori bulunamadı, ürün kategori ilişkisi kurulamayacak.", "warning", "cron-copier");
+                    }
+                }
+                
+                // Ürünü hedef dile kopyala
+                $newProductId = $adminProduct->copyProductToLanguage($productFullData, $targetLangId);
+                
+                if (!$newProductId) {
+                    Log::adminWrite("Ürün kopyalanamadı. Ürün ID: {$originalProductId}", "error", "cron-copier");
+                    $errorCount++;
+                    continue;
+                }
+                
+                Log::adminWrite("Ürün başarıyla kopyalandı. Orijinal ID: {$originalProductId}, Yeni ID: {$newProductId}", "info", "cron-copier");
+                
+                // Kategori ilişkisini kur
+                if ($targetCategoryId) {
+                    $addProductCategoryResult = $models['page']->insertPageCategory([
+                        'pageID' => $newProductId,
+                        'categoryID' => $targetCategoryId
+                    ]);
+                    
+                    if ($addProductCategoryResult['status'] === 'success') {
+                        Log::adminWrite("Ürün kategori ilişkisi kuruldu. Ürün ID: {$newProductId}, Kategori ID: {$targetCategoryId}", "info", "cron-copier");
+                    } else {
+                        Log::adminWrite("Ürün kategori ilişkisi kurulamadı: " . $addProductCategoryResult['message'], "warning", "cron-copier");
+                    }
+                }
+                
+                // Language mapping kaydı oluştur
+                $mappingResult = $models['language']->addLanguageProductMapping([
+                    'originalProductID' => $originalProductId,
+                    'translatedProductID' => $newProductId,
+                    'languageID' => $targetLangId,
+                    'translationStatus' => 'pending'
+                ]);
+                
+                if ($mappingResult['status'] === 'success') {
+                    Log::adminWrite("Ürün dil eşleşmesi eklendi. Mapping ID: {$mappingResult['mappingID']}", "info", "cron-copier");
+                } else {
+                    Log::adminWrite("Ürün dil eşleşmesi eklenemedi: " . $mappingResult['message'], "warning", "cron-copier");
+                }
+                
+                $successCount++;
+                
+            } catch (Exception $e) {
+                Log::adminWrite("Ürün kopyalama hatası - Ürün ID: {$product['productID']}, Hata: " . $e->getMessage(), "error", "cron-copier");
+                $errorCount++;
+            }
+        }
+        
+        Log::adminWrite("Ürün kopyalama tamamlandı. Başarılı: {$successCount}, Hatalı: {$errorCount}", "info", "cron-copier");
+        
+    } catch (Exception $e) {
+        Log::adminWrite("Ürün kopyalama fonksiyonunda genel hata: " . $e->getMessage(), "error", "cron-copier");
+        throw $e;
     }
 }
 ?>

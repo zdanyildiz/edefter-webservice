@@ -4,8 +4,8 @@ var userIcon = document.querySelector('.svg-icon-container.member');
 // aside-right-cart sınıfına sahip elementi bul
 var asideUser = document.querySelector('.aside-left-user');
 // mouseover olayını dinle
-if(userIcon){
-    userIcon.addEventListener('click', function() {
+if (userIcon) {
+    userIcon.addEventListener('click', function () {
         // active sınıfını aside-right-cart elementine ekle
         event.preventDefault();
         asideUser.classList.add('active');
@@ -15,16 +15,16 @@ if(userIcon){
 // aside-right-cart-close sınıfına sahip elementi bul
 var closeIcon = document.querySelector('.aside-left-user-close');
 // click olayını dinle
-if(closeIcon){
-    closeIcon.addEventListener('click', function() {
+if (closeIcon) {
+    closeIcon.addEventListener('click', function () {
         // active sınıfını aside-right-cart elementinden kaldır
         asideUser.classList.remove('active');
     });
 }
 
 var showAsideLeft = document.querySelector('#show-aside-left');
-if(showAsideLeft){
-    showAsideLeft.addEventListener('click', function() {
+if (showAsideLeft) {
+    showAsideLeft.addEventListener('click', function () {
         var asideLeftUser = document.querySelector('.aside-left-user');
         if (asideLeftUser.classList.contains('active')) {
             asideUser.classList.remove('active');
@@ -37,8 +37,8 @@ if(showAsideLeft){
 }
 
 //.svg-icon-container.search için dinleyici ekle, tıklandığında svg-icon-container'a mobile-search-active sınıfını ekle
-if(document.querySelector('.svg-icon-container.search')){
-    document.querySelector('.svg-icon-container.search').addEventListener('click', function(event) {
+if (document.querySelector('.svg-icon-container.search')) {
+    document.querySelector('.svg-icon-container.search').addEventListener('click', function (event) {
         event.preventDefault();
         var searchIcon = document.querySelector('.product-search-container');
         searchIcon.classList.add('mobile-search-active');
@@ -46,8 +46,8 @@ if(document.querySelector('.svg-icon-container.search')){
 }
 
 //.close-search sınıfına sahip elemente tıklandığında mobile-search-active sınıfını kaldır
-if(document.querySelector('.close-search')){
-    document.querySelector('.close-search').addEventListener('click', function(event) {
+if (document.querySelector('.close-search')) {
+    document.querySelector('.close-search').addEventListener('click', function (event) {
         event.preventDefault();
         var searchIcon = document.querySelector('.product-search-container');
         searchIcon.classList.remove('mobile-search-active');
@@ -78,28 +78,45 @@ const logoutBtn = document.querySelector('#logoutLink');
 
 // Eğer sayfada çıkış butonu varsa (kullanıcı giriş yapmışsa)
 if (logoutBtn) {
-    
-    logoutBtn.addEventListener('click', function(event) {
-        
+
+    logoutBtn.addEventListener('click', function (event) {
+
         // Linkin varsayılan yönlendirme davranışını hemen engelliyoruz.
-        event.preventDefault(); 
-        
+        event.preventDefault();
+
         // Yönlendirilecek adresi linkin href'inden alıyoruz.
         const logoutUrl = this.href;
 
         // Yönlendirme fonksiyonunu tanımlıyoruz.
-        const performLogout = function() {
+        const performLogout = function () {
             // Eğer bir URL varsa oraya yönlendir, yoksa ana sayfaya git.
-            document.location.href = logoutUrl || '/'; 
+            document.location.href = logoutUrl || '/';
         };
 
-        // Google'a 'logout' olayını gönderiyoruz.
-        console.log('Logout olayı GA4\'e gönderiliyor...');
-        gtag('event', 'logout', {
-            // Olay gönderildikten sonra performLogout fonksiyonunu çalıştır.
-            'event_callback': performLogout,
-            // 2 saniye içinde olay gönderilemezse yine de çıkış yap.
-            'event_timeout': 2000 
-        });
+        // Google Analytics'in yüklenme durumunu kontrol et
+        const sendLogoutEvent = function () {
+            // gtag fonksiyonunun yüklenip yüklenmediğini kontrol et
+            if (typeof gtag !== 'undefined') {
+                console.log('Logout olayı GA4\'e gönderiliyor...');
+                gtag('event', 'logout', {
+                    // Olay gönderildikten sonra performLogout fonksiyonunu çalıştır.
+                    'event_callback': performLogout,
+                    // 2 saniye içinde olay gönderilemezse yine de çıkış yap.
+                    'event_timeout': 2000
+                });
+            } else {
+                console.warn('gtag fonksiyonu henüz yüklenmedi, doğrudan logout yapılıyor.');
+                // gtag yoksa direkt çıkış yap
+                performLogout();
+            }
+        };
+
+        // Eğer gtag henüz yüklenmediyse kısa bir süre bekle
+        if (typeof gtag === 'undefined') {
+            console.log('gtag bekleniyor...');
+            setTimeout(sendLogoutEvent, 500); // 500ms bekle
+        } else {
+            sendLogoutEvent();
+        }
     });
 }

@@ -8,6 +8,16 @@ class Log
 {
 
     /**
+     * Checks if we are in development environment
+     * @return bool
+     */
+    private static function isDevelopmentEnvironment()
+    {
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+        return (str_starts_with($host, 'l.') || str_starts_with($host, 'localhost'));
+    }
+
+    /**
      * Writes a message to the log.
      *
      * @param string $message The message to write.
@@ -16,9 +26,15 @@ class Log
      */
     public static function write($message, $type = "info", $name = null)
     {
+        // Sunucu ortamındaysak ve tip "info" ise log yazma
+        // ANCAK reset, setup gibi kritik loglar her zaman yazılsın
+        if ($type === "info" && !self::isDevelopmentEnvironment() && !in_array($name, ['reset', 'setup'])) {
+            return;
+        }
+
         $date = date('Y-m-d');
         $dateTime = date('Y-m-d H:i:s');
-        $logFileName = (!empty($name)) ? "$date-$name" : $date;
+        $logFileName = (!empty($name)) ? "{$name}_{$date}" : $date;
         $logfile = LOG_DIR . $logFileName . ".log";
         $log = "[{$dateTime} - {$type}] {$message}" . PHP_EOL;
 
@@ -32,9 +48,14 @@ class Log
 
     public static function adminWrite($message, $type = "info", $name = null)
     {
+        // Sunucu ortamındaysak ve tip "info" ise log yazma
+        if ($type === "info" && !self::isDevelopmentEnvironment()) {
+            return;
+        }
+
         $date = date('Y-m-d');
         $dateTime = date('Y-m-d H:i:s');
-        $logFileName = (!empty($name)) ? "$date-$name" : $date;
+        $logFileName = (!empty($name)) ? "{$name}_{$date}" : $date;
         $logfile = LOG_DIR . "Admin/" . $logFileName . ".log";
         $log = "[{$dateTime} - {$type}] {$message}" . PHP_EOL;
 

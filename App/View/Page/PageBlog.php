@@ -13,17 +13,18 @@ $pageContent = $page['sayfaicerik'];
 $imageUrls = $page['resim_url'];
 $imageUrls = ($imageUrls) ? explode(",",$imageUrls) : [];
 
+$bannerInfo = $bannerInfo ?? [];
 $sliderBanner = array_filter($bannerInfo, function($banner){
     return $banner['bannerkategori'] === 1;
-}) ?? [];
+});
 
 $middleContentBanner = array_filter($bannerInfo, function($banner) {
     return $banner['bannerkategori'] === 3;
-}) ?? [];
+});
 
 $carouselBanner = array_filter($bannerInfo, function($banner) {
     return $banner['bannerkategori'] === 6;
-}) ?? [];
+});
 
 $pageGallery = $page['pageGallery'] ?? [];
 $pageFiles = $page['pageFiles'] ?? [];

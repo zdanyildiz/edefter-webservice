@@ -11,6 +11,7 @@
  * @var string $languageCode
  */
 
+
 ################# TANIMLAMALAR ###########################
 $routerResult = $session->getSession("routerResult");
 $casper = $session->getCasper();
@@ -273,9 +274,7 @@ if($bodyShowAssistant == 1){
 include_once MODEL .'Session.php';
 $session = new Session($config->key,3600,"/",$config->hostDomain,$config->cookieSecure,$config->cookieHttpOnly,$config->cookieSameSite);
 $cookieConsent = $session->getCookie("cookieConsent");
-$tagManager = $siteConfig['tagManager'][0] ?? "";
-$hasTagManager = isset($tagManager['tag_manager_content']);
-echo isset($tagManager['tag_manager_content']) ? html_entity_decode($tagManager['tag_manager_content']) : "";
+
 if(empty($cookieConsent)){
     ?>
     <div id="cookie-consent-modal">
@@ -704,213 +703,11 @@ foreach ($siteHeaderSettings as $siteSetting) {
         <?php
     }
 }
-?>
-<?php if(empty($cookieConsent)): ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        <?php if ($hasTagManager): ?>
-            gtag('consent', 'default', {
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied',
-                'analytics_storage': 'denied'
-            });
-        <?php endif; ?>
-        // İlk çerez uyarısı modalı (cookie-consent-modal) butonları
-        var consentModal = document.getElementById('cookie-consent-modal');
-        var acceptButton = document.getElementById('accept-cookies');
-        var declineButton = document.getElementById('decline-cookies');
-        var settingsButton = document.getElementById('settings-cookies');
 
-        // Çerez tercihleri modalı (cookie-consent-popup-modal) butonları
-        var consentPopupModal = document.getElementById('cookie-consent-popup-modal');
-        var popupAcceptButton = document.getElementById('cookie-consent-popup-modal-accept');
-        var popupCloseButtons = document.querySelectorAll('.cookie-consent-popup-modal-close');
 
-        // Çerez tercihleri dizi olarak tutulacak
-        var cookieConsent = {
-            'essential_cookies': true, // Zorunlu çerezler her zaman aktif
-            'ad_user_data': true,
-            'ad_personalization': true,
-            'ad_storage': true,
-            'analytics_storage': true
-        };
-
-        // İlk defa gelen ziyaretçi için modal göster
-        if (!document.cookie.includes("cookieConsent")) {
-            consentModal.style.display = 'block';
-        }
-
-        // Kabul Et butonuna tıklama
-        acceptButton.addEventListener('click', function () {
-            // Tüm çerezlere izin verildi
-            setAllCookieConsent(true);
-            saveCookieConsent();
-            consentModal.style.display = 'none';
-        });
-
-        // Reddet butonuna tıklama
-        declineButton.addEventListener('click', function () {
-            // Zorunlu çerezler hariç hepsi reddedildi
-            setAllCookieConsent(false);
-            cookieConsent.essential_cookies = true; // Zorunlu çerezler etkin kalacak
-            saveCookieConsent();
-            consentModal.style.display = 'none';
-        });
-
-        // Kişiselleştir butonuna tıklama
-        settingsButton.addEventListener('click', function () {
-            consentModal.style.display = 'none';
-            consentPopupModal.style.display = 'block';
-        });
-
-        // Tercihler modalındaki Kapat butonuna tıklama
-        popupCloseButtons.forEach(function(button) {
-            button.addEventListener('click', function () {
-                consentPopupModal.style.display = 'none';
-                consentModal.style.display = 'block'; // İlk uyarıya geri dön
-            });
-        });
-
-        // Tercihleri Kaydet butonuna tıklama
-        popupAcceptButton.addEventListener('click', function () {
-            // Kullanıcı tercihlerini modal içindeki checkbox'lardan al
-            cookieConsent.ad_user_data = document.getElementById('ad_user_data').checked;
-            cookieConsent.ad_personalization = document.getElementById('ad_user_data').checked;
-            cookieConsent.ad_storage = document.getElementById('ad_storage').checked;
-            cookieConsent.analytics_storage = document.getElementById('analytics_storage').checked;
-
-            saveCookieConsent();
-            consentPopupModal.style.display = 'none';
-        });
-
-        // Tüm çerez izinlerini ayarlayan fonksiyon
-        function setAllCookieConsent(status) {
-            cookieConsent.ad_user_data = status;
-            cookieConsent.ad_personalization = status;
-            cookieConsent.ad_storage = status;
-            cookieConsent.analytics_storage = status;
-        }
-
-        // Çerez tercihlerini kaydeden fonksiyon
-        function saveCookieConsent() {
-            console.log("Çerez tercihler kaydediliyor:", cookieConsent);
-            var uri = "/?/control/cookie/get/createCookie&name=cookieConsent&value=" + encodeURIComponent(JSON.stringify(cookieConsent));
-
-            fetch(uri, {
-                method: 'GET',
-                credentials: 'same-origin'
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json(); // Yanıtı JSON olarak işle
-                })
-                .then(data => {
-                    console.log(data); // JSON yanıtını konsolda göster
-                    if (data.status === "success") {
-                        console.log("Çerez tercihler başarıyla kaydedildi.");
-                    } else {
-                        console.error("Çerez tercihler kaydedilirken hata oluştu:", data.message);
-                    }
-                })
-                .then(() => {
-                    // Tag Manager varsa güncelle
-                    <?php if ($hasTagManager): ?>
-                    gtag('consent', 'update', {
-                        'ad_user_data': cookieConsent.ad_user_data ? 'granted' : 'denied',
-                        'ad_personalization': cookieConsent.ad_personalization ? 'granted' : 'denied',
-                        'ad_storage': cookieConsent.ad_storage ? 'granted' : 'denied',
-                        'analytics_storage': cookieConsent.analytics_storage ? 'granted' : 'denied'
-                    });
-                    <?php endif; ?>
-                })
-                .catch(error => {
-                    console.error("Çerez tercihler kaydedilirken hata oluştu:", error);
-                });
-        }
-    });
-</script>
-<?php endif; ?>
-<?php
-$adConversionCode = $siteConfig['adConversionCode'][0] ?? "";
-echo isset($adConversionCode['ad_conversion_code_content']) ? html_entity_decode($adConversionCode['ad_conversion_code_content']) : "";
-
-// Platform Tracking Conversion Codes
-$documentRoot = $_SERVER['DOCUMENT_ROOT'];
-include_once $documentRoot . '/App/Helpers/PlatformTrackingManager.php';
-$platformTrackingManager = new PlatformTrackingManager($db, $config);
-$platformConversionCodes = $platformTrackingManager->generateConversionCodes($languageID);
-if (!empty($platformConversionCodes)) {
-    echo $platformConversionCodes;
-}
-
-$gTagBasket = $session->getSession('gTagBasket') ?? [];
-
-if(isset($gTagBasket['currency'])){
-    echo 'currency var';
-    $cartConversionCode = $siteConfig['cartConversionCode'][0] ?? "";
-    $cartConversionCode = isset($cartConversionCode['cart_conversion_code']) ? html_entity_decode($cartConversionCode['cart_conversion_code']) : "";
-
-    if(!empty($cartConversionCode)){
-        
-        $currency = $gTagBasket['currency'];
-        $value = $gTagBasket['value'];
-        $items_json = json_encode($gTagBasket['items']); // JSON formatına çevir
-
-        // Placeholder'ları değişkenlerle değiştir
-        $cartConversionCode = str_replace(
-            ["{\$currency}", "{\$value}", "{items}"],
-            [$currency, $value, $items_json],
-            $cartConversionCode
-        );
-        // Dinamik olarak oluşturulmuş kodu ekrana bas
-        echo $cartConversionCode;
-    }
-
-    $session->removeSession('gTagBasket');
-}
-
-$pageSession = $session->getSession('page') ?? [];
-if(!empty($pageSession)){
-
-    $salesStatusSession = $session->getSession('salesStatus') ?? [];
-
-    if(!empty($salesStatusSession)){
-        $gTagSession = $session->getSession('gTag') ?? [];
-
-        if(!empty($gTagSession)){
-
-            $transaction_id = $gTagSession['transaction_id'];
-            $value = $gTagSession['value'];
-            $tax = $gTagSession['tax'];
-            $shipping = $gTagSession['shipping'];
-            $currency = $gTagSession['currency'];
-            $coupon = $gTagSession['coupon'];
-            $items_json = json_encode($gTagSession['items']); // JSON formatına çevir
-
-            $salesConversionCodeSettings = $siteConfig['salesConversionCodeSettings'][0] ?? "";
-            $salesConversionCode = isset($salesConversionCodeSettings['satisdonusumkod']) ? html_entity_decode($salesConversionCodeSettings['satisdonusumkod']) : "";
-
-            if(!empty($salesConversionCode)){
-
-                // Placeholder'ları değişkenlerle değiştir
-                $salesConversionCode = str_replace(
-                    ["{\$transaction_id}", "{value}", "{tax}", "{shipping}", "{currency}", "{coupon}", "{items}"],
-                    [$transaction_id, $value, $tax, $shipping, $currency, $coupon, $items_json],
-                    $salesConversionCode
-                );
-                // Dinamik olarak oluşturulmuş kodu ekrana bas
-                echo $salesConversionCode;
-
-            }
-
-            $session->removeSession('gTag');
-        }
-
-        $session->removeSession('salesStatus');
-    }
-}
+require_once Helpers . 'PlatformTrackingManager.php';
+PlatformTrackingManager::setDb($db);
+// Yeni Platform Tracking Manager sistemini kullanarak body script'lerini (genellikle noscript) ekle
+echo PlatformTrackingManager::getBodyScripts($languageID);
 ?>
 </body>

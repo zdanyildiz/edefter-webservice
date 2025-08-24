@@ -14,14 +14,20 @@ $languages = $languageModel->getLanguages();
 
 // Platform Tracking Manager'ı yükle
 include_once ROOT . '/App/Helpers/PlatformTrackingManager.php';
-$trackingManager = new PlatformTrackingManager($db, $config);
+include_once ROOT . '/App/Core/Log.php';
+PlatformTrackingManager::setDb($db);
 
 // Mevcut platform konfigürasyonlarını getir
 $platforms = PlatformTrackingManager::PLATFORMS;
 $activePlatforms = [];
 
+Log::adminWrite("Platform Tracking Debug - Language ID: $languageID", "info", "platform_debug");
+Log::adminWrite("Available Platforms: " . json_encode(array_keys($platforms)), "info", "platform_debug");
+
 foreach ($platforms as $platformKey => $platformInfo) {
-    $platformConfig = $trackingManager->getPlatformConfig($platformKey, $languageID);
+    $platformConfig = PlatformTrackingManager::getPlatformConfig($platformKey, $languageID);
+    Log::adminWrite("Platform: $platformKey - Config: " . json_encode($platformConfig), "info", "platform_debug");
+    
     $activePlatforms[$platformKey] = [
         'info' => $platformInfo,
         'config' => $platformConfig ? json_decode($platformConfig['config'], true) : [],

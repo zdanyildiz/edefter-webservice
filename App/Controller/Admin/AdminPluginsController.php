@@ -45,7 +45,7 @@ $tagManagerModel = new AdminTagManager($db);
 
 // Platform Tracking Manager'ı yükle
 include_once ROOT . '/App/Helpers/PlatformTrackingManager.php';
-$platformTrackingManager = new PlatformTrackingManager($db, $config);
+PlatformTrackingManager::setDb($db);
 
 if($action == "getSalesConversionCode") {
 

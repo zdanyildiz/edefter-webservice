@@ -4,6 +4,7 @@ class AdminProduct
     private AdminDatabase $db;
     public string $productSql;
     public Json $json;
+    public Helper $helper;
 
     public int $resultsPerPage = 20;
     public int $currentPage = 1;
@@ -11,6 +12,7 @@ class AdminProduct
     public function __construct(AdminDatabase $db,Config $config) {
         $this->db = $db;
         $this->json = $config->Json;
+        $this->helper = $config->Helper;
 
         $this->productSql = "
             SELECT 
@@ -146,7 +148,7 @@ class AdminProduct
             $productImages = $this->getProductImages($productID);
             $productFiles = $this->getProductFiles($productID);
             $productVideos = $this->getProductVideos($productID);
-            $productGallery = $this->getProductGallery($productID);
+            $productGallery = $this->getProductGalleries($productID);
 
             $productSeoTitle = $product['baslik'];
             $productSeoDescription = $product['aciklama'];
@@ -1193,7 +1195,7 @@ class AdminProduct
         return 0;
     }
 
-    public function getProductGallery($pageID){
+    public function getProductGalleries($pageID){
         $sql = "
             SELECT 
                 resimgaleriid as galleryID
@@ -1231,6 +1233,428 @@ class AdminProduct
     public function rollback($funcName = "")
     {
         $this->db->rollBack($funcName);
+    }
+
+    // Çeviri desteği için yeni metodlar
+    public function getProductForTranslation($productID)
+    {
+        $sql = "
+            SELECT 
+                s.*,
+                uo.*,
+                seo.baslik as seoTitle,
+                seo.aciklama as seoDescription,
+                seo.kelime as seoKeywords
+            FROM sayfa s
+            LEFT JOIN urunozellikleri uo ON s.sayfaid = uo.sayfaid
+            LEFT JOIN seo ON s.benzersizid = seo.benzersizid
+            WHERE s.sayfaid = :productID AND s.sayfatip = 7
+        ";
+        
+        $result = $this->db->select($sql, ['productID' => $productID]);
+        
+        if (!empty($result)) {
+            $product = $result[0];
+            
+            // Medya bilgilerini ekle
+            $product['images'] = $this->getProductImages($productID);
+            $product['files'] = $this->getProductFiles($productID);
+            $product['videos'] = $this->getProductVideos($productID);
+            $product['galleries'] = $this->getProductGalleries($productID);
+            
+            return $product;
+        }
+        
+        return null;
+    }
+
+    public function copyProductToLanguage($productData, $targetLanguageID)
+    {
+        try {
+            $this->beginTransaction('copyProductToLanguage');
+            
+            // 1. Yeni benzersiz ID oluştur
+            $newUniqueID = $this->helper->generateUniqID();
+            
+            // 2. Sayfa tablosuna kopyala
+            $sql = "
+                INSERT INTO sayfa (
+                    ID, benzersizid, sayfatip, sayfaad, sayfaicerik, sayfasira, 
+                    sayfalink, sayfaaktif, sayfasil, dilid, olusturmatarihi, guncellemetarihi
+                )
+                VALUES (
+                    :ID, :benzersizid, 7, :sayfaad, :sayfaicerik, :sayfasira,
+                    :sayfalink, :sayfaaktif, 0, :dilid, NOW(), NOW()
+                )
+            ";
+            
+            $params = [
+                ':ID' => $this->helper->generateUniqID(),
+                ':benzersizid' => $newUniqueID,
+                ':sayfaad' => $productData['sayfaad'],
+                ':sayfaicerik' => $productData['sayfaicerik'],
+                ':sayfasira' => $productData['sayfasira'],
+                ':sayfalink' => $productData['sayfalink'] . '-' . $targetLanguageID,
+                ':sayfaaktif' => $productData['sayfaaktif'],
+                ':dilid' => $targetLanguageID
+            ];
+            
+            $newProductID = $this->db->insert($sql, $params);
+            
+            if (!$newProductID) {
+                throw new Exception("Ürün kopyalanamadı");
+            }
+            
+            // 3. Ürün özelliklerini kopyala
+            $sql = "
+                INSERT INTO urunozellikleri (
+                    sayfaid, urunmarka, urunstokkodu, urunmodel, urunaciklama, urunaltbaslik,
+                    urunalisfiyat, urunsatisfiyat, urunindirimsizfiyat, urunbayifiyat,
+                    urunsatisbaslangictarih, urunsatisbitistarih, 
+                    urunstok, urunparabirim, urunmiktarbirim,
+                    variantProperties, product_properties
+                )
+                VALUES (
+                    :sayfaid, :urunmarka, :urunstokkodu, :urunmodel, :urunaciklama, :urunaltbaslik,
+                    :urunalisfiyat, :urunsatisfiyat, :urunindirimsizfiyat, :urunbayifiyat,
+                    :urunsatisbaslangictarih, :urunsatisbitistarih,
+                    :urunstok, :urunparabirim, :urunmiktarbirim,
+                    :variantProperties, :product_properties
+                )
+            ";
+            
+            $params = [
+                ':sayfaid' => $newProductID,
+                ':urunmarka' => $productData['urunmarka'] ?? null,
+                ':urunstokkodu' => $productData['urunstokkodu'] . '-' . $targetLanguageID,
+                ':urunmodel' => $productData['urunmodel'] ?? null,
+                ':urunaciklama' => $productData['urunaciklama'] ?? null,
+                ':urunaltbaslik' => $productData['urunaltbaslik'] ?? null,
+                ':urunalisfiyat' => $productData['urunalisfiyat'] ?? 0,
+                ':urunsatisfiyat' => $productData['urunsatisfiyat'] ?? 0,
+                ':urunindirimsizfiyat' => $productData['urunindirimsizfiyat'] ?? 0,
+                ':urunbayifiyat' => $productData['urunbayifiyat'] ?? 0,
+                ':urunsatisbaslangictarih' => $productData['urunsatisbaslangictarih'] ?? null,
+                ':urunsatisbitistarih' => $productData['urunsatisbitistarih'] ?? null,
+                ':urunstok' => $productData['urunstok'] ?? 0,
+                ':urunparabirim' => $productData['urunparabirim'] ?? 1,
+                ':urunmiktarbirim' => $productData['urunmiktarbirim'] ?? 1,
+                ':variantProperties' => $productData['variantProperties'] ?? null,
+                ':product_properties' => $productData['product_properties'] ?? null
+            ];
+            
+            $this->db->insert($sql, $params);
+            
+            // 4. SEO bilgilerini kopyala
+            if (isset($productData['seoTitle'])) {
+                $sql = "
+                    INSERT INTO seo (benzersizid, baslik, aciklama, kelime, link)
+                    VALUES (:benzersizid, :baslik, :aciklama, :kelime, :link)
+                ";
+                
+                $params = [
+                    ':benzersizid' => $newUniqueID,
+                    ':baslik' => $productData['seoTitle'],
+                    ':aciklama' => $productData['seoDescription'] ?? null,
+                    ':kelime' => $productData['seoKeywords'] ?? null,
+                    ':link' => $productData['sayfalink'] . '-' . $targetLanguageID
+                ];
+                
+                $this->db->insert($sql, $params);
+            }
+            
+            // 5. Medya ilişkilerini kopyala
+            $this->copyProductMediaRelations($productData, $newProductID);
+            
+            $this->commit('copyProductToLanguage');
+            
+            return $newProductID;
+            
+        } catch (Exception $e) {
+            $this->rollback('copyProductToLanguage');
+            Log::adminWrite("Ürün kopyalama hatası: " . $e->getMessage(), "error");
+            return false;
+        }
+    }
+
+    private function copyProductMediaRelations($productData, $newProductID)
+    {
+        // Resimleri kopyala
+        if (!empty($productData['images'])) {
+            foreach ($productData['images'] as $image) {
+                $sql = "INSERT INTO sayfalisteresim (sayfaid, resimid) VALUES (:sayfaid, :resimid)";
+                $this->db->insert($sql, ['sayfaid' => $newProductID, 'resimid' => $image['imageID']]);
+            }
+        }
+        
+        // Dosyaları kopyala
+        if (!empty($productData['files'])) {
+            foreach ($productData['files'] as $file) {
+                $sql = "INSERT INTO sayfalistedosya (sayfaid, dosyaid) VALUES (:sayfaid, :dosyaid)";
+                $this->db->insert($sql, ['sayfaid' => $newProductID, 'dosyaid' => $file['fileID']]);
+            }
+        }
+        
+        // Videoları kopyala
+        if (!empty($productData['videos'])) {
+            foreach ($productData['videos'] as $video) {
+                $sql = "INSERT INTO sayfalistevideo (sayfaid, videoid) VALUES (:sayfaid, :videoid)";
+                $this->db->insert($sql, ['sayfaid' => $newProductID, 'videoid' => $video['videoID']]);
+            }
+        }
+        
+        // Galerileri kopyala
+        if (!empty($productData['galleries'])) {
+            foreach ($productData['galleries'] as $gallery) {
+                $sql = "INSERT INTO sayfalistegaleri (sayfaid, galeriid) VALUES (:sayfaid, :galeriid)";
+                $this->db->insert($sql, ['sayfaid' => $newProductID, 'galeriid' => $gallery['galleryID']]);
+            }
+        }
+    }
+
+    public function updateProductTranslations($productID, $translations)
+    {
+        try {
+            $this->beginTransaction('updateProductTranslations');
+            
+            // Sayfa tablosunu güncelle
+            if (isset($translations['sayfaad'])) {
+                $sql = "UPDATE sayfa SET sayfaad = :sayfaad, guncellemetarihi = NOW() WHERE sayfaid = :productID";
+                $this->db->update($sql, ['sayfaad' => $translations['sayfaad'], 'productID' => $productID]);
+            }
+            
+            // Ürün özelliklerini güncelle
+            $updateFields = [];
+            $params = ['productID' => $productID];
+            
+            if (isset($translations['urunaciklama'])) {
+                $updateFields[] = "urunaciklama = :urunaciklama";
+                $params['urunaciklama'] = $translations['urunaciklama'];
+            }
+            
+            if (isset($translations['urunaltbaslik'])) {
+                $updateFields[] = "urunaltbaslik = :urunaltbaslik";
+                $params['urunaltbaslik'] = $translations['urunaltbaslik'];
+            }
+            
+            if (isset($translations['variantProperties'])) {
+                $updateFields[] = "variantProperties = :variantProperties";
+                $params['variantProperties'] = $translations['variantProperties'];
+            }
+            
+            if (isset($translations['product_properties'])) {
+                $updateFields[] = "product_properties = :product_properties";
+                $params['product_properties'] = $translations['product_properties'];
+            }
+            
+            if (!empty($updateFields)) {
+                $sql = "UPDATE urunozellikleri SET " . implode(', ', $updateFields) . " WHERE sayfaid = :productID";
+                $this->db->update($sql, $params);
+            }
+            
+            // SEO bilgilerini güncelle
+            if (isset($translations['seoTitle']) || isset($translations['seoDescription'])) {
+                $sql = "
+                    UPDATE seo 
+                    SET baslik = :baslik, aciklama = :aciklama
+                    WHERE benzersizid = (SELECT benzersizid FROM sayfa WHERE sayfaid = :productID)
+                ";
+                
+                $params = [
+                    'baslik' => $translations['seoTitle'] ?? null,
+                    'aciklama' => $translations['seoDescription'] ?? null,
+                    'productID' => $productID
+                ];
+                
+                $this->db->update($sql, $params);
+            }
+            
+            $this->commit('updateProductTranslations');
+            
+            return true;
+            
+        } catch (Exception $e) {
+            $this->rollback('updateProductTranslations');
+            Log::adminWrite("Ürün çeviri güncelleme hatası: " . $e->getMessage(), "error");
+            return false;
+        }
+    }
+
+    public function buildVariantPropertiesJSON($productID, $languageCode)
+    {
+        // Orijinal variantProperties JSON'ını al
+        $sql = "SELECT variantProperties FROM urunozellikleri WHERE sayfaid = :productID";
+        $result = $this->db->select($sql, ['productID' => $productID]);
+        
+        if (empty($result) || empty($result[0]['variantProperties'])) {
+            return null;
+        }
+        
+        $variants = json_decode($result[0]['variantProperties'], true);
+        
+        if (empty($variants)) {
+            return null;
+        }
+        
+        // Her varyant için çevirileri uygula
+        foreach ($variants as &$variant) {
+            if (isset($variant['variantProperties']) && is_array($variant['variantProperties'])) {
+                foreach ($variant['variantProperties'] as &$property) {
+                    if (isset($property['attribute']['name']) && isset($property['attribute']['value'])) {
+                        // Grup adını çevir
+                        $groupTranslation = $this->getVariantGroupTranslation($property['attribute']['name'], $languageCode);
+                        if ($groupTranslation) {
+                            $property['attribute']['name'] = $groupTranslation;
+                        }
+                        
+                        // Değeri çevir
+                        $valueTranslation = $this->getVariantValueTranslation($property['attribute']['value'], $languageCode);
+                        if ($valueTranslation) {
+                            $property['attribute']['value'] = $valueTranslation;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return json_encode($variants, JSON_UNESCAPED_UNICODE);
+    }
+
+    private function getVariantGroupTranslation($groupName, $languageCode)
+    {
+        $sql = "
+            SELECT vgt.varyantgrupad
+            FROM urunvaryantgrup_translate vgt
+            INNER JOIN urunvaryantgrup vg ON vg.varyantgrupid = vgt.varyantgrupid
+            WHERE vg.varyantgrupad = :groupName AND vgt.dilkodu = :languageCode
+        ";
+        
+        $result = $this->db->select($sql, ['groupName' => $groupName, 'languageCode' => $languageCode]);
+        
+        if (!empty($result)) {
+            return $result[0]['varyantgrupad'];
+        }
+        
+        return null;
+    }
+
+    private function getVariantValueTranslation($value, $languageCode)
+    {
+        $sql = "
+            SELECT vt.varyantad
+            FROM urunvaryant_translate vt
+            INNER JOIN urunvaryant v ON v.varyantid = vt.varyantid
+            WHERE v.varyantad = :value AND vt.dilkodu = :languageCode
+        ";
+        
+        $result = $this->db->select($sql, ['value' => $value, 'languageCode' => $languageCode]);
+        
+        if (!empty($result)) {
+            return $result[0]['varyantad'];
+        }
+        
+        return null;
+    }
+
+    public function buildProductPropertiesJSON($productID, $languageCode)
+    {
+        // Ürünün ek özelliklerini al
+        $sql = "SELECT product_properties FROM urunozellikleri WHERE sayfaid = :productID";
+        $result = $this->db->select($sql, ['productID' => $productID]);
+        
+        if (empty($result) || empty($result[0]['product_properties'])) {
+            return null;
+        }
+        
+        $properties = json_decode($result[0]['product_properties'], true);
+        
+        if (empty($properties)) {
+            return null;
+        }
+        
+        // Her özellik için çeviri kontrolü yap
+        foreach ($properties as &$property) {
+            if (isset($property['name'])) {
+                // Özellik adı çevirisini al
+                $translation = $this->getPropertyTranslation($property['name'], $languageCode);
+                if ($translation) {
+                    $property['name'] = $translation['ekozellikad'];
+                    if (isset($property['value']) && !empty($translation['ekozellikdeger'])) {
+                        $property['value'] = $translation['ekozellikdeger'];
+                    }
+                }
+            }
+        }
+        
+        return json_encode($properties, JSON_UNESCAPED_UNICODE);
+    }
+
+    private function getPropertyTranslation($propertyName, $languageCode)
+    {
+        $sql = "
+            SELECT et.ekozellikad, et.ekozellikdeger
+            FROM urunekozellikler_translate et
+            INNER JOIN urunekozellikler e ON e.ekozellikid = et.ekozellikid
+            WHERE e.ekozellikad = :propertyName AND et.dilkodu = :languageCode
+        ";
+        
+        $result = $this->db->select($sql, ['propertyName' => $propertyName, 'languageCode' => $languageCode]);
+        
+        if (!empty($result)) {
+            return $result[0];
+        }
+        
+        return null;
+    }
+
+    public function updateVariantPropertiesTable($productID, $languageCode)
+    {
+        try {
+            // Mevcut kayıtları sil
+            $sql = "DELETE FROM variant_properties WHERE variant_id LIKE :productPattern";
+            $this->db->delete($sql, ['productPattern' => $productID . '-%']);
+            
+            // variantProperties JSON'ını al
+            $sql = "SELECT variantProperties FROM urunozellikleri WHERE sayfaid = :productID";
+            $result = $this->db->select($sql, ['productID' => $productID]);
+            
+            if (empty($result) || empty($result[0]['variantProperties'])) {
+                return true;
+            }
+            
+            $variants = json_decode($result[0]['variantProperties'], true);
+            
+            if (empty($variants)) {
+                return true;
+            }
+            
+            // Her varyant için yeni kayıtlar ekle
+            foreach ($variants as $variant) {
+                if (isset($variant['variantProperties']) && is_array($variant['variantProperties'])) {
+                    foreach ($variant['variantProperties'] as $property) {
+                        if (isset($property['attribute']['name']) && isset($property['attribute']['value'])) {
+                            $variantData = [
+                                'variant_id' => $productID . '-' . ($variant['variantId'] ?? uniqid()),
+                                'variant_stock_code' => $variant['variantStockCode'] ?? '',
+                                'variant_quantity' => $variant['variantQuantity'] ?? 0,
+                                'variant_selling_price' => $variant['variantSellingPrice'] ?? 0,
+                                'variant_image_ids' => isset($variant['variantImageIds']) ? json_encode($variant['variantImageIds']) : null,
+                                'attribute_name' => $property['attribute']['name'],
+                                'attribute_value' => $property['attribute']['value']
+                            ];
+                            
+                            $this->addVariantProperty($variantData);
+                        }
+                    }
+                }
+            }
+            
+            return true;
+            
+        } catch (Exception $e) {
+            Log::adminWrite("Variant properties tablosu güncelleme hatası: " . $e->getMessage(), "error");
+            return false;
+        }
     }
 
 }

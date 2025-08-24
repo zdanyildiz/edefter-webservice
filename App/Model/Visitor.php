@@ -11,7 +11,20 @@ class Visitor {
         $visitorBrowser=$_SERVER['HTTP_USER_AGENT'] ?? null;
         if(empty($visitorBrowser)){
             Log::write("Ziyaretçi tarayıcı bilgisi alınamadı.","error");
-            return false;
+            //botlar için fake kullanıcı yapalım
+            return [
+                'visitorUniqID' => bin2hex(random_bytes(10)), // 20 karakterlik rastgele bir ID
+                'visitorEntryTime' => $visitorEntryTime,
+                'visitorIP' => $visitorIP,
+                'visitorBrowser' => 'Unknown Bot',
+                'visitorIsMember' => ['memberStatus' => false],
+                'visitorVisitCount' => 1,
+                'visitorLanguage' => 'tr',
+                'visitorGeo' => [],
+                'visitorCart' => [],
+                'visitorRemember' => false,
+                'visitorGetCart' => false
+            ];
         }
         $visitorIsMember=['memberStatus'=>false];
         $visitorVisitCount=1;

@@ -26,6 +26,7 @@ class CloudflareAPI
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         //ssl
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
@@ -39,15 +40,38 @@ class CloudflareAPI
         }
 
         $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $error = curl_error($ch);
 
         curl_close($ch);
 
         if ($error) {
-            return "cURL Error: $error";
-        } else {
-            return json_decode($response, true);
+            return [
+                "success" => false, 
+                "message" => "cURL Error: $error"
+            ];
         }
+
+        $decodedResponse = json_decode($response, true);
+        
+        // HTTP status kodu kontrolü
+        if ($httpCode >= 400) {
+            return [
+                "success" => false,
+                "message" => "HTTP Error $httpCode",
+                "response" => $decodedResponse
+            ];
+        }
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return [
+                "success" => false,
+                "message" => "JSON decode error: " . json_last_error_msg(),
+                "raw_response" => $response
+            ];
+        }
+
+        return $decodedResponse;
     }
 
     // Yeni site ekleme
@@ -109,6 +133,30 @@ class CloudflareAPI
         ];
 
         return $this->request("POST", "zones/{$zoneId}/dns_records", $data);
+    }
+
+    // DNS kayıtlarını listeleme
+    public function listDNSRecords($zoneId, $name = null)
+    {
+        $endpoint = "zones/{$zoneId}/dns_records";
+        if ($name) {
+            $endpoint .= "?name=" . urlencode($name);
+        }
+        return $this->request("GET", $endpoint);
+    }
+
+    // DNS kaydını güncelleme
+    public function updateDNSRecord($zoneId, $recordId, $type, $name, $content, $ttl = 3600, $proxied = false)
+    {
+        $data = [
+            "type" => $type,
+            "name" => $name,
+            "content" => $content,
+            "ttl" => $ttl,
+            "proxied" => $proxied
+        ];
+
+        return $this->request("PUT", "zones/{$zoneId}/dns_records/{$recordId}", $data);
     }
 
     // Subdomain ekleme (DNS kaydı ekleyerek yapılır)
