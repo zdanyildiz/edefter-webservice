@@ -712,18 +712,6 @@ class AdminLanguage
         return null;
     }
 
-    public function getLanguageCode($languageId)
-    {
-        $sql = "SELECT dilkisa FROM dil WHERE dilid = :languageId";
-        $result = $this->db->select($sql, ['languageId' => $languageId]);
-        
-        if (!empty($result) && isset($result[0]['dilkisa'])) {
-            return $result[0]['dilkisa'];
-        }
-        
-        return null;
-    }
-
     public function getLanguageName($languageId)
     {
         $sql = "SELECT dilad FROM dil WHERE dilid = :languageId";

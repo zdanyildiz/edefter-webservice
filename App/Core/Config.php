@@ -209,6 +209,8 @@ class Config {
         
         // Domain bilgilerini env'den al
         $domains = EnvHelper::get('APP_DOMAINS', '');
+        //$domains'e env domin alanını da ekleyelim
+        $domains .= "," . EnvHelper::get('APP_DOMAIN', '');
         $this->domain = explode(',', $domains);
         
         // Domain array'inin varlığını kontrol et
@@ -307,7 +309,7 @@ class Config {
         $this->serverName = $serverName;
         if (!in_array($serverName, $this->domain)) {
             // Eşleşme çıkmazsa sayfa yüklemesini durduralım
-            die("Domain'e izin verilmiyor ($serverName)");
+            die("Domain'e izin verilmiyor ($serverName) Domain: " . implode(', ', $this->domain) . ":");
         }
 
         if (str_starts_with($serverName, 'l.')) {

@@ -22,7 +22,7 @@ $pageVideos = $page['pageVideos'] ?? [];
     <?php echo ($sliderBanner) ? htmlspecialchars_decode($sliderBanner) : '';?>
     <div class="page-title">
         <h1><?php echo $pageTitle; ?></h1>
-    </div>
+    </div>30
     <div class="page-content">
         <?php
         if (count($imageUrls) > 0) {
