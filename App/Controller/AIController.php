@@ -1111,7 +1111,7 @@ class AIController {
      * Sohbet verilerini temizler.
      */
     private function clearChatData(): void {
-        $this->assistantLogger->clearChatData(); // Veri tabanında ilgili temizleme işlemi
+        //$this->assistantLogger->clearChatData(); // Veri tabanında ilgili temizleme işlemi
         Log::write("AssistantController: Sohbet verileri temizlendi.", "info");
     }
 

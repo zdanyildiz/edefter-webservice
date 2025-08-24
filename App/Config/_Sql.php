@@ -1,0 +1,9 @@
+<?php
+$dbServerName="ZjA1NTBjOTA1ZGYwMzFkZMgeh8PS9LIruGSW96zfthk=";
+$dbName="ZjA1NTBjOTA1ZGYwMzFkZGcJWYzUrDNNwLD0EINqqzW4ohFccY/hIcA+2Lvkr6KK";
+$dbUsername="ZjA1NTBjOTA1ZGYwMzFkZGcJWYzUrDNNwLD0EINqqzW4ohFccY/hIcA+2Lvkr6KK";
+$dbPassword="ZjA1NTBjOTA1ZGYwMzFkZHvbuL1Hfprsqqmx7uj8+g8=";
+$dbLocalServerName="ZjA1NTBjOTA1ZGYwMzFkZMgeh8PS9LIruGSW96zfthk=";
+$dbLocalName="ZjA1NTBjOTA1ZGYwMzFkZGcJWYzUrDNNwLD0EINqqzW4ohFccY/hIcA+2Lvkr6KK";
+$dbLocalUsername="ZjA1NTBjOTA1ZGYwMzFkZCgUa4ciXDlFHQL5agIBzG8=";
+$dbLocalPassword="ZjA1NTBjOTA1ZGYwMzFkZHvbuL1Hfprsqqmx7uj8+g8=";
